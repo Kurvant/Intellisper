@@ -1,0 +1,50 @@
+---
+title: "Run Enterprise Edition"
+icon: "building"
+---
+
+The enterprise edition requires a postgres and redis instance to run, and a license key to activate.
+
+<Steps>
+<Step title="Run the dev container">
+
+Follow the instructions [here](/build-blocks/misc/dev-container) to run the dev container.
+</Step>
+
+<Step title="Add the following env variables in `server/api/.env`">
+
+Pase the following env variables in `server/api/.env`
+
+```bash
+## these variables are set to align with the .devcontainer/docker-compose.yml file
+IB_DB_TYPE=POSTGRES
+IB_DEV_BLOCKS="your_piece_name"
+IB_ENVIRONMENT="dev"
+IB_EDITION=ee
+IB_EXECUTION_MODE=UNSANDBOXED
+IB_FRONTEND_URL="http://localhost:4200"
+IB_WEBHOOK_URL="http://localhost:3000"
+IB_BLOCKS_SOURCE='FILE'
+IB_BLOCKS_SYNC_MODE='NONE'
+IB_LOG_LEVEL=debug
+IB_LOG_PRETTY=true
+IB_REDIS_HOST="redis"
+IB_REDIS_PORT="6379"
+IB_TRIGGER_DEFAULT_POLL_INTERVAL=1
+IB_CACHE_PATH=/workspace/cache
+IB_POSTGRES_DATABASE=intellisper
+IB_POSTGRES_HOST=db
+IB_POSTGRES_PORT=5432
+IB_POSTGRES_USERNAME=postgres
+IB_POSTGRES_PASSWORD=A79Vm5D4p2VQHOp2gd5
+IB_ENCRYPTION_KEY=427a130d9ffab21dc07bcd549fcf0966
+IB_JWT_SECRET=secret
+```
+
+</Step>
+<Step title="Activate Your License Key">
+    After signing in, activate the license key by going to **Platform Admin -> Setup -> License Keys**
+    ![Activation License Key](/resources/screenshots/activation-license-key-settings.png)
+</Step>
+
+</Steps>

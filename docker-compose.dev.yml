@@ -1,0 +1,52 @@
+# Local development backing services (Postgres + Redis).
+#
+#   docker compose -f docker-compose.dev.yml up -d
+#   docker compose -f docker-compose.dev.yml down          # stop, keep data
+#   docker compose -f docker-compose.dev.yml down -v       # stop, WIPE data
+#
+# Values must stay in sync with .env.dev:
+#   IB_POSTGRES_PORT=5433, IB_POSTGRES_DATABASE=blockunits,
+#   IB_POSTGRES_USERNAME=postgres, IB_POSTGRES_PASSWORD=blockunits_dev_pw
+#   IB_REDIS_PORT=6380
+#
+# Non-default host ports (5433/6380) are deliberate: they avoid clashing with
+# other projects' Postgres/Redis containers already bound to 5432/6379.
+name: blockunits
+
+services:
+  postgres:
+    # pgvector, not plain postgres: the schema uses the vector extension.
+    image: pgvector/pgvector:pg16
+    container_name: blockunits_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: blockunits
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: blockunits_dev_pw
+    ports:
+      - '5433:5432'
+    volumes:
+      - blockunits_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d blockunits']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: blockunits_redis
+    restart: unless-stopped
+    ports:
+      - '6380:6379'
+    volumes:
+      - blockunits_redisdata:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  blockunits_pgdata:
+  blockunits_redisdata:

@@ -1,0 +1,38 @@
+import { createCustomApiCallAction } from '@intelblocks/blocks-common';
+import { createBlock } from '@intelblocks/blocks-framework';
+import { BlockCategory } from '@intelblocks/shared';
+import { bitlyAuth } from './lib/common/auth';
+import { newBitlinkCreatedTrigger } from './lib/triggers/new-bitlink-created';
+import { archiveBitlinkAction } from './lib/actions/archive-bitlink';
+import { createBitlinkAction } from './lib/actions/create-bitlink';
+import { createQrCodeAction } from './lib/actions/create-qr-code';
+import { getBitlinkDetailsAction } from './lib/actions/get-bitlink-details';
+import { updateBitlinkAction } from './lib/actions/update-bitlink';
+
+export const bitly = createBlock({
+  displayName: 'Bitly',
+  description: 'URL shortening and link management platform with analytics.',
+  auth: bitlyAuth,
+  minimumSupportedRelease: '0.20.0',
+  logoUrl: 'https://cdn.activepieces.com/pieces/bitly.png',
+  authors: ['aryel780'],
+  categories: [BlockCategory.MARKETING],
+  actions: [
+    archiveBitlinkAction,
+    createBitlinkAction,
+    createQrCodeAction,
+    getBitlinkDetailsAction,
+    updateBitlinkAction,
+    createCustomApiCallAction({
+      auth: bitlyAuth,
+      baseUrl: () => 'https://api-ssl.bitly.com/v4',
+      authMapping: async (auth) => {
+        const { accessToken } = auth.props;
+        return {
+          Authorization: `Bearer ${accessToken}`,
+        };
+      },
+    }),
+  ],
+  triggers: [ newBitlinkCreatedTrigger ],
+});

@@ -1,0 +1,38 @@
+# Enforce LF line endings for the web package's text/source files, overriding the
+# per-developer `core.autocrlf` setting. The web ESLint config requires `linebreak-style: unix`
+# (LF) + Prettier, so a CRLF checkout on Windows would fail lint for everyone. Scoped to
+# packages/web so server/shared line-ending behaviour is untouched. Binary assets are marked so
+# git never touches their bytes.
+
+# Text/source files: normalized to LF in the working tree on checkout.
+*.ts    text eol=lf
+*.tsx   text eol=lf
+*.js    text eol=lf
+*.jsx   text eol=lf
+*.mjs   text eol=lf
+*.cjs   text eol=lf
+*.mts   text eol=lf
+*.cts   text eol=lf
+*.json  text eol=lf
+*.css   text eol=lf
+*.scss  text eol=lf
+*.html  text eol=lf
+*.md    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.svg   text eol=lf
+
+# Binary assets: never normalized or diffed as text.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
+*.otf   binary
+*.mp4   binary
+*.pdf   binary

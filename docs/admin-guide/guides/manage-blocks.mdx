@@ -1,0 +1,92 @@
+---
+title: "How to Manage Blocks"
+description: "Control which integrations are available to your users"
+icon: "puzzle-block"
+---
+
+<Snippet file="enterprise-feature.mdx" />
+
+## Overview
+
+**Blocks** are the building blocks of Intellisper — they are integrations and connectors (like Google Sheets, Slack, OpenAI, etc.) that users can use in their automation flows.
+
+As a platform administrator, you have full control over which blocks are available to your users. This allows you to:
+
+- **Enforce security policies** by restricting access to certain integrations
+- **Simplify the user experience** by showing only relevant blocks for your use case
+- **Deploy custom/private blocks** that are specific to your organization
+
+There are **two levels** of block management:
+
+| Level | Who Can Manage | Scope |
+|-------|----------------|-------|
+| **Platform Level** | Platform Admin | Install and remove across the entire platform |
+| **Project Level** | Project Admin | Show/hide specific blocks for specfic project |
+
+<Note>
+Blocks are standard npm packages — official blocks are **auto-synced from the registry hourly**, so you don't need to upgrade the server to get new versions. Each step in a flow is pinned to a specific block version, and drafts can be upgraded from the builder. See [Block Syncing & Versioning](/install/architecture/block-syncing) for the full pipeline.
+</Note>
+
+---
+
+## Platform-Level Management
+
+Platform administrators can manage blocks for the entire Intellisper instance from **Platform Admin → Setup → Blocks**.
+
+## Project-Level Management
+
+Project administrators can further restrict which blocks are available within their specific project. This is useful when different teams or projects need access to different integrations.
+
+### Show/Hide Blocks in a Project
+
+<Steps>
+  <Step title="Open Project Settings">
+    Navigate to your project and go to **Settings → Blocks**.
+  </Step>
+  <Step title="Configure Visibility">
+    You'll see a list of all blocks installed on the platform. Toggle the visibility for each block:
+    - **Enabled**: Users in this project can use the block
+    - **Disabled**: The block is hidden from users in this project
+  </Step>
+  <Step title="Save Changes">
+    Changes take effect immediately — users will only see the enabled blocks when building their flows.
+  </Step>
+</Steps>
+
+![Manage Blocks](/resources/screenshots/manage-pieces.png)
+![Manage Blocks](/resources/screenshots/manage-pieces-2.png)
+
+<Note>
+Project-level settings can only **hide** blocks that are installed at the platform level. You cannot add blocks at the project level that aren't already installed on the platform.
+</Note>
+
+
+### Install Private Blocks
+
+<Tip>
+For detailed instructions on building custom blocks, check the [Building Blocks](/build-blocks/building-blocks/overview) documentation.
+</Tip>
+
+
+If you've built a custom block for your organization, you can upload it directly as a tarball (`.tgz`) file.
+
+<Steps>
+  <Step title="Build Your Block">
+    Build your block using the Intellisper CLI:
+    ```bash
+    npm run blocks -- build --name=your-block-name
+    ```
+    This generates a tarball in `dist/packages/blocks/your-block-name`.
+  </Step>
+  <Step title="Navigate to Blocks Settings">
+    Go to **Platform Admin → Setup → Blocks** and click **Install Block**.
+  </Step>
+  <Step title="Select File Upload">
+    Choose **Upload File** as the installation source.
+  </Step>
+  <Step title="Upload the Tarball">
+    Select the `.tgz` file from your build output and upload it.
+  </Step>
+</Steps>
+
+![Install Block](/resources/screenshots/install-piece.png)

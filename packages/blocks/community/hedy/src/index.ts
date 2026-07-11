@@ -1,0 +1,63 @@
+import { createBlock } from '@intelblocks/blocks-framework';
+import { BlockCategory } from '@intelblocks/shared';
+import { hedyAuth } from './lib/auth';
+import {
+  getSession,
+  listSessions,
+  getHighlight,
+  listHighlights,
+  listSessionHighlights,
+  getTodo,
+  listTodos,
+  listSessionTodos,
+  getTopic,
+  listTopics,
+  listTopicSessions,
+  createTopic,
+  updateTopic,
+  deleteTopic,
+  createContext,
+  getContext,
+  listContexts,
+  updateContext,
+  deleteContext,
+} from './lib/actions';
+import {
+  sessionCreated,
+  sessionEnded,
+  sessionExported,
+  highlightCreated,
+  todoExported,
+} from './lib/triggers';
+
+export const hedy = createBlock({
+  displayName: 'Hedy',
+  description: 'AI-powered meeting intelligence – be the brightest person in the room.',
+  auth: hedyAuth,
+  minimumSupportedRelease: '0.69.0',
+  logoUrl: 'https://cdn.activepieces.com/pieces/hedy.png',
+  categories: [BlockCategory.PRODUCTIVITY, BlockCategory.ARTIFICIAL_INTELLIGENCE],
+  authors: ['HedyAI'],
+  actions: [
+    getSession,
+    listSessions,
+    getHighlight,
+    listHighlights,
+    listSessionHighlights,
+    getTodo,
+    listTodos,
+    listSessionTodos,
+    getTopic,
+    listTopics,
+    listTopicSessions,
+    createTopic,
+    updateTopic,
+    deleteTopic,
+    createContext,
+    getContext,
+    listContexts,
+    updateContext,
+    deleteContext,
+  ],
+  triggers: [sessionCreated, sessionEnded, sessionExported, highlightCreated, todoExported],
+});

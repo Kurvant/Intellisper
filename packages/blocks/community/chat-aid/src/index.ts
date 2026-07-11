@@ -1,0 +1,31 @@
+import { createBlock } from '@intelblocks/blocks-framework';
+import { ChatAidAuth } from './lib/common/auth';
+import { addCustomSources } from './lib/actions/add-custom-sources';
+import { askQuestions } from './lib/actions/ask-questions';
+import { getCustomSourceById } from './lib/actions/get-custom-source-by-id';
+import { BlockCategory } from '@intelblocks/shared';
+import { createCustomApiCallAction } from '@intelblocks/blocks-common';
+import { BASE_URL } from './lib/common/client';
+
+export const chatAid = createBlock({
+  displayName: 'Chat Aid',
+  description: 'AI-powered assistant for your knowledge base.',
+  auth: ChatAidAuth,
+  minimumSupportedRelease: '0.36.1',
+  logoUrl: 'https://cdn.activepieces.com/pieces/chat-aid.png',
+  categories: [BlockCategory.ARTIFICIAL_INTELLIGENCE],
+  authors: ['sanket-a11y'],
+  actions: [
+    addCustomSources,
+    askQuestions,
+    getCustomSourceById,
+    createCustomApiCallAction({
+      baseUrl: () => BASE_URL,
+      auth: ChatAidAuth,
+      authMapping: async (auth) => ({
+        Authorization: `${auth}`,
+      }),
+    }),
+  ],
+  triggers: [],
+});

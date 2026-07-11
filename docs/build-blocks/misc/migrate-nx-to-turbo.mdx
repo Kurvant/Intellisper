@@ -1,0 +1,71 @@
+---
+title: 'Migrate from Nx to Turbo'
+icon: 'rotate'
+---
+
+<Note>
+The Intellisper monorepo has fully migrated to Turbo. This guide is kept for **historical reference** and for users with older forks that still use the Nx-based build system.
+</Note>
+
+If you have an existing fork with custom blocks built using the **old Nx-based build system**, you need to migrate them to the new **Turbo-based build system**. This guide explains what changed and provides a migration script.
+
+## What Changed
+
+The Intellisper monorepo replaced [Nx](https://nx.dev) with [Turbo](https://turbo.build) as its build orchestrator. For blocks, this means:
+
+| | **Old (Nx)** | **New (Turbo)** |
+|---|---|---|
+| Build config | `project.json` per block | `package.json` scripts |
+| Build command | `nx build blocks-{name}` | `turbo run build --filter=@intelblocks/block-{name}` |
+| Output directory | `dist/out-tsc` (shared) | `./dist` (local per block) |
+| Task runner | Nx executor (`@nx/js:tsc`) | Direct `tsc -p tsconfig.lib.json && cp package.json dist/` |
+| Dependencies | Inferred by Nx graph | Workspace protocol (`workspace:*`) in `package.json` |
+
+### Files affected per block
+
+- **`project.json`** — Deleted (no longer needed)
+- **`package.json`** — Added `build` and `lint` scripts, added `main` and `types` fields, added workspace dependencies
+- **`tsconfig.lib.json`** — Updated `outDir`, added `rootDir`, `baseUrl`, `paths`
+
+## Automatic Migration
+
+Run the migration script to update all custom blocks at once:
+
+```bash
+npx ts-node tools/scripts/migrate-custom-block-to-turbo.ts
+```
+
+This scans `packages/blocks/custom/` and applies all necessary changes.
+
+### Migrate a specific block
+
+You can also pass a path to migrate a single block:
+
+```bash
+npx ts-node tools/scripts/migrate-custom-block-to-turbo.ts packages/blocks/custom/my-block
+```
+
+### What the script does
+
+For each block, the script:
+
+1. **Updates `package.json`** — adds `build` and `lint` scripts, sets `main` and `types` entry points, ensures `@intelblocks/blocks-framework`, `@intelblocks/shared`, and `tslib` are listed as dependencies
+2. **Updates `tsconfig.lib.json`** — sets `outDir` to `./dist`, adds `rootDir`, `baseUrl`, `paths`, and `declaration` settings
+3. **Creates `tsconfig.json`** if missing — extends the root `tsconfig.base.json`
+4. **Deletes `project.json`** — removes Nx configuration
+
+## Verify the Migration
+
+After migrating, build your block to verify everything works:
+
+```bash
+npx turbo run build --filter=@intelblocks/block-your-block --force
+```
+
+Or use the CLI:
+
+```bash
+npm run build-block your-block
+```
+
+The build output should appear in `packages/blocks/custom/your-block/dist/`.

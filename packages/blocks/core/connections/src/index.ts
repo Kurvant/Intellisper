@@ -1,0 +1,15 @@
+import { BlockAuth, createBlock } from '@intelblocks/blocks-framework';
+import { BlockCategory } from '@intelblocks/shared';
+import { readConnection } from './lib/actions/read-connection';
+
+export const connections = createBlock({
+  displayName: 'Connections',
+  description: 'Read connections dynamically',
+  minimumSupportedRelease: '0.36.1',
+  logoUrl: 'https://cdn.activepieces.com/pieces/new-core/connections.svg',
+  categories: [BlockCategory.CORE],
+  auth: BlockAuth.None(),
+  authors: ["kishanprmr","AbdulTheActivePiecer","khaledmashaly","abuaboud"],
+  actions: [readConnection],
+  triggers: [],
+});

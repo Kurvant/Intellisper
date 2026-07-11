@@ -1,0 +1,30 @@
+import { createBlock, BlockAuth } from '@intelblocks/blocks-framework';
+import { newBooking } from './lib/triggers/new-booking';
+import { BlockCategory } from '@intelblocks/shared';
+import { createprofile } from './lib/actions/create-profile';
+import { retrieveBookingById } from './lib/actions/retrieve-booking-by-id';
+import { createCustomApiCallAction } from '@intelblocks/blocks-common';
+import { youcanbookmeAuth } from './lib/common/auth';
+
+export const youcanbookme = createBlock({
+  displayName: 'YouCanBookMe',
+  auth: youcanbookmeAuth,
+  minimumSupportedRelease: '0.36.1',
+  logoUrl: 'https://cdn.activepieces.com/pieces/youcanbookme.png',
+  categories: [BlockCategory.SALES_AND_CRM],
+  description:
+    'YouCanBookMe is an online scheduling tool that helps you manage appointments and bookings efficiently.',
+  authors: ['sanket-a11y'],
+  actions: [
+    createprofile,
+    retrieveBookingById,
+    createCustomApiCallAction({
+      auth: youcanbookmeAuth,
+      baseUrl: () => 'https://api.youcanbook.me/v1',
+      authMapping: async (auth) => ({
+        Authorization: `Bearer ${auth.secret_text}`,
+      }),
+    }),
+  ],
+  triggers: [newBooking],
+});

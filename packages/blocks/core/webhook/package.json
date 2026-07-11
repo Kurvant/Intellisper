@@ -1,0 +1,22 @@
+{
+  "name": "@intelblocks/block-webhook",
+  "version": "0.1.35",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.lib.json && cp package.json dist/",
+    "lint": "eslint 'src/**/*.ts'",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "3.0.8"
+  },
+  "dependencies": {
+    "@intelblocks/blocks-common": "workspace:*",
+    "@intelblocks/blocks-framework": "workspace:*",
+    "@intelblocks/shared": "workspace:*",
+    "dayjs": "1.11.9",
+    "http-status-codes": "2.2.0",
+    "tslib": "2.6.2"
+  }
+}

@@ -1,0 +1,47 @@
+import { HttpMethod } from '@intelblocks/blocks-common';
+import { createAction, Property } from '@intelblocks/blocks-framework';
+import { ampecoAuth } from '../../../common/auth';
+import { handleApiError, makeAmpecoApiCall, prepareQueryParams, processPathParameters } from '../../../common/utils';
+
+/**
+ * Generated from API version: 3.96.4
+ */
+
+//Endpoint: DELETE /public-api/resources/circuits/v2.0/{circuit}
+export const circuitDeleteAction = createAction({
+  auth: ampecoAuth,
+  name: 'circuitDelete',
+  displayName: 'Resources - Circuits - Delete',
+  description: 'Delete a circuit.',
+  audience: 'both',
+  aiMetadata: { description: 'Permanently delete an AMPECO load-balancing circuit by its numeric ID. Destructive and not reversible; re-running on an already-deleted circuit will fail. Confirm the correct circuit ID before deleting.', idempotent: false },
+  props: {
+        
+  circuit: Property.Number({
+    displayName: 'Circuit',
+    description: '',
+    required: true,
+  }),
+  },
+  async run(context): Promise<unknown> {
+    try {
+      const url = processPathParameters('/public-api/resources/circuits/v2.0/{circuit}', context.propsValue);
+      
+      const queryParams = prepareQueryParams(context.propsValue, []);
+      
+      const body = undefined;
+
+      
+      return await makeAmpecoApiCall(
+        context.auth,
+        url,
+        HttpMethod.DELETE,
+        body,
+        queryParams
+      ) as unknown;
+
+    } catch (error) {
+      handleApiError(error);
+    }
+  },
+});

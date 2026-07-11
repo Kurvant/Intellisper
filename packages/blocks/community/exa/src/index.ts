@@ -1,0 +1,35 @@
+import { createBlock, BlockAuth } from '@intelblocks/blocks-framework';
+import { BlockCategory } from '@intelblocks/shared';
+import { getContentsAction } from './lib/actions/get-contents';
+import { generateAnswerAction } from './lib/actions/generate-answer';
+import { performSearchAction } from './lib/actions/perform-search';
+import { findSimilarLinksAction } from './lib/actions/find-similar-links';
+import { createCustomApiCallAction, HttpMethod } from '@intelblocks/blocks-common';
+import { makeRequest } from './lib/common';
+import { exaAuth } from './lib/auth';
+
+const markdownDescription = `Obtain your API key from [Dashboard Setting](https://dashboard.exa.ai/api-keys).`;
+
+export const exa = createBlock({
+  displayName: 'Exa',
+  description: 'AI-powered search and content extraction from the web.',
+  auth: exaAuth,
+  minimumSupportedRelease: '0.36.1',
+  logoUrl: 'https://cdn.activepieces.com/pieces/exa.png',
+  categories: [BlockCategory.ARTIFICIAL_INTELLIGENCE,BlockCategory.PRODUCTIVITY],
+  authors: ['krushnarout','kishanprmr'],
+  actions: [
+    getContentsAction,
+    generateAnswerAction,
+    performSearchAction,
+    findSimilarLinksAction,
+    createCustomApiCallAction({
+      auth:exaAuth,
+       baseUrl: () => 'https://api.exa.ai',
+      authMapping: async (auth) => ({
+        'x-api-key': `${auth}`,
+      }),
+    })
+  ],
+  triggers: [],
+});

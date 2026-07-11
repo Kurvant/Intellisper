@@ -1,0 +1,51 @@
+import {
+  createBlock,
+  BlockPropValueSchema,
+} from '@intelblocks/blocks-framework';
+import { BlockCategory } from '@intelblocks/shared';
+import { smartsuiteAuth } from './lib/auth';
+
+// Actions
+import { createRecord } from './lib/actions/create-record';
+import { updateRecord } from './lib/actions/update-record';
+import { deleteRecord } from './lib/actions/delete-record';
+import { uploadFile } from './lib/actions/upload-file';
+import { findRecords } from './lib/actions/find-records';
+import { getRecord } from './lib/actions/get-record';
+
+// Triggers
+import { newRecord } from './lib/triggers/new-record';
+import { updatedRecord } from './lib/triggers/updated-record';
+import { createCustomApiCallAction } from '@intelblocks/blocks-common';
+import { SMARTSUITE_API_URL } from './lib/common/constants';
+
+export const smartsuite = createBlock({
+  displayName: 'SmartSuite',
+  description:
+    'Collaborative work management platform combining databases with spreadsheets.',
+  logoUrl: 'https://cdn.activepieces.com/pieces/smartsuite.png',
+  categories: [BlockCategory.PRODUCTIVITY],
+  auth: smartsuiteAuth,
+  minimumSupportedRelease: '0.30.0',
+  authors: ['Kunal-Darekar', 'kishanprmr'],
+  actions: [
+    createRecord,
+    updateRecord,
+    deleteRecord,
+    uploadFile,
+    findRecords,
+    getRecord,
+    createCustomApiCallAction({
+      auth: smartsuiteAuth,
+      baseUrl: () => SMARTSUITE_API_URL,
+      authMapping: async (auth) => {
+        const authValue = auth
+        return {
+          Authorization: `Token ${auth.props.apiKey}`,
+          'ACCOUNT-ID': auth.props.accountId,
+        };
+      },
+    }),
+  ],
+  triggers: [newRecord, updatedRecord],
+});

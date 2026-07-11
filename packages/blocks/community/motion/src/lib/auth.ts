@@ -1,0 +1,29 @@
+import { BlockAuth } from '@intelblocks/blocks-framework';
+import { httpClient, HttpMethod } from '@intelblocks/blocks-common';
+import { BASE_URL } from './common/props';
+
+export const motionAuth = BlockAuth.SecretText({
+  displayName: 'API Key',
+  description: `You can obtain API key from [API Settings](https://app.usemotion.com/web/settings/api).`,
+  required: true,
+  validate: async ({ auth }) => {
+    try {
+      await httpClient.sendRequest({
+        method: HttpMethod.GET,
+        url: `${BASE_URL}/workspaces`,
+        headers: {
+          'X-API-Key': auth,
+        },
+      });
+
+      return {
+        valid: true,
+      };
+    } catch {
+      return {
+        valid: false,
+        error: 'Invalid API key.',
+      };
+    }
+  },
+});

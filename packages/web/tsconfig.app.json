@@ -1,0 +1,40 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@intelblocks/shared": [
+        "../../packages/shared/src"
+      ],
+      "@intelblocks/blocks-framework": [
+        "../../packages/blocks/framework/src"
+      ],
+      "ee-embed-sdk": [
+        "./src/lib/embed-sdk"
+      ],
+      "@intelblocks/block-ai": [
+        "../../packages/blocks/community/ai/src"
+      ]
+    }
+  },
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.tsx",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.js",
+    "src/**/*.test.js",
+    "src/**/*.spec.jsx",
+    "src/**/*.test.jsx"
+  ],
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx", "i18next-parser.config.js", "src/app/builder/builder-flow-status-section/index.tsx"]
+}

@@ -1,0 +1,57 @@
+---
+title: 'Publish Custom Blocks'
+icon: 'upload'
+---
+
+You can use the CLI to publish custom blocks to the platform. This process packages the blocks and uploads them to the specified API endpoint.
+
+### How It Works
+
+The CLI scans the `packages/blocks/` directory for the specified block. It checks the **name** and **version** in the `package.json` file. If the block is not already published, it builds, packages, and uploads it to the platform using the API.
+
+### Usage
+
+To publish a block, follow these steps:
+
+1. Ensure you have an API Key. Generate it from the Admin Interface by navigating to Settings.
+2. Install the CLI by cloning the repository.
+3. Run the following command:
+
+```bash
+npm run publish-block-to-api
+```
+
+4. You will be asked three questions to publish your block:
+
+  - `Block Folder Name`: This is the name associated with the folder where the action resides. It helps organize and categorize actions within the block.
+
+  - `API URL`: This is the URL of the API endpoint where the block will be published (ex: https://cloud.activepieces.com/api).
+
+  - `API Key Source`: This is the source of the API key. It can be either `Env Variable (IB_API_KEY)` or `Manually`.
+
+
+In case you choose `Env Variable (IB_API_KEY)`, the CLI will use the API key from the `.env` file in the `packages/server/api` directory.
+
+In case you choose `Manually`, you will be asked to enter the API key.
+
+
+Examples:
+
+```bash
+npm run publish-block-to-api
+
+? Enter the block folder name : google-drive
+? Enter the API URL : https://cloud.activepieces.com/api
+? Enter the API Key Source : Env Variable (IB_API_KEY)
+
+```
+
+```bash
+npm run publish-block-to-api
+
+? Enter the block folder name : google-drive
+? Enter the API URL : https://cloud.activepieces.com/api
+? Enter the API Key Source : Manually
+? Enter the API Key : ib_1234567890abcdef1234567890abcdef
+
+```

@@ -1,0 +1,140 @@
+import {
+  BlockMetadataModel,
+  BlockPropertyMap,
+  blockPropertiesUtils,
+} from '@intelblocks/blocks-framework';
+import {
+  FlowAction,
+  setAtPath,
+  FlowTrigger,
+  PropertyExecutionType,
+} from '@intelblocks/shared';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
+import { UseFormReturn } from 'react-hook-form';
+import { z, ZodObject } from 'zod';
+
+import { formUtils } from '@/features/pieces';
+const numberReplacement = 'def.options.0.element';
+const stringReplacement = 'shape.';
+const createUpdatedSchemaKey = (propertyKey: string) => {
+  return propertyKey
+    .split('.')
+    .map((part) => {
+      if (part === '') {
+        return ''; // Keep empty parts intact (for consecutive dots)
+      } else if (!isNaN(Number(part))) {
+        return numberReplacement;
+      } else {
+        return `${stringReplacement}${part}`;
+      }
+    })
+    .join('.');
+};
+
+export type StepSettingsContextState = {
+  selectedStep: FlowAction | FlowTrigger;
+  blockModel: BlockMetadataModel | undefined;
+  formSchema: ZodObject<any>;
+  updateFormSchema: (key: string, newFieldSchema: BlockPropertyMap) => void;
+  updatePropertySettingsSchema: (
+    schema: BlockPropertyMap,
+    propertyName: string,
+    form: UseFormReturn,
+  ) => void;
+};
+
+export type StepSettingsProviderProps = {
+  selectedStep: FlowAction | FlowTrigger;
+  blockModel: BlockMetadataModel | undefined;
+  children: ReactNode;
+};
+
+const StepSettingsContext = createContext<StepSettingsContextState | undefined>(
+  undefined,
+);
+
+export const StepSettingsProvider = ({
+  selectedStep,
+  blockModel,
+  children,
+}: StepSettingsProviderProps) => {
+  const [formSchema, setFormSchema] = useState<ZodObject<any>>(
+    z.object({}) as ZodObject<any>,
+  );
+  const formSchemaInitializedRef = useRef<boolean>(false);
+
+  if (!formSchemaInitializedRef.current && selectedStep) {
+    const schema = formUtils.buildBlockSchema(
+      selectedStep.type,
+      selectedStep.settings.actionName ?? selectedStep.settings.triggerName,
+      blockModel ?? null,
+    );
+    formSchemaInitializedRef.current = true;
+    setFormSchema(schema as ZodObject<any>);
+  }
+
+  const updateFormSchema = useCallback(
+    (key: string, newFieldPropertyMap: BlockPropertyMap) => {
+      setFormSchema((prevSchema) => {
+        const newFieldSchema = blockPropertiesUtils.buildSchema(
+          newFieldPropertyMap,
+          undefined,
+        );
+        const currentSchema = Object.create(
+          Object.getPrototypeOf(prevSchema),
+          Object.getOwnPropertyDescriptors(prevSchema),
+        );
+        const keyUpdated = createUpdatedSchemaKey(key);
+        setAtPath(currentSchema, keyUpdated, newFieldSchema);
+        return currentSchema;
+      });
+    },
+    [],
+  );
+  const updatePropertySettingsSchema = (
+    schema: BlockPropertyMap,
+    propertyName: string,
+    form: UseFormReturn,
+  ) => {
+    // previously step settings schema didn't have this property, so we need to set it
+    // we can't always set it to MANUAL, because some sub properties might be dynamic and have the same name as the dynamic (parent) property i.e values property in insert row (Google Sheets)
+    // which will override the sub property exectuion type
+    if (!selectedStep.settings?.propertySettings?.[propertyName]) {
+      form.setValue(
+        `settings.propertySettings.${propertyName}.type`,
+        PropertyExecutionType.MANUAL,
+      );
+    }
+    form.setValue(`settings.propertySettings.${propertyName}.schema`, schema);
+  };
+  return (
+    <StepSettingsContext.Provider
+      value={{
+        selectedStep,
+        blockModel,
+        formSchema,
+        updateFormSchema,
+        updatePropertySettingsSchema,
+      }}
+    >
+      {children}
+    </StepSettingsContext.Provider>
+  );
+};
+
+export const useStepSettingsContext = () => {
+  const context = useContext(StepSettingsContext);
+  if (context === undefined) {
+    throw new Error(
+      'useStepSettingsContext must be used within a BlockSettingsProvider',
+    );
+  }
+  return context;
+};

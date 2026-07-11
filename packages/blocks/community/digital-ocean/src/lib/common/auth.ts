@@ -1,0 +1,63 @@
+import {
+  AppConnectionValueForAuthProperty,
+  BlockAuth,
+} from '@intelblocks/blocks-framework';
+import { HttpMethod } from '@intelblocks/blocks-common';
+import { digitalOceanApiCall } from './client';
+import { AppConnectionType } from '@intelblocks/shared';
+
+export const digitalOceanAuth = [
+  BlockAuth.OAuth2({
+    description: 'Connect your DigitalOcean account using OAuth2.',
+    authUrl: 'https://cloud.digitalocean.com/v1/oauth/authorize',
+    tokenUrl: 'https://cloud.digitalocean.com/v1/oauth/token',
+    required: true,
+    scope: [],
+    validate: async ({ auth }) => {
+      try {
+        await digitalOceanApiCall({
+          method: HttpMethod.GET,
+          path: '/account',
+          auth: {
+            type: AppConnectionType.OAUTH2,
+            access_token: auth.access_token,
+          },
+        });
+        return { valid: true };
+      } catch (e) {
+        return {
+          valid: false,
+          error: (e as Error).message,
+        };
+      }
+    },
+  }),
+  BlockAuth.SecretText({
+    displayName: 'Personal Access Token',
+    required: true,
+    description:
+      'Generate a Personal Access Token from DigitalOcean Control Panel under API > Personal access tokens.',
+    validate: async ({ auth }) => {
+      try {
+        await digitalOceanApiCall({
+          method: HttpMethod.GET,
+          path: '/account',
+          auth: {
+            type: AppConnectionType.SECRET_TEXT,
+            secret_text: auth,
+          },
+        });
+        return { valid: true };
+      } catch (e) {
+        return {
+          valid: false,
+          error: (e as Error).message,
+        };
+      }
+    },
+  }),
+];
+
+export type DigitalOceanAuthValue = AppConnectionValueForAuthProperty<
+  typeof digitalOceanAuth
+>;

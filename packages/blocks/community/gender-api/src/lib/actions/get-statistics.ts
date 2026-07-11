@@ -1,0 +1,30 @@
+import { createAction, Property } from '@intelblocks/blocks-framework';
+import { genderApiAuth } from '../common/auth';
+import { httpClient, HttpMethod } from '@intelblocks/blocks-common';
+
+export const getStatistics = createAction({
+  auth: genderApiAuth,
+  name: 'getStatistics',
+  displayName: 'Get Statistics',
+  description:
+    'Get account statistics including remaining credits and usage information',
+  audience: 'both',
+  aiMetadata: {
+    description:
+      'Retrieves the Gender API account statistics, including remaining credits and usage information. Use to check quota before running batches of name lookups. Takes no input; read-only and safe to repeat.',
+    idempotent: true,
+  },
+  props: {},
+  async run(context) {
+    const response = await httpClient.sendRequest({
+      method: HttpMethod.GET,
+      url: 'https://gender-api.com/v2/statistic',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${context.auth.secret_text}`,
+      },
+    });
+
+    return response.body;
+  },
+});

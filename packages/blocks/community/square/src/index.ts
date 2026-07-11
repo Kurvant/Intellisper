@@ -1,0 +1,39 @@
+import { BlockAuth, createBlock } from '@intelblocks/blocks-framework';
+import { BlockCategory } from '@intelblocks/shared';
+import crypto from 'crypto';
+import { triggers } from './lib/triggers';
+import { squareAuth } from './lib/auth';
+
+export const square = createBlock({
+  displayName: 'Square',
+  description: 'Payment solutions for every business',
+
+  minimumSupportedRelease: '0.30.0',
+  logoUrl: 'https://cdn.activepieces.com/pieces/square.png',
+  categories: [BlockCategory.COMMERCE],
+  authors: ["kishanprmr","MoShizzle","khaledmashaly","abuaboud"],
+  auth: squareAuth,
+  events: {
+    verify: ({ webhookSecret, payload, appWebhookUrl }) => {
+      const signature = payload.headers['x-square-hmacsha256-signature'];
+      const hmac = crypto.createHmac('sha256', webhookSecret as string);
+      hmac.update(appWebhookUrl + payload.rawBody);
+      const hash = hmac.digest('base64');
+      return hash === signature;
+    },
+    parseAndReply: ({ payload }) => {
+      const payloadBody = payload.body as Payload | undefined;
+      return {
+        event: payloadBody?.type,
+        identifierValue: payloadBody?.merchant_id,
+      };
+    },
+  },
+  actions: [],
+  triggers,
+});
+
+type Payload = {
+  type: string;
+  merchant_id: string;
+};

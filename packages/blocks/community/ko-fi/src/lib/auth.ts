@@ -1,0 +1,9 @@
+import { BlockAuth } from '@intelblocks/blocks-framework';
+
+/** Authenticate Ko-fi webhook payloads using the per-creator verification token. */
+export const koFiAuth = BlockAuth.SecretText({
+  displayName: 'Verification Token',
+  description:
+    'Your Ko-fi webhook verification token. Find it in Ko-fi Dashboard > Settings > API/Webhooks > Advanced Settings > Webhook verification token.',
+  required: true,
+});

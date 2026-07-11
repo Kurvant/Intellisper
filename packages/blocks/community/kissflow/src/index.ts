@@ -1,0 +1,37 @@
+import { createBlock } from '@intelblocks/blocks-framework';
+
+import { createCustomApiCallAction } from '@intelblocks/blocks-common';
+import { BlockCategory } from '@intelblocks/shared';
+import { kissflowAuth, KissflowAuth } from './auth';
+import { downloadAttachmentFromFormField } from './lib/actions/download-attachment-from-form-field';
+
+export const kissflow = createBlock({
+  displayName: 'Kissflow',
+  description: 'Low-code no-code platform',
+  categories: [BlockCategory.PRODUCTIVITY],
+  auth: kissflowAuth,
+  minimumSupportedRelease: '0.36.1',
+  logoUrl: 'https://cdn.activepieces.com/pieces/kissflow.png',
+  authors: ['danielpoonwj'],
+  actions: [
+    downloadAttachmentFromFormField,
+    createCustomApiCallAction({
+      baseUrl: (auth) => {
+        if (!auth) {
+          return ''
+        }
+        const typedAuth = auth.props;
+        return `https://${typedAuth.accountName}.${typedAuth.domainName}/process/2/${typedAuth.accountId}/`;
+      },
+      auth: kissflowAuth,
+      authMapping: async (auth) => {
+        const typedAuth = auth.props;
+        return {
+          'X-Access-Key-Id': typedAuth.accessKeyId,
+          'X-Access-Key-Secret': typedAuth.accessKeySecret,
+        };
+      },
+    }),
+  ],
+  triggers: [],
+});

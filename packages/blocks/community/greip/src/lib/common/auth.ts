@@ -1,0 +1,53 @@
+import { HttpMethod, httpClient } from '@intelblocks/blocks-common';
+import { BlockAuth } from '@intelblocks/blocks-framework';
+
+const BASE_URL = 'https://greipapi.com';
+
+export const greipAuth = BlockAuth.SecretText({
+  displayName: 'API Key',
+  description: `
+To get your API Key:
+
+1. Go to your Greip account dashboard
+2. Navigate to API settings
+3. Copy your API key
+4. Paste it here
+`,
+  required: true,
+  validate: async ({ auth }) => {
+    if (!auth) {
+      return {
+        valid: false,
+        error: 'API key is required',
+      };
+    }
+
+    try {
+      const response = await httpClient.sendRequest({
+        method: HttpMethod.GET,
+        url: `${BASE_URL}/geoip`,
+        headers: {
+          Authorization: `Bearer ${auth}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 200) {
+        return {
+          valid: true,
+        };
+      }
+
+      return {
+        valid: false,
+        error: 'Invalid API key',
+      };
+    } catch (error: any) {
+      return {
+        valid: false,
+        error: 'Invalid API key. Please check your API key and try again.',
+      };
+    }
+  },
+});
+

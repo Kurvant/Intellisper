@@ -1,0 +1,17 @@
+import { BlockAuth, createBlock } from '@intelblocks/blocks-framework';
+import { BlockCategory } from '@intelblocks/shared';
+import { csvToJsonAction } from './lib/actions/convert-csv-to-json';
+import { jsonToCsvAction } from './lib/actions/convert-json-to-csv';
+import { excelToCsvAction } from './lib/actions/convert-excel-to-csv';
+
+export const csv = createBlock({
+  displayName: 'CSV',
+  description: 'Manipulate CSV text',
+  minimumSupportedRelease: '0.30.0',
+  logoUrl: 'https://cdn.activepieces.com/pieces/new-core/csv.svg',
+  auth: BlockAuth.None(),
+  categories: [BlockCategory.CORE],
+  actions: [csvToJsonAction, jsonToCsvAction, excelToCsvAction],
+  authors: ["kishanprmr", "MoShizzle", "khaledmashaly", "abuaboud", 'sanket-a11y'],
+  triggers: [],
+});

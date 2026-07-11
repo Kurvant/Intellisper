@@ -1,0 +1,86 @@
+---
+title: "Docker"
+description: "Single docker image deployment with PGLite and Memory Queue"
+icon: "docker"
+---
+
+<Warning>
+This setup is only meant for personal use or testing. It runs on [PGLite](https://pglite.dev/) (embedded PostgreSQL) and an in-memory Redis queue, which supports only a single instance on a single machine. For production or multi-instance setups, you must use Docker Compose with PostgreSQL and Redis. You will not be able to upgrade from Community Edition to Enterprise out of the box, as Enterprise does not support PGLite.
+</Warning>
+
+To get up and running quickly with Intellisper, we will use the Intellisper Docker image. Follow these steps:
+
+## Prerequisites
+
+You need to have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker](https://docs.docker.com/get-docker/) installed on your machine in order to set up Intellisper via Docker Compose.
+
+## Install
+
+### Pull Image and Run Docker image 
+
+Pull the Intellisper Docker image and run the container with the following command:
+
+```bash
+docker run -d -p 8080:80 -v ~/.intellisper:/root/.intellisper -e IB_REDIS_TYPE=MEMORY -e IB_DB_TYPE=PGLITE -e IB_FRONTEND_URL="http://localhost:8080" activepieces/activepieces:latest
+```
+
+### Configure Webhook URL (Important for Triggers, Optional If you have public IP)
+
+**Note:** By default, Intellisper will try to use your public IP for webhooks. If you are self-hosting on a personal machine, you must configure the frontend URL so that the webhook is accessible from the internet.
+
+**Optional:** The easiest way to expose your webhook URL on localhost is by using a service like ngrok. However, it is not suitable for production use.
+
+1. Install ngrok
+2. Run the following command:
+```bash
+ngrok http 8080
+```
+3. Replace `IB_FRONTEND_URL` environment variable in the command line above.
+
+![Ngrok](../../resources/screenshots/docker-ngrok.png)
+
+
+
+## Upgrade 
+
+Please follow the steps below:
+
+### Step 1: Back Up Your Data (Recommended)
+
+Before proceeding with the upgrade, it is always a good practice to back up your Intellisper data to avoid any potential data loss during the update process.
+
+1. **Stop the Current Intellisper Container:** If your Intellisper container is running, stop it using the following command:
+   ```bash
+   docker stop intellisper_container_name
+   ```
+
+2. **Backup Intellisper Data Directory:** By default, Intellisper data is stored in the `~/.intellisper` directory on your host machine. Create a backup of this directory to a safe location using the following command:
+   ```bash
+   cp -r ~/.intellisper ~/.intellisper_backup
+   ```
+
+### Step 2: Update the Docker Image
+
+1. **Pull the Latest Intellisper Docker Image:** Run the following command to pull the latest Intellisper Docker image from Docker Hub:
+   ```bash
+   docker pull activepieces/activepieces:latest
+   ```
+
+### Step 3: Remove the Existing Intellisper Container
+
+1. **Stop and Remove the Current Intellisper Container:** If your Intellisper container is running, stop and remove it using the following commands:
+   ```bash
+   docker stop intellisper_container_name
+   docker rm intellisper_container_name
+   ```
+
+### Step 4: Run the Updated Intellisper Container
+
+Now, run the updated Intellisper container with the latest image using the same command you used during the initial setup. Be sure to replace `intellisper_container_name` with the desired name for your new container.
+
+```bash
+docker run -d -p 8080:80 -v ~/.intellisper:/root/.intellisper -e IB_REDIS_TYPE=MEMORY -e IB_DB_TYPE=PGLITE -e IB_FRONTEND_URL="http://localhost:8080" --name intellisper_container_name activepieces/activepieces:latest
+```
+
+
+Congratulations! You have successfully upgraded your Intellisper Docker deployment

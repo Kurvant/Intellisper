@@ -1,0 +1,2120 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2022", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@intelblocks/engine": ["packages/server/engine/src/main.ts"],
+      "@intelblocks/block-activecampaign": [
+        "packages/blocks/community/activecampaign/src/index.ts"
+      ],
+      "@intelblocks/block-activepieces": [
+        "packages/blocks/community/activepieces/src/index.ts"
+      ],
+      "@intelblocks/block-actualbudget": [
+        "packages/blocks/community/actualbudget/src/index.ts"
+      ],
+      "@intelblocks/block-acuity-scheduling": [
+        "packages/blocks/community/acuity-scheduling/src/index.ts"
+      ],
+      "@intelblocks/block-acumbamail": [
+        "packages/blocks/community/acumbamail/src/index.ts"
+      ],
+      "@intelblocks/block-add-event": [
+        "packages/blocks/community/add-event/src/index.ts"
+      ],
+      "@intelblocks/block-afforai": [
+        "packages/blocks/community/afforai/src/index.ts"
+      ],
+      "@intelblocks/block-agent": [
+        "packages/blocks/community/agent/src/index.ts"
+      ],
+      "@intelblocks/block-agentx": [
+        "packages/blocks/community/agentx/src/index.ts"
+      ],
+      "@intelblocks/block-aianswer": [
+        "packages/blocks/community/aianswer/src/index.ts"
+      ],
+      "@intelblocks/block-aidbase": [
+        "packages/blocks/community/aidbase/src/index.ts"
+      ],
+      "@intelblocks/block-aiprise": [
+        "packages/blocks/community/aiprise/src/index.ts"
+      ],
+      "@intelblocks/block-aircall": [
+        "packages/blocks/community/aircall/src/index.ts"
+      ],
+      "@intelblocks/block-airparser": [
+        "packages/blocks/community/airparser/src/index.ts"
+      ],
+      "@intelblocks/block-airtable": [
+        "packages/blocks/community/airtable/src/index.ts"
+      ],
+      "@intelblocks/block-airtop": [
+        "packages/blocks/community/airtop/src/index.ts"
+      ],
+      "@intelblocks/block-amazon-s3": [
+        "packages/blocks/community/amazon-s3/src/index.ts"
+      ],
+      "@intelblocks/block-amazon-sns": [
+        "packages/blocks/community/amazon-sns/src/index.ts"
+      ],
+      "@intelblocks/block-amazon-sqs": [
+        "packages/blocks/community/amazon-sqs/src/index.ts"
+      ],
+      "@intelblocks/block-amazon-textract": [
+        "packages/blocks/community/amazon-textract/src/index.ts"
+      ],
+      "@intelblocks/block-aminos": [
+        "packages/blocks/community/aminos/src/index.ts"
+      ],
+      "@intelblocks/block-anyhook-graphql": [
+        "packages/blocks/community/anyhook-graphql/src/index.ts"
+      ],
+      "@intelblocks/block-anyhook-websocket": [
+        "packages/blocks/community/anyhook-websocket/src/index.ts"
+      ],
+      "@intelblocks/block-apify": [
+        "packages/blocks/community/apify/src/index.ts"
+      ],
+      "@intelblocks/block-apitable": [
+        "packages/blocks/community/apitable/src/index.ts"
+      ],
+      "@intelblocks/block-apitemplate-io": [
+        "packages/blocks/community/apitemplate-io/src/index.ts"
+      ],
+      "@intelblocks/block-apollo": [
+        "packages/blocks/community/apollo/src/index.ts"
+      ],
+      "@intelblocks/block-approval": [
+        "packages/blocks/core/approval/src/index.ts"
+      ],
+      "@intelblocks/block-asana": [
+        "packages/blocks/community/asana/src/index.ts"
+      ],
+      "@intelblocks/block-ashby": [
+        "packages/blocks/community/ashby/src/index.ts"
+      ],
+      "@intelblocks/block-assembled": [
+        "packages/blocks/community/assembled/src/index.ts"
+      ],
+      "@intelblocks/block-assemblyai": [
+        "packages/blocks/community/assemblyai/src/index.ts"
+      ],
+      "@intelblocks/block-attio": [
+        "packages/blocks/community/attio/src/index.ts"
+      ],
+      "@intelblocks/block-autocalls": [
+        "packages/blocks/community/autocalls/src/index.ts"
+      ],
+      "@intelblocks/block-avian": [
+        "packages/blocks/community/avian/src/index.ts"
+      ],
+      "@intelblocks/block-avoma": [
+        "packages/blocks/community/avoma/src/index.ts"
+      ],
+      "@intelblocks/block-azure-ad": [
+        "packages/blocks/community/azure-ad/src/index.ts"
+      ],
+      "@intelblocks/block-azure-communication-services": [
+        "packages/blocks/community/azure-communication-services/src/index.ts"
+      ],
+      "@intelblocks/block-azure-devops": [
+        "packages/blocks/community/azure-devops/src/index.ts"
+      ],
+      "@intelblocks/block-azure-openai": [
+        "packages/blocks/community/azure-openai/src/index.ts"
+      ],
+      "@intelblocks/block-backblaze": [
+        "packages/blocks/community/backblaze/src/index.ts"
+      ],
+      "@intelblocks/block-bamboohr": [
+        "packages/blocks/community/bamboohr/src/index.ts"
+      ],
+      "@intelblocks/block-bannerbear": [
+        "packages/blocks/community/bannerbear/src/index.ts"
+      ],
+      "@intelblocks/block-baserow": [
+        "packages/blocks/community/baserow/src/index.ts"
+      ],
+      "@intelblocks/block-beamer": [
+        "packages/blocks/community/beamer/src/index.ts"
+      ],
+      "@intelblocks/block-beebole": [
+        "packages/blocks/community/beebole/src/index.ts"
+      ],
+      "@intelblocks/block-beehiiv": [
+        "packages/blocks/community/beehiiv/src/index.ts"
+      ],
+      "@intelblocks/block-bettermode": [
+        "packages/blocks/community/bettermode/src/index.ts"
+      ],
+      "@intelblocks/block-bocha-search": [
+        "packages/blocks/community/bocha-search/src/index.ts"
+      ],
+      "@intelblocks/block-bigcommerce": [
+        "packages/blocks/community/bigcommerce/src/index.ts"
+      ],
+      "@intelblocks/block-bigin-by-zoho": [
+        "packages/blocks/community/bigin-by-zoho/src/index.ts"
+      ],
+      "@intelblocks/block-bika": [
+        "packages/blocks/community/bika/src/index.ts"
+      ],
+      "@intelblocks/block-binance": [
+        "packages/blocks/community/binance/src/index.ts"
+      ],
+      "@intelblocks/block-bitly": [
+        "packages/blocks/community/bitly/src/index.ts"
+      ],
+      "@intelblocks/block-blockscout": [
+        "packages/blocks/community/blockscout/src/index.ts"
+      ],
+      "@intelblocks/block-bluesky": [
+        "packages/blocks/community/bluesky/src/index.ts"
+      ],
+      "@intelblocks/block-bonjoro": [
+        "packages/blocks/community/bonjoro/src/index.ts"
+      ],
+      "@intelblocks/block-box": ["packages/blocks/community/box/src/index.ts"],
+      "@intelblocks/block-brilliant-directories": [
+        "packages/blocks/community/brilliant-directories/src/index.ts"
+      ],
+      "@intelblocks/block-browse-ai": [
+        "packages/blocks/community/browse-ai/src/index.ts"
+      ],
+      "@intelblocks/block-browserless": [
+        "packages/blocks/community/browserless/src/index.ts"
+      ],
+      "@intelblocks/block-bubble": [
+        "packages/blocks/community/bubble/src/index.ts"
+      ],
+      "@intelblocks/block-buffer": [
+        "packages/blocks/community/buffer/src/index.ts"
+      ],
+      "@intelblocks/block-bumpups": [
+        "packages/blocks/community/bumpups/src/index.ts"
+      ],
+      "@intelblocks/block-cal-com": [
+        "packages/blocks/community/cal-com/src/index.ts"
+      ],
+      "@intelblocks/block-calendly": [
+        "packages/blocks/community/calendly/src/index.ts"
+      ],
+      "@intelblocks/block-call-rounded": [
+        "packages/blocks/community/call-rounded/src/index.ts"
+      ],
+      "@intelblocks/block-camb-ai": [
+        "packages/blocks/community/camb-ai/src/index.ts"
+      ],
+      "@intelblocks/block-campaign-monitor": [
+        "packages/blocks/community/campaign-monitor/src/index.ts"
+      ],
+      "@intelblocks/block-canva": [
+        "packages/blocks/community/canva/src/index.ts"
+      ],
+      "@intelblocks/block-capsule-crm": [
+        "packages/blocks/community/capsule-crm/src/index.ts"
+      ],
+      "@intelblocks/block-captain-data": [
+        "packages/blocks/community/captain-data/src/index.ts"
+      ],
+      "@intelblocks/block-cartloom": [
+        "packages/blocks/community/cartloom/src/index.ts"
+      ],
+      "@intelblocks/block-certopus": [
+        "packages/blocks/community/certopus/src/index.ts"
+      ],
+      "@intelblocks/block-chainalysis-api": [
+        "packages/blocks/community/chainalysis-api/src/index.ts"
+      ],
+      "@intelblocks/block-chargebee": [
+        "packages/blocks/community/chargebee/src/index.ts"
+      ],
+      "@intelblocks/block-chargekeep": [
+        "packages/blocks/community/chargekeep/src/index.ts"
+      ],
+      "@intelblocks/block-chat-data": [
+        "packages/blocks/community/chat-data/src/index.ts"
+      ],
+      "@intelblocks/block-chatbase": [
+        "packages/blocks/community/chatbase/src/index.ts"
+      ],
+      "@intelblocks/block-chatwoot": [
+        "packages/blocks/community/chatwoot/src/index.ts"
+      ],
+      "@intelblocks/block-checkout": [
+        "packages/blocks/community/checkout/src/index.ts"
+      ],
+      "@intelblocks/block-chess-com": [
+        "packages/blocks/community/chess-com/src/index.ts"
+      ],
+      "@intelblocks/block-circle": [
+        "packages/blocks/community/circle/src/index.ts"
+      ],
+      "@intelblocks/block-clarifai": [
+        "packages/blocks/community/clarifai/src/index.ts"
+      ],
+      "@intelblocks/block-claude": [
+        "packages/blocks/community/claude/src/index.ts"
+      ],
+      "@intelblocks/block-clearout": [
+        "packages/blocks/community/clearout/src/index.ts"
+      ],
+      "@intelblocks/block-clickfunnels": [
+        "packages/blocks/community/clickfunnels/src/index.ts"
+      ],
+      "@intelblocks/block-clicksend": [
+        "packages/blocks/community/clicksend/src/index.ts"
+      ],
+      "@intelblocks/block-clickup": [
+        "packages/blocks/community/clickup/src/index.ts"
+      ],
+      "@intelblocks/block-clockify": [
+        "packages/blocks/community/clockify/src/index.ts"
+      ],
+      "@intelblocks/block-everhour": [
+        "packages/blocks/community/everhour/src/index.ts"
+      ],
+      "@intelblocks/block-clockodo": [
+        "packages/blocks/community/clockodo/src/index.ts"
+      ],
+      "@intelblocks/block-close": [
+        "packages/blocks/community/close/src/index.ts"
+      ],
+      "@intelblocks/block-cohere": [
+        "packages/blocks/community/cohere/src/index.ts"
+      ],
+      "@intelblocks/block-cloudconvert": [
+        "packages/blocks/community/cloudconvert/src/index.ts"
+      ],
+      "@intelblocks/block-cloudinary": [
+        "packages/blocks/community/cloudinary/src/index.ts"
+      ],
+      "@intelblocks/block-cloutly": [
+        "packages/blocks/community/cloutly/src/index.ts"
+      ],
+      "@intelblocks/block-coda": [
+        "packages/blocks/community/coda/src/index.ts"
+      ],
+      "@intelblocks/block-cody": [
+        "packages/blocks/community/cody/src/index.ts"
+      ],
+      "@intelblocks/block-cognito-forms": [
+        "packages/blocks/community/cognito-forms/src/index.ts"
+      ],
+      "@intelblocks/block-cometapi": [
+        "packages/blocks/community/cometapi/src/index.ts"
+      ],
+      "@intelblocks/block-comfyicu": [
+        "packages/blocks/community/comfyicu/src/index.ts"
+      ],
+      "@intelblocks/block-confluence": [
+        "packages/blocks/community/confluence/src/index.ts"
+      ],
+      "@intelblocks/block-connections": [
+        "packages/blocks/core/connections/src/index.ts"
+      ],
+      "@intelblocks/block-constant-contact": [
+        "packages/blocks/community/constant-contact/src/index.ts"
+      ],
+      "@intelblocks/block-contentful": [
+        "packages/blocks/community/contentful/src/index.ts"
+      ],
+      "@intelblocks/block-contiguity": [
+        "packages/blocks/community/contiguity/src/index.ts"
+      ],
+      "@intelblocks/block-convertkit": [
+        "packages/blocks/community/convertkit/src/index.ts"
+      ],
+      "@intelblocks/block-copper": [
+        "packages/blocks/community/copper/src/index.ts"
+      ],
+      "@intelblocks/block-copy-ai": [
+        "packages/blocks/community/copy-ai/src/index.ts"
+      ],
+      "@intelblocks/block-coupa": [
+        "packages/blocks/community/coupa/src/index.ts"
+      ],
+      "@intelblocks/block-crisp": [
+        "packages/blocks/community/crisp/src/index.ts"
+      ],
+      "@intelblocks/block-crypto": [
+        "packages/blocks/core/crypto/src/index.ts"
+      ],
+      "@intelblocks/block-csv": ["packages/blocks/core/csv/src/index.ts"],
+      "@intelblocks/block-dappier": [
+        "packages/blocks/community/dappier/src/index.ts"
+      ],
+      "@intelblocks/block-data-mapper": [
+        "packages/blocks/core/data-mapper/src/index.ts"
+      ],
+      "@intelblocks/block-data-summarizer": [
+        "packages/blocks/core/data-summarizer/src/index.ts"
+      ],
+      "@intelblocks/block-datadog": [
+        "packages/blocks/community/datadog/src/index.ts"
+      ],
+      "@intelblocks/block-date-helper": [
+        "packages/blocks/core/date-helper/src/index.ts"
+      ],
+      "@intelblocks/block-datocms": [
+        "packages/blocks/community/datocms/src/index.ts"
+      ],
+      "@intelblocks/block-deepgram": [
+        "packages/blocks/community/deepgram/src/index.ts"
+      ],
+      "@intelblocks/block-deepl": [
+        "packages/blocks/community/deepl/src/index.ts"
+      ],
+      "@intelblocks/block-deepseek": [
+        "packages/blocks/community/deepseek/src/index.ts"
+      ],
+      "@intelblocks/block-deftform": [
+        "packages/blocks/community/deftform/src/index.ts"
+      ],
+      "@intelblocks/block-delay": ["packages/blocks/core/delay/src/index.ts"],
+      "@intelblocks/block-descript": [
+        "packages/blocks/community/descript/src/index.ts"
+      ],
+      "@intelblocks/block-devin": [
+        "packages/blocks/community/devin/src/index.ts"
+      ],
+      "@intelblocks/block-dimo": [
+        "packages/blocks/community/dimo/src/index.ts"
+      ],
+      "@intelblocks/block-discord": [
+        "packages/blocks/community/discord/src/index.ts"
+      ],
+      "@intelblocks/block-discourse": [
+        "packages/blocks/community/discourse/src/index.ts"
+      ],
+      "@intelblocks/block-dittofeed": [
+        "packages/blocks/community/dittofeed/src/index.ts"
+      ],
+      "@intelblocks/block-docsbot": [
+        "packages/blocks/community/docsbot/src/index.ts"
+      ],
+      "@intelblocks/block-docusign": [
+        "packages/blocks/community/docusign/src/index.ts"
+      ],
+      "@intelblocks/block-drip": [
+        "packages/blocks/community/drip/src/index.ts"
+      ],
+      "@intelblocks/block-dropbox": [
+        "packages/blocks/community/dropbox/src/index.ts"
+      ],
+      "@intelblocks/block-drupal": [
+        "packages/blocks/community/drupal/src/index.ts"
+      ],
+      "@intelblocks/block-dub": ["packages/blocks/community/dub/src/index.ts"],
+      "@intelblocks/block-dumpling-ai": [
+        "packages/blocks/community/dumpling-ai/src/index.ts"
+      ],
+      "@intelblocks/block-eden-ai": [
+        "packages/blocks/community/eden-ai/src/index.ts"
+      ],
+      "@intelblocks/block-editionguard": [
+        "packages/blocks/community/editionguard/src/index.ts"
+      ],
+      "@intelblocks/block-elastic-email": [
+        "packages/blocks/community/elastic-email/src/index.ts"
+      ],
+      "@intelblocks/block-elevenlabs": [
+        "packages/blocks/community/elevenlabs/src/index.ts"
+      ],
+      "@intelblocks/block-emailoctopus": [
+        "packages/blocks/community/emailoctopus/src/index.ts"
+      ],
+      "@intelblocks/block-eth-name-service": [
+        "packages/blocks/community/eth-name-service/src/index.ts"
+      ],
+      "@intelblocks/block-exa": ["packages/blocks/community/exa/src/index.ts"],
+      "@intelblocks/block-facebook-leads": [
+        "packages/blocks/community/facebook-leads/src/index.ts"
+      ],
+      "@intelblocks/block-facebook-pages": [
+        "packages/blocks/community/facebook-pages/src/index.ts"
+      ],
+      "@intelblocks/block-fathom-analytics": [
+        "packages/blocks/community/fathom-analytics/src/index.ts"
+      ],
+      "@intelblocks/block-feedhive": [
+        "packages/blocks/community/feedhive/src/index.ts"
+      ],
+      "@intelblocks/block-figma": [
+        "packages/blocks/community/figma/src/index.ts"
+      ],
+      "@intelblocks/block-file-helper": [
+        "packages/blocks/core/file-helper/src/index.ts"
+      ],
+      "@intelblocks/block-filetopdf": [
+        "packages/blocks/community/filetopdf/src/index.ts"
+      ],
+      "@intelblocks/block-fillout-forms": [
+        "packages/blocks/community/fillout-forms/src/index.ts"
+      ],
+      "@intelblocks/block-fireberry": [
+        "packages/blocks/community/fireberry/src/index.ts"
+      ],
+      "@intelblocks/block-firecrawl": [
+        "packages/blocks/community/firecrawl/src/index.ts"
+      ],
+      "@intelblocks/block-fireflies-ai": [
+        "packages/blocks/community/fireflies-ai/src/index.ts"
+      ],
+      "@intelblocks/block-fliqr-ai": [
+        "packages/blocks/community/fliqr-ai/src/index.ts"
+      ],
+      "@intelblocks/block-frill": [
+        "packages/blocks/community/frill/src/index.ts"
+      ],
+      "@intelblocks/block-flow-helper": [
+        "packages/blocks/community/flow-helper/src/index.ts"
+      ],
+      "@intelblocks/block-flowise": [
+        "packages/blocks/community/flowise/src/index.ts"
+      ],
+      "@intelblocks/block-flowlu": [
+        "packages/blocks/community/flowlu/src/index.ts"
+      ],
+      "@intelblocks/block-foreplay-co": [
+        "packages/blocks/community/foreplay-co/src/index.ts"
+      ],
+      "@intelblocks/block-formbricks": [
+        "packages/blocks/community/formbricks/src/index.ts"
+      ],
+      "@intelblocks/block-forms": ["packages/blocks/core/forms/src/index.ts"],
+      "@intelblocks/block-formstack": [
+        "packages/blocks/community/formstack/src/index.ts"
+      ],
+      "@intelblocks/block-frame": [
+        "packages/blocks/community/frame/src/index.ts"
+      ],
+      "@intelblocks/block-freshdesk": [
+        "packages/blocks/community/freshdesk/src/index.ts"
+      ],
+      "@intelblocks/block-freshservice": [
+        "packages/blocks/community/freshservice/src/index.ts"
+      ],
+      "@intelblocks/block-freshsales": [
+        "packages/blocks/community/freshsales/src/index.ts"
+      ],
+      "@intelblocks/block-front": [
+        "packages/blocks/community/front/src/index.ts"
+      ],
+      "@intelblocks/block-gameball": [
+        "packages/blocks/community/gameball/src/index.ts"
+      ],
+      "@intelblocks/block-gamma": [
+        "packages/blocks/community/gamma/src/index.ts"
+      ],
+      "@intelblocks/block-gcloud-pubsub": [
+        "packages/blocks/community/gcloud-pubsub/src/index.ts"
+      ],
+      "@intelblocks/block-generatebanners": [
+        "packages/blocks/community/generatebanners/src/index.ts"
+      ],
+      "@intelblocks/block-getresponse": [
+        "packages/blocks/community/getresponse/src/index.ts"
+      ],
+      "@intelblocks/block-ghostcms": [
+        "packages/blocks/community/ghostcms/src/index.ts"
+      ],
+      "@intelblocks/block-github": [
+        "packages/blocks/community/github/src/index.ts"
+      ],
+      "@intelblocks/block-gitlab": [
+        "packages/blocks/community/gitlab/src/index.ts"
+      ],
+      "@intelblocks/block-gmail": [
+        "packages/blocks/community/gmail/src/index.ts"
+      ],
+      "@intelblocks/block-google-bigquery": [
+        "packages/blocks/community/google-bigquery/src/index.ts"
+      ],
+      "@intelblocks/block-google-calendar": [
+        "packages/blocks/community/google-calendar/src/index.ts"
+      ],
+      "@intelblocks/block-google-contacts": [
+        "packages/blocks/community/google-contacts/src/index.ts"
+      ],
+      "@intelblocks/block-google-docs": [
+        "packages/blocks/community/google-docs/src/index.ts"
+      ],
+      "@intelblocks/block-google-drive": [
+        "packages/blocks/community/google-drive/src/index.ts"
+      ],
+      "@intelblocks/block-google-forms": [
+        "packages/blocks/community/google-forms/src/index.ts"
+      ],
+      "@intelblocks/block-google-gemini": [
+        "packages/blocks/community/google-gemini/src/index.ts"
+      ],
+      "@intelblocks/block-google-my-business": [
+        "packages/blocks/community/google-my-business/src/index.ts"
+      ],
+      "@intelblocks/block-google-search-console": [
+        "packages/blocks/community/google-search-console/src/index.ts"
+      ],
+      "@intelblocks/block-google-sheets": [
+        "packages/blocks/community/google-sheets/src/index.ts"
+      ],
+      "@intelblocks/block-google-slides": [
+        "packages/blocks/community/google-slides/src/index.ts"
+      ],
+      "@intelblocks/block-google-tasks": [
+        "packages/blocks/community/google-tasks/src/index.ts"
+      ],
+      "@intelblocks/block-googlechat": [
+        "packages/blocks/community/googlechat/src/index.ts"
+      ],
+      "@intelblocks/block-gotify": [
+        "packages/blocks/community/gotify/src/index.ts"
+      ],
+      "@intelblocks/block-gorgias": [
+        "packages/blocks/community/gorgias/src/index.ts"
+      ],
+      "@intelblocks/block-granola": [
+        "packages/blocks/community/granola/src/index.ts"
+      ],
+      "@intelblocks/block-graphql": [
+        "packages/blocks/core/graphql/src/index.ts"
+      ],
+      "@intelblocks/block-gravityforms": [
+        "packages/blocks/community/gravityforms/src/index.ts"
+      ],
+      "@intelblocks/block-greenhouse": [
+        "packages/blocks/community/greenhouse/src/index.ts"
+      ],
+      "@intelblocks/block-grist": [
+        "packages/blocks/community/grist/src/index.ts"
+      ],
+      "@intelblocks/block-grok-xai": [
+        "packages/blocks/community/grok-xai/src/index.ts"
+      ],
+      "@intelblocks/block-groq": [
+        "packages/blocks/community/groq/src/index.ts"
+      ],
+      "@intelblocks/block-hackernews": [
+        "packages/blocks/community/hackernews/src/index.ts"
+      ],
+      "@intelblocks/block-harvest": [
+        "packages/blocks/community/harvest/src/index.ts"
+      ],
+      "@intelblocks/block-heartbeat": [
+        "packages/blocks/community/heartbeat/src/index.ts"
+      ],
+      "@intelblocks/block-hedy": [
+        "packages/blocks/community/hedy/src/index.ts"
+      ],
+      "@intelblocks/block-help-scout": [
+        "packages/blocks/community/help-scout/src/index.ts"
+      ],
+      "@intelblocks/block-heygen": [
+        "packages/blocks/community/heygen/src/index.ts"
+      ],
+      "@intelblocks/block-hootsuite": [
+        "packages/blocks/community/hootsuite/src/index.ts"
+      ],
+      "@intelblocks/block-http": ["packages/blocks/core/http/src/index.ts"],
+      "@intelblocks/block-http-oauth2": [
+        "packages/blocks/community/http-oauth2/src/index.ts"
+      ],
+      "@intelblocks/block-hubspot": [
+        "packages/blocks/community/hubspot/src/index.ts"
+      ],
+      "@intelblocks/block-hugging-face": [
+        "packages/blocks/community/hugging-face/src/index.ts"
+      ],
+      "@intelblocks/block-hunter": [
+        "packages/blocks/community/hunter/src/index.ts"
+      ],
+      "@intelblocks/block-iloveapi": [
+        "packages/blocks/community/iloveapi/src/index.ts"
+      ],
+      "@intelblocks/block-image-ai": [
+        "packages/blocks/community/image-ai/src/index.ts"
+      ],
+      "@intelblocks/block-image-helper": [
+        "packages/blocks/core/image-helper/src/index.ts"
+      ],
+      "@intelblocks/block-imap": [
+        "packages/blocks/community/imap/src/index.ts"
+      ],
+      "@intelblocks/block-imeetify": [
+        "packages/blocks/community/imeetify/src/index.ts"
+      ],
+      "@intelblocks/block-insighto-ai": [
+        "packages/blocks/community/insighto-ai/src/index.ts"
+      ],
+      "@intelblocks/block-instagram-business": [
+        "packages/blocks/community/instagram-business/src/index.ts"
+      ],
+      "@intelblocks/block-instasent": [
+        "packages/blocks/community/instasent/src/index.ts"
+      ],
+      "@intelblocks/block-intercom": [
+        "packages/blocks/community/intercom/src/index.ts"
+      ],
+      "@intelblocks/block-invoiceninja": [
+        "packages/blocks/community/invoiceninja/src/index.ts"
+      ],
+      "@intelblocks/block-jina-ai": [
+        "packages/blocks/community/jina-ai/src/index.ts"
+      ],
+      "@intelblocks/block-jungle-grid": [
+        "packages/blocks/community/jungle-grid/src/index.ts"
+      ],
+      "@intelblocks/block-jira-cloud": [
+        "packages/blocks/community/jira-cloud/src/index.ts"
+      ],
+      "@intelblocks/block-jira-data-center": [
+        "packages/blocks/community/jira-data-center/src/index.ts"
+      ],
+      "@intelblocks/block-jotform": [
+        "packages/blocks/community/jotform/src/index.ts"
+      ],
+      "@intelblocks/block-json": [
+        "packages/blocks/community/json/src/index.ts"
+      ],
+      "@intelblocks/block-kallabot-ai": [
+        "packages/blocks/community/kallabot-ai/src/index.ts"
+      ],
+      "@intelblocks/block-kimai": [
+        "packages/blocks/community/kimai/src/index.ts"
+      ],
+      "@intelblocks/block-kizeo-forms": [
+        "packages/blocks/community/kizeo-forms/src/index.ts"
+      ],
+      "@intelblocks/block-klaviyo": [
+        "packages/blocks/community/klaviyo/src/index.ts"
+      ],
+      "@intelblocks/block-klipy": [
+        "packages/blocks/community/klipy/src/index.ts"
+      ],
+      "@intelblocks/block-klenty": [
+        "packages/blocks/community/klenty/src/index.ts"
+      ],
+      "@intelblocks/block-knack": [
+        "packages/blocks/community/knack/src/index.ts"
+      ],
+      "@intelblocks/block-ko-fi": [
+        "packages/blocks/community/ko-fi/src/index.ts"
+      ],
+      "@intelblocks/block-kustomer": [
+        "packages/blocks/community/kustomer/src/index.ts"
+      ],
+      "@intelblocks/block-kommo": [
+        "packages/blocks/community/kommo/src/index.ts"
+      ],
+      "@intelblocks/block-krisp-call": [
+        "packages/blocks/community/krisp-call/src/index.ts"
+      ],
+      "@intelblocks/block-lead-connector": [
+        "packages/blocks/community/lead-connector/src/index.ts"
+      ],
+      "@intelblocks/block-lemlist": [
+        "packages/blocks/community/lemlist/src/index.ts"
+      ],
+      "@intelblocks/block-line": [
+        "packages/blocks/community/line/src/index.ts"
+      ],
+      "@intelblocks/block-linear": [
+        "packages/blocks/community/linear/src/index.ts"
+      ],
+      "@intelblocks/block-linka": [
+        "packages/blocks/community/linka/src/index.ts"
+      ],
+      "@intelblocks/block-linkedin": [
+        "packages/blocks/community/linkedin/src/index.ts"
+      ],
+      "@intelblocks/block-llmrails": [
+        "packages/blocks/community/llmrails/src/index.ts"
+      ],
+      "@intelblocks/block-localai": [
+        "packages/blocks/community/localai/src/index.ts"
+      ],
+      "@intelblocks/block-lusha": [
+        "packages/blocks/community/lusha/src/index.ts"
+      ],
+      "@intelblocks/block-magical-api": [
+        "packages/blocks/community/magical-api/src/index.ts"
+      ],
+      "@intelblocks/block-magicslides": [
+        "packages/blocks/community/magicslides/src/index.ts"
+      ],
+      "@intelblocks/block-mailchain": [
+        "packages/blocks/community/mailchain/src/index.ts"
+      ],
+      "@intelblocks/block-mailchimp": [
+        "packages/blocks/community/mailchimp/src/index.ts"
+      ],
+      "@intelblocks/block-mailgun": [
+        "packages/blocks/community/mailgun/src/index.ts"
+      ],
+      "@intelblocks/block-mailer-lite": [
+        "packages/blocks/community/mailer-lite/src/index.ts"
+      ],
+      "@intelblocks/block-maileroo": [
+        "packages/blocks/community/maileroo/src/index.ts"
+      ],
+      "@intelblocks/block-manychat": [
+        "packages/blocks/community/manychat/src/index.ts"
+      ],
+      "@intelblocks/block-mastodon": [
+        "packages/blocks/community/mastodon/src/index.ts"
+      ],
+      "@intelblocks/block-math-helper": [
+        "packages/blocks/core/math-helper/src/index.ts"
+      ],
+      "@intelblocks/block-matomo": [
+        "packages/blocks/community/matomo/src/index.ts"
+      ],
+      "@intelblocks/block-matrix": [
+        "packages/blocks/community/matrix/src/index.ts"
+      ],
+      "@intelblocks/block-mattermost": [
+        "packages/blocks/community/mattermost/src/index.ts"
+      ],
+      "@intelblocks/block-mautic": [
+        "packages/blocks/community/mautic/src/index.ts"
+      ],
+      "@intelblocks/block-mcp": ["packages/blocks/community/mcp/src/index.ts"],
+      "@intelblocks/block-medullar": [
+        "packages/blocks/community/medullar/src/index.ts"
+      ],
+      "@intelblocks/block-mem": ["packages/blocks/community/mem/src/index.ts"],
+      "@intelblocks/block-mempool-space": [
+        "packages/blocks/community/mempool-space/src/index.ts"
+      ],
+      "@intelblocks/block-messagebird": [
+        "packages/blocks/community/messagebird/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-365-people": [
+        "packages/blocks/community/microsoft-365-people/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-365-planner": [
+        "packages/blocks/community/microsoft-365-planner/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-excel-365": [
+        "packages/blocks/community/microsoft-excel-365/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-onedrive": [
+        "packages/blocks/community/microsoft-onedrive/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-onenote": [
+        "packages/blocks/community/microsoft-onenote/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-outlook": [
+        "packages/blocks/community/microsoft-outlook/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-outlook-calendar": [
+        "packages/blocks/community/microsoft-outlook-calendar/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-power-bi": [
+        "packages/blocks/community/microsoft-power-bi/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-teams": [
+        "packages/blocks/community/microsoft-teams/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-todo": [
+        "packages/blocks/community/microsoft-todo/src/index.ts"
+      ],
+      "@intelblocks/block-mindee": [
+        "packages/blocks/community/mindee/src/index.ts"
+      ],
+      "@intelblocks/block-missive": [
+        "packages/blocks/community/missive/src/index.ts"
+      ],
+      "@intelblocks/block-mistral-ai": [
+        "packages/blocks/community/mistral-ai/src/index.ts"
+      ],
+      "@intelblocks/block-mixmax": [
+        "packages/blocks/community/mixmax/src/index.ts"
+      ],
+      "@intelblocks/block-mixpanel": [
+        "packages/blocks/community/mixpanel/src/index.ts"
+      ],
+      "@intelblocks/block-mollie": [
+        "packages/blocks/community/mollie/src/index.ts"
+      ],
+      "@intelblocks/block-monday": [
+        "packages/blocks/community/monday/src/index.ts"
+      ],
+      "@intelblocks/block-mongodb": [
+        "packages/blocks/community/mongodb/src/index.ts"
+      ],
+      "@intelblocks/block-motion": [
+        "packages/blocks/community/motion/src/index.ts"
+      ],
+      "@intelblocks/block-moxie-crm": [
+        "packages/blocks/community/moxie-crm/src/index.ts"
+      ],
+      "@intelblocks/block-muna-ai": [
+        "packages/blocks/community/muna-ai/src/index.ts"
+      ],
+      "@intelblocks/block-murf-api": [
+        "packages/blocks/community/murf-api/src/index.ts"
+      ],
+      "@intelblocks/block-mysendingbox": [
+        "packages/blocks/community/mysendingbox/src/index.ts"
+      ],
+      "@intelblocks/block-mysql": [
+        "packages/blocks/community/mysql/src/index.ts"
+      ],
+      "@intelblocks/block-netlify": [
+        "packages/blocks/community/netlify/src/index.ts"
+      ],
+      "@intelblocks/block-netsuite": [
+        "packages/blocks/community/netsuite/src/index.ts"
+      ],
+      "@intelblocks/block-nifty": [
+        "packages/blocks/community/nifty/src/index.ts"
+      ],
+      "@intelblocks/block-ninjapipe": [
+        "packages/blocks/community/ninjapipe/src/index.ts"
+      ],
+      "@intelblocks/block-ninox": [
+        "packages/blocks/community/ninox/src/index.ts"
+      ],
+      "@intelblocks/block-nocodb": [
+        "packages/blocks/community/nocodb/src/index.ts"
+      ],
+      "@intelblocks/block-notion": [
+        "packages/blocks/community/notion/src/index.ts"
+      ],
+      "@intelblocks/block-ntfy": [
+        "packages/blocks/community/ntfy/src/index.ts"
+      ],
+      "@intelblocks/block-nuelink": [
+        "packages/blocks/community/nuelink/src/index.ts"
+      ],
+      "@intelblocks/block-odoo": [
+        "packages/blocks/community/odoo/src/index.ts"
+      ],
+      "@intelblocks/block-okta": [
+        "packages/blocks/community/okta/src/index.ts"
+      ],
+      "@intelblocks/block-omnisend": [
+        "packages/blocks/community/omnisend/src/index.ts"
+      ],
+      "@intelblocks/block-onfleet": [
+        "packages/blocks/community/onfleet/src/index.ts"
+      ],
+      "@intelblocks/block-open-phone": [
+        "packages/blocks/community/open-phone/src/index.ts"
+      ],
+      "@intelblocks/block-open-router": [
+        "packages/blocks/community/open-router/src/index.ts"
+      ],
+      "@intelblocks/block-openai": [
+        "packages/blocks/community/openai/src/index.ts"
+      ],
+      "@intelblocks/block-oracle-fusion-cloud-erp": [
+        "packages/blocks/community/oracle-fusion-cloud-erp/src/index.ts"
+      ],
+      "@intelblocks/block-paddle": [
+        "packages/blocks/community/paddle/src/index.ts"
+      ],
+      "@intelblocks/block-pandadoc": [
+        "packages/blocks/community/pandadoc/src/index.ts"
+      ],
+      "@intelblocks/block-paperform": [
+        "packages/blocks/community/paperform/src/index.ts"
+      ],
+      "@intelblocks/block-pagerduty": [
+        "packages/blocks/community/pagerduty/src/index.ts"
+      ],
+      "@intelblocks/block-parallel": [
+        "packages/blocks/community/parallel/src/index.ts"
+      ],
+      "@intelblocks/block-parseur": [
+        "packages/blocks/community/parseur/src/index.ts"
+      ],
+      "@intelblocks/block-pastebin": [
+        "packages/blocks/community/pastebin/src/index.ts"
+      ],
+      "@intelblocks/block-pastefy": [
+        "packages/blocks/community/pastefy/src/index.ts"
+      ],
+      "@intelblocks/block-pdf": ["packages/blocks/core/pdf/src/index.ts"],
+      "@intelblocks/block-pdf-co": [
+        "packages/blocks/community/pdf-co/src/index.ts"
+      ],
+      "@intelblocks/block-pdf4me": [
+        "packages/blocks/community/pdf4me/src/index.ts"
+      ],
+      "@intelblocks/block-pdfmonkey": [
+        "packages/blocks/community/pdfmonkey/src/index.ts"
+      ],
+      "@intelblocks/block-peekshot": [
+        "packages/blocks/community/peekshot/src/index.ts"
+      ],
+      "@intelblocks/block-pendo": [
+        "packages/blocks/community/pendo/src/index.ts"
+      ],
+      "@intelblocks/block-perplexity-ai": [
+        "packages/blocks/community/perplexity-ai/src/index.ts"
+      ],
+      "@intelblocks/block-personal-ai": [
+        "packages/blocks/community/personal-ai/src/index.ts"
+      ],
+      "@intelblocks/block-photoroom": [
+        "packages/blocks/community/photoroom/src/index.ts"
+      ],
+      "@intelblocks/block-pinecone": [
+        "packages/blocks/community/pinecone/src/index.ts"
+      ],
+      "@intelblocks/block-pinterest": [
+        "packages/blocks/community/pinterest/src/index.ts"
+      ],
+      "@intelblocks/block-pipedrive": [
+        "packages/blocks/community/pipedrive/src/index.ts"
+      ],
+      "@intelblocks/block-placid": [
+        "packages/blocks/community/placid/src/index.ts"
+      ],
+      "@intelblocks/block-podio": [
+        "packages/blocks/community/podio/src/index.ts"
+      ],
+      "@intelblocks/block-poper": [
+        "packages/blocks/community/poper/src/index.ts"
+      ],
+      "@intelblocks/block-postgres": [
+        "packages/blocks/community/postgres/src/index.ts"
+      ],
+      "@intelblocks/block-posthog": [
+        "packages/blocks/community/posthog/src/index.ts"
+      ],
+      "@intelblocks/block-postiz": [
+        "packages/blocks/community/postiz/src/index.ts"
+      ],
+      "@intelblocks/block-postmark": [
+        "packages/blocks/community/postmark/src/index.ts"
+      ],
+      "@intelblocks/block-predict-leads": [
+        "packages/blocks/community/predict-leads/src/index.ts"
+      ],
+      "@intelblocks/block-productboard": [
+        "packages/blocks/community/productboard/src/index.ts"
+      ],
+      "@intelblocks/block-promotekit": [
+        "packages/blocks/community/promotekit/src/index.ts"
+      ],
+      "@intelblocks/block-prompthub": [
+        "packages/blocks/community/prompthub/src/index.ts"
+      ],
+      "@intelblocks/block-provenexpert": [
+        "packages/blocks/community/provenexpert/src/index.ts"
+      ],
+      "@intelblocks/block-pubrio": [
+        "packages/blocks/community/pubrio/src/index.ts"
+      ],
+      "@intelblocks/block-pushover": [
+        "packages/blocks/community/pushover/src/index.ts"
+      ],
+      "@intelblocks/block-pylon": [
+        "packages/blocks/community/pylon/src/index.ts"
+      ],
+      "@intelblocks/block-qawafel": [
+        "packages/blocks/community/qawafel/src/index.ts"
+      ],
+      "@intelblocks/block-qdrant": [
+        "packages/blocks/community/qdrant/src/index.ts"
+      ],
+      "@intelblocks/block-qrcode": [
+        "packages/blocks/core/qrcode/src/index.ts"
+      ],
+      "@intelblocks/block-queue": [
+        "packages/blocks/community/queue/src/index.ts"
+      ],
+      "@intelblocks/block-quickbooks": [
+        "packages/blocks/community/quickbooks/src/index.ts"
+      ],
+      "@intelblocks/block-quickzu": [
+        "packages/blocks/community/quickzu/src/index.ts"
+      ],
+      "@intelblocks/block-quizell": [
+        "packages/blocks/community/quizell/src/index.ts"
+      ],
+      "@intelblocks/block-rabbitmq": [
+        "packages/blocks/community/rabbitmq/src/index.ts"
+      ],
+      "@intelblocks/block-raindrop": [
+        "packages/blocks/community/raindrop/src/index.ts"
+      ],
+      "@intelblocks/block-razorpay": [
+        "packages/blocks/community/razorpay/src/index.ts"
+      ],
+      "@intelblocks/block-reachinbox": [
+        "packages/blocks/community/reachinbox/src/index.ts"
+      ],
+      "@intelblocks/block-read-file": [
+        "packages/blocks/read-file/src/index.ts"
+      ],
+      "@intelblocks/block-readwise": [
+        "packages/blocks/community/readwise/src/index.ts"
+      ],
+      "@intelblocks/block-reddit": [
+        "packages/blocks/community/reddit/src/index.ts"
+      ],
+      "@intelblocks/block-rendex": [
+        "packages/blocks/community/rendex/src/index.ts"
+      ],
+      "@intelblocks/block-reoon-verifier": [
+        "packages/blocks/community/reoon-verifier/src/index.ts"
+      ],
+      "@intelblocks/block-resend": [
+        "packages/blocks/community/resend/src/index.ts"
+      ],
+      "@intelblocks/block-respaid": [
+        "packages/blocks/community/respaid/src/index.ts"
+      ],
+      "@intelblocks/block-respond-io": [
+        "packages/blocks/community/respond-io/src/index.ts"
+      ],
+      "@intelblocks/block-reply-io": [
+        "packages/blocks/community/reply-io/src/index.ts"
+      ],
+      "@intelblocks/block-retable": [
+        "packages/blocks/community/retable/src/index.ts"
+      ],
+      "@intelblocks/block-retell-ai": [
+        "packages/blocks/community/retell-ai/src/index.ts"
+      ],
+      "@intelblocks/block-retune": [
+        "packages/blocks/community/retune/src/index.ts"
+      ],
+      "@intelblocks/block-returning-ai": [
+        "packages/blocks/community/returning-ai/src/index.ts"
+      ],
+      "@intelblocks/block-recurly": [
+        "packages/blocks/community/recurly/src/index.ts"
+      ],
+      "@intelblocks/block-robolly": [
+        "packages/blocks/community/robolly/src/index.ts"
+      ],
+      "@intelblocks/block-rss": ["packages/blocks/community/rss/src/index.ts"],
+      "@intelblocks/block-runway": [
+        "packages/blocks/community/runway/src/index.ts"
+      ],
+      "@intelblocks/block-saastic": [
+        "packages/blocks/community/saastic/src/index.ts"
+      ],
+      "@intelblocks/block-saleor": [
+        "packages/blocks/community/saleor/src/index.ts"
+      ],
+      "@intelblocks/block-salesforce": [
+        "packages/blocks/community/salesforce/src/index.ts"
+      ],
+      "@intelblocks/block-salesloft": [
+        "packages/blocks/community/salesloft/src/index.ts"
+      ],
+      "@intelblocks/block-savvycal": [
+        "packages/blocks/community/savvycal/src/index.ts"
+      ],
+      "@intelblocks/block-scenario": [
+        "packages/blocks/community/scenario/src/index.ts"
+      ],
+      "@intelblocks/block-schedule": [
+        "packages/blocks/core/schedule/src/index.ts"
+      ],
+      "@intelblocks/block-scrapegrapghai": [
+        "packages/blocks/community/scrapegrapghai/src/index.ts"
+      ],
+      "@intelblocks/block-scrapeless": [
+        "packages/blocks/community/scrapeless/src/index.ts"
+      ],
+      "@intelblocks/block-segment": [
+        "packages/blocks/community/segment/src/index.ts"
+      ],
+      "@intelblocks/block-sender": [
+        "packages/blocks/community/sender/src/index.ts"
+      ],
+      "@intelblocks/block-sendr": [
+        "packages/blocks/community/sendr/src/index.ts"
+      ],
+      "@intelblocks/block-sendfox": [
+        "packages/blocks/community/sendfox/src/index.ts"
+      ],
+      "@intelblocks/block-sendgrid": [
+        "packages/blocks/community/sendgrid/src/index.ts"
+      ],
+      "@intelblocks/block-sendinblue": [
+        "packages/blocks/community/sendinblue/src/index.ts"
+      ],
+      "@intelblocks/block-sendpulse": [
+        "packages/blocks/community/sendpulse/src/index.ts"
+      ],
+      "@intelblocks/block-sendy": [
+        "packages/blocks/community/sendy/src/index.ts"
+      ],
+      "@intelblocks/block-senja": [
+        "packages/blocks/community/senja/src/index.ts"
+      ],
+      "@intelblocks/block-serp-api": [
+        "packages/blocks/community/serp-api/src/index.ts"
+      ],
+      "@intelblocks/block-serpstat": [
+        "packages/blocks/community/serpstat/src/index.ts"
+      ],
+      "@intelblocks/block-sessions-us": [
+        "packages/blocks/community/sessions-us/src/index.ts"
+      ],
+      "@intelblocks/block-seven": [
+        "packages/blocks/community/seven/src/index.ts"
+      ],
+      "@intelblocks/block-service-now": [
+        "packages/blocks/community/service-now/src/index.ts"
+      ],
+      "@intelblocks/block-sftp": ["packages/blocks/core/sftp/src/index.ts"],
+      "@intelblocks/block-shopify": [
+        "packages/blocks/community/shopify/src/index.ts"
+      ],
+      "@intelblocks/block-short-io": [
+        "packages/blocks/community/short-io/src/index.ts"
+      ],
+      "@intelblocks/block-simplepdf": [
+        "packages/blocks/community/simplepdf/src/index.ts"
+      ],
+      "@intelblocks/block-simpliroute": [
+        "packages/blocks/community/simpliroute/src/index.ts"
+      ],
+      "@intelblocks/block-simplybookme": [
+        "packages/blocks/community/simplybookme/src/index.ts"
+      ],
+      "@intelblocks/block-simplyprint": [
+        "packages/blocks/community/simplyprint/src/index.ts"
+      ],
+      "@intelblocks/block-sitespeakai": [
+        "packages/blocks/community/sitespeakai/src/index.ts"
+      ],
+      "@intelblocks/block-skyvern": [
+        "packages/blocks/community/skyvern/src/index.ts"
+      ],
+      "@intelblocks/block-slack": [
+        "packages/blocks/community/slack/src/index.ts"
+      ],
+      "@intelblocks/block-slashed": [
+        "packages/blocks/community/slashed/src/index.ts"
+      ],
+      "@intelblocks/block-slidespeak": [
+        "packages/blocks/community/slidespeak/src/index.ts"
+      ],
+      "@intelblocks/block-slite": [
+        "packages/blocks/community/slite/src/index.ts"
+      ],
+      "@intelblocks/block-smaily": [
+        "packages/blocks/community/smaily/src/index.ts"
+      ],
+      "@intelblocks/block-smartsheet": [
+        "packages/blocks/community/smartsheet/src/index.ts"
+      ],
+      "@intelblocks/block-smartsuite": [
+        "packages/blocks/community/smartsuite/src/index.ts"
+      ],
+      "@intelblocks/block-smoove": [
+        "packages/blocks/community/smoove/src/index.ts"
+      ],
+      "@intelblocks/block-smtp": ["packages/blocks/core/smtp/src/index.ts"],
+      "@intelblocks/block-soap": [
+        "packages/blocks/community/soap/src/index.ts"
+      ],
+      "@intelblocks/block-socialkit": [
+        "packages/blocks/community/socialkit/src/index.ts"
+      ],
+      "@intelblocks/block-softr": [
+        "packages/blocks/community/softr/src/index.ts"
+      ],
+      "@intelblocks/block-sperse": [
+        "packages/blocks/community/sperse/src/index.ts"
+      ],
+      "@intelblocks/block-spotify": [
+        "packages/blocks/community/spotify/src/index.ts"
+      ],
+      "@intelblocks/block-square": [
+        "packages/blocks/community/square/src/index.ts"
+      ],
+      "@intelblocks/block-stability-ai": [
+        "packages/blocks/community/stability-ai/src/index.ts"
+      ],
+      "@intelblocks/block-modelslab": [
+        "packages/blocks/community/modelslab/src/index.ts"
+      ],
+      "@intelblocks/block-stable-diffusion-webui": [
+        "packages/blocks/community/stable-diffusion-webui/src/index.ts"
+      ],
+      "@intelblocks/block-store": ["packages/blocks/core/store/src/index.ts"],
+      "@intelblocks/block-straico": [
+        "packages/blocks/community/straico/src/index.ts"
+      ],
+      "@intelblocks/block-streak": [
+        "packages/blocks/community/streak/src/index.ts"
+      ],
+      "@intelblocks/block-stripe": [
+        "packages/blocks/community/stripe/src/index.ts"
+      ],
+      "@intelblocks/block-subflows": [
+        "packages/blocks/core/subflows/src/index.ts"
+      ],
+      "@intelblocks/block-supabase": [
+        "packages/blocks/community/supabase/src/index.ts"
+      ],
+      "@intelblocks/block-supadata": [
+        "packages/blocks/community/supadata/src/index.ts"
+      ],
+      "@intelblocks/block-surrealdb": [
+        "packages/blocks/community/surrealdb/src/index.ts"
+      ],
+      "@intelblocks/block-surveymonkey": [
+        "packages/blocks/community/surveymonkey/src/index.ts"
+      ],
+      "@intelblocks/block-systeme-io": [
+        "packages/blocks/community/systeme-io/src/index.ts"
+      ],
+      "@intelblocks/block-tables": [
+        "packages/blocks/core/tables/src/index.ts"
+      ],
+      "@intelblocks/block-tags": ["packages/blocks/core/tags/src/index.ts"],
+      "@intelblocks/block-talkable": [
+        "packages/blocks/community/talkable/src/index.ts"
+      ],
+      "@intelblocks/block-tally": [
+        "packages/blocks/community/tally/src/index.ts"
+      ],
+      "@intelblocks/block-tapfiliate": [
+        "packages/blocks/community/tapfiliate/src/index.ts"
+      ],
+      "@intelblocks/block-tarvent": [
+        "packages/blocks/community/tarvent/src/index.ts"
+      ],
+      "@intelblocks/block-taskade": [
+        "packages/blocks/community/taskade/src/index.ts"
+      ],
+      "@intelblocks/block-tavily": [
+        "packages/blocks/community/tavily/src/index.ts"
+      ],
+      "@intelblocks/block-teamhood": [
+        "packages/blocks/community/teamhood/src/index.ts"
+      ],
+      "@intelblocks/block-teamleader": [
+        "packages/blocks/community/teamleader/src/index.ts"
+      ],
+      "@intelblocks/block-teamwork": [
+        "packages/blocks/community/teamwork/src/index.ts"
+      ],
+      "@intelblocks/block-telegram-bot": [
+        "packages/blocks/community/telegram-bot/src/index.ts"
+      ],
+      "@intelblocks/block-telnyx": [
+        "packages/blocks/community/telnyx/src/index.ts"
+      ],
+      "@intelblocks/block-text-ai": [
+        "packages/blocks/community/text-ai/src/index.ts"
+      ],
+      "@intelblocks/block-text-helper": [
+        "packages/blocks/core/text-helper/src/index.ts"
+      ],
+      "@intelblocks/block-textcortex-ai": [
+        "packages/blocks/community/textcortex-ai/src/index.ts"
+      ],
+      "@intelblocks/block-thankster": [
+        "packages/blocks/community/thankster/src/index.ts"
+      ],
+      "@intelblocks/block-ticktick": [
+        "packages/blocks/community/ticktick/src/index.ts"
+      ],
+      "@intelblocks/block-tidycal": [
+        "packages/blocks/community/tidycal/src/index.ts"
+      ],
+      "@intelblocks/block-timelines-ai": [
+        "packages/blocks/community/timelines-ai/src/index.ts"
+      ],
+      "@intelblocks/block-todoist": [
+        "packages/blocks/community/todoist/src/index.ts"
+      ],
+      "@intelblocks/block-toggl-track": [
+        "packages/blocks/community/toggl-track/src/index.ts"
+      ],
+      "@intelblocks/block-totalcms": [
+        "packages/blocks/community/totalcms/src/index.ts"
+      ],
+      "@intelblocks/block-trello": [
+        "packages/blocks/community/trello/src/index.ts"
+      ],
+      "@intelblocks/block-truelayer": [
+        "packages/blocks/community/truelayer/src/index.ts"
+      ],
+      "@intelblocks/block-trust": [
+        "packages/blocks/community/trust/src/index.ts"
+      ],
+      "@intelblocks/block-twilio": [
+        "packages/blocks/community/twilio/src/index.ts"
+      ],
+      "@intelblocks/block-typefully": [
+        "packages/blocks/community/typefully/src/index.ts"
+      ],
+      "@intelblocks/block-twin-labs": [
+        "packages/blocks/community/twin-labs/src/index.ts"
+      ],
+      "@intelblocks/block-twitter": [
+        "packages/blocks/community/twitter/src/index.ts"
+      ],
+      "@intelblocks/block-twenty": [
+        "packages/blocks/community/twenty/src/index.ts"
+      ],
+      "@intelblocks/block-typeform": [
+        "packages/blocks/community/typeform/src/index.ts"
+      ],
+      "@intelblocks/block-umami": [
+        "packages/blocks/community/umami/src/index.ts"
+      ],
+      "@intelblocks/block-upgradechat": [
+        "packages/blocks/community/upgradechat/src/index.ts"
+      ],
+      "@intelblocks/block-uptimerobot": [
+        "packages/blocks/community/uptimerobot/src/index.ts"
+      ],
+      "@intelblocks/block-useinbox": [
+        "packages/blocks/community/useinbox/src/index.ts"
+      ],
+      "@intelblocks/block-utility-ai": [
+        "packages/blocks/community/utility-ai/src/index.ts"
+      ],
+      "@intelblocks/block-uxsniff": [
+        "packages/blocks/community/uxsniff/src/index.ts"
+      ],
+      "@intelblocks/block-vadoo-ai": [
+        "packages/blocks/community/vadoo-ai/src/index.ts"
+      ],
+      "@intelblocks/block-vbout": [
+        "packages/blocks/community/vbout/src/index.ts"
+      ],
+      "@intelblocks/block-video-ai": [
+        "packages/blocks/community/video-ai/src/index.ts"
+      ],
+      "@intelblocks/block-village": [
+        "packages/blocks/community/village/src/index.ts"
+      ],
+      "@intelblocks/block-vimeo": [
+        "packages/blocks/community/vimeo/src/index.ts"
+      ],
+      "@intelblocks/block-vlm-run": [
+        "packages/blocks/community/vlm-run/src/index.ts"
+      ],
+      "@intelblocks/block-vtex": [
+        "packages/blocks/community/vtex/src/index.ts"
+      ],
+      "@intelblocks/block-vtiger": [
+        "packages/blocks/community/vtiger/src/index.ts"
+      ],
+      "@intelblocks/block-wafeq": [
+        "packages/blocks/community/wafeq/src/index.ts"
+      ],
+      "@intelblocks/block-wealthbox": [
+        "packages/blocks/community/wealthbox/src/index.ts"
+      ],
+      "@intelblocks/block-webflow": [
+        "packages/blocks/community/webflow/src/index.ts"
+      ],
+      "@intelblocks/block-webhook": [
+        "packages/blocks/core/webhook/src/index.ts"
+      ],
+      "@intelblocks/block-webling": [
+        "packages/blocks/community/webling/src/index.ts"
+      ],
+      "@intelblocks/block-webscraping-ai": [
+        "packages/blocks/community/webscraping-ai/src/index.ts"
+      ],
+      "@intelblocks/block-wedof": [
+        "packages/blocks/community/wedof/src/index.ts"
+      ],
+      "@intelblocks/block-weekdone": [
+        "packages/blocks/community/weekdone/src/index.ts"
+      ],
+      "@intelblocks/block-what-converts": [
+        "packages/blocks/community/what-converts/src/index.ts"
+      ],
+      "@intelblocks/block-whatsable": [
+        "packages/blocks/community/whatsable/src/index.ts"
+      ],
+      "@intelblocks/block-whatsapp": [
+        "packages/blocks/community/whatsapp/src/index.ts"
+      ],
+      "@intelblocks/block-whatsscale": [
+        "packages/blocks/community/whatsscale/src/index.ts"
+      ],
+      "@intelblocks/block-wistia": [
+        "packages/blocks/community/wistia/src/index.ts"
+      ],
+      "@intelblocks/block-wonderchat": [
+        "packages/blocks/community/wonderchat/src/index.ts"
+      ],
+      "@intelblocks/block-woocommerce": [
+        "packages/blocks/community/woocommerce/src/index.ts"
+      ],
+      "@intelblocks/block-wootric": [
+        "packages/blocks/community/wootric/src/index.ts"
+      ],
+      "@intelblocks/block-wordpress": [
+        "packages/blocks/community/wordpress/src/index.ts"
+      ],
+      "@intelblocks/block-workable": [
+        "packages/blocks/community/workable/src/index.ts"
+      ],
+      "@intelblocks/block-workday": [
+        "packages/blocks/community/workday/src/index.ts"
+      ],
+      "@intelblocks/block-wrike": [
+        "packages/blocks/community/wrike/src/index.ts"
+      ],
+      "@intelblocks/block-wufoo": [
+        "packages/blocks/community/wufoo/src/index.ts"
+      ],
+      "@intelblocks/block-xero": [
+        "packages/blocks/community/xero/src/index.ts"
+      ],
+      "@intelblocks/block-xquik": [
+        "packages/blocks/community/xquik/src/index.ts"
+      ],
+      "@intelblocks/block-xml": ["packages/blocks/core/xml/src/index.ts"],
+      "@intelblocks/block-youtube": [
+        "packages/blocks/community/youtube/src/index.ts"
+      ],
+      "@intelblocks/block-youtrack": [
+        "packages/blocks/community/youtrack/src/index.ts"
+      ],
+      "@intelblocks/block-zagomail": [
+        "packages/blocks/community/zagomail/src/index.ts"
+      ],
+      "@intelblocks/block-zendesk": [
+        "packages/blocks/community/zendesk/src/index.ts"
+      ],
+      "@intelblocks/block-zerobounce": [
+        "packages/blocks/community/zerobounce/src/index.ts"
+      ],
+      "@intelblocks/block-zoho-bookings": [
+        "packages/blocks/community/zoho-bookings/src/index.ts"
+      ],
+      "@intelblocks/block-zoho-books": [
+        "packages/blocks/community/zoho-books/src/index.ts"
+      ],
+      "@intelblocks/block-zoho-campaigns": [
+        "packages/blocks/community/zoho-campaigns/src/index.ts"
+      ],
+      "@intelblocks/block-zoho-crm": [
+        "packages/blocks/community/zoho-crm/src/index.ts"
+      ],
+      "@intelblocks/block-zoho-desk": [
+        "packages/blocks/community/zoho-desk/src/index.ts"
+      ],
+      "@intelblocks/block-zoho-invoice": [
+        "packages/blocks/community/zoho-invoice/src/index.ts"
+      ],
+      "@intelblocks/block-zoho-mail": [
+        "packages/blocks/community/zoho-mail/src/index.ts"
+      ],
+      "@intelblocks/block-zoo": ["packages/blocks/community/zoo/src/index.ts"],
+      "@intelblocks/block-zoom": [
+        "packages/blocks/community/zoom/src/index.ts"
+      ],
+      "@intelblocks/blocks-common": ["packages/blocks/common/src/index.ts"],
+      "@intelblocks/blocks-framework": [
+        "packages/blocks/framework/src/index.ts"
+      ],
+      "@intelblocks/block-meistertask": [
+        "packages/blocks/community/meistertask/src/index.ts"
+      ],
+      "@intelblocks/server-utils": ["packages/server/utils/src/index.ts"],
+      "@intelblocks/shared": ["packages/shared/src/index.ts"],
+      "@ee/*": ["packages/ee/*"],
+      "Aminos": ["packages/blocks/community/Aminos/src/index.ts"],
+      "@intelblocks/block-microsoft-dynamics-365-business-central": [
+        "packages/blocks/community/microsoft-dynamics-365-business-central/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-dynamics-crm": [
+        "packages/blocks/community/microsoft-dynamics-crm/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-sharepoint": [
+        "packages/blocks/community/microsoft-sharepoint/src/index.ts"
+      ],
+      "@intelblocks/block-snowflake": [
+        "packages/blocks/community/snowflake/src/index.ts"
+      ],
+      "@intelblocks/block-zuora": [
+        "packages/blocks/community/zuora/src/index.ts"
+      ],
+      "@intelblocks/block-cashfree-payments": [
+        "packages/blocks/community/cashfree-payments/src/index.ts"
+      ],
+      "ee-embed-sdk": ["packages/web/src/lib/embed-sdk/index.ts"],
+      "ui-feature-forms": ["packages/ui/features-forms/src/index.ts"],
+      "@intelblocks/block-kissflow": [
+        "packages/blocks/community/kissflow/src/index.ts"
+      ],
+      "@intelblocks/block-housecall-pro": [
+        "packages/blocks/community/housecall-pro/src/index.ts"
+      ],
+      "@intelblocks/block-chat-aid": [
+        "packages/blocks/community/chat-aid/src/index.ts"
+      ],
+      "@intelblocks/block-videoask": [
+        "packages/blocks/community/videoask/src/index.ts"
+      ],
+      "@intelblocks/block-presentation": [
+        "packages/blocks/community/presentation/src/index.ts"
+      ],
+      "@intelblocks/block-formspark": [
+        "packages/blocks/community/formspark/src/index.ts"
+      ],
+      "@intelblocks/block-webex": [
+        "packages/blocks/community/webex/src/index.ts"
+      ],
+      "@intelblocks/block-tableau": [
+        "packages/blocks/community/tableau/src/index.ts"
+      ],
+      "@intelblocks/block-fragment": [
+        "packages/blocks/community/fragment/src/index.ts"
+      ],
+      "@intelblocks/block-fountain": [
+        "packages/blocks/community/fountain/src/index.ts"
+      ],
+      "@intelblocks/block-omni-co": [
+        "packages/blocks/community/omni-co/src/index.ts"
+      ],
+      "@intelblocks/block-instabase": [
+        "packages/blocks/community/instabase/src/index.ts"
+      ],
+      "@intelblocks/block-gladia": [
+        "packages/blocks/community/gladia/src/index.ts"
+      ],
+      "@intelblocks/block-glide": [
+        "packages/blocks/community/glide/src/index.ts"
+      ],
+      "@intelblocks/block-manus": [
+        "packages/blocks/community/manus/src/index.ts"
+      ],
+      "@intelblocks/block-recall-ai": [
+        "packages/blocks/community/recall-ai/src/index.ts"
+      ],
+      "@intelblocks/block-contextual-ai": [
+        "packages/blocks/community/contextual-ai/src/index.ts"
+      ],
+      "@intelblocks/block-hume-ai": [
+        "packages/blocks/community/hume-ai/src/index.ts"
+      ],
+      "@intelblocks/block-chatsistant": [
+        "packages/blocks/community/chatsistant/src/index.ts"
+      ],
+      "@intelblocks/block-rapidtext-ai": [
+        "packages/blocks/community/rapidtext-ai/src/index.ts"
+      ],
+      "@intelblocks/block-opnform": [
+        "packages/blocks/community/opnform/src/index.ts"
+      ],
+      "@intelblocks/block-opportify": [
+        "packages/blocks/community/opportify/src/index.ts"
+      ],
+      "@intelblocks/block-promptmate": [
+        "packages/blocks/community/promptmate/src/index.ts"
+      ],
+      "@intelblocks/block-guidelite": [
+        "packages/blocks/community/guidelite/src/index.ts"
+      ],
+      "@intelblocks/block-bolna": [
+        "packages/blocks/community/bolna/src/index.ts"
+      ],
+      "@intelblocks/block-appfollow": [
+        "packages/blocks/community/appfollow/src/index.ts"
+      ],
+      "@intelblocks/block-griptape": [
+        "packages/blocks/community/griptape/src/index.ts"
+      ],
+      "@intelblocks/block-bexio": [
+        "packages/blocks/community/bexio/src/index.ts"
+      ],
+      "@intelblocks/block-pushbullet": [
+        "packages/blocks/community/pushbullet/src/index.ts"
+      ],
+      "@intelblocks/block-denser-ai": [
+        "packages/blocks/community/denser-ai/src/index.ts"
+      ],
+      "@intelblocks/block-ask-handle": [
+        "packages/blocks/community/ask-handle/src/index.ts"
+      ],
+      "@intelblocks/block-phantombuster": [
+        "packages/blocks/community/phantombuster/src/index.ts"
+      ],
+      "@intelblocks/block-openmic-ai": [
+        "packages/blocks/community/openmic-ai/src/index.ts"
+      ],
+      "@intelblocks/block-datafuel": [
+        "packages/blocks/community/datafuel/src/index.ts"
+      ],
+      "@intelblocks/block-doctly": [
+        "packages/blocks/community/doctly/src/index.ts"
+      ],
+      "@intelblocks/block-chatnode": [
+        "packages/blocks/community/chatnode/src/index.ts"
+      ],
+      "@intelblocks/block-greip": [
+        "packages/blocks/community/greip/src/index.ts"
+      ],
+      "@intelblocks/block-chaindesk": [
+        "packages/blocks/community/chaindesk/src/index.ts"
+      ],
+      "@intelblocks/block-orimon": [
+        "packages/blocks/community/orimon/src/index.ts"
+      ],
+      "@intelblocks/block-linkup": [
+        "packages/blocks/community/linkup/src/index.ts"
+      ],
+      "@intelblocks/block-youform": [
+        "packages/blocks/community/youform/src/index.ts"
+      ],
+      "@intelblocks/block-flow-parser": [
+        "packages/blocks/community/flow-parser/src/index.ts"
+      ],
+      "@intelblocks/block-writesonic-bulk": [
+        "packages/blocks/community/writesonic-bulk/src/index.ts"
+      ],
+      "@intelblocks/block-documentpro": [
+        "packages/blocks/community/documentpro/src/index.ts"
+      ],
+      "@intelblocks/block-image-router": [
+        "packages/blocks/community/image-router/src/index.ts"
+      ],
+      "@intelblocks/block-pollybot-ai": [
+        "packages/blocks/community/pollybot-ai/src/index.ts"
+      ],
+      "@intelblocks/block-documerge": [
+        "packages/blocks/community/documerge/src/index.ts"
+      ],
+      "@intelblocks/block-letta": [
+        "packages/blocks/community/letta/src/index.ts"
+      ],
+      "@intelblocks/block-logrocket": [
+        "packages/blocks/community/logrocket/src/index.ts"
+      ],
+      "@intelblocks/block-logsnag": [
+        "packages/blocks/community/logsnag/src/index.ts"
+      ],
+      "@intelblocks/block-couchbase": [
+        "packages/blocks/community/couchbase/src/index.ts"
+      ],
+      "@intelblocks/block-cursor": [
+        "packages/blocks/community/cursor/src/index.ts"
+      ],
+      "@intelblocks/block-gptzero-detect-ai": [
+        "packages/blocks/community/gptzero-detect-ai/src/index.ts"
+      ],
+      "@intelblocks/block-bursty-ai": [
+        "packages/blocks/community/bursty-ai/src/index.ts"
+      ],
+      "@intelblocks/block-tl-dv": [
+        "packages/blocks/community/tl-dv/src/index.ts"
+      ],
+      "@intelblocks/block-parser-expert": [
+        "packages/blocks/community/parser-expert/src/index.ts"
+      ],
+      "@intelblocks/block-vidlab7": [
+        "packages/blocks/community/vidlab7/src/index.ts"
+      ],
+      "@intelblocks/block-bookedin": [
+        "packages/blocks/community/bookedin/src/index.ts"
+      ],
+      "@intelblocks/block-ai": ["packages/blocks/community/ai/src/index.ts"],
+      "@intelblocks/block-customgpt": [
+        "packages/blocks/community/customgpt/src/index.ts"
+      ],
+      "@intelblocks/block-synthesia": [
+        "packages/blocks/community/synthesia/src/index.ts"
+      ],
+      "@intelblocks/block-meetgeek-ai": [
+        "packages/blocks/community/meetgeek-ai/src/index.ts"
+      ],
+      "@intelblocks/block-fellow": [
+        "packages/blocks/community/fellow/src/index.ts"
+      ],
+      "@intelblocks/block-echowin": [
+        "packages/blocks/community/echowin/src/index.ts"
+      ],
+      "@intelblocks/block-feathery": [
+        "packages/blocks/community/feathery/src/index.ts"
+      ],
+      "@intelblocks/block-chatling": [
+        "packages/blocks/community/chatling/src/index.ts"
+      ],
+      "@intelblocks/block-air-ops": [
+        "packages/blocks/community/air-ops/src/index.ts"
+      ],
+      "@intelblocks/block-mind-studio": [
+        "packages/blocks/community/mind-studio/src/index.ts"
+      ],
+      "@intelblocks/block-easy-peasy-ai": [
+        "packages/blocks/community/easy-peasy-ai/src/index.ts"
+      ],
+      "@intelblocks/block-leexi": [
+        "packages/blocks/community/leexi/src/index.ts"
+      ],
+      "@intelblocks/block-tiny-talk-ai": [
+        "packages/blocks/community/tiny-talk-ai/src/index.ts"
+      ],
+      "@intelblocks/block-sap-ariba": [
+        "packages/blocks/community/sap-ariba/src/index.ts"
+      ],
+      "@intelblocks/block-hastewire": [
+        "packages/blocks/community/hastewire/src/index.ts"
+      ],
+      "@intelblocks/block-greenpt": [
+        "packages/blocks/community/greenpt/src/index.ts"
+      ],
+      "@intelblocks/block-oncehub": [
+        "packages/blocks/community/oncehub/src/index.ts"
+      ],
+      "@intelblocks/block-swarmnode": [
+        "packages/blocks/community/swarmnode/src/index.ts"
+      ],
+      "@intelblocks/block-alt-text-ai": [
+        "packages/blocks/community/alt-text-ai/src/index.ts"
+      ],
+      "@intelblocks/block-dashworks": [
+        "packages/blocks/community/dashworks/src/index.ts"
+      ],
+      "@intelblocks/block-raia-ai": [
+        "packages/blocks/community/raia-ai/src/index.ts"
+      ],
+      "@intelblocks/block-alttextify": [
+        "packages/blocks/community/alttextify/src/index.ts"
+      ],
+      "@intelblocks/block-motiontools": [
+        "packages/blocks/community/motiontools/src/index.ts"
+      ],
+      "@intelblocks/block-formsite": [
+        "packages/blocks/community/formsite/src/index.ts"
+      ],
+      "@intelblocks/block-lofty": [
+        "packages/blocks/community/lofty/src/index.ts"
+      ],
+      "@intelblocks/block-loops": [
+        "packages/blocks/community/loops/src/index.ts"
+      ],
+      "@intelblocks/block-youcanbookme": [
+        "packages/blocks/community/youcanbookme/src/index.ts"
+      ],
+      "@intelblocks/block-esignatures": [
+        "packages/blocks/community/esignatures/src/index.ts"
+      ],
+      "@intelblocks/block-base44": [
+        "packages/blocks/community/base44/src/index.ts"
+      ],
+      "@intelblocks/block-luxury-presence": [
+        "packages/blocks/community/luxury-presence/src/index.ts"
+      ],
+      "@intelblocks/block-signrequest": [
+        "packages/blocks/community/signrequest/src/index.ts"
+      ],
+      "@intelblocks/block-hystruct": [
+        "packages/blocks/community/hystruct/src/index.ts"
+      ],
+      "@intelblocks/block-chatfly": [
+        "packages/blocks/community/chatfly/src/index.ts"
+      ],
+      "@intelblocks/block-azure-blob-storage": [
+        "packages/blocks/community/azure-blob-storage/src/index.ts"
+      ],
+      "@intelblocks/block-metatext": [
+        "packages/blocks/community/metatext/src/index.ts"
+      ],
+      "@intelblocks/block-kudosity": [
+        "packages/blocks/community/kudosity/src/index.ts"
+      ],
+      "@intelblocks/block-neverbounce": [
+        "packages/blocks/community/neverbounce/src/index.ts"
+      ],
+      "@intelblocks/block-mailercheck": [
+        "packages/blocks/community/mailercheck/src/index.ts"
+      ],
+      "@intelblocks/block-vero": [
+        "packages/blocks/community/vero/src/index.ts"
+      ],
+      "@intelblocks/block-digital-pilot": [
+        "packages/blocks/community/digital-pilot/src/index.ts"
+      ],
+      "@intelblocks/block-clearoutphone": [
+        "packages/blocks/community/clearoutphone/src/index.ts"
+      ],
+      "@intelblocks/block-omnihr": [
+        "packages/blocks/community/omnihr/src/index.ts"
+      ],
+      "@intelblocks/block-clicdata": [
+        "packages/blocks/community/clicdata/src/index.ts"
+      ],
+      "@intelblocks/block-katana": [
+        "packages/blocks/community/katana/src/index.ts"
+      ],
+      "@intelblocks/block-giftbit": [
+        "packages/blocks/community/giftbit/src/index.ts"
+      ],
+      "@intelblocks/block-free-agent": [
+        "packages/blocks/community/free-agent/src/index.ts"
+      ],
+      "@intelblocks/block-lemon-squeezy": [
+        "packages/blocks/community/lemon-squeezy/src/index.ts"
+      ],
+      "@intelblocks/block-qwilr": [
+        "packages/blocks/community/qwilr/src/index.ts"
+      ],
+      "@intelblocks/block-splitwise": [
+        "packages/blocks/community/splitwise/src/index.ts"
+      ],
+      "@intelblocks/block-voipstudio": [
+        "packages/blocks/community/voipstudio/src/index.ts"
+      ],
+      "@intelblocks/block-millionverifier": [
+        "packages/blocks/community/millionverifier/src/index.ts"
+      ],
+      "@intelblocks/block-octopush-sms": [
+        "packages/blocks/community/octopush-sms/src/index.ts"
+      ],
+      "@intelblocks/block-twitch": [
+        "packages/blocks/community/twitch/src/index.ts"
+      ],
+      "@intelblocks/block-moonclerk": [
+        "packages/blocks/community/moonclerk/src/index.ts"
+      ],
+      "@intelblocks/block-heymarket-sms": [
+        "packages/blocks/community/heymarket-sms/src/index.ts"
+      ],
+      "@intelblocks/block-flipando": [
+        "packages/blocks/community/flipando/src/index.ts"
+      ],
+      "@intelblocks/block-skyprep": [
+        "packages/blocks/community/skyprep/src/index.ts"
+      ],
+      "@intelblocks/block-influencers-club": [
+        "packages/blocks/community/influencers-club/src/index.ts"
+      ],
+      "@intelblocks/block-tenzo": [
+        "packages/blocks/community/tenzo/src/index.ts"
+      ],
+      "@intelblocks/block-seek-table": [
+        "packages/blocks/community/seek-table/src/index.ts"
+      ],
+      "@intelblocks/block-lucidya": [
+        "packages/blocks/community/lucidya/src/index.ts"
+      ],
+      "@intelblocks/block-phone-validator": [
+        "packages/blocks/community/phone-validator/src/index.ts"
+      ],
+      "@intelblocks/block-barcode-lookup": [
+        "packages/blocks/community/barcode-lookup/src/index.ts"
+      ],
+      "@intelblocks/block-intruder": [
+        "packages/blocks/community/intruder/src/index.ts"
+      ],
+      "@intelblocks/block-tidely": [
+        "packages/blocks/community/tidely/src/index.ts"
+      ],
+      "@intelblocks/block-cryptolens": [
+        "packages/blocks/community/cryptolens/src/index.ts"
+      ],
+      "@intelblocks/block-ampeco": [
+        "packages/blocks/community/ampeco/src/index.ts"
+      ],
+      "@intelblocks/block-quaderno": [
+        "packages/blocks/community/quaderno/src/index.ts"
+      ],
+      "@intelblocks/block-livesession": [
+        "packages/blocks/community/livesession/src/index.ts"
+      ],
+      "@intelblocks/block-roe-ai": [
+        "packages/blocks/community/roe-ai/src/index.ts"
+      ],
+      "@intelblocks/block-duckdb": [
+        "packages/blocks/community/duckdb/src/index.ts"
+      ],
+      "@intelblocks/block-waitwhile": [
+        "packages/blocks/community/waitwhile/src/index.ts"
+      ],
+      "@intelblocks/block-baremetrics": [
+        "packages/blocks/community/baremetrics/src/index.ts"
+      ],
+      "@intelblocks/block-chartly": [
+        "packages/blocks/community/chartly/src/index.ts"
+      ],
+      "@intelblocks/block-insta-charts": [
+        "packages/blocks/community/insta-charts/src/index.ts"
+      ],
+      "@intelblocks/block-pinch-payments": [
+        "packages/blocks/community/pinch-payments/src/index.ts"
+      ],
+      "@intelblocks/block-just-invoice": [
+        "packages/blocks/community/just-invoice/src/index.ts"
+      ],
+      "@intelblocks/block-billplz": [
+        "packages/blocks/community/billplz/src/index.ts"
+      ],
+      "@intelblocks/block-vouchery-io": [
+        "packages/blocks/community/vouchery-io/src/index.ts"
+      ],
+      "@intelblocks/block-lokalise": [
+        "packages/blocks/community/lokalise/src/index.ts"
+      ],
+      "@intelblocks/block-digital-ocean": [
+        "packages/blocks/community/digital-ocean/src/index.ts"
+      ],
+      "@intelblocks/block-hashi-corp-vault": [
+        "packages/blocks/community/hashi-corp-vault/src/index.ts"
+      ],
+      "@intelblocks/block-leap-ai": [
+        "packages/blocks/community/leap-ai/src/index.ts"
+      ],
+      "@intelblocks/block-time-ops": [
+        "packages/blocks/community/time-ops/src/index.ts"
+      ],
+      "@intelblocks/block-formitable": [
+        "packages/blocks/community/formitable/src/index.ts"
+      ],
+      "@intelblocks/block-gender-api": [
+        "packages/blocks/community/gender-api/src/index.ts"
+      ],
+      "@intelblocks/block-plausible": [
+        "packages/blocks/community/plausible/src/index.ts"
+      ],
+      "@intelblocks/block-woodpecker": [
+        "packages/blocks/community/woodpecker/src/index.ts"
+      ],
+      "@intelblocks/block-visible": [
+        "packages/blocks/community/visible/src/index.ts"
+      ],
+      "@intelblocks/block-paywhirl": [
+        "packages/blocks/community/paywhirl/src/index.ts"
+      ],
+      "@intelblocks/block-smsmode": [
+        "packages/blocks/community/smsmode/src/index.ts"
+      ],
+      "@intelblocks/block-mooninvoice": [
+        "packages/blocks/community/mooninvoice/src/index.ts"
+      ],
+      "@intelblocks/block-chain-aware": [
+        "packages/blocks/community/chain-aware/src/index.ts"
+      ],
+      "@intelblocks/block-detecting-ai": [
+        "packages/blocks/community/detecting-ai/src/index.ts"
+      ],
+      "@intelblocks/block-moveo-ai": [
+        "packages/blocks/community/moveo-ai/src/index.ts"
+      ],
+      "@intelblocks/block-oneclickimpact": [
+        "packages/blocks/community/oneclickimpact/src/index.ts"
+      ],
+      "@intelblocks/block-bokio": [
+        "packages/blocks/community/bokio/src/index.ts"
+      ],
+      "@intelblocks/block-vidnoz": [
+        "packages/blocks/community/vidnoz/src/index.ts"
+      ],
+      "@intelblocks/block-lets-calendar": [
+        "packages/blocks/community/lets-calendar/src/index.ts"
+      ],
+      "@intelblocks/block-predis-ai": [
+        "packages/blocks/community/predis-ai/src/index.ts"
+      ],
+      "@intelblocks/block-week-done": [
+        "packages/blocks/community/week-done/src/index.ts"
+      ],
+      "@intelblocks/block-manual-trigger": [
+        "packages/blocks/core/manual-trigger/src/index.ts"
+      ],
+      "@intelblocks/block-zeplin": [
+        "packages/blocks/community/zeplin/src/index.ts"
+      ],
+      "@intelblocks/block-google-search": [
+        "packages/blocks/community/google-search/src/index.ts"
+      ],
+      "@intelblocks/block-microsoft-copilot": [
+        "packages/blocks/community/microsoft-copilot/src/index.ts"
+      ],
+      "@intelblocks/block-asknews": [
+        "packages/blocks/community/asknews/src/index.ts"
+      ],
+      "@intelblocks/block-valyu": [
+        "packages/blocks/community/valyu/src/index.ts"
+      ],
+      "@intelblocks/block-alai": [
+        "packages/blocks/community/alai/src/index.ts"
+      ],
+      "@intelblocks/block-algolia": [
+        "packages/blocks/community/algolia/src/index.ts"
+      ],
+      "@intelblocks/block-kapso": [
+        "packages/blocks/community/kapso/src/index.ts"
+      ],
+      "@intelblocks/block-pdfcrowd": [
+        "packages/blocks/community/pdfcrowd/src/index.ts"
+      ],
+      "@intelblocks/block-amazon-bedrock": [
+        "packages/blocks/community/amazon-bedrock/src/index.ts"
+      ],
+      "@intelblocks/block-brave-search": [
+        "packages/blocks/community/brave-search/src/index.ts"
+      ],
+      "@intelblocks/block-amazon-secrets-manager": [
+        "packages/blocks/community/amazon-secrets-manager/src/index.ts"
+      ],
+      "@intelblocks/block-validatedmails": [
+        "packages/blocks/community/validatedmails/src/index.ts"
+      ],
+      "@intelblocks/block-coralogix": [
+        "packages/blocks/community/coralogix/src/index.ts"
+      ],
+      "@intelblocks/block-pocketbase": [
+        "packages/blocks/community/pocketbase/src/index.ts"
+      ],
+      "@intelblocks/block-carbone": [
+        "packages/blocks/community/carbone/src/index.ts"
+      ],
+      "@intelblocks/block-emailit": [
+        "packages/blocks/community/emailit/src/index.ts"
+      ],
+      "@intelblocks/block-bland-ai": [
+        "packages/blocks/community/bland-ai/src/index.ts"
+      ],
+      "@intelblocks/block-vapi": [
+        "packages/blocks/community/vapi/src/index.ts"
+      ],
+      "@intelblocks/block-canny": [
+        "packages/blocks/community/canny/src/index.ts"
+      ],
+      "@intelblocks/block-knock": [
+        "packages/blocks/community/knock/src/index.ts"
+      ],
+      "@intelblocks/block-plunk": [
+        "packages/blocks/community/plunk/src/index.ts"
+      ],
+      "@intelblocks/block-proxycurl": [
+        "packages/blocks/community/proxycurl/src/index.ts"
+      ],
+      "@intelblocks/block-connectuc": [
+        "packages/blocks/community/connectuc/src/index.ts"
+      ]
+    },
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules", "tmp"]
+}
