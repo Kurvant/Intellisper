@@ -32,6 +32,8 @@ import { join } from 'node:path'
 const WRITE = process.argv.includes('--write')
 const ALL = process.argv.includes('--all')
 const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').replace('--only=', '')
+const ONLY_FAILED = process.argv.includes('--only-failed')
+const REPORT_PATH = 'scripts/publish-packages.report.json'
 const REGISTRY = 'https://npm.pkg.github.com'
 
 // ---- workspace version map (mirrors cli/workspace-utils.buildWorkspaceVersionMap) ----
@@ -101,7 +103,26 @@ const FOUNDATION = ['@intelblocks/shared', '@intelblocks/blocks-common', '@intel
 const foundationSet = new Set(FOUNDATION)
 
 let selected
-if (ONLY) {
+if (ONLY_FAILED) {
+    // Re-read the last report and retry only the packages that failed. Foundation
+    // packages, if present, are ordered first so dependents can resolve them.
+    if (!existsSync(REPORT_PATH)) {
+        console.error(`--only-failed: no prior report at ${REPORT_PATH}. Run a publish first.`)
+        process.exit(1)
+    }
+    const prev = JSON.parse(readFileSync(REPORT_PATH, 'utf8'))
+    const failedNames = new Set((prev.failed || []).map((f) => f.name))
+    if (failedNames.size === 0) {
+        console.log('--only-failed: previous run had 0 failures. Nothing to do.')
+        process.exit(0)
+    }
+    const failedPkgs = packages.filter((p) => failedNames.has(p.name))
+    const fFoundation = FOUNDATION.map((n) => failedPkgs.find((p) => p.name === n)).filter(Boolean)
+    const fRest = failedPkgs.filter((p) => !foundationSet.has(p.name)).sort((a, b) => a.name.localeCompare(b.name))
+    selected = [...fFoundation, ...fRest]
+    console.log(`--only-failed: retrying ${selected.length} previously-failed package(s)`)
+}
+else if (ONLY) {
     const want = new Set(ONLY.split(',').map((s) => s.trim()))
     selected = packages.filter((p) => want.has(p.name))
 }
@@ -117,7 +138,7 @@ else {
 
 console.log(`mode: ${WRITE ? 'PUBLISH' : 'dry-run'} | packages selected: ${selected.length}\n`)
 
-const report = { mode: WRITE ? 'publish' : 'dry-run', registry: REGISTRY, ok: [], failed: [] }
+const report = { mode: WRITE ? 'publish' : 'dry-run', registry: REGISTRY, ok: [], skipped: [], failed: [] }
 
 for (const pkg of selected) {
     try {
@@ -152,16 +173,25 @@ for (const pkg of selected) {
     }
     catch (err) {
         const msg = (err.stdout ? err.stdout.toString() : '') + (err.stderr ? err.stderr.toString() : '') || err.message
-        console.error(`  ❌ FAILED: ${pkg.name}`)
-        console.error('     ' + msg.split('\n').filter(Boolean).slice(-6).join('\n     '))
-        report.failed.push({ name: pkg.name, version: pkg.version, error: msg.split('\n').slice(-6).join(' | ') })
+        // An immutable-version conflict means it's already published — not a failure.
+        // Treat it as "skipped" so re-runs (and --only-failed) converge to 0 failures.
+        if (/E409|409 Conflict|cannot publish over|already exists|EPUBLISHCONFLICT/i.test(msg)) {
+            console.log(`  ⏭️  skipped (already published): ${pkg.name}@${pkg.version}`)
+            report.skipped.push({ name: pkg.name, version: pkg.version })
+        }
+        else {
+            console.error(`  ❌ FAILED: ${pkg.name}`)
+            console.error('     ' + msg.split('\n').filter(Boolean).slice(-6).join('\n     '))
+            report.failed.push({ name: pkg.name, version: pkg.version, error: msg.split('\n').slice(-6).join(' | ') })
+        }
     }
 }
 
 writeFileSync('scripts/publish-packages.report.json', JSON.stringify(report, null, 2) + '\n')
 console.log('\n──────── summary ────────')
-console.log(`ok     : ${report.ok.length}`)
-console.log(`failed : ${report.failed.length}`)
+console.log(`ok      : ${report.ok.length}`)
+console.log(`skipped : ${report.skipped.length} (already published)`)
+console.log(`failed  : ${report.failed.length}`)
 console.log('report : scripts/publish-packages.report.json')
 if (report.failed.length) {
     console.error('\n⚠️  some packages failed — see above.')
