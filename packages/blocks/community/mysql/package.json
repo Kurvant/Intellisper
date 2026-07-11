@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "@types/sqlstring": "2.3.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

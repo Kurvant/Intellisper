@@ -31,5 +31,8 @@
     "@types/node": "24.11.0",
     "pino": "10.1.0",
     "vitest": "3.0.8"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

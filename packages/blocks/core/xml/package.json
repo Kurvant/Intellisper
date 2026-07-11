@@ -19,5 +19,8 @@
   "devDependencies": {
     "@types/json2xml": "0.1.4",
     "vitest": "3.0.8"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

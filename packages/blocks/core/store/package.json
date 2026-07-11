@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "@types/deep-equal": "1.0.4"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

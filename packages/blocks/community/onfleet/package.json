@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "@types/onfleet__node-onfleet": "1.3.12"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

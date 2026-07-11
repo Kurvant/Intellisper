@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "@types/content-disposition": "0.5.9"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

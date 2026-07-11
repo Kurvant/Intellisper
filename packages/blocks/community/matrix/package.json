@@ -16,5 +16,8 @@
   },
   "devDependencies": {
     "@types/marked": "4.3.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

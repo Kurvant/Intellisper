@@ -1,0 +1,3019 @@
+{
+  "mode": "write",
+  "registry": "https://npm.pkg.github.com",
+  "total": 752,
+  "updated": [
+    {
+      "file": "packages/blocks/common/package.json",
+      "name": "@intelblocks/blocks-common"
+    },
+    {
+      "file": "packages/blocks/community/activecampaign/package.json",
+      "name": "@intelblocks/block-activecampaign"
+    },
+    {
+      "file": "packages/blocks/community/activepieces/package.json",
+      "name": "@intelblocks/block-activepieces"
+    },
+    {
+      "file": "packages/blocks/community/actualbudget/package.json",
+      "name": "@intelblocks/block-actualbudget"
+    },
+    {
+      "file": "packages/blocks/community/acuity-scheduling/package.json",
+      "name": "@intelblocks/block-acuity-scheduling"
+    },
+    {
+      "file": "packages/blocks/community/acumbamail/package.json",
+      "name": "@intelblocks/block-acumbamail"
+    },
+    {
+      "file": "packages/blocks/community/add-event/package.json",
+      "name": "@intelblocks/block-add-event"
+    },
+    {
+      "file": "packages/blocks/community/afforai/package.json",
+      "name": "@intelblocks/block-afforai"
+    },
+    {
+      "file": "packages/blocks/community/agentx/package.json",
+      "name": "@intelblocks/block-agentx"
+    },
+    {
+      "file": "packages/blocks/community/ai/package.json",
+      "name": "@intelblocks/block-ai"
+    },
+    {
+      "file": "packages/blocks/community/aianswer/package.json",
+      "name": "@intelblocks/block-aianswer"
+    },
+    {
+      "file": "packages/blocks/community/aidbase/package.json",
+      "name": "@intelblocks/block-aidbase"
+    },
+    {
+      "file": "packages/blocks/community/aiprise/package.json",
+      "name": "@intelblocks/block-aiprise"
+    },
+    {
+      "file": "packages/blocks/community/air-ops/package.json",
+      "name": "@intelblocks/block-air-ops"
+    },
+    {
+      "file": "packages/blocks/community/aircall/package.json",
+      "name": "@intelblocks/block-aircall"
+    },
+    {
+      "file": "packages/blocks/community/airparser/package.json",
+      "name": "@intelblocks/block-airparser"
+    },
+    {
+      "file": "packages/blocks/community/airtable/package.json",
+      "name": "@intelblocks/block-airtable"
+    },
+    {
+      "file": "packages/blocks/community/airtop/package.json",
+      "name": "@intelblocks/block-airtop"
+    },
+    {
+      "file": "packages/blocks/community/alai/package.json",
+      "name": "@intelblocks/block-alai"
+    },
+    {
+      "file": "packages/blocks/community/algolia/package.json",
+      "name": "@intelblocks/block-algolia"
+    },
+    {
+      "file": "packages/blocks/community/alt-text-ai/package.json",
+      "name": "@intelblocks/block-alt-text-ai"
+    },
+    {
+      "file": "packages/blocks/community/alttextify/package.json",
+      "name": "@intelblocks/block-alttextify"
+    },
+    {
+      "file": "packages/blocks/community/amazon-bedrock/package.json",
+      "name": "@intelblocks/block-amazon-bedrock"
+    },
+    {
+      "file": "packages/blocks/community/amazon-s3/package.json",
+      "name": "@intelblocks/block-amazon-s3"
+    },
+    {
+      "file": "packages/blocks/community/amazon-secrets-manager/package.json",
+      "name": "@intelblocks/block-amazon-secrets-manager"
+    },
+    {
+      "file": "packages/blocks/community/amazon-ses/package.json",
+      "name": "@intelblocks/block-amazon-ses"
+    },
+    {
+      "file": "packages/blocks/community/amazon-sns/package.json",
+      "name": "@intelblocks/block-amazon-sns"
+    },
+    {
+      "file": "packages/blocks/community/amazon-sqs/package.json",
+      "name": "@intelblocks/block-amazon-sqs"
+    },
+    {
+      "file": "packages/blocks/community/amazon-textract/package.json",
+      "name": "@intelblocks/block-amazon-textract"
+    },
+    {
+      "file": "packages/blocks/community/aminos/package.json",
+      "name": "@intelblocks/block-aminos"
+    },
+    {
+      "file": "packages/blocks/community/ampeco/package.json",
+      "name": "@intelblocks/block-ampeco"
+    },
+    {
+      "file": "packages/blocks/community/anyhook-graphql/package.json",
+      "name": "@intelblocks/block-anyhook-graphql"
+    },
+    {
+      "file": "packages/blocks/community/anyhook-websocket/package.json",
+      "name": "@intelblocks/block-anyhook-websocket"
+    },
+    {
+      "file": "packages/blocks/community/apify/package.json",
+      "name": "@intelblocks/block-apify"
+    },
+    {
+      "file": "packages/blocks/community/apitable/package.json",
+      "name": "@intelblocks/block-apitable"
+    },
+    {
+      "file": "packages/blocks/community/apitemplate-io/package.json",
+      "name": "@intelblocks/block-apitemplate-io"
+    },
+    {
+      "file": "packages/blocks/community/apollo/package.json",
+      "name": "@intelblocks/block-apollo"
+    },
+    {
+      "file": "packages/blocks/community/appfollow/package.json",
+      "name": "@intelblocks/block-appfollow"
+    },
+    {
+      "file": "packages/blocks/community/asana/package.json",
+      "name": "@intelblocks/block-asana"
+    },
+    {
+      "file": "packages/blocks/community/ashby/package.json",
+      "name": "@intelblocks/block-ashby"
+    },
+    {
+      "file": "packages/blocks/community/ask-handle/package.json",
+      "name": "@intelblocks/block-ask-handle"
+    },
+    {
+      "file": "packages/blocks/community/asknews/package.json",
+      "name": "@intelblocks/block-asknews"
+    },
+    {
+      "file": "packages/blocks/community/assembled/package.json",
+      "name": "@intelblocks/block-assembled"
+    },
+    {
+      "file": "packages/blocks/community/assemblyai/package.json",
+      "name": "@intelblocks/block-assemblyai"
+    },
+    {
+      "file": "packages/blocks/community/attio/package.json",
+      "name": "@intelblocks/block-attio"
+    },
+    {
+      "file": "packages/blocks/community/autocalls/package.json",
+      "name": "@intelblocks/block-autocalls"
+    },
+    {
+      "file": "packages/blocks/community/avian/package.json",
+      "name": "@intelblocks/block-avian"
+    },
+    {
+      "file": "packages/blocks/community/avoma/package.json",
+      "name": "@intelblocks/block-avoma"
+    },
+    {
+      "file": "packages/blocks/community/azure-ad/package.json",
+      "name": "@intelblocks/block-azure-ad"
+    },
+    {
+      "file": "packages/blocks/community/azure-blob-storage/package.json",
+      "name": "@intelblocks/block-azure-blob-storage"
+    },
+    {
+      "file": "packages/blocks/community/azure-communication-services/package.json",
+      "name": "@intelblocks/block-azure-communication-services"
+    },
+    {
+      "file": "packages/blocks/community/azure-devops/package.json",
+      "name": "@intelblocks/block-azure-devops"
+    },
+    {
+      "file": "packages/blocks/community/azure-openai/package.json",
+      "name": "@intelblocks/block-azure-openai"
+    },
+    {
+      "file": "packages/blocks/community/backblaze/package.json",
+      "name": "@intelblocks/block-backblaze"
+    },
+    {
+      "file": "packages/blocks/community/bamboohr/package.json",
+      "name": "@intelblocks/block-bamboohr"
+    },
+    {
+      "file": "packages/blocks/community/bannerbear/package.json",
+      "name": "@intelblocks/block-bannerbear"
+    },
+    {
+      "file": "packages/blocks/community/barcode-lookup/package.json",
+      "name": "@intelblocks/block-barcode-lookup"
+    },
+    {
+      "file": "packages/blocks/community/baremetrics/package.json",
+      "name": "@intelblocks/block-baremetrics"
+    },
+    {
+      "file": "packages/blocks/community/base44/package.json",
+      "name": "@intelblocks/block-base44"
+    },
+    {
+      "file": "packages/blocks/community/baserow/package.json",
+      "name": "@intelblocks/block-baserow"
+    },
+    {
+      "file": "packages/blocks/community/beamer/package.json",
+      "name": "@intelblocks/block-beamer"
+    },
+    {
+      "file": "packages/blocks/community/beebole/package.json",
+      "name": "@intelblocks/block-beebole"
+    },
+    {
+      "file": "packages/blocks/community/beehiiv/package.json",
+      "name": "@intelblocks/block-beehiiv"
+    },
+    {
+      "file": "packages/blocks/community/bettermode/package.json",
+      "name": "@intelblocks/block-bettermode"
+    },
+    {
+      "file": "packages/blocks/community/bexio/package.json",
+      "name": "@intelblocks/block-bexio"
+    },
+    {
+      "file": "packages/blocks/community/bigcommerce/package.json",
+      "name": "@intelblocks/block-bigcommerce"
+    },
+    {
+      "file": "packages/blocks/community/bigin-by-zoho/package.json",
+      "name": "@intelblocks/block-bigin-by-zoho"
+    },
+    {
+      "file": "packages/blocks/community/bika/package.json",
+      "name": "@intelblocks/block-bika"
+    },
+    {
+      "file": "packages/blocks/community/billplz/package.json",
+      "name": "@intelblocks/block-billplz"
+    },
+    {
+      "file": "packages/blocks/community/binance/package.json",
+      "name": "@intelblocks/block-binance"
+    },
+    {
+      "file": "packages/blocks/community/bitly/package.json",
+      "name": "@intelblocks/block-bitly"
+    },
+    {
+      "file": "packages/blocks/community/bland-ai/package.json",
+      "name": "@intelblocks/block-bland-ai"
+    },
+    {
+      "file": "packages/blocks/community/blockscout/package.json",
+      "name": "@intelblocks/block-blockscout"
+    },
+    {
+      "file": "packages/blocks/community/bluesky/package.json",
+      "name": "@intelblocks/block-bluesky"
+    },
+    {
+      "file": "packages/blocks/community/bocha-search/package.json",
+      "name": "@intelblocks/block-bocha-search"
+    },
+    {
+      "file": "packages/blocks/community/bokio/package.json",
+      "name": "@intelblocks/block-bokio"
+    },
+    {
+      "file": "packages/blocks/community/bolna/package.json",
+      "name": "@intelblocks/block-bolna"
+    },
+    {
+      "file": "packages/blocks/community/bonjoro/package.json",
+      "name": "@intelblocks/block-bonjoro"
+    },
+    {
+      "file": "packages/blocks/community/bookedin/package.json",
+      "name": "@intelblocks/block-bookedin"
+    },
+    {
+      "file": "packages/blocks/community/box/package.json",
+      "name": "@intelblocks/block-box"
+    },
+    {
+      "file": "packages/blocks/community/brave-search/package.json",
+      "name": "@intelblocks/block-brave-search"
+    },
+    {
+      "file": "packages/blocks/community/brilliant-directories/package.json",
+      "name": "@intelblocks/block-brilliant-directories"
+    },
+    {
+      "file": "packages/blocks/community/browse-ai/package.json",
+      "name": "@intelblocks/block-browse-ai"
+    },
+    {
+      "file": "packages/blocks/community/browserless/package.json",
+      "name": "@intelblocks/block-browserless"
+    },
+    {
+      "file": "packages/blocks/community/bubble/package.json",
+      "name": "@intelblocks/block-bubble"
+    },
+    {
+      "file": "packages/blocks/community/buffer/package.json",
+      "name": "@intelblocks/block-buffer"
+    },
+    {
+      "file": "packages/blocks/community/bumpups/package.json",
+      "name": "@intelblocks/block-bumpups"
+    },
+    {
+      "file": "packages/blocks/community/bursty-ai/package.json",
+      "name": "@intelblocks/block-bursty-ai"
+    },
+    {
+      "file": "packages/blocks/community/buttondown/package.json",
+      "name": "@intelblocks/block-buttondown"
+    },
+    {
+      "file": "packages/blocks/community/cal-com/package.json",
+      "name": "@intelblocks/block-cal-com"
+    },
+    {
+      "file": "packages/blocks/community/calendly/package.json",
+      "name": "@intelblocks/block-calendly"
+    },
+    {
+      "file": "packages/blocks/community/call-rounded/package.json",
+      "name": "@intelblocks/block-rounded-studio"
+    },
+    {
+      "file": "packages/blocks/community/camb-ai/package.json",
+      "name": "@intelblocks/block-camb-ai"
+    },
+    {
+      "file": "packages/blocks/community/campaign-monitor/package.json",
+      "name": "@intelblocks/block-campaign-monitor"
+    },
+    {
+      "file": "packages/blocks/community/canny/package.json",
+      "name": "@intelblocks/block-canny"
+    },
+    {
+      "file": "packages/blocks/community/canva/package.json",
+      "name": "@intelblocks/block-canva"
+    },
+    {
+      "file": "packages/blocks/community/capsule-crm/package.json",
+      "name": "@intelblocks/block-capsule-crm"
+    },
+    {
+      "file": "packages/blocks/community/captain-data/package.json",
+      "name": "@intelblocks/block-captain-data"
+    },
+    {
+      "file": "packages/blocks/community/carbone/package.json",
+      "name": "@intelblocks/block-carbone"
+    },
+    {
+      "file": "packages/blocks/community/cartloom/package.json",
+      "name": "@intelblocks/block-cartloom"
+    },
+    {
+      "file": "packages/blocks/community/cashfree-payments/package.json",
+      "name": "@intelblocks/block-cashfree-payments"
+    },
+    {
+      "file": "packages/blocks/community/certopus/package.json",
+      "name": "@intelblocks/block-certopus"
+    },
+    {
+      "file": "packages/blocks/community/chain-aware/package.json",
+      "name": "@intelblocks/block-chain-aware"
+    },
+    {
+      "file": "packages/blocks/community/chainalysis-api/package.json",
+      "name": "@intelblocks/block-chainalysis-api"
+    },
+    {
+      "file": "packages/blocks/community/chaindesk/package.json",
+      "name": "@intelblocks/block-chaindesk"
+    },
+    {
+      "file": "packages/blocks/community/chargebee/package.json",
+      "name": "@intelblocks/block-chargebee"
+    },
+    {
+      "file": "packages/blocks/community/chargekeep/package.json",
+      "name": "@intelblocks/block-chargekeep"
+    },
+    {
+      "file": "packages/blocks/community/chartly/package.json",
+      "name": "@intelblocks/block-chartly"
+    },
+    {
+      "file": "packages/blocks/community/chat-aid/package.json",
+      "name": "@intelblocks/block-chat-aid"
+    },
+    {
+      "file": "packages/blocks/community/chat-data/package.json",
+      "name": "@intelblocks/block-chat-data"
+    },
+    {
+      "file": "packages/blocks/community/chatbase/package.json",
+      "name": "@intelblocks/block-chatbase"
+    },
+    {
+      "file": "packages/blocks/community/chatfly/package.json",
+      "name": "@intelblocks/block-chatfly"
+    },
+    {
+      "file": "packages/blocks/community/chatling/package.json",
+      "name": "@intelblocks/block-chatling"
+    },
+    {
+      "file": "packages/blocks/community/chatnode/package.json",
+      "name": "@intelblocks/block-chatnode"
+    },
+    {
+      "file": "packages/blocks/community/chatsistant/package.json",
+      "name": "@intelblocks/block-chatsistant"
+    },
+    {
+      "file": "packages/blocks/community/chatwoot/package.json",
+      "name": "@intelblocks/block-chatwoot"
+    },
+    {
+      "file": "packages/blocks/community/checkout/package.json",
+      "name": "@intelblocks/block-checkout"
+    },
+    {
+      "file": "packages/blocks/community/chess-com/package.json",
+      "name": "@intelblocks/block-chess-com"
+    },
+    {
+      "file": "packages/blocks/community/circle/package.json",
+      "name": "@intelblocks/block-circle"
+    },
+    {
+      "file": "packages/blocks/community/clarifai/package.json",
+      "name": "@intelblocks/block-clarifai"
+    },
+    {
+      "file": "packages/blocks/community/claude/package.json",
+      "name": "@intelblocks/block-claude"
+    },
+    {
+      "file": "packages/blocks/community/clearout/package.json",
+      "name": "@intelblocks/block-clearout"
+    },
+    {
+      "file": "packages/blocks/community/clearoutphone/package.json",
+      "name": "@intelblocks/block-clearoutphone"
+    },
+    {
+      "file": "packages/blocks/community/clicdata/package.json",
+      "name": "@intelblocks/block-clicdata"
+    },
+    {
+      "file": "packages/blocks/community/clickfunnels/package.json",
+      "name": "@intelblocks/block-clickfunnels"
+    },
+    {
+      "file": "packages/blocks/community/clicksend/package.json",
+      "name": "@intelblocks/block-clicksend"
+    },
+    {
+      "file": "packages/blocks/community/clickup/package.json",
+      "name": "@intelblocks/block-clickup"
+    },
+    {
+      "file": "packages/blocks/community/clockify/package.json",
+      "name": "@intelblocks/block-clockify"
+    },
+    {
+      "file": "packages/blocks/community/clockodo/package.json",
+      "name": "@intelblocks/block-clockodo"
+    },
+    {
+      "file": "packages/blocks/community/close/package.json",
+      "name": "@intelblocks/block-close"
+    },
+    {
+      "file": "packages/blocks/community/cloudconvert/package.json",
+      "name": "@intelblocks/block-cloudconvert"
+    },
+    {
+      "file": "packages/blocks/community/cloudinary/package.json",
+      "name": "@intelblocks/block-cloudinary"
+    },
+    {
+      "file": "packages/blocks/community/cloutly/package.json",
+      "name": "@intelblocks/block-cloutly"
+    },
+    {
+      "file": "packages/blocks/community/coda/package.json",
+      "name": "@intelblocks/block-coda"
+    },
+    {
+      "file": "packages/blocks/community/cody/package.json",
+      "name": "@intelblocks/block-cody"
+    },
+    {
+      "file": "packages/blocks/community/cognito-forms/package.json",
+      "name": "@intelblocks/block-cognito-forms"
+    },
+    {
+      "file": "packages/blocks/community/cohere/package.json",
+      "name": "@intelblocks/block-cohere"
+    },
+    {
+      "file": "packages/blocks/community/cometapi/package.json",
+      "name": "@intelblocks/block-cometapi"
+    },
+    {
+      "file": "packages/blocks/community/comfyicu/package.json",
+      "name": "@intelblocks/block-comfyicu"
+    },
+    {
+      "file": "packages/blocks/community/confluence/package.json",
+      "name": "@intelblocks/block-confluence"
+    },
+    {
+      "file": "packages/blocks/community/connectuc/package.json",
+      "name": "@intelblocks/block-connectuc"
+    },
+    {
+      "file": "packages/blocks/community/constant-contact/package.json",
+      "name": "@intelblocks/block-constant-contact"
+    },
+    {
+      "file": "packages/blocks/community/contentful/package.json",
+      "name": "@intelblocks/block-contentful"
+    },
+    {
+      "file": "packages/blocks/community/contextual-ai/package.json",
+      "name": "@intelblocks/block-contextual-ai"
+    },
+    {
+      "file": "packages/blocks/community/contiguity/package.json",
+      "name": "@intelblocks/block-contiguity"
+    },
+    {
+      "file": "packages/blocks/community/convertkit/package.json",
+      "name": "@intelblocks/block-convertkit"
+    },
+    {
+      "file": "packages/blocks/community/copper/package.json",
+      "name": "@intelblocks/block-copper"
+    },
+    {
+      "file": "packages/blocks/community/copy-ai/package.json",
+      "name": "@intelblocks/block-copy-ai"
+    },
+    {
+      "file": "packages/blocks/community/coralogix/package.json",
+      "name": "@intelblocks/block-coralogix"
+    },
+    {
+      "file": "packages/blocks/community/couchbase/package.json",
+      "name": "@intelblocks/block-couchbase"
+    },
+    {
+      "file": "packages/blocks/community/coupa/package.json",
+      "name": "@intelblocks/block-coupa"
+    },
+    {
+      "file": "packages/blocks/community/crisp/package.json",
+      "name": "@intelblocks/block-crisp"
+    },
+    {
+      "file": "packages/blocks/community/cryptolens/package.json",
+      "name": "@intelblocks/block-cryptolens"
+    },
+    {
+      "file": "packages/blocks/community/cursor/package.json",
+      "name": "@intelblocks/block-cursor"
+    },
+    {
+      "file": "packages/blocks/community/customer-io/package.json",
+      "name": "@intelblocks/block-customer-io"
+    },
+    {
+      "file": "packages/blocks/community/customgpt/package.json",
+      "name": "@intelblocks/block-customgpt"
+    },
+    {
+      "file": "packages/blocks/community/cyberark/package.json",
+      "name": "@intelblocks/block-cyberark"
+    },
+    {
+      "file": "packages/blocks/community/dappier/package.json",
+      "name": "@intelblocks/block-dappier"
+    },
+    {
+      "file": "packages/blocks/community/dashworks/package.json",
+      "name": "@intelblocks/block-dashworks"
+    },
+    {
+      "file": "packages/blocks/community/datadog/package.json",
+      "name": "@intelblocks/block-datadog"
+    },
+    {
+      "file": "packages/blocks/community/datafuel/package.json",
+      "name": "@intelblocks/block-datafuel"
+    },
+    {
+      "file": "packages/blocks/community/datocms/package.json",
+      "name": "@intelblocks/block-datocms"
+    },
+    {
+      "file": "packages/blocks/community/deepgram/package.json",
+      "name": "@intelblocks/block-deepgram"
+    },
+    {
+      "file": "packages/blocks/community/deepl/package.json",
+      "name": "@intelblocks/block-deepl"
+    },
+    {
+      "file": "packages/blocks/community/deepseek/package.json",
+      "name": "@intelblocks/block-deepseek"
+    },
+    {
+      "file": "packages/blocks/community/deftform/package.json",
+      "name": "@intelblocks/block-deftform"
+    },
+    {
+      "file": "packages/blocks/community/denser-ai/package.json",
+      "name": "@intelblocks/block-denser-ai"
+    },
+    {
+      "file": "packages/blocks/community/descript/package.json",
+      "name": "@intelblocks/block-descript"
+    },
+    {
+      "file": "packages/blocks/community/detecting-ai/package.json",
+      "name": "@intelblocks/block-detecting-ai"
+    },
+    {
+      "file": "packages/blocks/community/devin/package.json",
+      "name": "@intelblocks/block-devin"
+    },
+    {
+      "file": "packages/blocks/community/digital-ocean/package.json",
+      "name": "@intelblocks/block-digital-ocean"
+    },
+    {
+      "file": "packages/blocks/community/digital-pilot/package.json",
+      "name": "@intelblocks/block-digital-pilot"
+    },
+    {
+      "file": "packages/blocks/community/dimo/package.json",
+      "name": "@intelblocks/block-dimo"
+    },
+    {
+      "file": "packages/blocks/community/discord/package.json",
+      "name": "@intelblocks/block-discord"
+    },
+    {
+      "file": "packages/blocks/community/discourse/package.json",
+      "name": "@intelblocks/block-discourse"
+    },
+    {
+      "file": "packages/blocks/community/dittofeed/package.json",
+      "name": "@intelblocks/block-dittofeed"
+    },
+    {
+      "file": "packages/blocks/community/docsbot/package.json",
+      "name": "@intelblocks/block-docsbot"
+    },
+    {
+      "file": "packages/blocks/community/doctly/package.json",
+      "name": "@intelblocks/block-doctly"
+    },
+    {
+      "file": "packages/blocks/community/documentpro/package.json",
+      "name": "@intelblocks/block-documentpro"
+    },
+    {
+      "file": "packages/blocks/community/documerge/package.json",
+      "name": "@intelblocks/block-documerge"
+    },
+    {
+      "file": "packages/blocks/community/docusign/package.json",
+      "name": "@intelblocks/block-docusign"
+    },
+    {
+      "file": "packages/blocks/community/drip/package.json",
+      "name": "@intelblocks/block-drip"
+    },
+    {
+      "file": "packages/blocks/community/dropbox/package.json",
+      "name": "@intelblocks/block-dropbox"
+    },
+    {
+      "file": "packages/blocks/community/drupal/package.json",
+      "name": "@intelblocks/block-drupal"
+    },
+    {
+      "file": "packages/blocks/community/dub/package.json",
+      "name": "@intelblocks/block-dub"
+    },
+    {
+      "file": "packages/blocks/community/duckdb/package.json",
+      "name": "@intelblocks/block-duckdb"
+    },
+    {
+      "file": "packages/blocks/community/dumpling-ai/package.json",
+      "name": "@intelblocks/block-dumpling-ai"
+    },
+    {
+      "file": "packages/blocks/community/dust/package.json",
+      "name": "@intelblocks/block-dust"
+    },
+    {
+      "file": "packages/blocks/community/easy-peasy-ai/package.json",
+      "name": "@intelblocks/block-easy-peasy-ai"
+    },
+    {
+      "file": "packages/blocks/community/echowin/package.json",
+      "name": "@intelblocks/block-echowin"
+    },
+    {
+      "file": "packages/blocks/community/eden-ai/package.json",
+      "name": "@intelblocks/block-eden-ai"
+    },
+    {
+      "file": "packages/blocks/community/editionguard/package.json",
+      "name": "@intelblocks/block-editionguard"
+    },
+    {
+      "file": "packages/blocks/community/elastic-email/package.json",
+      "name": "@intelblocks/block-elastic-email"
+    },
+    {
+      "file": "packages/blocks/community/elevenlabs/package.json",
+      "name": "@intelblocks/block-elevenlabs"
+    },
+    {
+      "file": "packages/blocks/community/emailit/package.json",
+      "name": "@intelblocks/block-emailit"
+    },
+    {
+      "file": "packages/blocks/community/emailoctopus/package.json",
+      "name": "@intelblocks/block-emailoctopus"
+    },
+    {
+      "file": "packages/blocks/community/enrichlayer/package.json",
+      "name": "@intelblocks/block-enrichlayer"
+    },
+    {
+      "file": "packages/blocks/community/esignatures/package.json",
+      "name": "@intelblocks/block-esignatures"
+    },
+    {
+      "file": "packages/blocks/community/eth-name-service/package.json",
+      "name": "@intelblocks/block-eth-name-service"
+    },
+    {
+      "file": "packages/blocks/community/everhour/package.json",
+      "name": "@intelblocks/block-everhour"
+    },
+    {
+      "file": "packages/blocks/community/exa/package.json",
+      "name": "@intelblocks/block-exa"
+    },
+    {
+      "file": "packages/blocks/community/extracta-ai/package.json",
+      "name": "@intelblocks/block-extracta-ai"
+    },
+    {
+      "file": "packages/blocks/community/facebook-leads/package.json",
+      "name": "@intelblocks/block-facebook-leads"
+    },
+    {
+      "file": "packages/blocks/community/facebook-pages/package.json",
+      "name": "@intelblocks/block-facebook-pages"
+    },
+    {
+      "file": "packages/blocks/community/famulor/package.json",
+      "name": "@intelblocks/block-famulor"
+    },
+    {
+      "file": "packages/blocks/community/fathom-analytics/package.json",
+      "name": "@intelblocks/block-fathom-analytics"
+    },
+    {
+      "file": "packages/blocks/community/fathom/package.json",
+      "name": "@intelblocks/block-fathom"
+    },
+    {
+      "file": "packages/blocks/community/feathery/package.json",
+      "name": "@intelblocks/block-feathery"
+    },
+    {
+      "file": "packages/blocks/community/feedhive/package.json",
+      "name": "@intelblocks/block-feedhive"
+    },
+    {
+      "file": "packages/blocks/community/fellow/package.json",
+      "name": "@intelblocks/block-fellow"
+    },
+    {
+      "file": "packages/blocks/community/figma/package.json",
+      "name": "@intelblocks/block-figma"
+    },
+    {
+      "file": "packages/blocks/community/filetopdf/package.json",
+      "name": "@intelblocks/block-filetopdf"
+    },
+    {
+      "file": "packages/blocks/community/fillout-forms/package.json",
+      "name": "@intelblocks/block-fillout-forms"
+    },
+    {
+      "file": "packages/blocks/community/fireberry/package.json",
+      "name": "@intelblocks/block-fireberry"
+    },
+    {
+      "file": "packages/blocks/community/firecrawl/package.json",
+      "name": "@intelblocks/block-firecrawl"
+    },
+    {
+      "file": "packages/blocks/community/fireflies-ai/package.json",
+      "name": "@intelblocks/block-fireflies-ai"
+    },
+    {
+      "file": "packages/blocks/community/flipando/package.json",
+      "name": "@intelblocks/block-flipando"
+    },
+    {
+      "file": "packages/blocks/community/fliqr-ai/package.json",
+      "name": "@intelblocks/block-fliqr-ai"
+    },
+    {
+      "file": "packages/blocks/community/flow-helper/package.json",
+      "name": "@intelblocks/block-flow-helper"
+    },
+    {
+      "file": "packages/blocks/community/flow-parser/package.json",
+      "name": "@intelblocks/block-flow-parser"
+    },
+    {
+      "file": "packages/blocks/community/flowise/package.json",
+      "name": "@intelblocks/block-flowise"
+    },
+    {
+      "file": "packages/blocks/community/flowlu/package.json",
+      "name": "@intelblocks/block-flowlu"
+    },
+    {
+      "file": "packages/blocks/community/folk/package.json",
+      "name": "@intelblocks/block-folk"
+    },
+    {
+      "file": "packages/blocks/community/foreplay-co/package.json",
+      "name": "@intelblocks/block-foreplay-co"
+    },
+    {
+      "file": "packages/blocks/community/formbricks/package.json",
+      "name": "@intelblocks/block-formbricks"
+    },
+    {
+      "file": "packages/blocks/community/formitable/package.json",
+      "name": "@intelblocks/block-formitable"
+    },
+    {
+      "file": "packages/blocks/community/formsite/package.json",
+      "name": "@intelblocks/block-formsite"
+    },
+    {
+      "file": "packages/blocks/community/formspark/package.json",
+      "name": "@intelblocks/block-formspark"
+    },
+    {
+      "file": "packages/blocks/community/formstack/package.json",
+      "name": "@intelblocks/block-formstack"
+    },
+    {
+      "file": "packages/blocks/community/fountain/package.json",
+      "name": "@intelblocks/block-fountain"
+    },
+    {
+      "file": "packages/blocks/community/fragment/package.json",
+      "name": "@intelblocks/block-fragment"
+    },
+    {
+      "file": "packages/blocks/community/frame/package.json",
+      "name": "@intelblocks/block-frame"
+    },
+    {
+      "file": "packages/blocks/community/free-agent/package.json",
+      "name": "@intelblocks/block-free-agent"
+    },
+    {
+      "file": "packages/blocks/community/freshdesk/package.json",
+      "name": "@intelblocks/block-freshdesk"
+    },
+    {
+      "file": "packages/blocks/community/freshsales/package.json",
+      "name": "@intelblocks/block-freshsales"
+    },
+    {
+      "file": "packages/blocks/community/freshservice/package.json",
+      "name": "@intelblocks/block-freshservice"
+    },
+    {
+      "file": "packages/blocks/community/frill/package.json",
+      "name": "@intelblocks/block-frill"
+    },
+    {
+      "file": "packages/blocks/community/front/package.json",
+      "name": "@intelblocks/block-front"
+    },
+    {
+      "file": "packages/blocks/community/gameball/package.json",
+      "name": "@intelblocks/block-gameball"
+    },
+    {
+      "file": "packages/blocks/community/gamma/package.json",
+      "name": "@intelblocks/block-gamma"
+    },
+    {
+      "file": "packages/blocks/community/gcloud-pubsub/package.json",
+      "name": "@intelblocks/block-gcloud-pubsub"
+    },
+    {
+      "file": "packages/blocks/community/gender-api/package.json",
+      "name": "@intelblocks/block-gender-api"
+    },
+    {
+      "file": "packages/blocks/community/generatebanners/package.json",
+      "name": "@intelblocks/block-generatebanners"
+    },
+    {
+      "file": "packages/blocks/community/getresponse/package.json",
+      "name": "@intelblocks/block-getresponse"
+    },
+    {
+      "file": "packages/blocks/community/ghostcms/package.json",
+      "name": "@intelblocks/block-ghostcms"
+    },
+    {
+      "file": "packages/blocks/community/giftbit/package.json",
+      "name": "@intelblocks/block-giftbit"
+    },
+    {
+      "file": "packages/blocks/community/gistly/package.json",
+      "name": "@intelblocks/block-gistly"
+    },
+    {
+      "file": "packages/blocks/community/gitea/package.json",
+      "name": "@intelblocks/block-gitea"
+    },
+    {
+      "file": "packages/blocks/community/github/package.json",
+      "name": "@intelblocks/block-github"
+    },
+    {
+      "file": "packages/blocks/community/gitlab/package.json",
+      "name": "@intelblocks/block-gitlab"
+    },
+    {
+      "file": "packages/blocks/community/gladia/package.json",
+      "name": "@intelblocks/block-gladia"
+    },
+    {
+      "file": "packages/blocks/community/glide/package.json",
+      "name": "@intelblocks/block-glide"
+    },
+    {
+      "file": "packages/blocks/community/gmail/package.json",
+      "name": "@intelblocks/block-gmail"
+    },
+    {
+      "file": "packages/blocks/community/goodmem/package.json",
+      "name": "@intelblocks/block-goodmem"
+    },
+    {
+      "file": "packages/blocks/community/google-bigquery/package.json",
+      "name": "@intelblocks/block-google-bigquery"
+    },
+    {
+      "file": "packages/blocks/community/google-calendar/package.json",
+      "name": "@intelblocks/block-google-calendar"
+    },
+    {
+      "file": "packages/blocks/community/google-cloud-storage/package.json",
+      "name": "@intelblocks/block-google-cloud-storage"
+    },
+    {
+      "file": "packages/blocks/community/google-contacts/package.json",
+      "name": "@intelblocks/block-google-contacts"
+    },
+    {
+      "file": "packages/blocks/community/google-docs/package.json",
+      "name": "@intelblocks/block-google-docs"
+    },
+    {
+      "file": "packages/blocks/community/google-drive/package.json",
+      "name": "@intelblocks/block-google-drive"
+    },
+    {
+      "file": "packages/blocks/community/google-forms/package.json",
+      "name": "@intelblocks/block-google-forms"
+    },
+    {
+      "file": "packages/blocks/community/google-gemini/package.json",
+      "name": "@intelblocks/block-google-gemini"
+    },
+    {
+      "file": "packages/blocks/community/google-my-business/package.json",
+      "name": "@intelblocks/block-google-my-business"
+    },
+    {
+      "file": "packages/blocks/community/google-search-console/package.json",
+      "name": "@intelblocks/block-google-search-console"
+    },
+    {
+      "file": "packages/blocks/community/google-search/package.json",
+      "name": "@intelblocks/block-google-search"
+    },
+    {
+      "file": "packages/blocks/community/google-sheets/package.json",
+      "name": "@intelblocks/block-google-sheets"
+    },
+    {
+      "file": "packages/blocks/community/google-slides/package.json",
+      "name": "@intelblocks/block-google-slides"
+    },
+    {
+      "file": "packages/blocks/community/google-tasks/package.json",
+      "name": "@intelblocks/block-google-tasks"
+    },
+    {
+      "file": "packages/blocks/community/google-vertexai/package.json",
+      "name": "@intelblocks/block-google-vertexai"
+    },
+    {
+      "file": "packages/blocks/community/googlechat/package.json",
+      "name": "@intelblocks/block-googlechat"
+    },
+    {
+      "file": "packages/blocks/community/gorgias/package.json",
+      "name": "@intelblocks/block-gorgias"
+    },
+    {
+      "file": "packages/blocks/community/gotify/package.json",
+      "name": "@intelblocks/block-gotify"
+    },
+    {
+      "file": "packages/blocks/community/gptzero-detect-ai/package.json",
+      "name": "@intelblocks/block-gptzero-detect-ai"
+    },
+    {
+      "file": "packages/blocks/community/granola/package.json",
+      "name": "@intelblocks/block-granola"
+    },
+    {
+      "file": "packages/blocks/community/gravityforms/package.json",
+      "name": "@intelblocks/block-gravityforms"
+    },
+    {
+      "file": "packages/blocks/community/greenhouse/package.json",
+      "name": "@intelblocks/block-greenhouse"
+    },
+    {
+      "file": "packages/blocks/community/greenpt/package.json",
+      "name": "@intelblocks/block-greenpt"
+    },
+    {
+      "file": "packages/blocks/community/greip/package.json",
+      "name": "@intelblocks/block-greip"
+    },
+    {
+      "file": "packages/blocks/community/griptape/package.json",
+      "name": "@intelblocks/block-griptape"
+    },
+    {
+      "file": "packages/blocks/community/grist/package.json",
+      "name": "@intelblocks/block-grist"
+    },
+    {
+      "file": "packages/blocks/community/grok-xai/package.json",
+      "name": "@intelblocks/block-grok-xai"
+    },
+    {
+      "file": "packages/blocks/community/groq/package.json",
+      "name": "@intelblocks/block-groq"
+    },
+    {
+      "file": "packages/blocks/community/guidelite/package.json",
+      "name": "@intelblocks/block-guidelite"
+    },
+    {
+      "file": "packages/blocks/community/hackernews/package.json",
+      "name": "@intelblocks/block-hackernews"
+    },
+    {
+      "file": "packages/blocks/community/harvest/package.json",
+      "name": "@intelblocks/block-harvest"
+    },
+    {
+      "file": "packages/blocks/community/hashi-corp-vault/package.json",
+      "name": "@intelblocks/block-hashi-corp-vault"
+    },
+    {
+      "file": "packages/blocks/community/hastewire/package.json",
+      "name": "@intelblocks/block-hastewire"
+    },
+    {
+      "file": "packages/blocks/community/heartbeat/package.json",
+      "name": "@intelblocks/block-heartbeat"
+    },
+    {
+      "file": "packages/blocks/community/hedy/package.json",
+      "name": "@intelblocks/block-hedy"
+    },
+    {
+      "file": "packages/blocks/community/help-scout/package.json",
+      "name": "@intelblocks/block-help-scout"
+    },
+    {
+      "file": "packages/blocks/community/heygen/package.json",
+      "name": "@intelblocks/block-heygen"
+    },
+    {
+      "file": "packages/blocks/community/heymarket-sms/package.json",
+      "name": "@intelblocks/block-heymarket-sms"
+    },
+    {
+      "file": "packages/blocks/community/hootsuite/package.json",
+      "name": "@intelblocks/block-hootsuite"
+    },
+    {
+      "file": "packages/blocks/community/housecall-pro/package.json",
+      "name": "@intelblocks/block-housecall-pro"
+    },
+    {
+      "file": "packages/blocks/community/http-oauth2/package.json",
+      "name": "@intelblocks/block-http-oauth2"
+    },
+    {
+      "file": "packages/blocks/community/hubspot/package.json",
+      "name": "@intelblocks/block-hubspot"
+    },
+    {
+      "file": "packages/blocks/community/hugging-face/package.json",
+      "name": "@intelblocks/block-hugging-face"
+    },
+    {
+      "file": "packages/blocks/community/hume-ai/package.json",
+      "name": "@intelblocks/block-hume-ai"
+    },
+    {
+      "file": "packages/blocks/community/hunter/package.json",
+      "name": "@intelblocks/block-hunter"
+    },
+    {
+      "file": "packages/blocks/community/hystruct/package.json",
+      "name": "@intelblocks/block-hystruct"
+    },
+    {
+      "file": "packages/blocks/community/ibm-cognose/package.json",
+      "name": "@intelblocks/block-ibm-cognose"
+    },
+    {
+      "file": "packages/blocks/community/iloveapi/package.json",
+      "name": "@intelblocks/block-iloveapi"
+    },
+    {
+      "file": "packages/blocks/community/image-router/package.json",
+      "name": "@intelblocks/block-image-router"
+    },
+    {
+      "file": "packages/blocks/community/imap/package.json",
+      "name": "@intelblocks/block-imap"
+    },
+    {
+      "file": "packages/blocks/community/imeetify/package.json",
+      "name": "@intelblocks/block-imeetify"
+    },
+    {
+      "file": "packages/blocks/community/influencers-club/package.json",
+      "name": "@intelblocks/block-influencers-club"
+    },
+    {
+      "file": "packages/blocks/community/insightly/package.json",
+      "name": "@intelblocks/block-insightly"
+    },
+    {
+      "file": "packages/blocks/community/insighto-ai/package.json",
+      "name": "@intelblocks/block-insighto-ai"
+    },
+    {
+      "file": "packages/blocks/community/insta-charts/package.json",
+      "name": "@intelblocks/block-insta-charts"
+    },
+    {
+      "file": "packages/blocks/community/instabase/package.json",
+      "name": "@intelblocks/block-instabase"
+    },
+    {
+      "file": "packages/blocks/community/instagram-business/package.json",
+      "name": "@intelblocks/block-instagram-business"
+    },
+    {
+      "file": "packages/blocks/community/instantly-ai/package.json",
+      "name": "@intelblocks/block-instantly-ai"
+    },
+    {
+      "file": "packages/blocks/community/instasent/package.json",
+      "name": "@intelblocks/block-instasent"
+    },
+    {
+      "file": "packages/blocks/community/intercom/package.json",
+      "name": "@intelblocks/block-intercom"
+    },
+    {
+      "file": "packages/blocks/community/intruder/package.json",
+      "name": "@intelblocks/block-intruder"
+    },
+    {
+      "file": "packages/blocks/community/invoiceninja/package.json",
+      "name": "@intelblocks/block-invoiceninja"
+    },
+    {
+      "file": "packages/blocks/community/jina-ai/package.json",
+      "name": "@intelblocks/block-jina-ai"
+    },
+    {
+      "file": "packages/blocks/community/jira-cloud/package.json",
+      "name": "@intelblocks/block-jira-cloud"
+    },
+    {
+      "file": "packages/blocks/community/jira-data-center/package.json",
+      "name": "@intelblocks/block-jira-data-center"
+    },
+    {
+      "file": "packages/blocks/community/jogg-ai/package.json",
+      "name": "@intelblocks/block-jogg-ai"
+    },
+    {
+      "file": "packages/blocks/community/jotform/package.json",
+      "name": "@intelblocks/block-jotform"
+    },
+    {
+      "file": "packages/blocks/community/json/package.json",
+      "name": "@intelblocks/block-json"
+    },
+    {
+      "file": "packages/blocks/community/jungle-grid/package.json",
+      "name": "@intelblocks/block-jungle-grid"
+    },
+    {
+      "file": "packages/blocks/community/just-invoice/package.json",
+      "name": "@intelblocks/block-just-invoice"
+    },
+    {
+      "file": "packages/blocks/community/kallabot-ai/package.json",
+      "name": "@intelblocks/block-kallabot-ai"
+    },
+    {
+      "file": "packages/blocks/community/kapso/package.json",
+      "name": "@intelblocks/block-kapso"
+    },
+    {
+      "file": "packages/blocks/community/katana/package.json",
+      "name": "@intelblocks/block-katana"
+    },
+    {
+      "file": "packages/blocks/community/kimai/package.json",
+      "name": "@intelblocks/block-kimai"
+    },
+    {
+      "file": "packages/blocks/community/kissflow/package.json",
+      "name": "@intelblocks/block-kissflow"
+    },
+    {
+      "file": "packages/blocks/community/kizeo-forms/package.json",
+      "name": "@intelblocks/block-kizeo-forms"
+    },
+    {
+      "file": "packages/blocks/community/klaviyo/package.json",
+      "name": "@intelblocks/block-klaviyo"
+    },
+    {
+      "file": "packages/blocks/community/klenty/package.json",
+      "name": "@intelblocks/block-klenty"
+    },
+    {
+      "file": "packages/blocks/community/klipy/package.json",
+      "name": "@intelblocks/block-klipy"
+    },
+    {
+      "file": "packages/blocks/community/knack/package.json",
+      "name": "@intelblocks/block-knack"
+    },
+    {
+      "file": "packages/blocks/community/knock/package.json",
+      "name": "@intelblocks/block-knock"
+    },
+    {
+      "file": "packages/blocks/community/ko-fi/package.json",
+      "name": "@intelblocks/block-ko-fi"
+    },
+    {
+      "file": "packages/blocks/community/kommo/package.json",
+      "name": "@intelblocks/block-kommo"
+    },
+    {
+      "file": "packages/blocks/community/krisp-call/package.json",
+      "name": "@intelblocks/block-krisp-call"
+    },
+    {
+      "file": "packages/blocks/community/kudosity/package.json",
+      "name": "@intelblocks/block-kudosity"
+    },
+    {
+      "file": "packages/blocks/community/kustomer/package.json",
+      "name": "@intelblocks/block-kustomer"
+    },
+    {
+      "file": "packages/blocks/community/lead-connector/package.json",
+      "name": "@intelblocks/block-lead-connector"
+    },
+    {
+      "file": "packages/blocks/community/leap-ai/package.json",
+      "name": "@intelblocks/block-leap-ai"
+    },
+    {
+      "file": "packages/blocks/community/leexi/package.json",
+      "name": "@intelblocks/block-leexi"
+    },
+    {
+      "file": "packages/blocks/community/lemlist/package.json",
+      "name": "@intelblocks/block-lemlist"
+    },
+    {
+      "file": "packages/blocks/community/lemon-squeezy/package.json",
+      "name": "@intelblocks/block-lemon-squeezy"
+    },
+    {
+      "file": "packages/blocks/community/lets-calendar/package.json",
+      "name": "@intelblocks/block-lets-calendar"
+    },
+    {
+      "file": "packages/blocks/community/letta/package.json",
+      "name": "@intelblocks/block-letta"
+    },
+    {
+      "file": "packages/blocks/community/lever/package.json",
+      "name": "@intelblocks/block-lever"
+    },
+    {
+      "file": "packages/blocks/community/lightfunnels/package.json",
+      "name": "@intelblocks/block-lightfunnels"
+    },
+    {
+      "file": "packages/blocks/community/line/package.json",
+      "name": "@intelblocks/block-line"
+    },
+    {
+      "file": "packages/blocks/community/linear/package.json",
+      "name": "@intelblocks/block-linear"
+    },
+    {
+      "file": "packages/blocks/community/linka/package.json",
+      "name": "@intelblocks/block-linka"
+    },
+    {
+      "file": "packages/blocks/community/linkedin/package.json",
+      "name": "@intelblocks/block-linkedin"
+    },
+    {
+      "file": "packages/blocks/community/linkup/package.json",
+      "name": "@intelblocks/block-linkup"
+    },
+    {
+      "file": "packages/blocks/community/livesession/package.json",
+      "name": "@intelblocks/block-livesession"
+    },
+    {
+      "file": "packages/blocks/community/llmrails/package.json",
+      "name": "@intelblocks/block-llmrails"
+    },
+    {
+      "file": "packages/blocks/community/lobstermail/package.json",
+      "name": "@intelblocks/block-lobstermail"
+    },
+    {
+      "file": "packages/blocks/community/localai/package.json",
+      "name": "@intelblocks/block-localai"
+    },
+    {
+      "file": "packages/blocks/community/lofty/package.json",
+      "name": "@intelblocks/block-lofty"
+    },
+    {
+      "file": "packages/blocks/community/logrocket/package.json",
+      "name": "@intelblocks/block-logrocket"
+    },
+    {
+      "file": "packages/blocks/community/logsnag/package.json",
+      "name": "@intelblocks/block-logsnag"
+    },
+    {
+      "file": "packages/blocks/community/lokalise/package.json",
+      "name": "@intelblocks/block-lokalise"
+    },
+    {
+      "file": "packages/blocks/community/loops/package.json",
+      "name": "@intelblocks/block-loops"
+    },
+    {
+      "file": "packages/blocks/community/lucidya/package.json",
+      "name": "@intelblocks/block-lucidya"
+    },
+    {
+      "file": "packages/blocks/community/lusha/package.json",
+      "name": "@intelblocks/block-lusha"
+    },
+    {
+      "file": "packages/blocks/community/luxury-presence/package.json",
+      "name": "@intelblocks/block-luxury-presence"
+    },
+    {
+      "file": "packages/blocks/community/magical-api/package.json",
+      "name": "@intelblocks/block-magical-api"
+    },
+    {
+      "file": "packages/blocks/community/magicslides/package.json",
+      "name": "@intelblocks/block-magicslides"
+    },
+    {
+      "file": "packages/blocks/community/mailchain/package.json",
+      "name": "@intelblocks/block-mailchain"
+    },
+    {
+      "file": "packages/blocks/community/mailchimp/package.json",
+      "name": "@intelblocks/block-mailchimp"
+    },
+    {
+      "file": "packages/blocks/community/mailer-lite/package.json",
+      "name": "@intelblocks/block-mailer-lite"
+    },
+    {
+      "file": "packages/blocks/community/mailercheck/package.json",
+      "name": "@intelblocks/block-mailercheck"
+    },
+    {
+      "file": "packages/blocks/community/maileroo/package.json",
+      "name": "@intelblocks/block-maileroo"
+    },
+    {
+      "file": "packages/blocks/community/mailgun/package.json",
+      "name": "@intelblocks/block-mailgun"
+    },
+    {
+      "file": "packages/blocks/community/mailjet/package.json",
+      "name": "@intelblocks/block-mailjet"
+    },
+    {
+      "file": "packages/blocks/community/manus/package.json",
+      "name": "@intelblocks/block-manus"
+    },
+    {
+      "file": "packages/blocks/community/manychat/package.json",
+      "name": "@intelblocks/block-manychat"
+    },
+    {
+      "file": "packages/blocks/community/mastodon/package.json",
+      "name": "@intelblocks/block-mastodon"
+    },
+    {
+      "file": "packages/blocks/community/matomo/package.json",
+      "name": "@intelblocks/block-matomo"
+    },
+    {
+      "file": "packages/blocks/community/matrix/package.json",
+      "name": "@intelblocks/block-matrix"
+    },
+    {
+      "file": "packages/blocks/community/mattermost/package.json",
+      "name": "@intelblocks/block-mattermost"
+    },
+    {
+      "file": "packages/blocks/community/mautic/package.json",
+      "name": "@intelblocks/block-mautic"
+    },
+    {
+      "file": "packages/blocks/community/mcp/package.json",
+      "name": "@intelblocks/block-mcp"
+    },
+    {
+      "file": "packages/blocks/community/medullar/package.json",
+      "name": "@intelblocks/block-medullar"
+    },
+    {
+      "file": "packages/blocks/community/meetgeek-ai/package.json",
+      "name": "@intelblocks/block-meetgeek-ai"
+    },
+    {
+      "file": "packages/blocks/community/meistertask/package.json",
+      "name": "@intelblocks/block-meistertask"
+    },
+    {
+      "file": "packages/blocks/community/mem/package.json",
+      "name": "@intelblocks/block-mem"
+    },
+    {
+      "file": "packages/blocks/community/mempool-space/package.json",
+      "name": "@intelblocks/block-mempool-space"
+    },
+    {
+      "file": "packages/blocks/community/messagebird/package.json",
+      "name": "@intelblocks/block-messagebird"
+    },
+    {
+      "file": "packages/blocks/community/metabase/package.json",
+      "name": "@intelblocks/block-metabase"
+    },
+    {
+      "file": "packages/blocks/community/metatext/package.json",
+      "name": "@intelblocks/block-metatext"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-365-people/package.json",
+      "name": "@intelblocks/block-microsoft-365-people"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-365-planner/package.json",
+      "name": "@intelblocks/block-microsoft-365-planner"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-copilot/package.json",
+      "name": "@intelblocks/block-microsoft-copilot"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-dynamics-365-business-central/package.json",
+      "name": "@intelblocks/block-microsoft-dynamics-365-business-central"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-dynamics-crm/package.json",
+      "name": "@intelblocks/block-microsoft-dynamics-crm"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-excel-365/package.json",
+      "name": "@intelblocks/block-microsoft-excel-365"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-onedrive/package.json",
+      "name": "@intelblocks/block-microsoft-onedrive"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-onenote/package.json",
+      "name": "@intelblocks/block-microsoft-onenote"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-outlook-calendar/package.json",
+      "name": "@intelblocks/block-microsoft-outlook-calendar"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-outlook/package.json",
+      "name": "@intelblocks/block-microsoft-outlook"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-power-bi/package.json",
+      "name": "@intelblocks/block-microsoft-power-bi"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-sharepoint/package.json",
+      "name": "@intelblocks/block-microsoft-sharepoint"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-teams/package.json",
+      "name": "@intelblocks/block-microsoft-teams"
+    },
+    {
+      "file": "packages/blocks/community/microsoft-todo/package.json",
+      "name": "@intelblocks/block-microsoft-todo"
+    },
+    {
+      "file": "packages/blocks/community/millionverifier/package.json",
+      "name": "@intelblocks/block-millionverifier"
+    },
+    {
+      "file": "packages/blocks/community/mind-studio/package.json",
+      "name": "@intelblocks/block-mind-studio"
+    },
+    {
+      "file": "packages/blocks/community/mindee/package.json",
+      "name": "@intelblocks/block-mindee"
+    },
+    {
+      "file": "packages/blocks/community/missive/package.json",
+      "name": "@intelblocks/block-missive"
+    },
+    {
+      "file": "packages/blocks/community/mistral-ai/package.json",
+      "name": "@intelblocks/block-mistral-ai"
+    },
+    {
+      "file": "packages/blocks/community/mixmax/package.json",
+      "name": "@intelblocks/block-mixmax"
+    },
+    {
+      "file": "packages/blocks/community/mixpanel/package.json",
+      "name": "@intelblocks/block-mixpanel"
+    },
+    {
+      "file": "packages/blocks/community/modelslab/package.json",
+      "name": "@intelblocks/block-modelslab"
+    },
+    {
+      "file": "packages/blocks/community/mollie/package.json",
+      "name": "@intelblocks/block-mollie"
+    },
+    {
+      "file": "packages/blocks/community/monday/package.json",
+      "name": "@intelblocks/block-monday"
+    },
+    {
+      "file": "packages/blocks/community/mongodb/package.json",
+      "name": "@intelblocks/block-mongodb"
+    },
+    {
+      "file": "packages/blocks/community/moonclerk/package.json",
+      "name": "@intelblocks/block-moonclerk"
+    },
+    {
+      "file": "packages/blocks/community/mooninvoice/package.json",
+      "name": "@intelblocks/block-mooninvoice"
+    },
+    {
+      "file": "packages/blocks/community/motion/package.json",
+      "name": "@intelblocks/block-motion"
+    },
+    {
+      "file": "packages/blocks/community/motiontools/package.json",
+      "name": "@intelblocks/block-motiontools"
+    },
+    {
+      "file": "packages/blocks/community/moveo-ai/package.json",
+      "name": "@intelblocks/block-moveo-ai"
+    },
+    {
+      "file": "packages/blocks/community/moxie-crm/package.json",
+      "name": "@intelblocks/block-moxie-crm"
+    },
+    {
+      "file": "packages/blocks/community/muna-ai/package.json",
+      "name": "@intelblocks/block-muna-ai"
+    },
+    {
+      "file": "packages/blocks/community/murf-api/package.json",
+      "name": "@intelblocks/block-murf-api"
+    },
+    {
+      "file": "packages/blocks/community/mycase-piece/package.json",
+      "name": "@intelblocks/block-mycase-piece"
+    },
+    {
+      "file": "packages/blocks/community/mysendingbox/package.json",
+      "name": "@intelblocks/block-mysendingbox"
+    },
+    {
+      "file": "packages/blocks/community/mysql/package.json",
+      "name": "@intelblocks/block-mysql"
+    },
+    {
+      "file": "packages/blocks/community/netlify/package.json",
+      "name": "@intelblocks/block-netlify"
+    },
+    {
+      "file": "packages/blocks/community/netsuite/package.json",
+      "name": "@intelblocks/block-netsuite"
+    },
+    {
+      "file": "packages/blocks/community/neverbounce/package.json",
+      "name": "@intelblocks/block-neverbounce"
+    },
+    {
+      "file": "packages/blocks/community/nifty/package.json",
+      "name": "@intelblocks/block-nifty"
+    },
+    {
+      "file": "packages/blocks/community/ninjapipe/package.json",
+      "name": "@intelblocks/block-ninjapipe"
+    },
+    {
+      "file": "packages/blocks/community/ninox/package.json",
+      "name": "@intelblocks/block-ninox"
+    },
+    {
+      "file": "packages/blocks/community/nocodb/package.json",
+      "name": "@intelblocks/block-nocodb"
+    },
+    {
+      "file": "packages/blocks/community/notion/package.json",
+      "name": "@intelblocks/block-notion"
+    },
+    {
+      "file": "packages/blocks/community/ntfy/package.json",
+      "name": "@intelblocks/block-ntfy"
+    },
+    {
+      "file": "packages/blocks/community/nuelink/package.json",
+      "name": "@intelblocks/block-nuelink"
+    },
+    {
+      "file": "packages/blocks/community/octopush-sms/package.json",
+      "name": "@intelblocks/block-octopush-sms"
+    },
+    {
+      "file": "packages/blocks/community/odoo/package.json",
+      "name": "@intelblocks/block-odoo"
+    },
+    {
+      "file": "packages/blocks/community/okta/package.json",
+      "name": "@intelblocks/block-okta"
+    },
+    {
+      "file": "packages/blocks/community/omni-co/package.json",
+      "name": "@intelblocks/block-omni-co"
+    },
+    {
+      "file": "packages/blocks/community/omnihr/package.json",
+      "name": "@intelblocks/block-omnihr"
+    },
+    {
+      "file": "packages/blocks/community/omnisend/package.json",
+      "name": "@intelblocks/block-omnisend"
+    },
+    {
+      "file": "packages/blocks/community/oncehub/package.json",
+      "name": "@intelblocks/block-oncehub"
+    },
+    {
+      "file": "packages/blocks/community/oneclickimpact/package.json",
+      "name": "@intelblocks/block-oneclickimpact"
+    },
+    {
+      "file": "packages/blocks/community/onfleet/package.json",
+      "name": "@intelblocks/block-onfleet"
+    },
+    {
+      "file": "packages/blocks/community/open-phone/package.json",
+      "name": "@intelblocks/block-open-phone"
+    },
+    {
+      "file": "packages/blocks/community/open-router/package.json",
+      "name": "@intelblocks/block-open-router"
+    },
+    {
+      "file": "packages/blocks/community/openai/package.json",
+      "name": "@intelblocks/block-openai"
+    },
+    {
+      "file": "packages/blocks/community/openmic-ai/package.json",
+      "name": "@intelblocks/block-openmic-ai"
+    },
+    {
+      "file": "packages/blocks/community/opnform/package.json",
+      "name": "@intelblocks/block-opnform"
+    },
+    {
+      "file": "packages/blocks/community/opportify/package.json",
+      "name": "@intelblocks/block-opportify"
+    },
+    {
+      "file": "packages/blocks/community/oracle-database/package.json",
+      "name": "@intelblocks/block-oracle-database"
+    },
+    {
+      "file": "packages/blocks/community/oracle-fusion-cloud-erp/package.json",
+      "name": "@intelblocks/block-oracle-fusion-cloud-erp"
+    },
+    {
+      "file": "packages/blocks/community/orimon/package.json",
+      "name": "@intelblocks/block-orimon"
+    },
+    {
+      "file": "packages/blocks/community/outseta/package.json",
+      "name": "@intelblocks/block-outseta"
+    },
+    {
+      "file": "packages/blocks/community/paddle/package.json",
+      "name": "@intelblocks/block-paddle"
+    },
+    {
+      "file": "packages/blocks/community/pagerduty/package.json",
+      "name": "@intelblocks/block-pagerduty"
+    },
+    {
+      "file": "packages/blocks/community/pandadoc/package.json",
+      "name": "@intelblocks/block-pandadoc"
+    },
+    {
+      "file": "packages/blocks/community/paperform/package.json",
+      "name": "@intelblocks/block-paperform"
+    },
+    {
+      "file": "packages/blocks/community/parallel/package.json",
+      "name": "@intelblocks/block-parallel"
+    },
+    {
+      "file": "packages/blocks/community/parser-expert/package.json",
+      "name": "@intelblocks/block-parser-expert"
+    },
+    {
+      "file": "packages/blocks/community/parseur/package.json",
+      "name": "@intelblocks/block-parseur"
+    },
+    {
+      "file": "packages/blocks/community/pastebin/package.json",
+      "name": "@intelblocks/block-pastebin"
+    },
+    {
+      "file": "packages/blocks/community/pastefy/package.json",
+      "name": "@intelblocks/block-pastefy"
+    },
+    {
+      "file": "packages/blocks/community/paywhirl/package.json",
+      "name": "@intelblocks/block-paywhirl"
+    },
+    {
+      "file": "packages/blocks/community/pdf-co/package.json",
+      "name": "@intelblocks/block-pdf-co"
+    },
+    {
+      "file": "packages/blocks/community/pdf4me/package.json",
+      "name": "@intelblocks/block-pdf4me"
+    },
+    {
+      "file": "packages/blocks/community/pdfcrowd/package.json",
+      "name": "@intelblocks/block-pdfcrowd"
+    },
+    {
+      "file": "packages/blocks/community/pdfmonkey/package.json",
+      "name": "@intelblocks/block-pdfmonkey"
+    },
+    {
+      "file": "packages/blocks/community/peekshot/package.json",
+      "name": "@intelblocks/block-peekshot"
+    },
+    {
+      "file": "packages/blocks/community/pendo/package.json",
+      "name": "@intelblocks/block-pendo"
+    },
+    {
+      "file": "packages/blocks/community/perplexity-ai/package.json",
+      "name": "@intelblocks/block-perplexity-ai"
+    },
+    {
+      "file": "packages/blocks/community/personal-ai/package.json",
+      "name": "@intelblocks/block-personal-ai"
+    },
+    {
+      "file": "packages/blocks/community/phantombuster/package.json",
+      "name": "@intelblocks/block-phantombuster"
+    },
+    {
+      "file": "packages/blocks/community/phone-validator/package.json",
+      "name": "@intelblocks/block-phone-validator"
+    },
+    {
+      "file": "packages/blocks/community/photoroom/package.json",
+      "name": "@intelblocks/block-photoroom"
+    },
+    {
+      "file": "packages/blocks/community/pinch-payments/package.json",
+      "name": "@intelblocks/block-pinch-payments"
+    },
+    {
+      "file": "packages/blocks/community/pinecone/package.json",
+      "name": "@intelblocks/block-pinecone"
+    },
+    {
+      "file": "packages/blocks/community/pinterest/package.json",
+      "name": "@intelblocks/block-pinterest"
+    },
+    {
+      "file": "packages/blocks/community/pipedrive/package.json",
+      "name": "@intelblocks/block-pipedrive"
+    },
+    {
+      "file": "packages/blocks/community/placid/package.json",
+      "name": "@intelblocks/block-placid"
+    },
+    {
+      "file": "packages/blocks/community/plausible/package.json",
+      "name": "@intelblocks/block-plausible"
+    },
+    {
+      "file": "packages/blocks/community/plunk/package.json",
+      "name": "@intelblocks/block-plunk"
+    },
+    {
+      "file": "packages/blocks/community/pocketbase/package.json",
+      "name": "@intelblocks/block-pocketbase"
+    },
+    {
+      "file": "packages/blocks/community/podio/package.json",
+      "name": "@intelblocks/block-podio"
+    },
+    {
+      "file": "packages/blocks/community/pollybot-ai/package.json",
+      "name": "@intelblocks/block-pollybot-ai"
+    },
+    {
+      "file": "packages/blocks/community/poper/package.json",
+      "name": "@intelblocks/block-poper"
+    },
+    {
+      "file": "packages/blocks/community/postgres/package.json",
+      "name": "@intelblocks/block-postgres"
+    },
+    {
+      "file": "packages/blocks/community/posthog/package.json",
+      "name": "@intelblocks/block-posthog"
+    },
+    {
+      "file": "packages/blocks/community/postiz/package.json",
+      "name": "@intelblocks/block-postiz"
+    },
+    {
+      "file": "packages/blocks/community/postmark/package.json",
+      "name": "@intelblocks/block-postmark"
+    },
+    {
+      "file": "packages/blocks/community/predict-leads/package.json",
+      "name": "@intelblocks/block-predict-leads"
+    },
+    {
+      "file": "packages/blocks/community/predis-ai/package.json",
+      "name": "@intelblocks/block-predis-ai"
+    },
+    {
+      "file": "packages/blocks/community/presentation/package.json",
+      "name": "@intelblocks/block-presentation"
+    },
+    {
+      "file": "packages/blocks/community/productboard/package.json",
+      "name": "@intelblocks/block-productboard"
+    },
+    {
+      "file": "packages/blocks/community/promotekit/package.json",
+      "name": "@intelblocks/block-promotekit"
+    },
+    {
+      "file": "packages/blocks/community/prompthub/package.json",
+      "name": "@intelblocks/block-prompthub"
+    },
+    {
+      "file": "packages/blocks/community/promptmate/package.json",
+      "name": "@intelblocks/block-promptmate"
+    },
+    {
+      "file": "packages/blocks/community/provenexpert/package.json",
+      "name": "@intelblocks/block-provenexpert"
+    },
+    {
+      "file": "packages/blocks/community/proxycurl/package.json",
+      "name": "@intelblocks/block-proxycurl"
+    },
+    {
+      "file": "packages/blocks/community/pubrio/package.json",
+      "name": "@intelblocks/block-pubrio"
+    },
+    {
+      "file": "packages/blocks/community/pushbullet/package.json",
+      "name": "@intelblocks/block-pushbullet"
+    },
+    {
+      "file": "packages/blocks/community/pushover/package.json",
+      "name": "@intelblocks/block-pushover"
+    },
+    {
+      "file": "packages/blocks/community/pylon/package.json",
+      "name": "@intelblocks/block-pylon"
+    },
+    {
+      "file": "packages/blocks/community/qawafel/package.json",
+      "name": "@intelblocks/block-qawafel"
+    },
+    {
+      "file": "packages/blocks/community/qdrant/package.json",
+      "name": "@intelblocks/block-qdrant"
+    },
+    {
+      "file": "packages/blocks/community/quaderno/package.json",
+      "name": "@intelblocks/block-quaderno"
+    },
+    {
+      "file": "packages/blocks/community/queue/package.json",
+      "name": "@intelblocks/block-queue"
+    },
+    {
+      "file": "packages/blocks/community/quickbase/package.json",
+      "name": "@intelblocks/block-quickbase"
+    },
+    {
+      "file": "packages/blocks/community/quickbooks/package.json",
+      "name": "@intelblocks/block-quickbooks"
+    },
+    {
+      "file": "packages/blocks/community/quickzu/package.json",
+      "name": "@intelblocks/block-quickzu"
+    },
+    {
+      "file": "packages/blocks/community/quizell/package.json",
+      "name": "@intelblocks/block-quizell"
+    },
+    {
+      "file": "packages/blocks/community/qwilr/package.json",
+      "name": "@intelblocks/block-qwilr"
+    },
+    {
+      "file": "packages/blocks/community/rabbitmq/package.json",
+      "name": "@intelblocks/block-rabbitmq"
+    },
+    {
+      "file": "packages/blocks/community/raia-ai/package.json",
+      "name": "@intelblocks/block-raia-ai"
+    },
+    {
+      "file": "packages/blocks/community/raindrop/package.json",
+      "name": "@intelblocks/block-raindrop"
+    },
+    {
+      "file": "packages/blocks/community/rapidtext-ai/package.json",
+      "name": "@intelblocks/block-rapidtext-ai"
+    },
+    {
+      "file": "packages/blocks/community/razorpay/package.json",
+      "name": "@intelblocks/block-razorpay"
+    },
+    {
+      "file": "packages/blocks/community/reachinbox/package.json",
+      "name": "@intelblocks/block-reachinbox"
+    },
+    {
+      "file": "packages/blocks/community/readwise/package.json",
+      "name": "@intelblocks/block-readwise"
+    },
+    {
+      "file": "packages/blocks/community/recall-ai/package.json",
+      "name": "@intelblocks/block-recall-ai"
+    },
+    {
+      "file": "packages/blocks/community/recurly/package.json",
+      "name": "@intelblocks/block-recurly"
+    },
+    {
+      "file": "packages/blocks/community/reddit/package.json",
+      "name": "@intelblocks/block-reddit"
+    },
+    {
+      "file": "packages/blocks/community/rendex/package.json",
+      "name": "@intelblocks/block-rendex"
+    },
+    {
+      "file": "packages/blocks/community/reoon-verifier/package.json",
+      "name": "@intelblocks/block-reoon-verifier"
+    },
+    {
+      "file": "packages/blocks/community/reply-io/package.json",
+      "name": "@intelblocks/block-reply-io"
+    },
+    {
+      "file": "packages/blocks/community/resend/package.json",
+      "name": "@intelblocks/block-resend"
+    },
+    {
+      "file": "packages/blocks/community/respaid/package.json",
+      "name": "@intelblocks/block-respaid"
+    },
+    {
+      "file": "packages/blocks/community/respond-io/package.json",
+      "name": "@intelblocks/block-respond-io"
+    },
+    {
+      "file": "packages/blocks/community/retable/package.json",
+      "name": "@intelblocks/block-retable"
+    },
+    {
+      "file": "packages/blocks/community/retell-ai/package.json",
+      "name": "@intelblocks/block-retell-ai"
+    },
+    {
+      "file": "packages/blocks/community/retune/package.json",
+      "name": "@intelblocks/block-retune"
+    },
+    {
+      "file": "packages/blocks/community/returning-ai/package.json",
+      "name": "@intelblocks/block-returning-ai"
+    },
+    {
+      "file": "packages/blocks/community/robolly/package.json",
+      "name": "@intelblocks/block-robolly"
+    },
+    {
+      "file": "packages/blocks/community/roe-ai/package.json",
+      "name": "@intelblocks/block-roe-ai"
+    },
+    {
+      "file": "packages/blocks/community/rss/package.json",
+      "name": "@intelblocks/block-rss"
+    },
+    {
+      "file": "packages/blocks/community/runware/package.json",
+      "name": "@intelblocks/block-runware"
+    },
+    {
+      "file": "packages/blocks/community/runway/package.json",
+      "name": "@intelblocks/block-runway"
+    },
+    {
+      "file": "packages/blocks/community/saastic/package.json",
+      "name": "@intelblocks/block-saastic"
+    },
+    {
+      "file": "packages/blocks/community/saleor/package.json",
+      "name": "@intelblocks/block-saleor"
+    },
+    {
+      "file": "packages/blocks/community/salesforce/package.json",
+      "name": "@intelblocks/block-salesforce"
+    },
+    {
+      "file": "packages/blocks/community/salesloft/package.json",
+      "name": "@intelblocks/block-salesloft"
+    },
+    {
+      "file": "packages/blocks/community/sap-ariba/package.json",
+      "name": "@intelblocks/block-sap-ariba"
+    },
+    {
+      "file": "packages/blocks/community/sardis/package.json",
+      "name": "@intelblocks/block-sardis"
+    },
+    {
+      "file": "packages/blocks/community/savvycal/package.json",
+      "name": "@intelblocks/block-savvycal"
+    },
+    {
+      "file": "packages/blocks/community/scenario/package.json",
+      "name": "@intelblocks/block-scenario"
+    },
+    {
+      "file": "packages/blocks/community/scrapegrapghai/package.json",
+      "name": "@intelblocks/block-scrapegrapghai"
+    },
+    {
+      "file": "packages/blocks/community/scrapeless/package.json",
+      "name": "@intelblocks/block-scrapeless"
+    },
+    {
+      "file": "packages/blocks/community/seek-table/package.json",
+      "name": "@intelblocks/block-seek-table"
+    },
+    {
+      "file": "packages/blocks/community/segment/package.json",
+      "name": "@intelblocks/block-segment"
+    },
+    {
+      "file": "packages/blocks/community/send-it/package.json",
+      "name": "@intelblocks/block-send-it"
+    },
+    {
+      "file": "packages/blocks/community/sender/package.json",
+      "name": "@intelblocks/block-sender"
+    },
+    {
+      "file": "packages/blocks/community/sendfox/package.json",
+      "name": "@intelblocks/block-sendfox"
+    },
+    {
+      "file": "packages/blocks/community/sendgrid/package.json",
+      "name": "@intelblocks/block-sendgrid"
+    },
+    {
+      "file": "packages/blocks/community/sendinblue/package.json",
+      "name": "@intelblocks/block-sendinblue"
+    },
+    {
+      "file": "packages/blocks/community/sendpulse/package.json",
+      "name": "@intelblocks/block-sendpulse"
+    },
+    {
+      "file": "packages/blocks/community/sendr/package.json",
+      "name": "@intelblocks/block-sendr"
+    },
+    {
+      "file": "packages/blocks/community/sendy/package.json",
+      "name": "@intelblocks/block-sendy"
+    },
+    {
+      "file": "packages/blocks/community/senja/package.json",
+      "name": "@intelblocks/block-senja"
+    },
+    {
+      "file": "packages/blocks/community/serp-api/package.json",
+      "name": "@intelblocks/block-serp-api"
+    },
+    {
+      "file": "packages/blocks/community/serpstat/package.json",
+      "name": "@intelblocks/block-serpstat"
+    },
+    {
+      "file": "packages/blocks/community/service-now/package.json",
+      "name": "@intelblocks/block-service-now"
+    },
+    {
+      "file": "packages/blocks/community/sessions-us/package.json",
+      "name": "@intelblocks/block-sessions-us"
+    },
+    {
+      "file": "packages/blocks/community/seven/package.json",
+      "name": "@intelblocks/block-seven"
+    },
+    {
+      "file": "packages/blocks/community/shippo/package.json",
+      "name": "@intelblocks/block-shippo"
+    },
+    {
+      "file": "packages/blocks/community/shopify/package.json",
+      "name": "@intelblocks/block-shopify"
+    },
+    {
+      "file": "packages/blocks/community/short-io/package.json",
+      "name": "@intelblocks/block-short-io"
+    },
+    {
+      "file": "packages/blocks/community/sign-now/package.json",
+      "name": "@intelblocks/block-sign-now"
+    },
+    {
+      "file": "packages/blocks/community/signrequest/package.json",
+      "name": "@intelblocks/block-signrequest"
+    },
+    {
+      "file": "packages/blocks/community/simplepdf/package.json",
+      "name": "@intelblocks/block-simplepdf"
+    },
+    {
+      "file": "packages/blocks/community/simpliroute/package.json",
+      "name": "@intelblocks/block-simpliroute"
+    },
+    {
+      "file": "packages/blocks/community/simplybookme/package.json",
+      "name": "@intelblocks/block-simplybookme"
+    },
+    {
+      "file": "packages/blocks/community/simplyprint/package.json",
+      "name": "@intelblocks/block-simplyprint"
+    },
+    {
+      "file": "packages/blocks/community/sitespeakai/package.json",
+      "name": "@intelblocks/block-sitespeakai"
+    },
+    {
+      "file": "packages/blocks/community/skyprep/package.json",
+      "name": "@intelblocks/block-skyprep"
+    },
+    {
+      "file": "packages/blocks/community/skyvern/package.json",
+      "name": "@intelblocks/block-skyvern"
+    },
+    {
+      "file": "packages/blocks/community/slack/package.json",
+      "name": "@intelblocks/block-slack"
+    },
+    {
+      "file": "packages/blocks/community/slashed/package.json",
+      "name": "@intelblocks/block-slashed"
+    },
+    {
+      "file": "packages/blocks/community/slidespeak/package.json",
+      "name": "@intelblocks/block-slidespeak"
+    },
+    {
+      "file": "packages/blocks/community/slite/package.json",
+      "name": "@intelblocks/block-slite"
+    },
+    {
+      "file": "packages/blocks/community/smaily/package.json",
+      "name": "@intelblocks/block-smaily"
+    },
+    {
+      "file": "packages/blocks/community/smartlead/package.json",
+      "name": "@intelblocks/block-smartlead"
+    },
+    {
+      "file": "packages/blocks/community/smartsheet/package.json",
+      "name": "@intelblocks/block-smartsheet"
+    },
+    {
+      "file": "packages/blocks/community/smartsuite/package.json",
+      "name": "@intelblocks/block-smartsuite"
+    },
+    {
+      "file": "packages/blocks/community/smoove/package.json",
+      "name": "@intelblocks/block-smoove"
+    },
+    {
+      "file": "packages/blocks/community/smsmode/package.json",
+      "name": "@intelblocks/block-smsmode"
+    },
+    {
+      "file": "packages/blocks/community/snowflake/package.json",
+      "name": "@intelblocks/block-snowflake"
+    },
+    {
+      "file": "packages/blocks/community/soap/package.json",
+      "name": "@intelblocks/block-soap"
+    },
+    {
+      "file": "packages/blocks/community/socialkit/package.json",
+      "name": "@intelblocks/block-socialkit"
+    },
+    {
+      "file": "packages/blocks/community/softr/package.json",
+      "name": "@intelblocks/block-softr"
+    },
+    {
+      "file": "packages/blocks/community/sperse/package.json",
+      "name": "@intelblocks/block-sperse"
+    },
+    {
+      "file": "packages/blocks/community/splitwise/package.json",
+      "name": "@intelblocks/block-splitwise"
+    },
+    {
+      "file": "packages/blocks/community/spotify/package.json",
+      "name": "@intelblocks/block-spotify"
+    },
+    {
+      "file": "packages/blocks/community/square/package.json",
+      "name": "@intelblocks/block-square"
+    },
+    {
+      "file": "packages/blocks/community/stability-ai/package.json",
+      "name": "@intelblocks/block-stability-ai"
+    },
+    {
+      "file": "packages/blocks/community/stable-diffusion-webui/package.json",
+      "name": "@intelblocks/block-stable-diffusion-webui"
+    },
+    {
+      "file": "packages/blocks/community/straico/package.json",
+      "name": "@intelblocks/block-straico"
+    },
+    {
+      "file": "packages/blocks/community/strale/package.json",
+      "name": "@intelblocks/block-strale"
+    },
+    {
+      "file": "packages/blocks/community/streak/package.json",
+      "name": "@intelblocks/block-streak"
+    },
+    {
+      "file": "packages/blocks/community/stripe/package.json",
+      "name": "@intelblocks/block-stripe"
+    },
+    {
+      "file": "packages/blocks/community/supabase/package.json",
+      "name": "@intelblocks/block-supabase"
+    },
+    {
+      "file": "packages/blocks/community/supadata/package.json",
+      "name": "@intelblocks/block-supadata"
+    },
+    {
+      "file": "packages/blocks/community/surrealdb/package.json",
+      "name": "@intelblocks/block-surrealdb"
+    },
+    {
+      "file": "packages/blocks/community/surveymonkey/package.json",
+      "name": "@intelblocks/block-surveymonkey"
+    },
+    {
+      "file": "packages/blocks/community/surveytale/package.json",
+      "name": "@intelblocks/block-surveytale"
+    },
+    {
+      "file": "packages/blocks/community/swarmnode/package.json",
+      "name": "@intelblocks/block-swarmnode"
+    },
+    {
+      "file": "packages/blocks/community/synthesia/package.json",
+      "name": "@intelblocks/block-synthesia"
+    },
+    {
+      "file": "packages/blocks/community/systeme-io/package.json",
+      "name": "@intelblocks/block-systeme-io"
+    },
+    {
+      "file": "packages/blocks/community/tableau/package.json",
+      "name": "@intelblocks/block-tableau"
+    },
+    {
+      "file": "packages/blocks/community/talkable/package.json",
+      "name": "@intelblocks/block-talkable"
+    },
+    {
+      "file": "packages/blocks/community/tally/package.json",
+      "name": "@intelblocks/block-tally"
+    },
+    {
+      "file": "packages/blocks/community/tapfiliate/package.json",
+      "name": "@intelblocks/block-tapfiliate"
+    },
+    {
+      "file": "packages/blocks/community/tarvent/package.json",
+      "name": "@intelblocks/block-tarvent"
+    },
+    {
+      "file": "packages/blocks/community/taskade/package.json",
+      "name": "@intelblocks/block-taskade"
+    },
+    {
+      "file": "packages/blocks/community/tavily/package.json",
+      "name": "@intelblocks/block-tavily"
+    },
+    {
+      "file": "packages/blocks/community/teable/package.json",
+      "name": "@intelblocks/block-teable"
+    },
+    {
+      "file": "packages/blocks/community/teamhood/package.json",
+      "name": "@intelblocks/block-teamhood"
+    },
+    {
+      "file": "packages/blocks/community/teamleader/package.json",
+      "name": "@intelblocks/block-teamleader"
+    },
+    {
+      "file": "packages/blocks/community/teamwork/package.json",
+      "name": "@intelblocks/block-teamwork"
+    },
+    {
+      "file": "packages/blocks/community/telegram-bot/package.json",
+      "name": "@intelblocks/block-telegram-bot"
+    },
+    {
+      "file": "packages/blocks/community/telnyx/package.json",
+      "name": "@intelblocks/block-telnyx"
+    },
+    {
+      "file": "packages/blocks/community/tenzo/package.json",
+      "name": "@intelblocks/block-tenzo"
+    },
+    {
+      "file": "packages/blocks/community/textcortex-ai/package.json",
+      "name": "@intelblocks/block-textcortex-ai"
+    },
+    {
+      "file": "packages/blocks/community/thankster/package.json",
+      "name": "@intelblocks/block-thankster"
+    },
+    {
+      "file": "packages/blocks/community/ticktick/package.json",
+      "name": "@intelblocks/block-ticktick"
+    },
+    {
+      "file": "packages/blocks/community/tidely/package.json",
+      "name": "@intelblocks/block-tidely"
+    },
+    {
+      "file": "packages/blocks/community/tidycal/package.json",
+      "name": "@intelblocks/block-tidycal"
+    },
+    {
+      "file": "packages/blocks/community/time-ops/package.json",
+      "name": "@intelblocks/block-time-ops"
+    },
+    {
+      "file": "packages/blocks/community/timelines-ai/package.json",
+      "name": "@intelblocks/block-timelines-ai"
+    },
+    {
+      "file": "packages/blocks/community/tiny-talk-ai/package.json",
+      "name": "@intelblocks/block-tiny-talk-ai"
+    },
+    {
+      "file": "packages/blocks/community/tl-dv/package.json",
+      "name": "@intelblocks/block-tl-dv"
+    },
+    {
+      "file": "packages/blocks/community/todoist/package.json",
+      "name": "@intelblocks/block-todoist"
+    },
+    {
+      "file": "packages/blocks/community/toggl-track/package.json",
+      "name": "@intelblocks/block-toggl-track"
+    },
+    {
+      "file": "packages/blocks/community/totalcms/package.json",
+      "name": "@intelblocks/block-totalcms"
+    },
+    {
+      "file": "packages/blocks/community/trello/package.json",
+      "name": "@intelblocks/block-trello"
+    },
+    {
+      "file": "packages/blocks/community/truelayer/package.json",
+      "name": "@intelblocks/block-truelayer"
+    },
+    {
+      "file": "packages/blocks/community/trust/package.json",
+      "name": "@intelblocks/block-trust"
+    },
+    {
+      "file": "packages/blocks/community/twenty/package.json",
+      "name": "@intelblocks/block-twenty"
+    },
+    {
+      "file": "packages/blocks/community/twilio/package.json",
+      "name": "@intelblocks/block-twilio"
+    },
+    {
+      "file": "packages/blocks/community/twin-labs/package.json",
+      "name": "@intelblocks/block-twin-labs"
+    },
+    {
+      "file": "packages/blocks/community/twitch/package.json",
+      "name": "@intelblocks/block-twitch"
+    },
+    {
+      "file": "packages/blocks/community/twitter/package.json",
+      "name": "@intelblocks/block-twitter"
+    },
+    {
+      "file": "packages/blocks/community/typeform/package.json",
+      "name": "@intelblocks/block-typeform"
+    },
+    {
+      "file": "packages/blocks/community/typefully/package.json",
+      "name": "@intelblocks/block-typefully"
+    },
+    {
+      "file": "packages/blocks/community/umami/package.json",
+      "name": "@intelblocks/block-umami"
+    },
+    {
+      "file": "packages/blocks/community/upgradechat/package.json",
+      "name": "@intelblocks/block-upgradechat"
+    },
+    {
+      "file": "packages/blocks/community/uptimerobot/package.json",
+      "name": "@intelblocks/block-uptimerobot"
+    },
+    {
+      "file": "packages/blocks/community/uscreen/package.json",
+      "name": "@intelblocks/block-uscreen"
+    },
+    {
+      "file": "packages/blocks/community/useinbox/package.json",
+      "name": "@intelblocks/block-useinbox"
+    },
+    {
+      "file": "packages/blocks/community/uxsniff/package.json",
+      "name": "@intelblocks/block-uxsniff"
+    },
+    {
+      "file": "packages/blocks/community/vadoo-ai/package.json",
+      "name": "@intelblocks/block-vadoo-ai"
+    },
+    {
+      "file": "packages/blocks/community/validatedmails/package.json",
+      "name": "@intelblocks/block-validatedmails"
+    },
+    {
+      "file": "packages/blocks/community/valyu/package.json",
+      "name": "@intelblocks/block-valyu"
+    },
+    {
+      "file": "packages/blocks/community/vapi/package.json",
+      "name": "@intelblocks/block-vapi"
+    },
+    {
+      "file": "packages/blocks/community/vbout/package.json",
+      "name": "@intelblocks/block-vbout"
+    },
+    {
+      "file": "packages/blocks/community/vercel/package.json",
+      "name": "@intelblocks/block-vercel"
+    },
+    {
+      "file": "packages/blocks/community/vero/package.json",
+      "name": "@intelblocks/block-vero"
+    },
+    {
+      "file": "packages/blocks/community/videoask/package.json",
+      "name": "@intelblocks/block-videoask"
+    },
+    {
+      "file": "packages/blocks/community/vidlab7/package.json",
+      "name": "@intelblocks/block-vidlab7"
+    },
+    {
+      "file": "packages/blocks/community/vidnoz/package.json",
+      "name": "@intelblocks/block-vidnoz"
+    },
+    {
+      "file": "packages/blocks/community/village/package.json",
+      "name": "@intelblocks/block-village"
+    },
+    {
+      "file": "packages/blocks/community/vimeo/package.json",
+      "name": "@intelblocks/block-vimeo"
+    },
+    {
+      "file": "packages/blocks/community/visible/package.json",
+      "name": "@intelblocks/block-visible"
+    },
+    {
+      "file": "packages/blocks/community/vlm-run/package.json",
+      "name": "@intelblocks/block-vlm-run"
+    },
+    {
+      "file": "packages/blocks/community/voipstudio/package.json",
+      "name": "@intelblocks/block-voipstudio"
+    },
+    {
+      "file": "packages/blocks/community/vouchery-io/package.json",
+      "name": "@intelblocks/block-vouchery-io"
+    },
+    {
+      "file": "packages/blocks/community/vtex/package.json",
+      "name": "@intelblocks/block-vtex"
+    },
+    {
+      "file": "packages/blocks/community/vtiger/package.json",
+      "name": "@intelblocks/block-vtiger"
+    },
+    {
+      "file": "packages/blocks/community/wafeq/package.json",
+      "name": "@intelblocks/block-wafeq"
+    },
+    {
+      "file": "packages/blocks/community/waitwhile/package.json",
+      "name": "@intelblocks/block-waitwhile"
+    },
+    {
+      "file": "packages/blocks/community/wayfront/package.json",
+      "name": "@intelblocks/block-wayfront"
+    },
+    {
+      "file": "packages/blocks/community/wealthbox/package.json",
+      "name": "@intelblocks/block-wealthbox"
+    },
+    {
+      "file": "packages/blocks/community/webex/package.json",
+      "name": "@intelblocks/block-webex"
+    },
+    {
+      "file": "packages/blocks/community/webflow/package.json",
+      "name": "@intelblocks/block-webflow"
+    },
+    {
+      "file": "packages/blocks/community/webling/package.json",
+      "name": "@intelblocks/block-webling"
+    },
+    {
+      "file": "packages/blocks/community/webscraping-ai/package.json",
+      "name": "@intelblocks/block-webscraping-ai"
+    },
+    {
+      "file": "packages/blocks/community/wedof/package.json",
+      "name": "@intelblocks/block-wedof"
+    },
+    {
+      "file": "packages/blocks/community/week-done/package.json",
+      "name": "@intelblocks/block-week-done"
+    },
+    {
+      "file": "packages/blocks/community/weekdone/package.json",
+      "name": "@intelblocks/block-weekdone"
+    },
+    {
+      "file": "packages/blocks/community/what-converts/package.json",
+      "name": "@intelblocks/block-what-converts"
+    },
+    {
+      "file": "packages/blocks/community/whatsable/package.json",
+      "name": "@intelblocks/block-whatsable"
+    },
+    {
+      "file": "packages/blocks/community/whatsapp/package.json",
+      "name": "@intelblocks/block-whatsapp"
+    },
+    {
+      "file": "packages/blocks/community/whatsscale/package.json",
+      "name": "@intelblocks/block-whatsscale"
+    },
+    {
+      "file": "packages/blocks/community/wistia/package.json",
+      "name": "@intelblocks/block-wistia"
+    },
+    {
+      "file": "packages/blocks/community/wonderchat/package.json",
+      "name": "@intelblocks/block-wonderchat"
+    },
+    {
+      "file": "packages/blocks/community/woocommerce/package.json",
+      "name": "@intelblocks/block-woocommerce"
+    },
+    {
+      "file": "packages/blocks/community/woodpecker/package.json",
+      "name": "@intelblocks/block-woodpecker"
+    },
+    {
+      "file": "packages/blocks/community/wootric/package.json",
+      "name": "@intelblocks/block-wootric"
+    },
+    {
+      "file": "packages/blocks/community/wordpress/package.json",
+      "name": "@intelblocks/block-wordpress"
+    },
+    {
+      "file": "packages/blocks/community/workable/package.json",
+      "name": "@intelblocks/block-workable"
+    },
+    {
+      "file": "packages/blocks/community/workday/package.json",
+      "name": "@intelblocks/block-workday"
+    },
+    {
+      "file": "packages/blocks/community/wrike/package.json",
+      "name": "@intelblocks/block-wrike"
+    },
+    {
+      "file": "packages/blocks/community/writesonic-bulk/package.json",
+      "name": "@intelblocks/block-writesonic-bulk"
+    },
+    {
+      "file": "packages/blocks/community/wufoo/package.json",
+      "name": "@intelblocks/block-wufoo"
+    },
+    {
+      "file": "packages/blocks/community/xero/package.json",
+      "name": "@intelblocks/block-xero"
+    },
+    {
+      "file": "packages/blocks/community/xquik/package.json",
+      "name": "@intelblocks/block-xquik"
+    },
+    {
+      "file": "packages/blocks/community/youcanbookme/package.json",
+      "name": "@intelblocks/block-youcanbookme"
+    },
+    {
+      "file": "packages/blocks/community/youform/package.json",
+      "name": "@intelblocks/block-youform"
+    },
+    {
+      "file": "packages/blocks/community/youtrack/package.json",
+      "name": "@intelblocks/block-youtrack"
+    },
+    {
+      "file": "packages/blocks/community/youtube/package.json",
+      "name": "@intelblocks/block-youtube"
+    },
+    {
+      "file": "packages/blocks/community/zagomail/package.json",
+      "name": "@intelblocks/block-zagomail"
+    },
+    {
+      "file": "packages/blocks/community/zendesk-sell/package.json",
+      "name": "@intelblocks/block-zendesk-sell"
+    },
+    {
+      "file": "packages/blocks/community/zendesk/package.json",
+      "name": "@intelblocks/block-zendesk"
+    },
+    {
+      "file": "packages/blocks/community/zeplin/package.json",
+      "name": "@intelblocks/block-zeplin"
+    },
+    {
+      "file": "packages/blocks/community/zerobounce/package.json",
+      "name": "@intelblocks/block-zerobounce"
+    },
+    {
+      "file": "packages/blocks/community/zoho-bookings/package.json",
+      "name": "@intelblocks/block-zoho-bookings"
+    },
+    {
+      "file": "packages/blocks/community/zoho-books/package.json",
+      "name": "@intelblocks/block-zoho-books"
+    },
+    {
+      "file": "packages/blocks/community/zoho-campaigns/package.json",
+      "name": "@intelblocks/block-zoho-campaigns"
+    },
+    {
+      "file": "packages/blocks/community/zoho-crm/package.json",
+      "name": "@intelblocks/block-zoho-crm"
+    },
+    {
+      "file": "packages/blocks/community/zoho-desk/package.json",
+      "name": "@intelblocks/block-zoho-desk"
+    },
+    {
+      "file": "packages/blocks/community/zoho-invoice/package.json",
+      "name": "@intelblocks/block-zoho-invoice"
+    },
+    {
+      "file": "packages/blocks/community/zoho-mail/package.json",
+      "name": "@intelblocks/block-zoho-mail"
+    },
+    {
+      "file": "packages/blocks/community/zoo/package.json",
+      "name": "@intelblocks/block-zoo"
+    },
+    {
+      "file": "packages/blocks/community/zoom/package.json",
+      "name": "@intelblocks/block-zoom"
+    },
+    {
+      "file": "packages/blocks/community/zuora/package.json",
+      "name": "@intelblocks/block-zuora"
+    },
+    {
+      "file": "packages/blocks/core/approval/package.json",
+      "name": "@intelblocks/block-approval"
+    },
+    {
+      "file": "packages/blocks/core/connections/package.json",
+      "name": "@intelblocks/block-connections"
+    },
+    {
+      "file": "packages/blocks/core/crypto/package.json",
+      "name": "@intelblocks/block-crypto"
+    },
+    {
+      "file": "packages/blocks/core/csv/package.json",
+      "name": "@intelblocks/block-csv"
+    },
+    {
+      "file": "packages/blocks/core/data-mapper/package.json",
+      "name": "@intelblocks/block-data-mapper"
+    },
+    {
+      "file": "packages/blocks/core/data-summarizer/package.json",
+      "name": "@intelblocks/block-data-summarizer"
+    },
+    {
+      "file": "packages/blocks/core/date-helper/package.json",
+      "name": "@intelblocks/block-date-helper"
+    },
+    {
+      "file": "packages/blocks/core/delay/package.json",
+      "name": "@intelblocks/block-delay"
+    },
+    {
+      "file": "packages/blocks/core/file-helper/package.json",
+      "name": "@intelblocks/block-file-helper"
+    },
+    {
+      "file": "packages/blocks/core/forms/package.json",
+      "name": "@intelblocks/block-forms"
+    },
+    {
+      "file": "packages/blocks/core/graphql/package.json",
+      "name": "@intelblocks/block-graphql"
+    },
+    {
+      "file": "packages/blocks/core/http/package.json",
+      "name": "@intelblocks/block-http"
+    },
+    {
+      "file": "packages/blocks/core/image-helper/package.json",
+      "name": "@intelblocks/block-image-helper"
+    },
+    {
+      "file": "packages/blocks/core/manual-trigger/package.json",
+      "name": "@intelblocks/block-manual-trigger"
+    },
+    {
+      "file": "packages/blocks/core/math-helper/package.json",
+      "name": "@intelblocks/block-math-helper"
+    },
+    {
+      "file": "packages/blocks/core/pdf/package.json",
+      "name": "@intelblocks/block-pdf"
+    },
+    {
+      "file": "packages/blocks/core/qrcode/package.json",
+      "name": "@intelblocks/block-qrcode"
+    },
+    {
+      "file": "packages/blocks/core/schedule/package.json",
+      "name": "@intelblocks/block-schedule"
+    },
+    {
+      "file": "packages/blocks/core/sftp/package.json",
+      "name": "@intelblocks/block-sftp"
+    },
+    {
+      "file": "packages/blocks/core/smtp/package.json",
+      "name": "@intelblocks/block-smtp"
+    },
+    {
+      "file": "packages/blocks/core/store/package.json",
+      "name": "@intelblocks/block-store"
+    },
+    {
+      "file": "packages/blocks/core/subflows/package.json",
+      "name": "@intelblocks/block-subflows"
+    },
+    {
+      "file": "packages/blocks/core/tables/package.json",
+      "name": "@intelblocks/block-tables"
+    },
+    {
+      "file": "packages/blocks/core/tags/package.json",
+      "name": "@intelblocks/block-tags"
+    },
+    {
+      "file": "packages/blocks/core/text-helper/package.json",
+      "name": "@intelblocks/block-text-helper"
+    },
+    {
+      "file": "packages/blocks/core/webhook/package.json",
+      "name": "@intelblocks/block-webhook"
+    },
+    {
+      "file": "packages/blocks/core/xml/package.json",
+      "name": "@intelblocks/block-xml"
+    },
+    {
+      "file": "packages/blocks/framework/package.json",
+      "name": "@intelblocks/blocks-framework"
+    },
+    {
+      "file": "packages/cli/package.json",
+      "name": "@intelblocks/cli"
+    },
+    {
+      "file": "packages/server/engine/package.json",
+      "name": "@intelblocks/engine"
+    },
+    {
+      "file": "packages/server/utils/package.json",
+      "name": "@intelblocks/server-utils"
+    },
+    {
+      "file": "packages/shared/package.json",
+      "name": "@intelblocks/shared"
+    }
+  ],
+  "already": [],
+  "skippedNotScoped": [
+    {
+      "file": "packages/server/api/package.json",
+      "name": "api"
+    },
+    {
+      "file": "packages/server/worker/package.json",
+      "name": "worker"
+    },
+    {
+      "file": "packages/tests-e2e/package.json",
+      "name": "tests-e2e"
+    },
+    {
+      "file": "packages/web/package.json",
+      "name": "web"
+    }
+  ],
+  "errors": []
+}
