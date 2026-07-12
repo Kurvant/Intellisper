@@ -58,13 +58,15 @@ console.log(`org: ${ORG} | @intelblocks packages found: ${names.length} | mode: 
 const report = { org: ORG, mode: WRITE ? 'delete' : 'dry-run', deleted: [], notFound: [], failed: [] }
 
 function api(method, path) {
-    // curl is available cross-platform; returns HTTP status on its own line.
-    const cmd = `curl -sS -o /dev/null -w "%{http_code}" -X ${method} `
-        + `-H "Accept: application/vnd.github+json" `
-        + `-H "Authorization: Bearer ${TOKEN}" `
-        + `-H "X-GitHub-Api-Version: 2022-11-28" `
-        + `"${API}${path}"`
-    return execSync(cmd, { encoding: 'utf8' }).trim()
+    // Node's built-in fetch — no curl (curl's -o/-w combo is flaky on Windows/Git Bash).
+    return fetch(`${API}${path}`, {
+        method,
+        headers: {
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${TOKEN}`,
+            'X-GitHub-Api-Version': '2022-11-28',
+        },
+    }).then((r) => r.status)
 }
 
 for (const fullName of names) {
@@ -73,15 +75,15 @@ for (const fullName of names) {
     try {
         if (!WRITE) {
             // just check existence with a GET
-            const code = api('GET', path)
-            if (code === '200') { console.log(`  would delete  ${fullName}`); report.deleted.push(fullName) }
-            else if (code === '404') { report.notFound.push(fullName) }
+            const code = await api('GET', path)
+            if (code === 200) { console.log(`  would delete  ${fullName}`); report.deleted.push(fullName) }
+            else if (code === 404) { report.notFound.push(fullName) }
             else { console.log(`  ?? ${code}       ${fullName}`); report.failed.push({ name: fullName, code }) }
         }
         else {
-            const code = api('DELETE', path)
-            if (code === '204') { console.log(`  deleted       ${fullName}`); report.deleted.push(fullName) }
-            else if (code === '404') { report.notFound.push(fullName) }
+            const code = await api('DELETE', path)
+            if (code === 204) { console.log(`  deleted       ${fullName}`); report.deleted.push(fullName) }
+            else if (code === 404) { report.notFound.push(fullName) }
             else { console.error(`  FAILED ${code}  ${fullName}`); report.failed.push({ name: fullName, code }) }
         }
     }
