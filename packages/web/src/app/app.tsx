@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { IbErrorDialog } from '@/components/custom/ap-error-dialog/ap-error-dialog';
+import { Icon3dDefs } from '@/components/icons-3d';
 import { EmbeddingProvider } from '@/components/providers/embed-provider';
 import TelemetryProvider from '@/components/providers/telemetry-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
@@ -19,6 +20,7 @@ export function App() {
   const { i18n } = useTranslation();
   return (
     <QueryClientProvider client={queryClient}>
+      <Icon3dDefs />
       <RefreshAnalyticsProvider>
         <EmbeddingProvider>
           <InitialDataGuard>

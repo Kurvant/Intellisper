@@ -25,6 +25,12 @@ const ChatWithAIPage = React.lazy(() =>
   })),
 );
 
+const OverhaulHomePage = React.lazy(() =>
+  import('@/app/routes/overhaul-home').then((m) => ({
+    default: m.OverhaulHomePage,
+  })),
+);
+
 function chatElement() {
   return (
     <AllowOnlyLoggedInUserOnlyGuard>
@@ -44,11 +50,28 @@ const chatRoutes = [
   { path: '/chat/:conversationId', element: chatElement() },
 ];
 
+// Overhaul (new IA) — additive route mounted alongside the current app for verification.
+const overhaulRoutes = [
+  {
+    path: '/home',
+    element: (
+      <AllowOnlyLoggedInUserOnlyGuard>
+        <PageTitle title="Home">
+          <Suspense fallback={<RouteLoadingBar />}>
+            <OverhaulHomePage />
+          </Suspense>
+        </PageTitle>
+      </AllowOnlyLoggedInUserOnlyGuard>
+    ),
+  },
+];
+
 const routes = [
   ...publicRoutes,
   ...projectRoutes,
   ...authRoutes,
   ...platformRoutes,
+  ...overhaulRoutes,
   ...chatRoutes,
   {
     path: '/projects/:projectId',
