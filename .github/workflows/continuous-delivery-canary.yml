@@ -3,8 +3,9 @@ name: Continuous Delivery — Canary
 on:
   workflow_dispatch:
   workflow_call:
-  schedule:
-    - cron: '0 9 * * *'  # Daily 9 AM UTC
+  # Schedule disabled until CD infrastructure is set up.
+  # schedule:
+  #   - cron: '0 9 * * *'  # Daily 9 AM UTC
 
 jobs:
   build-image:

@@ -3,8 +3,9 @@ name: Continuous Delivery — Staging
 on:
   push:
     branches: [main]
-  schedule:
-    - cron: '0 17 * * 4'  # Thursday 5 PM UTC — only for tagging release candidate
+  # Schedule disabled until CD infrastructure is set up.
+  # schedule:
+  #   - cron: '0 17 * * 4'  # Thursday 5 PM UTC — only for tagging release candidate
   workflow_dispatch:
     inputs:
       action:

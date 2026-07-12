@@ -1,8 +1,9 @@
 name: Generate Translation Files for Community Blocks and UI
 
 on:
-  schedule:
-    - cron: '5 15 * * *'
+  # Schedule disabled until translation automation is intentionally re-enabled.
+  # schedule:
+  #   - cron: '5 15 * * *'
   workflow_dispatch:
 
 jobs:
