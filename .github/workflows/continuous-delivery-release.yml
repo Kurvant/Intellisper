@@ -1,8 +1,9 @@
 name: Continuous Delivery — Release
 
 on:
-  schedule:
-    - cron: '0 14 * * 2' # Every Tuesday at 14:00 UTC
+  # Schedule disabled until CD infrastructure is set up.
+  # schedule:
+  #   - cron: '0 14 * * 2' # Every Tuesday at 14:00 UTC
   workflow_dispatch:
 
 permissions:
