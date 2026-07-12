@@ -63,6 +63,7 @@ export function AutomationsGalleryCard({
   onExportFlow,
   onExportTable,
   isDuplicating,
+  isMoving,
 }: {
   item: TreeItem;
   isSelected: boolean;
@@ -78,6 +79,7 @@ export function AutomationsGalleryCard({
   onExportFlow: (flow: PopulatedFlow) => void;
   onExportTable: (table: Table) => void;
   isDuplicating: boolean;
+  isMoving: boolean;
 }) {
   const { embedState } = useEmbedding();
   const [isMoveOpen, setIsMoveOpen] = useState(false);
@@ -287,6 +289,7 @@ export function AutomationsGalleryCard({
         folders={folders}
         selectedFolderId={moveFolderId}
         onFolderChange={setMoveFolderId}
+        isMoving={isMoving}
         onConfirm={() => {
           onMoveTo(item, moveFolderId);
           setIsMoveOpen(false);

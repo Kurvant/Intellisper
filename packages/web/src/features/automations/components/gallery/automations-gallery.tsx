@@ -68,6 +68,7 @@ export function AutomationsGallery(props: AutomationsGalleryProps) {
     isCreatingFlow,
     isCreatingTable,
     isDuplicating,
+    isMoving,
     onLoadMoreInFolder,
     isItemSelected,
   } = props;
@@ -103,6 +104,7 @@ export function AutomationsGallery(props: AutomationsGalleryProps) {
       onExportFlow={onExportFlow}
       onExportTable={onExportTable}
       isDuplicating={isDuplicating}
+      isMoving={isMoving}
     />
   );
 
@@ -165,10 +167,10 @@ export function AutomationsGallery(props: AutomationsGalleryProps) {
                       scope="folder"
                       align="end"
                       userHasPermissionToWriteFlow={
-                        userHasPermissionToWriteFlow
+                        !!userHasPermissionToWriteFlow
                       }
                       userHasPermissionToWriteTable={
-                        userHasPermissionToWriteTable
+                        !!userHasPermissionToWriteTable
                       }
                       userHasPermissionToWriteFolder={false}
                       isCreatingFlow={isCreatingFlow}
@@ -310,6 +312,7 @@ type AutomationsGalleryProps = {
   isCreatingFlow?: boolean;
   isCreatingTable?: boolean;
   isDuplicating: boolean;
+  isMoving: boolean;
   onLoadMoreInFolder?: (folderId: string) => void;
   isItemSelected: (item: TreeItem) => boolean;
 };

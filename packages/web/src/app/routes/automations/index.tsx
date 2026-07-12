@@ -362,6 +362,7 @@ const AutomationsPageContent = ({ projectId }: { projectId: string }) => {
               isCreatingFlow={mutations.isCreateFlowPending}
               isCreatingTable={mutations.isCreatingTable}
               isDuplicating={mutations.isDuplicating}
+              isMoving={mutations.isMoving}
               onLoadMoreInFolder={loadMoreInFolder}
               isItemSelected={isItemSelected}
             />
