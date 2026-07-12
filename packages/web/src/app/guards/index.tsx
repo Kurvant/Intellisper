@@ -17,7 +17,10 @@ import { AllowOnlyLoggedInUserOnlyGuard } from '../components/allow-logged-in-us
 import { ProjectDashboardLayout } from '../components/project-layout';
 
 import { DefaultRoute } from './default-route';
-import { TokenCheckerWrapper } from './project-route-wrapper';
+import {
+  ProjectRouterWrapper,
+  TokenCheckerWrapper,
+} from './project-route-wrapper';
 
 const ChatWithAIPage = React.lazy(() =>
   import('@/app/routes/chat-with-ai').then((m) => ({
@@ -70,18 +73,20 @@ const overhaulRoutes = [
       </AllowOnlyLoggedInUserOnlyGuard>
     ),
   },
-  {
+  // Automations is project-scoped: ProjectRouterWrapper mounts BOTH
+  //   /projects/:projectId/build/automations  (access-validated + switches session), and
+  //   /build/automations                      (redirects to the current project's URL).
+  // This preserves the URL-scoped-project + access-guard capability the old route had.
+  ...ProjectRouterWrapper({
     path: '/build/automations',
     element: (
-      <AllowOnlyLoggedInUserOnlyGuard>
-        <PageTitle title="Automations">
-          <Suspense fallback={<RouteLoadingBar />}>
-            <OverhaulAutomationsPage />
-          </Suspense>
-        </PageTitle>
-      </AllowOnlyLoggedInUserOnlyGuard>
+      <PageTitle title="Automations">
+        <Suspense fallback={<RouteLoadingBar />}>
+          <OverhaulAutomationsPage />
+        </Suspense>
+      </PageTitle>
     ),
-  },
+  }),
 ];
 
 const routes = [

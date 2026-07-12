@@ -135,3 +135,15 @@ SET→Project Settings, SHL→shell. No cluster is orphaned. Old routes redirect
 - Strategy going forward: prefer WRAPPING existing capable page-content components in `NewAppShell`
   over rewriting, wherever the component is layout-agnostic (returns content, not chrome). Rewrite
   only where the new IA genuinely changes the interaction (Home, and later the builder/table shells).
+
+## Project-scoping rule for overhaul routes (established after review)
+
+Project-scoped surfaces (Automations, Runs, Connections, Variables, Tables, Releases, project
+Impact/Leaderboard) MUST be mounted via `ProjectRouterWrapper({ path, element })` so the new route
+carries the SAME scoping capability as the existing `/projects/:projectId/...` routes:
+- `/projects/:projectId{newPath}` — access-validated (`useHasAccessToProject`) + `switchToProject`.
+- `{newPath}` (bare) — redirects to the current project's URL (preserving ?query/?from).
+Do NOT rely on `authenticationSession.getProjectId()` alone for project-scoped surfaces — that drops
+the URL-scoping + access-guard capability (a lose-nothing gap; caught on Automations review).
+Workspace-level surfaces that aren't per-project (Home, Admin, account) do NOT need this.
+Corrected: `/build/automations` now uses ProjectRouterWrapper (mounts both routes above).
