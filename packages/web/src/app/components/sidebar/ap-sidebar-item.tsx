@@ -49,7 +49,10 @@ export const IbSidebarItem = (item: SidebarItemType) => {
   const button = (
     <SidebarMenuButton
       className={cn(
-        { 'bg-sidebar-accent hover:bg-sidebar-accent!': isLinkActive },
+        {
+          'bg-sidebar-accent hover:bg-sidebar-accent! text-sidebar-primary [&_svg]:text-sidebar-primary':
+            isLinkActive,
+        },
         item.highlight && !isLinkActive && 'hover:bg-sidebar-accent/60',
       )}
       onClick={() => {

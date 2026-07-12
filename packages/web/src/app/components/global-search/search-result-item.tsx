@@ -48,7 +48,7 @@ function ItemIcon({
 
   if (type === 'flow') {
     return (
-      <span className="[&_svg]:text-violet-500! shrink-0">
+      <span className="[&_svg]:text-chart-1! shrink-0">
         <WorkflowIcon className="size-4" />
       </span>
     );
@@ -56,7 +56,7 @@ function ItemIcon({
 
   if (type === 'table') {
     return (
-      <span className="[&_svg]:text-emerald-500! shrink-0">
+      <span className="[&_svg]:text-chart-5! shrink-0">
         <TableIcon className="size-4" />
       </span>
     );

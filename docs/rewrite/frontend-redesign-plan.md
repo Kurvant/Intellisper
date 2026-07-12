@@ -326,4 +326,19 @@ moving on.
   (no OAuth2 connections in cloud mode — provider redirects to the cloud host).
 - **Definition of Done per phase:** target surfaces visually updated + **§2/§3 capability checklist
   green for those surfaces** + no behavior change + `tsc` clean + lint clean + verified across editions
-  (CE/EE/Cloud), embed mode, and at least one non-English locale.
+  (CE/EE/Cloud), embed mode, and at least one non-English locale + **docs screenshot refresh** (see below).
+
+### Docs impact (user-facing Mintlify site at `docs/`)
+
+The product docs are a Mintlify site (`docs/docs.json`, ~222 `.mdx` files: `overview`, `flows`,
+`admin-guide`, `embedding`, `mcp`, `build-blocks`, `endpoints`, …). This is separate from `docs/rewrite/`
+(internal build notes). Because scope is re-skin + zero behavior changes, docs **content** needs no edits
+— only two exposures:
+
+- **Screenshots (in scope, per phase).** Any doc image showing the old UI goes stale as each phase lands.
+  **DoD gate:** every phase must include a **docs screenshot refresh** — re-capture the doc images for the
+  surfaces that phase re-skinned, in the same edition/locale/state the original shot used, and update the
+  referenced assets. A phase is not Done until its docs screenshots match the shipped UI.
+- **Terminology rebrand (deferred — separate effort).** The `piece→block` / `@activepieces→@intelblocks`
+  rename likely still appears across the `.mdx` files. This is a rebrand sweep, NOT part of the re-skin,
+  and is deliberately deferred; do not fold it into the phases above.

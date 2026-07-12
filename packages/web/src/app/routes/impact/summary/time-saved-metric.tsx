@@ -53,8 +53,8 @@ export const TimeSavedMetric = ({
         subtitle={t('{days} workdays saved', {
           days: 'N/A',
         })}
-        iconColor="text-emerald-500"
-        iconBgColor="bg-emerald-500/10"
+        iconColor="text-chart-5"
+        iconBgColor="bg-chart-5/10"
       />
     );
   }

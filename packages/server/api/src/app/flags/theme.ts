@@ -64,7 +64,7 @@ export function generateTheme({
 }
 
 export const defaultTheme = generateTheme({
-    primaryColor: '#6e41e2',
+    primaryColor: '#b5652f',
     websiteName: 'Intellisper',
     // Self-hosted from the web app's public/ folder — no dependency on any external
     // CDN. Served at the site root; see packages/web/public/intellisper-logo.png.
