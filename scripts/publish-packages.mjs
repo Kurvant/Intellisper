@@ -183,8 +183,29 @@ for (const pkg of selected) {
         if (!distJson.publishConfig || distJson.publishConfig.registry !== REGISTRY) {
             distJson.publishConfig = { ...(distJson.publishConfig || {}), registry: REGISTRY }
         }
+        // We publish from INSIDE dist/, so dist/ IS the tarball root. Source package.json
+        // says main "./dist/src/index.js" (correct from the package root); inside the
+        // tarball that resolves to dist/dist/src/... which does not exist. Strip the
+        // leading ./dist/ so main/types/exports point at the real files in the tarball.
+        const stripDist = (v) => (typeof v === 'string' ? v.replace(/^\.?\/?dist\//, './') : v)
+        if (distJson.main) distJson.main = stripDist(distJson.main)
+        if (distJson.types) distJson.types = stripDist(distJson.types)
+        if (distJson.typings) distJson.typings = stripDist(distJson.typings)
+        if (distJson.module) distJson.module = stripDist(distJson.module)
+        if (distJson.exports) {
+            const fixExports = (node) => {
+                if (typeof node === 'string') return stripDist(node)
+                if (node && typeof node === 'object') {
+                    const out = {}
+                    for (const [k, val] of Object.entries(node)) out[k] = fixExports(val)
+                    return out
+                }
+                return node
+            }
+            distJson.exports = fixExports(distJson.exports)
+        }
         writeFileSync(distPkgPath, JSON.stringify(distJson, null, 2) + '\n')
-        console.log(`  prepared deps: ${JSON.stringify(distJson.dependencies || {})}`)
+        console.log(`  prepared: main=${distJson.main} deps=${JSON.stringify(distJson.dependencies || {})}`)
 
         // 3) publish (or dry-run) from dist/
         const cmd = WRITE ? 'npm publish' : 'npm publish --dry-run'
