@@ -57,13 +57,13 @@ export function NewAppShell({
         {!embedState.hideSideNav && <DomainRail />}
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
           {!embedState.hidePageHeader && (
-            <header className="sticky top-0 z-10 flex items-center gap-4 border-b border-border bg-background/80 px-6 py-3 backdrop-blur">
+            <header className="sticky top-0 z-10 flex items-center gap-4 border-b border-border/70 bg-background/70 px-7 py-3.5 backdrop-blur-xl">
               <div className="min-w-0">
-                <h1 className="truncate text-lg font-semibold tracking-tight">
+                <h1 className="truncate text-[19px] font-bold tracking-tight">
                   {title}
                 </h1>
                 {subtitle && (
-                  <p className="truncate text-xs text-muted-foreground">
+                  <p className="truncate text-[12.5px] text-muted-foreground">
                     {subtitle}
                   </p>
                 )}
@@ -103,11 +103,11 @@ function DomainRail() {
   };
 
   return (
-    <nav className="flex w-[236px] shrink-0 flex-col gap-1 overflow-y-auto border-r border-border bg-sidebar px-3 py-3">
-      <div className="px-1 pb-2">
+    <nav className="flex w-[236px] shrink-0 flex-col gap-0.5 overflow-y-auto border-r border-border/70 bg-sidebar px-3 py-3">
+      <div className="px-1 pb-1.5">
         <AppSidebarHeader />
       </div>
-      <div className="pb-2">
+      <div className="pb-1">
         <GlobalSearchCommand />
       </div>
 
@@ -115,10 +115,10 @@ function DomainRail() {
         const visibleItems = group.items.filter(isItemVisible);
         if (visibleItems.length === 0) return null;
         return (
-          <div key={group.key} className="pt-2">
-            <div className="flex items-center gap-2 px-2 pb-1">
-              <Icon3d name={group.icon} size={16} />
-              <span className="text-[10.5px] font-bold uppercase tracking-[0.11em] text-muted-foreground">
+          <div key={group.key} className="pt-2.5">
+            <div className="flex items-center gap-2 px-2 pb-1.5">
+              <Icon3d name={group.icon} size={15} />
+              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground/80">
                 {t(group.label)}
               </span>
             </div>

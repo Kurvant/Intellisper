@@ -35,21 +35,21 @@ export function OverhaulHomePage() {
         </Button>
       }
     >
-      <div className="mx-auto max-w-[1080px] p-6">
+      <div className="mx-auto max-w-[1280px] px-7 py-6">
         {/* Hero + run-health */}
-        <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+        <div className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
           <HeroCard onNewFlow={() => navigate('/automations')} />
           <RunHealthCard onClick={() => navigate('/runs')} />
         </div>
 
         {/* Recent + needs-attention */}
-        <div className="mt-4 grid gap-4 lg:grid-cols-[1.6fr_1fr]">
+        <div className="mt-5 grid gap-5 lg:grid-cols-[1.6fr_1fr]">
           <RecentAutomationsCard onSeeAll={() => navigate('/automations')} />
           <NeedsAttentionCard navigate={navigate} />
         </div>
 
         {/* Stat tiles */}
-        <div className="mt-4 grid gap-4 md:grid-cols-3">
+        <div className="mt-5 grid gap-5 md:grid-cols-3">
           <StatTile
             label={t('Active flows')}
             value="42"
@@ -82,19 +82,23 @@ export function OverhaulHomePage() {
 
 function HeroCard({ onNewFlow }: { onNewFlow: () => void }) {
   return (
-    <div className="rounded-xl border border-border bg-gradient-to-br from-primary to-[color-mix(in_srgb,hsl(var(--primary))_55%,hsl(var(--warning)))] p-5 text-white shadow-sm">
-      <div className="text-[11px] font-bold uppercase tracking-[0.07em] text-white/80">
+    <div className="relative overflow-hidden rounded-2xl p-6 text-white shadow-[0_1px_2px_rgba(16,22,35,.06),0_18px_40px_-20px_rgba(154,82,32,.55)]">
+      {/* layered brand gradient + radial sheen for depth (not a flat block) */}
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,#C4703A_0%,#B5652F_42%,#9A5220_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(120%_120%_at_12%_0%,rgba(255,220,150,.45)_0%,transparent_45%)]" />
+      <div className="pointer-events-none absolute -right-16 -top-16 -z-10 size-64 rounded-full bg-[radial-gradient(circle,rgba(245,184,24,.35)_0%,transparent_70%)]" />
+      <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/75">
         {t('Command center')}
       </div>
-      <h2 className="mt-1 text-[22px] font-bold leading-tight tracking-tight">
+      <h2 className="mt-1.5 text-[23px] font-bold leading-[1.15] tracking-tight text-white [text-wrap:balance]">
         {t('Your automations saved 214 hours this month')}
       </h2>
-      <p className="mt-1.5 max-w-[44ch] text-sm text-white/90">
+      <p className="mt-2 max-w-[46ch] text-[13.5px] leading-relaxed text-white/85">
         {t(
           "42 automations running across 3 projects. Everything's healthy except a few runs that need a retry.",
         )}
       </p>
-      <div className="mt-4 flex flex-wrap gap-2.5">
+      <div className="mt-5 flex flex-wrap gap-2.5">
         <HeroChip
           icon="automation"
           label={t('New automation')}
@@ -134,22 +138,27 @@ function HeroChip({
 
 function Card({
   cap,
+  action,
   children,
   className,
 }: {
   cap: string;
+  action?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
 }) {
   return (
     <div
       className={
-        'rounded-xl border border-border bg-card p-[18px] shadow-sm ' +
+        'rounded-2xl border border-border/70 bg-card p-5 shadow-[0_1px_2px_rgba(16,22,35,.04),0_12px_28px_-18px_rgba(16,22,35,.22)] ' +
         (className ?? '')
       }
     >
-      <div className="mb-3 text-[11px] font-bold uppercase tracking-[0.07em] text-muted-foreground">
-        {cap}
+      <div className="mb-3.5 flex items-center justify-between gap-2">
+        <span className="text-[10.5px] font-bold uppercase tracking-[0.09em] text-muted-foreground/90">
+          {cap}
+        </span>
+        {action}
       </div>
       {children}
     </div>
@@ -164,13 +173,15 @@ function RunHealthCard({ onClick }: { onClick: () => void }) {
         <Metric n="98.6%" l={t('Success')} d={t('+0.4%')} up />
         <Metric n="3" l={t('Failed')} d={t('needs retry')} />
       </div>
-      <div className="mt-2.5 flex h-11 items-end gap-[3px]">
+      <div className="mt-3 flex h-12 items-end gap-1.5 border-b border-border/60 pb-px">
         {[40, 55, 48, 70, 62, 88, 75].map((h, i) => (
           <span
             key={i}
             className={
-              'flex-1 rounded-t-[3px] ' +
-              (i === 5 ? 'bg-primary' : 'bg-primary/35')
+              'flex-1 rounded-md bg-gradient-to-t ' +
+              (i === 5
+                ? 'from-primary/70 to-primary'
+                : 'from-primary/15 to-primary/45')
             }
             style={{ height: `${h}%` }}
           />
@@ -244,21 +255,25 @@ function RecentAutomationsCard({ onSeeAll }: { onSeeAll: () => void }) {
     },
   ] as const;
   return (
-    <Card cap={t('Recent & favorite automations')}>
-      <button
-        type="button"
-        onClick={onSeeAll}
-        className="float-right -mt-7 text-xs font-semibold text-primary hover:underline"
-      >
-        {t('View all →')}
-      </button>
-      <div className="flex flex-col">
+    <Card
+      cap={t('Recent & favorite automations')}
+      action={
+        <button
+          type="button"
+          onClick={onSeeAll}
+          className="text-xs font-semibold text-primary hover:underline"
+        >
+          {t('View all →')}
+        </button>
+      }
+    >
+      <div className="-mx-1 flex flex-col">
         {rows.map((r) => (
           <div
             key={r.name}
-            className="flex items-center gap-3 border-b border-border py-2.5 last:border-b-0"
+            className="flex items-center gap-3 rounded-lg px-1 py-2.5 transition-colors hover:bg-muted/50 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-border/60"
           >
-            <Icon3d name={r.icon} size={30} />
+            <Icon3d name={r.icon} size={32} />
             <div className="min-w-0">
               <div className="truncate text-sm font-semibold">{r.name}</div>
               <div className="text-[11.5px] text-muted-foreground">
@@ -333,21 +348,37 @@ function Alert({
   onClick: () => void;
 }) {
   const map = {
-    danger: 'bg-destructive/8 border-destructive/25 text-destructive',
-    warn: 'bg-warning/10 border-warning/25 text-warning',
-    info: 'bg-secondary/8 border-secondary/25 text-secondary',
+    danger: {
+      wrap: 'bg-destructive/10 border-destructive/20 hover:bg-destructive/15',
+      stripe: 'bg-destructive',
+      dot: 'text-destructive',
+    },
+    warn: {
+      wrap: 'bg-warning/12 border-warning/25 hover:bg-warning/18',
+      stripe: 'bg-warning',
+      dot: 'text-warning',
+    },
+    info: {
+      wrap: 'bg-secondary/10 border-secondary/20 hover:bg-secondary/15',
+      stripe: 'bg-secondary',
+      dot: 'text-secondary',
+    },
   }[tone];
   return (
     <button
       type="button"
       onClick={onClick}
       className={
-        'mb-2.5 flex w-full items-start gap-2.5 rounded-lg border p-2.5 text-left last:mb-0 ' +
-        map
+        'group relative mb-2.5 flex w-full items-start gap-2.5 overflow-hidden rounded-xl border p-3 pl-3.5 text-left transition-colors last:mb-0 ' +
+        map.wrap
       }
     >
-      <span className="mt-0.5 text-base leading-none">●</span>
-      <span className="text-[12.5px] text-foreground">{text}</span>
+      <span
+        className={'absolute inset-y-0 left-0 w-1 ' + map.stripe}
+        aria-hidden
+      />
+      <span className={'mt-0.5 text-[13px] leading-none ' + map.dot}>●</span>
+      <span className="text-[12.5px] leading-snug text-foreground">{text}</span>
     </button>
   );
 }
