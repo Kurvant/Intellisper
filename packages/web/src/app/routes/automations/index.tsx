@@ -1,10 +1,12 @@
 import { Permission, UncategorizedFolderId } from '@intelblocks/shared';
 import { t } from 'i18next';
-import { useCallback } from 'react';
+import { LayoutGrid, List } from 'lucide-react';
+import { useCallback, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { recordAccess } from '@/app/components/global-search/access-history';
 import { useEmbedding } from '@/components/providers/embed-provider';
+import { Button } from '@/components/ui/button';
 import { AutomationsEmptyState } from '@/features/automations/components/automations-empty-state';
 import { AutomationsFilters as AutomationsFiltersComponent } from '@/features/automations/components/automations-filters';
 import { AutomationsNoResultsState } from '@/features/automations/components/automations-no-results-state';
@@ -13,6 +15,7 @@ import { AutomationsSelectionBar } from '@/features/automations/components/autom
 import { AutomationsTable } from '@/features/automations/components/automations-table';
 import { CreateFolderDialog } from '@/features/automations/components/create-folder-dialog';
 import { CreateInFolderKind } from '@/features/automations/components/create-new-menu';
+import { AutomationsGallery } from '@/features/automations/components/gallery/automations-gallery';
 import { MoveToFolderDialog } from '@/features/automations/components/move-to-folder-dialog';
 import { RenameDialog } from '@/features/automations/components/rename-dialog';
 import { useAutomationsData } from '@/features/automations/hooks/use-automations-data';
@@ -41,10 +44,23 @@ export const AutomationsPage = () => {
   return <AutomationsPageContent key={projectId} projectId={projectId} />;
 };
 
+const AUTOMATIONS_VIEW_STORAGE_KEY = 'ib.automations.viewMode';
+
 const AutomationsPageContent = ({ projectId }: { projectId: string }) => {
   const [, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { embedState } = useEmbedding();
+
+  // View mode (premium gallery is the default; the classic table is one click away). Persisted
+  // per-user. Both views receive identical props, so every capability is available in either.
+  const [viewMode, setViewModeState] = useState<'gallery' | 'table'>(() => {
+    const stored = localStorage.getItem(AUTOMATIONS_VIEW_STORAGE_KEY);
+    return stored === 'table' ? 'table' : 'gallery';
+  });
+  const setViewMode = (mode: 'gallery' | 'table') => {
+    localStorage.setItem(AUTOMATIONS_VIEW_STORAGE_KEY, mode);
+    setViewModeState(mode);
+  };
 
   const { data: allProjects = [] } = projectCollectionUtils.useAll();
   const currentProjectName = (() => {
@@ -317,35 +333,69 @@ const AutomationsPageContent = ({ projectId }: { projectId: string }) => {
         <AutomationsNoResultsState onClearFilters={clearAllFilters} />
       ) : (
         <>
-          <AutomationsTable
-            items={treeItems}
-            isLoading={isLoading}
-            selectedItems={selectedItems}
-            expandedFolders={expandedFolders}
-            projectMembers={projectMembers}
-            folders={folders}
-            selectableCount={selectableItems.length}
-            isPinned={isPinned}
-            onTogglePin={togglePin}
-            onToggleAllSelection={toggleAllSelection}
-            onToggleItemSelection={toggleItemSelection}
-            onRowClick={handleRowClick}
-            onRenameItem={dialogs.openRenameDialog}
-            onDeleteItem={mutations.handleDeleteItem}
-            onDuplicateFlow={mutations.handleDuplicateFlow}
-            onMoveItem={mutations.handleMoveItem}
-            onExportFlow={mutations.handleExportFlow}
-            onExportTable={mutations.handleExportTable}
-            onCreateInFolder={handleCreateInFolder}
-            userHasPermissionToWriteFlow={userHasPermissionToWriteFlow}
-            userHasPermissionToWriteTable={userHasPermissionToWriteTable}
-            isCreatingFlow={mutations.isCreateFlowPending}
-            isCreatingTable={mutations.isCreatingTable}
-            isMoving={mutations.isMoving}
-            isDuplicating={mutations.isDuplicating}
-            onLoadMoreInFolder={loadMoreInFolder}
-            isItemSelected={isItemSelected}
-          />
+          <div className="flex items-center justify-end pt-1">
+            <ViewModeToggle value={viewMode} onChange={setViewMode} />
+          </div>
+
+          {viewMode === 'gallery' ? (
+            <AutomationsGallery
+              items={treeItems}
+              isLoading={isLoading}
+              selectedItems={selectedItems}
+              expandedFolders={expandedFolders}
+              folders={folders}
+              selectableCount={selectableItems.length}
+              isPinned={isPinned}
+              onTogglePin={togglePin}
+              onToggleAllSelection={toggleAllSelection}
+              onToggleItemSelection={toggleItemSelection}
+              onRowClick={handleRowClick}
+              onRenameItem={dialogs.openRenameDialog}
+              onDeleteItem={mutations.handleDeleteItem}
+              onDuplicateFlow={mutations.handleDuplicateFlow}
+              onMoveItem={mutations.handleMoveItem}
+              onExportFlow={mutations.handleExportFlow}
+              onExportTable={mutations.handleExportTable}
+              onCreateInFolder={handleCreateInFolder}
+              userHasPermissionToWriteFlow={userHasPermissionToWriteFlow}
+              userHasPermissionToWriteTable={userHasPermissionToWriteTable}
+              isCreatingFlow={mutations.isCreateFlowPending}
+              isCreatingTable={mutations.isCreatingTable}
+              isDuplicating={mutations.isDuplicating}
+              onLoadMoreInFolder={loadMoreInFolder}
+              isItemSelected={isItemSelected}
+            />
+          ) : (
+            <AutomationsTable
+              items={treeItems}
+              isLoading={isLoading}
+              selectedItems={selectedItems}
+              expandedFolders={expandedFolders}
+              projectMembers={projectMembers}
+              folders={folders}
+              selectableCount={selectableItems.length}
+              isPinned={isPinned}
+              onTogglePin={togglePin}
+              onToggleAllSelection={toggleAllSelection}
+              onToggleItemSelection={toggleItemSelection}
+              onRowClick={handleRowClick}
+              onRenameItem={dialogs.openRenameDialog}
+              onDeleteItem={mutations.handleDeleteItem}
+              onDuplicateFlow={mutations.handleDuplicateFlow}
+              onMoveItem={mutations.handleMoveItem}
+              onExportFlow={mutations.handleExportFlow}
+              onExportTable={mutations.handleExportTable}
+              onCreateInFolder={handleCreateInFolder}
+              userHasPermissionToWriteFlow={userHasPermissionToWriteFlow}
+              userHasPermissionToWriteTable={userHasPermissionToWriteTable}
+              isCreatingFlow={mutations.isCreateFlowPending}
+              isCreatingTable={mutations.isCreatingTable}
+              isMoving={mutations.isMoving}
+              isDuplicating={mutations.isDuplicating}
+              onLoadMoreInFolder={loadMoreInFolder}
+              isItemSelected={isItemSelected}
+            />
+          )}
 
           <AutomationsPagination
             currentPage={rootPage}
@@ -428,3 +478,44 @@ const AutomationsPageContent = ({ projectId }: { projectId: string }) => {
     </div>
   );
 };
+
+function ViewModeToggle({
+  value,
+  onChange,
+}: {
+  value: 'gallery' | 'table';
+  onChange: (mode: 'gallery' | 'table') => void;
+}) {
+  return (
+    <div className="inline-flex items-center gap-0.5 rounded-lg border border-border/70 bg-card p-0.5">
+      <Button
+        variant="ghost"
+        size="icon-sm"
+        aria-label={t('Gallery view')}
+        aria-pressed={value === 'gallery'}
+        onClick={() => onChange('gallery')}
+        className={
+          value === 'gallery'
+            ? 'bg-primary/10 text-primary hover:bg-primary/15'
+            : 'text-muted-foreground'
+        }
+      >
+        <LayoutGrid className="h-4 w-4" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon-sm"
+        aria-label={t('Table view')}
+        aria-pressed={value === 'table'}
+        onClick={() => onChange('table')}
+        className={
+          value === 'table'
+            ? 'bg-primary/10 text-primary hover:bg-primary/15'
+            : 'text-muted-foreground'
+        }
+      >
+        <List className="h-4 w-4" />
+      </Button>
+    </div>
+  );
+}
