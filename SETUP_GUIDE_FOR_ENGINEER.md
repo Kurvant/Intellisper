@@ -306,7 +306,7 @@ There are ~744 block packages plus `blocks-framework`, `blocks-common`, `shared`
 do this with a script, not by hand. Ask a senior engineer before writing a bulk
 script that edits every package.json — it's easy to get wrong. A safe approach is a
 small Node script that walks `packages/blocks/**/package.json` and adds the field if
-missing.
+missing. 
 
 Also confirm the **`name`** field of the framework packages matches what blocks
 depend on (`@intelblocks/blocks-framework`, etc.), because at publish time
