@@ -82,34 +82,35 @@ export function OverhaulHomePage() {
 
 function HeroCard({ onNewFlow }: { onNewFlow: () => void }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl p-6 text-white shadow-[0_1px_2px_rgba(16,22,35,.06),0_18px_40px_-20px_rgba(154,82,32,.55)]">
-      {/* layered brand gradient + radial sheen for depth (not a flat block) */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(135deg,#C4703A_0%,#B5652F_42%,#9A5220_100%)]" />
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(120%_120%_at_12%_0%,rgba(255,220,150,.45)_0%,transparent_45%)]" />
-      <div className="pointer-events-none absolute -right-16 -top-16 -z-10 size-64 rounded-full bg-[radial-gradient(circle,rgba(245,184,24,.35)_0%,transparent_70%)]" />
-      <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/75">
-        {t('Command center')}
-      </div>
-      <h2 className="mt-1.5 text-[23px] font-bold leading-[1.15] tracking-tight text-white [text-wrap:balance]">
-        {t('Your automations saved 214 hours this month')}
-      </h2>
-      <p className="mt-2 max-w-[46ch] text-[13.5px] leading-relaxed text-white/85">
-        {t(
-          "42 automations running across 3 projects. Everything's healthy except a few runs that need a retry.",
-        )}
-      </p>
-      <div className="mt-5 flex flex-wrap gap-2.5">
+    <div className="relative overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#C4703A_0%,#B5652F_42%,#9A5220_100%)] p-6 text-white shadow-[0_1px_2px_rgba(16,22,35,.06),0_18px_40px_-20px_rgba(154,82,32,.55)]">
+      {/* radial sheen + amber glow above the base gradient, below the content */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_120%_at_12%_0%,rgba(255,220,150,.45)_0%,transparent_45%)]" />
+      <div className="pointer-events-none absolute -right-16 -top-16 size-64 rounded-full bg-[radial-gradient(circle,rgba(245,184,24,.35)_0%,transparent_70%)]" />
+      <div className="relative">
+        <div className="text-[11px] font-bold uppercase tracking-[0.12em] text-white/75">
+          {t('Command center')}
+        </div>
+        <h2 className="mt-1.5 text-[23px] font-bold leading-[1.15] tracking-tight text-white [text-wrap:balance]">
+          {t('Your automations saved 214 hours this month')}
+        </h2>
+        <p className="mt-2 max-w-[46ch] text-[13.5px] leading-relaxed text-white/85">
+          {t(
+            "42 automations running across 3 projects. Everything's healthy except a few runs that need a retry.",
+          )}
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2.5">
         <HeroChip
           icon="automation"
           label={t('New automation')}
           onClick={onNewFlow}
         />
-        <HeroChip icon="table" label={t('New table')} onClick={onNewFlow} />
-        <HeroChip
-          icon="chat"
-          label={t('Ask Intellisper')}
-          onClick={onNewFlow}
-        />
+          <HeroChip icon="table" label={t('New table')} onClick={onNewFlow} />
+          <HeroChip
+            icon="chat"
+            label={t('Ask Intellisper')}
+            onClick={onNewFlow}
+          />
+        </div>
       </div>
     </div>
   );
