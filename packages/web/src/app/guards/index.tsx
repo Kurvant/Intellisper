@@ -31,6 +31,12 @@ const OverhaulHomePage = React.lazy(() =>
   })),
 );
 
+const OverhaulAutomationsPage = React.lazy(() =>
+  import('@/app/routes/overhaul-automations').then((m) => ({
+    default: m.OverhaulAutomationsPage,
+  })),
+);
+
 function chatElement() {
   return (
     <AllowOnlyLoggedInUserOnlyGuard>
@@ -50,7 +56,7 @@ const chatRoutes = [
   { path: '/chat/:conversationId', element: chatElement() },
 ];
 
-// Overhaul (new IA) — additive route mounted alongside the current app for verification.
+// Overhaul (new IA) — additive routes mounted alongside the current app for verification.
 const overhaulRoutes = [
   {
     path: '/home',
@@ -59,6 +65,18 @@ const overhaulRoutes = [
         <PageTitle title="Home">
           <Suspense fallback={<RouteLoadingBar />}>
             <OverhaulHomePage />
+          </Suspense>
+        </PageTitle>
+      </AllowOnlyLoggedInUserOnlyGuard>
+    ),
+  },
+  {
+    path: '/build/automations',
+    element: (
+      <AllowOnlyLoggedInUserOnlyGuard>
+        <PageTitle title="Automations">
+          <Suspense fallback={<RouteLoadingBar />}>
+            <OverhaulAutomationsPage />
           </Suspense>
         </PageTitle>
       </AllowOnlyLoggedInUserOnlyGuard>

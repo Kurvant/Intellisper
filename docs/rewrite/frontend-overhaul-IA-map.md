@@ -122,3 +122,16 @@ Every ledger cluster maps to a domain above: BLD→Build/Operate, TBL→Build/Da
 RUN→Operate, FRM/PCH→public runtimes, AIC→assistant, PLT→Admin/Insights/Connect, AUTH→auth, BILL→Admin,
 SMG→Connect/Admin, TPL→Build, PRJ→Admin+switcher, MEM→Admin, ALT→settings, REL→Build/Operate, ANL→Insights,
 SET→Project Settings, SHL→shell. No cluster is orphaned. Old routes redirect. Gates preserved.
+
+## Build progress notes (Pillar 3)
+
+- **Home** (`/home`) — new command-center, built + polished + user-approved.
+- **Automations** (`/build/automations`) — capability-preservation by REUSE: renders the existing
+  `<AutomationsPage/>` verbatim inside `NewAppShell`. All BLD-145..204 list capabilities preserved
+  (same component). KNOWN FOLLOW-UP: the reused page's row nav uses `appendProjectRoutePrefix`, so
+  opening a flow/table navigates to the OLD `/projects/:id/...` routes (exits the new shell). That's
+  fine for the additive proof-of-concept; rewiring builder/table nav into the new shell is a later
+  step once those surfaces are rebuilt. No capability lost — navigation target only.
+- Strategy going forward: prefer WRAPPING existing capable page-content components in `NewAppShell`
+  over rewriting, wherever the component is layout-agnostic (returns content, not chrome). Rewrite
+  only where the new IA genuinely changes the interaction (Home, and later the builder/table shells).
