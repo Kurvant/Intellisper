@@ -33,8 +33,23 @@ const WRITE = process.argv.includes('--write')
 const ALL = process.argv.includes('--all')
 const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').replace('--only=', '')
 const ONLY_FAILED = process.argv.includes('--only-failed')
+// --skip-published: query the registry BEFORE building, and skip any package whose
+// exact version is already there. Turns a full re-run from "rebuild all 748" into
+// "only build+publish the missing ones" — much faster on a resumed run.
+const SKIP_PUBLISHED = process.argv.includes('--skip-published')
 const REPORT_PATH = 'scripts/publish-packages.report.json'
 const REGISTRY = 'https://npm.pkg.github.com'
+
+// Returns true if name@version already exists on the registry.
+function isAlreadyPublished(name, version) {
+    try {
+        const out = execSync(`npm view ${name}@${version} version --registry=${REGISTRY}`, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] })
+        return out.trim() === version
+    }
+    catch {
+        return false // 404 / not found / any error -> treat as not published, let publish decide
+    }
+}
 
 // ---- workspace version map (mirrors cli/workspace-utils.buildWorkspaceVersionMap) ----
 function buildWorkspaceVersionMap(rootDir) {
@@ -144,6 +159,14 @@ for (const pkg of selected) {
     try {
         console.log(`\n=== ${pkg.name}@${pkg.version} ===`)
 
+        // 0) fast path: if already on the registry, skip WITHOUT building.
+        if (SKIP_PUBLISHED && isAlreadyPublished(pkg.name, pkg.version)) {
+            console.log('  ⏭️  already published — skipping (no build)')
+            report.skipped.push({ name: pkg.name, version: pkg.version })
+            writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2) + '\n')
+            continue
+        }
+
         // 1) build (refreshes dist/ and copies package.json into it)
         console.log('  building…')
         execSync(`npx turbo run build --filter=${pkg.name}`, { stdio: 'pipe' })
@@ -170,6 +193,7 @@ for (const pkg of selected) {
         const published = /\+\s+@intelblocks\//.test(out) || WRITE
         console.log(`  ${WRITE ? '✅ published' : 'ℹ️  dry-run ok'}`)
         report.ok.push({ name: pkg.name, version: pkg.version, published })
+        writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2) + '\n')
     }
     catch (err) {
         const msg = (err.stdout ? err.stdout.toString() : '') + (err.stderr ? err.stderr.toString() : '') || err.message
@@ -184,6 +208,9 @@ for (const pkg of selected) {
             console.error('     ' + msg.split('\n').filter(Boolean).slice(-6).join('\n     '))
             report.failed.push({ name: pkg.name, version: pkg.version, error: msg.split('\n').slice(-6).join(' | ') })
         }
+        // Persist after every package so an interrupted run (Ctrl+C) keeps its state
+        // and --only-failed still works.
+        writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2) + '\n')
     }
 }
 
