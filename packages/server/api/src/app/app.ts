@@ -11,6 +11,7 @@ import { agentsModule } from './agents/agents-module'
 import { aiProviderService } from './ai/ai-provider-service'
 import { aiProviderModule } from './ai/ai-provider.module'
 import { aiGatewayAdminModule } from './ai-gateway/ai-gateway-admin.module'
+import { blockMetadataAdminModule } from './pieces/block-metadata-admin.module'
 import { aiGatewayModule } from './ai-gateway/ai-gateway.module'
 import { aiUsageSink } from './ai-gateway/ai-usage-sink'
 import { platformAnalyticsModule } from './analytics/platform-analytics.module'
@@ -273,6 +274,10 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
             await app.register(aiGatewayAdminModule)
             // Browser-agent operator surface — cross-tenant agent activity, operator-key gated, CLOUD-only.
             await app.register(browserAgentActivityAdminModule)
+            // Block catalogue write surface — how the operator publishes block metadata so it appears
+            // in every tenant's picker. Operator-key gated and CLOUD-only for the same reason as the
+            // surfaces above: a catalogue write decides what code all tenants' flows resolve.
+            await app.register(blockMetadataAdminModule)
             await app.register(adminPlatformTemplatesCloudModule)
             await app.register(appCredentialModule)
             await app.register(connectionKeyModule)
