@@ -66,10 +66,13 @@ async function publishOne(block: { name: string, version: string }): Promise<Res
     if (response.status === 200) {
         return 'created'
     }
-    if (response.status === 409) {
+    const body = await response.text().catch(() => '')
+    // Re-publishing an existing (name, version) is normal when this re-runs on every deploy. The
+    // admin route surfaces that as the service's VALIDATION error rather than a 409, so match on
+    // the error string; treating it as success is what makes the script idempotent.
+    if (response.status === 409 || body.includes('piece_metadata_already_exists') || body.includes('already_exists')) {
         return 'exists'
     }
-    const body = await response.text().catch(() => '')
     console.error(`  FAILED ${block.name}@${block.version} -> HTTP ${response.status} ${body.slice(0, 200)}`)
     return 'failed'
 }
