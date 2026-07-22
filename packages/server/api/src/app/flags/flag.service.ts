@@ -195,13 +195,13 @@ export const flagService = (log: FastifyBaseLogger) => ({
             },
             {
                 id: IbFlagId.PRIVACY_POLICY_URL,
-                value: 'https://intellisper.kurvant.com/privacy',
+                value: 'https://intellisper.com/privacy',
                 created,
                 updated,
             },
             {
                 id: IbFlagId.TERMS_OF_SERVICE_URL,
-                value: 'https://intellisper.kurvant.com/terms',
+                value: 'https://intellisper.com/terms',
                 created,
                 updated,
             },

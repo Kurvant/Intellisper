@@ -90,8 +90,12 @@ export const BuilderHeader = () => {
   }, []);
 
   const goToFlowsPage = () => {
+    // Exit the builder into the NEW shell's automations list (overhaul), not the legacy
+    // /automations page — the builder itself is shell-agnostic, but its exit must land users
+    // back in the new design.
     navigate({
-      pathname: authenticationSession.appendProjectRoutePrefix('/automations'),
+      pathname:
+        authenticationSession.appendProjectRoutePrefix('/build/automations'),
       search: createSearchParams({
         folderId: folderData?.id ?? UncategorizedFolderId,
       }).toString(),
@@ -209,7 +213,7 @@ export const BuilderHeader = () => {
   return (
     <div
       style={{
-        height: `$${flowCanvasConsts.BUILDER_HEADER_HEIGHT}px`,
+        height: `${flowCanvasConsts.BUILDER_HEADER_HEIGHT}px`,
       }}
     >
       <PageHeader

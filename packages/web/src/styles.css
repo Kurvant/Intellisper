@@ -825,116 +825,65 @@
   font-size: 1rem;
 }
 
-/* ── Auth Animation (auth-anim-*) ── */
+/* ── Auth pages (auth-scene-*) ── */
 
-/* Canvas scaling: wrapper fills parent height, canvas scales to fit */
-.auth-anim-scale-wrapper {
-  height: 100%;
+/* Builder-canvas dot grid on the white ground, faded to nothing under the centered form so
+   the card sits on clean white. */
+.auth-scene-grid {
+  background-image: radial-gradient(circle, rgba(31, 41, 51, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 46%, transparent 30%, black 78%);
+  mask-image: radial-gradient(ellipse 70% 65% at 50% 46%, transparent 30%, black 78%);
 }
-.auth-anim-canvas {
-  transform: scale(0.71);
-  width: 140.85%; /* 1/0.71 */
+
+/* Gentle vertical float for the flow-step cards + chips around the sign-up form. */
+.auth-scene-float {
+  animation: auth-scene-float 7s ease-in-out infinite;
 }
-@media (min-width: 640px) {
-  .auth-anim-canvas {
-    transform: scale(0.85);
-    width: 117.65%; /* 1/0.85 */
+@keyframes auth-scene-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* Slow dash-march on the connector paths (direction: toward the form). */
+.auth-scene-dash {
+  animation: auth-scene-dash 1.4s linear infinite;
+}
+@keyframes auth-scene-dash {
+  to { stroke-dashoffset: -20; }
+}
+
+/* The single data-dot traveling across the card's mini-pipeline motif. */
+.auth-scene-runner {
+  animation: auth-scene-runner 2.8s ease-in-out infinite;
+}
+@keyframes auth-scene-runner {
+  0% { left: 6%; opacity: 0; }
+  12% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 90%; opacity: 0; }
+}
+
+/* Soft pulse for "live" status dots. */
+.auth-scene-pulse {
+  animation: auth-scene-pulse 2s ease-in-out infinite;
+}
+@keyframes auth-scene-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-scene-float,
+  .auth-scene-dash,
+  .auth-scene-runner,
+  .auth-scene-pulse {
+    animation: none;
   }
-}
-@media (min-width: 768px) {
-  .auth-anim-canvas {
-    transform: scale(1);
-    width: 100%;
+  /* SMIL animateMotion dots cannot be paused via CSS — hide them instead. */
+  .auth-scene-motion {
+    display: none;
   }
-}
-
-/* Agent element with spring-based staggered transitions */
-.auth-anim-agent {
-  transition:
-    top 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    left 800ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    width 700ms cubic-bezier(0.22, 1, 0.36, 1) 80ms,
-    height 700ms cubic-bezier(0.22, 1, 0.36, 1) 80ms;
-  will-change: top, left, width, height;
-}
-
-/* Animated AI gradient border */
-.auth-anim-gradient-border {
-  position: relative;
-  background: linear-gradient(90deg, #8b5cf6, #a855f7, #c084fc, #a855f7, #8b5cf6);
-  background-size: 300% 100%;
-  animation: auth-anim-gradient-flow 4s ease-in-out infinite;
-  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Enhanced during morphing/movement */
-.auth-anim-gradient-morphing {
-  animation: auth-anim-gradient-flow 2s ease-in-out infinite;
-  transform: scale(1.005);
-}
-
-@keyframes auth-anim-gradient-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Particle dots with percentage-based animation */
-.auth-anim-particle-dot {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  animation: auth-anim-particle-right 1s linear infinite;
-}
-
-.auth-anim-particle-dot-reverse {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  animation: auth-anim-particle-left 1s linear infinite;
-}
-
-@keyframes auth-anim-particle-right {
-  0% { left: 0%; }
-  100% { left: 100%; }
-}
-
-@keyframes auth-anim-particle-left {
-  0% { left: 100%; }
-  100% { left: 0%; }
-}
-
-/* Vertical particle dots */
-.auth-anim-particle-dot-vertical {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  animation: auth-anim-particle-down 2s linear infinite;
-}
-
-.auth-anim-particle-dot-vertical-reverse {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  animation: auth-anim-particle-up 2s linear infinite;
-}
-
-@keyframes auth-anim-particle-down {
-  0% { top: -5%; opacity: 0; }
-  5% { opacity: 1; }
-  95% { opacity: 1; }
-  100% { top: 105%; opacity: 0; }
-}
-
-@keyframes auth-anim-particle-up {
-  0% { top: 105%; opacity: 0; }
-  5% { opacity: 1; }
-  95% { opacity: 1; }
-  100% { top: -5%; opacity: 0; }
 }
 
 /* ── Password strength bolt glow ── */

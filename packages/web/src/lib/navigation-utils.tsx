@@ -28,7 +28,11 @@ export const LOGIN_QUERY_PARAM = 'intellisperLogin';
 export const PROVIDER_NAME_QUERY_PARAM = 'providerName';
 
 export const useDefaultRedirectPath = () => {
-  return '/flows';
+  // Post-login / fallback landing target. '/home' is the overhaul (new shell) command-center:
+  // login-gated but NOT project-scoped, so it is always safe to navigate to right after
+  // authentication — before project/permission state has loaded. The legacy '/flows' target
+  // landed users in the old shell.
+  return '/home';
 };
 
 export const useRedirectAfterLogin = () => {
