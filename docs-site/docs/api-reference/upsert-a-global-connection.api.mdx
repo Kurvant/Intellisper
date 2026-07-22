@@ -1,0 +1,68 @@
+---
+id: upsert-a-global-connection
+title: "Upsert a global connection"
+description: "Create or update an organization-shared connection (administrator-only)."
+sidebar_label: "Upsert a global connection"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWd9v4jgQ/leiebqT0tLuY95aYLXVdUtV4HQnhNCQTMFbx/baTtscyv9+shOaAOkuSF3tA/AU4sn8/D4nnlmBxYWBaAILLufIz2IpBMWWSWFgGkJCJtZMuf8QQVcTWgqkDjKVuCsUgdQLFOw/dCJnZomakqBWEvyBScoEM1ajlfpMCp7/eQ4haPqekbHXMskhWkEshSVh3SUqxVns9XW+GWd3BSZeUop+VeSDR4gmK7C5IohAzr9RbCEEpaUibRkZJ5cwozjmd5iS+1sJG6uZWEARwpzL+Ond1ZQsJmixsbhtx6s2rU9jkjDnPvL7pk/F2uzfpA0rA9t5tryxvRACiSx1ZRr2uw/90WzU/2cE0yKEZ+QZ/cBN1vRxf7WGYk12ZunVtj2WMnFLYmGXEF26sFw1mabEqfKymxq8xlj+2IX726vR58HDVy+ttHRx3CTNDKPWmEMIzFLalvkiBHq1pAXym6Q1u0rTkDjF9rPUd/RyX1pp6ppLyQkFbEfVxFMTPeE63rIQ6zg3IpgW4bHCdXA1Hn35dAhSY85I2BlrKeAW7kKIZdJqvUVsFi+RcxKL9gy+g06Xncwupa42uFlKdilbXVtH/KV/1es/QAjXg96/PvAqopIQe7i70Cjs7GeZ3fTLZ+LNVKwpIWEZcrNmkzIfDg5NCdMU21mm+R5h7Q2VLebVgKgKXnNsM7NbHlUWT3vPse493dvBuDc77UC/iv8H5n9/Wp94e9S8XRf1RN3fRt22Ehz0uj+Q7FvaT9w/Vu5fXw1vujMHukNonxlXxLZgd+is0JgXqffZIA7ydav8bx41LJ5ebEcO7u54OBp8PRjdh6r9Fa+M9h5PaekE6GMF9N3gw8Fcq2yD3NFDbVpUXDRKClOm9NPFhQfZRqu+R4+YcRs8VJLej/UHKChpfGnQveug83zZaWn/ux6ufiZtfLvdf/XB0lplok4HFTtnwhLnzCjS57FMYXtacK9lkpVTgKFXBMXU94UzzWw+dC39MgBU7C/KG7lzVnbUjQ0Fucx0gIoFT5QHCxKk0VISPGqZBnZJgR82uPGDkbzMoTPiqkGonQNFCG6m8FBPH/qvmCpOOzStcdVgZ+NboSblDpNqqSqeZnd9lymbqxud991DRo3uTWxP1qLTTezWvrwLWaszKkJg4lF6r5h16YCburxBT8ZZSsL6c4wL4S3Ui/OL8wvPCGlsin4fKT/FYKwMaRtgUGKrMRXarm1j/vORM6Yqvy6VHcWRCedndXopoT+B50sI35l9LR1JogmsVnM0NNa8KNzt7xnpHKLJ1FVSM5y7bE3cXrMkTEh7tjw5PEO3jOps1GR2tDvhcrx44+b9YOhwMK8mY6k/poLGF3dKwheIAEKQqnQzWpX3VsBRLDJ0J1Qodbrf/+vhmLU=
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Upsert a global connection"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/global-connections"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create or update an organization-shared connection (administrator-only).
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"anyOf":[{"type":"object","properties":{"displayName":{"type":"string"},"blockName":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["SECRET_TEXT"]},"value":{"type":"object","properties":{"type":{"type":"string","enum":["SECRET_TEXT"]},"secret_text":{"type":"string","minLength":1}},"required":["type","secret_text"]},"scope":{"type":"string","enum":["PLATFORM"]},"projectIds":{"type":"array","items":{"type":"string"}},"externalId":{"type":"string"},"preSelectForNewProjects":{"type":"boolean"}},"required":["displayName","blockName","type","value","scope","projectIds"]},{"type":"object","properties":{"displayName":{"type":"string"},"blockName":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["OAUTH2"]},"value":{"type":"object","properties":{"client_id":{"type":"string","minLength":1},"code":{"type":"string","minLength":1},"code_challenge":{"type":"string"},"scope":{"type":"string"},"authorization_method":{"type":"string","enum":["HEADER","BODY"]},"client_secret":{"type":"string","minLength":1},"grant_type":{"type":"string","enum":["authorization_code","client_credentials"]},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"redirect_url":{"type":"string","minLength":1},"type":{"type":"string","enum":["OAUTH2"]}},"required":["client_id","code","scope","client_secret","redirect_url","type"]},"scope":{"type":"string","enum":["PLATFORM"]},"projectIds":{"type":"array","items":{"type":"string"}},"externalId":{"type":"string"},"preSelectForNewProjects":{"type":"boolean"}},"required":["displayName","blockName","type","value","scope","projectIds"]},{"type":"object","properties":{"displayName":{"type":"string"},"blockName":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["CLOUD_OAUTH2"]},"value":{"type":"object","properties":{"client_id":{"type":"string","minLength":1},"code":{"type":"string","minLength":1},"code_challenge":{"type":"string"},"scope":{"type":"string"},"authorization_method":{"type":"string","enum":["HEADER","BODY"]},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"type":{"type":"string","enum":["CLOUD_OAUTH2"]}},"required":["client_id","code","scope","type"]},"scope":{"type":"string","enum":["PLATFORM"]},"projectIds":{"type":"array","items":{"type":"string"}},"externalId":{"type":"string"},"preSelectForNewProjects":{"type":"boolean"}},"required":["displayName","blockName","type","value","scope","projectIds"]},{"type":"object","properties":{"displayName":{"type":"string"},"blockName":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["PLATFORM_OAUTH2"]},"value":{"type":"object","properties":{"client_id":{"type":"string","minLength":1},"code":{"type":"string","minLength":1},"code_challenge":{"type":"string"},"scope":{"type":"string"},"authorization_method":{"type":"string","enum":["HEADER","BODY"]},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"type":{"type":"string","enum":["PLATFORM_OAUTH2"]},"redirect_url":{"type":"string","minLength":1}},"required":["client_id","code","scope","type","redirect_url"]},"scope":{"type":"string","enum":["PLATFORM"]},"projectIds":{"type":"array","items":{"type":"string"}},"externalId":{"type":"string"},"preSelectForNewProjects":{"type":"boolean"}},"required":["displayName","blockName","type","value","scope","projectIds"]},{"type":"object","properties":{"displayName":{"type":"string"},"blockName":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["BASIC_AUTH"]},"value":{"type":"object","properties":{"username":{"type":"string","minLength":1},"password":{"type":"string","minLength":1},"type":{"type":"string","enum":["BASIC_AUTH"]}},"required":["username","password","type"]},"scope":{"type":"string","enum":["PLATFORM"]},"projectIds":{"type":"array","items":{"type":"string"}},"externalId":{"type":"string"},"preSelectForNewProjects":{"type":"boolean"}},"required":["displayName","blockName","type","value","scope","projectIds"]},{"type":"object","properties":{"displayName":{"type":"string"},"blockName":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["CUSTOM_AUTH"]},"value":{"type":"object","properties":{"type":{"type":"string","enum":["CUSTOM_AUTH"]},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}}},"required":["type","props"]},"scope":{"type":"string","enum":["PLATFORM"]},"projectIds":{"type":"array","items":{"type":"string"}},"externalId":{"type":"string"},"preSelectForNewProjects":{"type":"boolean"}},"required":["displayName","blockName","type","value","scope","projectIds"]},{"type":"object","properties":{"displayName":{"type":"string"},"blockName":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["NO_AUTH"]},"value":{"type":"object","properties":{"type":{"type":"string","enum":["NO_AUTH"]}},"required":["type"]},"scope":{"type":"string","enum":["PLATFORM"]},"projectIds":{"type":"array","items":{"type":"string"}},"externalId":{"type":"string"},"preSelectForNewProjects":{"type":"boolean"}},"required":["displayName","blockName","type","value","scope","projectIds"]}]}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

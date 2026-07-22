@@ -16,7 +16,6 @@
 // replaces it. OAuth2 performs the authorization-code exchange server-side (via the app-connection
 // service's validation path); API-key stores the presented key as a secret-text value.
 import {
-    IntellisperError,
     AppConnectionScope,
     AppConnectionStatus,
     AppConnectionType,
@@ -25,6 +24,7 @@ import {
     AppCredentialType,
     ErrorCode,
     GetOrDeleteConnectionFromTokenRequest,
+    IntellisperError,
     isNil,
     OAuth2GrantType,
     UpsertConnectionFromToken,

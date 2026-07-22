@@ -1,5 +1,5 @@
-import { isNil } from '@intelblocks/shared';
 import { useDndMonitor, useDroppable, DragMoveEvent } from '@dnd-kit/core';
+import { isNil } from '@intelblocks/shared';
 import { Plus } from 'lucide-react';
 import React, { useState } from 'react';
 

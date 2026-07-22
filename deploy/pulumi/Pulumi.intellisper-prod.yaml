@@ -1,19 +1,24 @@
-encryptionsalt: v1:icXg2cmIvSc=:v1:y8+4YhdMCPPDY26J:5cNYmimH353n8sjUDDc6srvcPgb+8Q==
 config:
-  intellisper:environment: "prod"
-  intellisper:apEncryptionKey:  
-  intellisper:apJwtSecret: 
-  intellisper:deployLocalBuild: "true"
-  intellisper:repoName: "intellisper-prod-repo"
+  intellisper:ibJwtSecret:
+    secure: AAABAOZN9jq7M1sXbCA0N9TxVKeasOXGYQ6GJWEH4gR9fShIvHkX6dxO/oILT7fCSHtPXinOBEhAAnCQW8SAL42lnmubMDsSMmGUdC/uhw7hi8VP2c9C0gfvGXjhdvyv
+  intellisper:ibEncryptionKey:
+    secure: AAABAHSCiuuXoTmwSfg9K+EA2HD0BvGxbZrf4u7WqdQzY6AEkgCevjR8tzijEqLG2prKVXo0rVUpxFAPO94SxA==
+  intellisper:dbPassword:
+    secure: AAABAHwFq2v7Wc/nawGswpSzWHPEx+NppvptoW5V6fOujfmG2sGrg18NUNVZJy4nm5fhgPRSjvnJMMhxgzXjPQ==
+  aws:region: us-east-1
   intellisper:containerCpu: "512"
   intellisper:containerMemory: "1024"
   intellisper:containerInstances: "1"
-  intellisper:usePostgres: "true"
-  intellisper:dbInstanceClass: "db.t3.small"
+  intellisper:dbInstanceClass: db.t3.small
   intellisper:dbIsPublic: "false"
-  intellisper:dbPassword:
-    secure: v1:MXNSOcqZCp10X2PX:mU2iTrcETjdisk8FkD5yHLJYUxRei/9l
-  intellisper:dbUsername: "postgres"
+  intellisper:dbUsername: postgres
+  intellisper:usePostgres: "true"
   intellisper:useRedis: "true"
-  intellisper:redisNodeType: "cache.t3.small"
-  aws:region: "us-east-1"
+  intellisper:redisNodeType: cache.t3.small
+  intellisper:deployLocalBuild: "true"
+  intellisper:environment: prod
+  intellisper:repoName: intellisper-prod-repo
+  intellisper:skipImageBuild: "true"
+  intellisper:acmCertificateArn: arn:aws:acm:us-east-1:835582727847:certificate/0c45c65d-f069-46b4-a534-25bfe4096032
+  intellisper:subDomain: cloud
+  intellisper:domain: intellisper.com

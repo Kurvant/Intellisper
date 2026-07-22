@@ -3,7 +3,7 @@
 // licensed source. One plan row per platform (1:1).
 import { AiCreditsAutoTopUpState, Platform, PlatformPlan, TeamProjectsLimit } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../../database/database-common'
 
 type PlatformPlanSchema = PlatformPlan & {
     platform: Platform
@@ -73,6 +73,18 @@ export const PlatformPlanEntity = new EntitySchema<PlatformPlanSchema>({
         stripeSubscriptionCancelDate: { type: Number, nullable: true },
         projectsLimit: { type: Number, nullable: true },
         activeFlowsLimit: { type: Number, nullable: true },
+        // Browser-agent entitlements (SUBSCRIPTION_PLANS_PROPOSAL §8 Option 1 — promoted into the
+        // plan so one row is the single source of truth for both products). The two booleans already
+        // existed in the DB (browser-agent Phase-1 migration) as DB-only flags; they are now part of
+        // the mapped entity. `agentCaps` is one jsonb blob (the shared BrowserAgentCaps shape) so a
+        // tier change writes the whole entitlement set atomically — no multi-column drift.
+        browserAgentEnabled: { type: Boolean, nullable: false, default: false },
+        agentSharingUnlocked: { type: Boolean, nullable: false, default: false },
+        agentCaps: { type: 'jsonb', nullable: true },
+        // Memory's entitlement is its OWN blob, not a field of `agentCaps`: memory is sold and used
+        // by either product (agent → personal memory, Studio → org/flow memory), so a Studio-only
+        // plan sets this with no agent columns touched. NULL = no memory (the resolver fails closed).
+        memoryCaps: { type: 'jsonb', nullable: true },
         // @deprecated retained for backwards compatibility with the MIT type.
         dedicatedWorkers: { type: 'jsonb', nullable: true },
         canary: { type: Boolean, nullable: false },

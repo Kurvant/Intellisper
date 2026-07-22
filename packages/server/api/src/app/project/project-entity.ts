@@ -16,8 +16,8 @@ import {
 } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
 import {
-    IbIdSchema,
     BaseColumnSchemaPart,
+    IbIdSchema,
 } from '../database/database-common'
 
 type ProjectSchema = Project & {

@@ -17,17 +17,18 @@
 // crashed turn and recover it to IDLE (persisted, so the client and subsequent reads see a
 // usable conversation). IDLE/ERROR are never affected by staleness.
 import {
-    IntellisperError,
-    ibId,
     ChatConversation,
     ChatConversationStatus,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     PersistedChatMessage,
     SeekPage,
     spreadIfDefined,
 } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
+import { jsonbArray } from '../../core/db/jsonb-column'
 import { repoFactory } from '../../core/db/repo-factory'
 import { paginationHelper } from '../../helper/pagination/pagination-utils'
 import { ChatConversationEntity } from './chat-conversation-entity'
@@ -190,8 +191,8 @@ export const chatConversationService = (_log: FastifyBaseLogger) => ({
         await conversationRepo().update(
             { id },
             {
-                messages,
-                uiMessages,
+                messages: jsonbArray(messages),
+                uiMessages: jsonbArray(uiMessages),
                 status: ChatConversationStatus.IDLE,
                 ...spreadIfDefined('title', title),
                 ...spreadIfDefined('modelName', modelName),
@@ -204,7 +205,7 @@ export const chatConversationService = (_log: FastifyBaseLogger) => ({
     // Heartbeat + streaming progress: update the rolling UI-message history mid-turn and bump
     // `updated` (which is what the staleness check reads). Keeps the conversation STREAMING.
     async updateProgress({ id, uiMessages }: { id: string, uiMessages: PersistedChatMessage[] }): Promise<void> {
-        await conversationRepo().update({ id }, { uiMessages, updated: new Date().toISOString() })
+        await conversationRepo().update({ id }, { uiMessages: jsonbArray(uiMessages), updated: new Date().toISOString() })
     },
 
     // Bind (or clear) the conversation's active project context, set by the agent's

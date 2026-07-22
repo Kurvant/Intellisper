@@ -1,8 +1,8 @@
 import { Flow, FlowVersion, User } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
 import {
-    IbIdSchema,
     BaseColumnSchemaPart,
+    IbIdSchema,
 } from '../../database/database-common'
 
 export type FlowVersionSchema = {

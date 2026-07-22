@@ -1,8 +1,9 @@
 import { inspect } from 'util'
-import { IbEdition, IbEnvironment, DefaultProjectRole, ExecutionMode, FileLocation, isNil, NetworkMode, BlockSyncMode } from '@intelblocks/shared'
+import { BlockSyncMode, DefaultProjectRole, ExecutionMode, FileLocation, IbEdition, IbEnvironment, isNil, NetworkMode } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { DatabaseType } from '../database/database-type'
 import { RedisType } from '../database/redis/types'
+import { EmailTransport, RestEmailProvider } from '../enterprise/helper/email/email-sender'
 import { s3Helper } from '../file/s3-helper'
 import { encryptUtils } from './encryption'
 import { jwtUtils } from './jwt-utils'
@@ -62,6 +63,11 @@ const systemPropValidators: {
     [AppSystemProp.SANDBOX_MEMORY_LIMIT]: numberValidator,
     [AppSystemProp.SANDBOX_PROPAGATED_ENV_VARS]: stringValidator,
     [AppSystemProp.SENTRY_DSN]: urlValidator,
+    [AppSystemProp.CLOUD_OAUTH_URL]: urlValidator,
+    [AppSystemProp.CLOUD_OAUTH_API_KEY]: stringValidator,
+    [AppSystemProp.LICENSE_KEY]: stringValidator,
+    [AppSystemProp.LICENSE_KEY_URL]: urlValidator,
+    [AppSystemProp.LICENSE_KEY_EXTEND_TRIAL_API_KEY]: stringValidator,
     [AppSystemProp.RUNS_METADATA_UPDATE_CONCURRENCY]: numberValidator,
     [AppSystemProp.LOKI_PASSWORD]: stringValidator,
     [AppSystemProp.LOKI_URL]: urlValidator,
@@ -144,6 +150,7 @@ const systemPropValidators: {
     [AppSystemProp.FIREBASE_HASH_PARAMETERS]: stringValidator,
     [AppSystemProp.STRIPE_SECRET_KEY]: stringValidator,
     [AppSystemProp.STRIPE_WEBHOOK_SECRET]: stringValidator,
+    [AppSystemProp.STRIPE_PLAN_PRICE_IDS]: stringValidator,
     [AppSystemProp.INTERNAL_URL]: stringValidator,
     [AppSystemProp.WORKERS]: numberValidator,
     [AppSystemProp.EDITION]: enumValidator(Object.values(IbEdition)),
@@ -155,6 +162,7 @@ const systemPropValidators: {
     // Cloud
     [AppSystemProp.GOOGLE_CLIENT_ID]: stringValidator,
     [AppSystemProp.GOOGLE_CLIENT_SECRET]: stringValidator,
+    [AppSystemProp.GOOGLE_CLIENT_ID_INTELLISPER]: stringValidator,
 
     // Cloudflare
     [AppSystemProp.CLOUDFLARE_API_TOKEN]: stringValidator,
@@ -202,6 +210,22 @@ const systemPropValidators: {
     [AppSystemProp.CHAT_ROLLOUT_CAP]: numberValidator,
     [AppSystemProp.CHAT_METRICS_ENABLED]: booleanValidator,
     [AppSystemProp.CHAT_METRICS_RETENTION_DAYS]: numberValidator,
+    // Browser-agent model provider (keys + tier model ids) — free-form strings.
+    [AppSystemProp.BROWSER_AGENT_ANTHROPIC_API_KEY]: stringValidator,
+    [AppSystemProp.BROWSER_AGENT_OPENAI_API_KEY]: stringValidator,
+    [AppSystemProp.BROWSER_AGENT_DEFAULT_MODEL]: stringValidator,
+    [AppSystemProp.BROWSER_AGENT_ESCALATION_MODEL]: stringValidator,
+    [AppSystemProp.BROWSER_AGENT_REASONING_MODEL]: stringValidator,
+    [AppSystemProp.BROWSER_AGENT_FALLBACK_MODEL]: stringValidator,
+    [AppSystemProp.BROWSER_AGENT_DISTILL_MODEL]: stringValidator,
+    [AppSystemProp.BROWSER_AGENT_EMBEDDING_MODEL]: stringValidator,
+    [AppSystemProp.BROWSER_AGENT_SITE_URL]: stringValidator,
+    // Platform email transport (REST is the preferred transport; SMTP remains supported)
+    [AppSystemProp.EMAIL_TRANSPORT]: enumValidator(Object.values(EmailTransport)),
+    [AppSystemProp.EMAIL_REST_PROVIDER]: enumValidator(Object.values(RestEmailProvider)),
+    [AppSystemProp.EMAIL_REST_URL]: urlValidator,
+    [AppSystemProp.EMAIL_REST_AUTH_HEADER]: stringValidator,
+    [AppSystemProp.EMAIL_REST_AUTH_VALUE]: stringValidator,
 }
 
 

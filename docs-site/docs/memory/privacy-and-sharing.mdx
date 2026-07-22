@@ -1,0 +1,86 @@
+---
+title: Privacy & sharing
+description: The exact rules governing when a personal memory fact can be seen by anyone else — a three-condition gate where private is an absolute veto and revocation takes effect immediately.
+sidebar_label: Privacy & sharing
+sidebar_position: 1
+---
+This page is the definitive statement of who can see your personal memory. It matters: personal memory
+holds your data, and the rules below are the contract for how it's protected.
+
+The short version: **your personal facts are private, and stay private unless you and your admin both
+deliberately open a narrow, per-fact door — which you can close again at any moment.**
+
+## The three-condition gate
+
+A personal (**My memory**) fact can be seen by a workspace admin **only when all three** of these are
+true at once:
+
+<Steps>
+  <Step title="Your admin has unlocked sharing for the workspace">
+    An administrator has turned on the workspace-wide sharing switch. Until they do, no personal fact is
+    visible to anyone but its owner — no matter what individual members choose.
+  </Step>
+  <Step title="You have opted in to sharing">
+    You — the fact's owner — have turned on your personal *opt in to admin visibility* setting. This is
+    your choice alone; an admin cannot make it for you.
+  </Step>
+  <Step title="You have marked that specific fact as shared">
+    Sharing is per-fact. Even when the first two conditions hold, only the facts you've individually
+    marked **shared** are visible. Everything you leave **private** stays private.
+  </Step>
+</Steps>
+
+All three are required. Remove any one — the admin locks sharing, you opt out, or you set the fact back
+to private — and the fact is no longer visible to anyone but you.
+
+```text
+Visible to an admin  ⟺  workspace sharing unlocked
+                     AND you opted in
+                     AND this fact is marked SHARED
+```
+
+Facts in **org** and **flow** scope are shared by their nature (that's what those scopes mean), so they
+aren't governed by this gate — it applies specifically to personal facts.
+
+## Private is an absolute veto
+
+Marking a fact **private** — or simply leaving it private, which is the default — is a veto that nothing
+overrides:
+
+- An **admin cannot** mark your fact as shared. Only you can change your own fact's visibility.
+- An **admin cannot** opt you in to sharing on your behalf.
+
+So a private personal fact is unreachable by anyone else, regardless of the workspace sharing switch or
+your opt-in state. The only facts an admin can ever see are ones **you** marked shared, while **you** are
+opted in, while sharing is unlocked.
+
+## Revocation is immediate
+
+The three conditions are checked **live**, every time facts are read — they're not baked in when you
+share. That means revocation takes effect on the very next read:
+
+- Turn off your opt-in → your shared facts vanish from admin view immediately.
+- Set a fact back to private → it's hidden immediately.
+- Your admin re-locks workspace sharing → all shared facts across the workspace are hidden at once.
+
+Turning sharing back on later restores visibility of exactly the facts that still meet all three
+conditions — nothing more. Revoking never destroys your data or your per-fact marks; it only changes what
+others can see, right now.
+
+## What an admin can and can't do
+
+<CardGroup cols={2}>
+  <Card title="An admin CAN">
+    - Unlock (or re-lock) workspace-wide sharing.
+    - View facts that meet all three conditions.
+    - See a count of how many personal facts are currently shared.
+  </Card>
+  <Card title="An admin CANNOT">
+    - Mark any member's fact as shared.
+    - Opt a member in to sharing.
+    - See any fact a member left private.
+  </Card>
+</CardGroup>
+
+See [Admin governance](/memory/admin-governance) for the admin side, and [Settings](/memory/settings) for
+your opt-in and per-fact controls.

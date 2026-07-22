@@ -1,13 +1,13 @@
 // Clean-room implementation — development / no-op email sender (capability spec A.1). Used in
 // the test environment (the automated suite must never send real mail) and as the fallback in
 // non-production when the real transport is not fully configured (preserving zero-setup dev).
-// It reports SMTP as unconfigured and logs sends instead of delivering them. It MUST never
-// throw.
+// It reports the transport as unconfigured and logs sends instead of delivering them. It
+// MUST never throw.
 import { FastifyBaseLogger } from 'fastify'
 import { EmailSender, SendEmailArgs } from './email-sender'
 
 export const logEmailSender = (log: FastifyBaseLogger): EmailSender => ({
-    isSmtpConfigured(): boolean {
+    isConfigured(): boolean {
         return false
     },
 

@@ -22,9 +22,13 @@ function createFakeJob(id: string): ConsumeJobRequest {
     return {
         jobId: id,
         jobData: {} as ConsumeJobRequest['jobData'],
-        timeoutInSeconds: 600,
         attempsStarted: 0,
         engineToken: 'token',
+        // `token` and `queueName` are what let an orphaned job be RETURNED to the queue. Omitting them
+        // from the fixture made the dispatcher forward `undefined` for both, so the requeue path was
+        // being exercised with data that could never requeue anything.
+        token: 'lock-token',
+        queueName: 'test-queue',
     }
 }
 
@@ -96,9 +100,12 @@ describe('QueueDispatcher', () => {
     })
 
     it('should only have one active getNextJob call at a time', async () => {
-        dispatcher.poll()
-        dispatcher.poll()
-        dispatcher.poll()
+        // Deliberately NOT awaited: these three waiters must stay pending while we assert that the
+        // dispatcher opened only ONE dequeue for them. afterEach's dispatcher.close() resolves every
+        // pending waiter with null, so nothing leaks.
+        void dispatcher.poll()
+        void dispatcher.poll()
+        void dispatcher.poll()
 
         await vi.advanceTimersByTimeAsync(0)
 
@@ -224,11 +231,12 @@ describe('QueueDispatcher', () => {
         expect(result2).toBeNull()
     })
 
-    it('should report waiter count', async () => {
+    it('should report waiter count', () => {
         expect(dispatcher.waiterCount()).toBe(0)
 
-        dispatcher.poll()
-        dispatcher.poll()
+        // Left pending on purpose — the point is that the dispatcher COUNTS them while they wait.
+        void dispatcher.poll()
+        void dispatcher.poll()
 
         expect(dispatcher.waiterCount()).toBe(2)
     })
@@ -249,7 +257,10 @@ describe('QueueDispatcher', () => {
         pendingDequeues[0].resolve(orphanedJob)
         await vi.advanceTimersByTimeAsync(0)
 
-        expect(onOrphanedJobMock).toHaveBeenCalledWith('orphaned-job', mockLog)
+        // The orphan handler must receive the lock token and the queue name, not just the id —
+        // without them the job cannot actually be returned to the queue, and a dequeued-but-undelivered
+        // job would be silently lost.
+        expect(onOrphanedJobMock).toHaveBeenCalledWith('orphaned-job', 'lock-token', 'test-queue', mockLog)
     })
 
     it('should not spawn a second concurrent loop after close() while dequeue is in-flight', async () => {

@@ -1,0 +1,68 @@
+---
+id: replace-app-connections
+title: "Replace app connections"
+description: "Replace app connections"
+sidebar_label: "Replace app connections"
+hide_title: true
+hide_table_of_contents: true
+api: eJyNlE1P4zAQhv9KNGfTlNWecmOBA9rDIj5OVQ5TZ2gNiW3sSaGK/N9X46QQPkUvdZLXM/O+fpIBGDcRqhWg90faWUuajbMRagUNRR2Ml2uo4Ip8i5oK9L6YCxUEeuwp8h/X7KEaQDvLZFmW6H1rNIqwvI9SZoCot9ShrHjvCSpw63vSDAp8cJ4CG4pZ5/qg6cT705dmF81sW+Rg7AaSAsawIf6J0gcnvT59mkYjJlAjeXze/qtm89J1eluLQ09JQSTdB8N7qFYSjPlLsqxTLdronY2j71/L3/L3NvwzusO+5eJqUoL6eczWiSjln4KOeOsaqMC7mENH3kIF5e64fIdAGcYTB5k97CjEPHofWqhgy+xjVZbozcJYprY10VNYaNfBe3Iug2v6XLO4zoVATB/yuJZBR+uHVF7ORrp8KHcbqdi7PhToTfFA+2JDlgIyNcVdcF3BWyqw6YwVTKNrs4HcBCpYEwYZICmQpK5e0T1/xs639A16B1S+JO5VMANthp+xdy67MyyN4OI1uOLM6b4jy/kUQYHkPfpdLpaLZabXRe4wn67F7Obrd/JNZLN38pstU+ZMz1z6Fo2Vnvm0h4mSFeyOQX34VAjAIym1gq1gVa1gGNYY6Ta0Kcntx55C5l3BDoPBtQSwqpOCLWFDIaP1IIcPp+OsRzcyj8jbXub6AHlShx0nWpPnb7X1jPzLf9c3oGA9fa8618iegE/iBJ+gAlDg/GiuGsZ7A7RoNz1uRDvWFIiwl2BegJ3wUoeFuJoeod3PJhyGUXHjHsimBGqywnINSb4h/wGc5Pb4
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Replace app connections"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/app-connections/replace"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Replace app connections
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"sourceAppConnectionId":{"type":"string"},"targetAppConnectionId":{"type":"string"},"projectId":{"type":"string"}},"required":["sourceAppConnectionId","targetAppConnectionId","projectId"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"204":{"description":"Default Response","content":{"application/json":{"schema":{"not":{}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -77,6 +77,7 @@ const ApproveRequest = {
     },
     schema: {
         tags: ['mcp-oauth'],
+        summary: 'Approve an MCP OAuth authorization request',
         body: z.object({
             authRequestId: z.string(),
             projectId: z.string().optional(),

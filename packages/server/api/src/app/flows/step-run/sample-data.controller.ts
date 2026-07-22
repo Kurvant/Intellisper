@@ -43,6 +43,7 @@ const GetSampleDataRequestParams = {
     },
     schema: {
         tags: ['sample-data'],
+        summary: 'Get sample data',
         querystring: GetSampleDataRequest,
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },
@@ -58,6 +59,7 @@ const TestSampleDataRequestBody = {
     },
     schema: {
         tags: ['sample-data'],
+        summary: 'Run a step to produce sample data',
         body: CreateStepRunRequestBody,
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },

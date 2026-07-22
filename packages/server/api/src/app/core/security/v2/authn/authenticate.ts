@@ -1,4 +1,4 @@
-import { IntellisperError, ErrorCode, isNil, Principal, PrincipalType } from '@intelblocks/shared'
+import { ErrorCode, IntellisperError, isNil, Principal, PrincipalType } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { nanoid } from 'nanoid'
 import { accessTokenManager } from '../../../../authentication/lib/access-token-manager'

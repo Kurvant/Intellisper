@@ -1,0 +1,40 @@
+---
+title: Tables
+description: Store and manage structured data in Intellisper — spreadsheet-like tables your flows and agents can read and write, with fields, records, export, and webhooks.
+sidebar_label: Overview
+sidebar_position: 1
+---
+Tables give you a place to store structured data inside Intellisper — like a spreadsheet, but wired into
+your automations. A table has **fields** (columns) and **records** (rows), and your [flows](/flows/building-flows)
+can read from and write to it as part of an automation.
+
+Use tables to hold the data your automations work with: a list of leads to process, a log of results, a
+lookup of settings, a queue of items to handle.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Fields & records" href="/tables/fields-and-records">
+    Define columns, add rows, and edit your data.
+  </Card>
+  <Card title="Table webhooks" href="/tables/table-webhooks">
+    Get notified when a record is created, updated, or deleted.
+  </Card>
+</CardGroup>
+
+## Working with a table
+
+- **Create** a table and define its fields.
+- **Add, edit, and delete records** — by hand, or from a flow.
+- **Export** a table's data.
+- **Clear** a table to remove all its records while keeping its structure.
+- **Save a table as a template** to reuse its structure elsewhere.
+
+Tables are scoped to your project, so each project has its own tables.
+
+## Tables and flows
+
+Tables are most powerful when your automations use them. A flow can look up a record, append a row of
+results, or update a status as it processes work — turning a table into the shared state your automation
+reads and writes across runs. And with [table webhooks](/tables/table-webhooks), a change to a table can
+itself trigger a flow.

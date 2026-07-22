@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   getAuthPropertyForValue,
   BlockAuthProperty,
@@ -14,7 +15,6 @@ import {
   isNil,
   UpsertAppConnectionRequestBody,
 } from '@intelblocks/shared';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { t } from 'i18next';
 import { useState } from 'react';
 import { Resolver, useForm } from 'react-hook-form';

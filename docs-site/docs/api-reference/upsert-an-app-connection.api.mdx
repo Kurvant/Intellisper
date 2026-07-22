@@ -1,0 +1,68 @@
+---
+id: upsert-an-app-connection
+title: "Upsert an app connection"
+description: "Upsert an app connection based on the app name"
+sidebar_label: "Upsert an app connection"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWd9v4jgQ/leiec6Wto95aymnVtctVYHVnSqETDIl3jq213bacij/+2mcACGkd9Bf+8ITwXZmvpn5ZmKPF+DYzEJ0D0zrb7GSEmPHlbQwDiFBGxuu6T9EMNIWjQuYDJjWwXppMGUWk0DJwKXo5yTLEEIw+CtH685VModoAbGSDqWjR6a14DGjtzs/LUlfgI1TzJiflfP+A0T3C3BzjRCBmv7E2EEI2iiNxnG0tA5fHBrJxFVC/6q11hkuZ1CEkHCrBZvfEJi2+alQ8eOrs9ooUvqK7AwdS5hjtckmSK/Ytr7NkoST7Uzc1g0qlqB+oLG89MrWu+VAcyIElHlGYRz0une94WTY+2sI4yKEJyZy/A+YvI5xd7EWY4Nu4vDFtb2WcXmNcuZSiE7ILKICN5iQKL92U8K4uaYW2s1A1sNWD1K4FFvau0XegdcWDElbER6Y9QZm9c9Gw8vTfUgVC47STXiLpQ2KhBCrpFV7y7JJnDIhUM7a/Wtj1WYIeSd3qTL8H194Jhm6VLVCW1p82Tu76N1BCOf9i7+94ZVFJXd3gDszTLrJ/3l2E5f3xEpVbDBB6TgT1iMgD9sPJ4fBhBuM3SQ3YgezdqZKI63XhKgCvoxW07MNRJXGzy8T/bPcpaeHCvG2CtG97o8uJoc68VlZuqf/d0++L8qurlB5Ehxy7D05dnt9Nvyjf/f9kGa/Lc3aQrDXB3TPxGxI//w8vRXMPSiTHVL1Xal6fja46k6II/tkaW7Jk22u2Mo+zax9VmaXfN4La4NfK0Q1jV/2zThnlscB8fBAwzfuykaDYf/73jzcV+xn1OL2zkGp6Qu2K7l1Kjtw7x3cu+l/OO/WItvY8fmsuFEHRrxv/9rtXfavaSf3YcFq28HEmCqRoIFiXPhKYjHODXdz31lmmv+J9DguxoTBaiVt6Y7T42P62RR4gQ8sFy64q1ZCUXrZb1lBK+s9y+hzC52nk06zm07qzRMa67X7TSKkzmkbdTpM8yMuHQrBrUZzFKsMtgwyKsnLdvvACwLCvTRpQL3zEv3SsFUESMuWuJHFYK5yEzDNg0ecBzOUaJjDJHgwKis7+UnGJfX5rRLlnpSUQARTZIYAFCFQ8/5u3ebvvbBMC2ySf82CDc6vh2tUXw/WGF7b1qyJvcXG9arK9HrTerv+bM5uNLRXfC5C4PJB+be4I8vgah2p4ELFeYbS+RMMqVhBOT46Pjr2eaqsy5jPlXJX9+o9SjNItRuT/e9eKhvJnI4WjEvCUp1NSprew9MJhG3XPimxObqHxYKkj4woChr+laPxGUOuNJxNyR33VNlTZJRoxOxH4h50S+DfhvVKGm1f+xCHV0l02x9QIKbVdVHmT6Bg2DMdgNgzRAAhKF3CjBbl2AIEk7Oc0eETSplFdbSshbpibLh8qN0tMTmvIVwsyhVD9YiyKCCsDHL0v6wk/wLc/15y
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Upsert an app connection"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/app-connections"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Upsert an app connection based on the app name
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"anyOf":[{"type":"object","properties":{"externalId":{"type":"string"},"displayName":{"type":"string"},"blockName":{"type":"string"},"projectId":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["SECRET_TEXT"]},"value":{"type":"object","properties":{"type":{"type":"string","enum":["SECRET_TEXT"]},"secret_text":{"type":"string","minLength":1}},"required":["type","secret_text"]}},"required":["externalId","displayName","blockName","projectId","type","value"],"description":"Secret Text"},{"type":"object","properties":{"externalId":{"type":"string"},"displayName":{"type":"string"},"blockName":{"type":"string"},"projectId":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["OAUTH2"]},"value":{"type":"object","properties":{"client_id":{"type":"string","minLength":1},"code":{"type":"string","minLength":1},"code_challenge":{"type":"string"},"scope":{"type":"string"},"authorization_method":{"type":"string","enum":["HEADER","BODY"]},"client_secret":{"type":"string","minLength":1},"grant_type":{"type":"string","enum":["authorization_code","client_credentials"]},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"redirect_url":{"type":"string","minLength":1},"type":{"type":"string","enum":["OAUTH2"]}},"required":["client_id","code","scope","client_secret","redirect_url","type"]}},"required":["externalId","displayName","blockName","projectId","type","value"],"description":"OAuth2"},{"type":"object","properties":{"externalId":{"type":"string"},"displayName":{"type":"string"},"blockName":{"type":"string"},"projectId":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["CLOUD_OAUTH2"]},"value":{"type":"object","properties":{"client_id":{"type":"string","minLength":1},"code":{"type":"string","minLength":1},"code_challenge":{"type":"string"},"scope":{"type":"string"},"authorization_method":{"type":"string","enum":["HEADER","BODY"]},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"type":{"type":"string","enum":["CLOUD_OAUTH2"]}},"required":["client_id","code","scope","type"]}},"required":["externalId","displayName","blockName","projectId","type","value"],"description":"Cloud OAuth2"},{"type":"object","properties":{"externalId":{"type":"string"},"displayName":{"type":"string"},"blockName":{"type":"string"},"projectId":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["PLATFORM_OAUTH2"]},"value":{"type":"object","properties":{"client_id":{"type":"string","minLength":1},"code":{"type":"string","minLength":1},"code_challenge":{"type":"string"},"scope":{"type":"string"},"authorization_method":{"type":"string","enum":["HEADER","BODY"]},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"type":{"type":"string","enum":["PLATFORM_OAUTH2"]},"redirect_url":{"type":"string","minLength":1}},"required":["client_id","code","scope","type","redirect_url"]}},"required":["externalId","displayName","blockName","projectId","type","value"],"description":"Platform OAuth2"},{"type":"object","properties":{"externalId":{"type":"string"},"displayName":{"type":"string"},"blockName":{"type":"string"},"projectId":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["BASIC_AUTH"]},"value":{"type":"object","properties":{"username":{"type":"string","minLength":1},"password":{"type":"string","minLength":1},"type":{"type":"string","enum":["BASIC_AUTH"]}},"required":["username","password","type"]}},"required":["externalId","displayName","blockName","projectId","type","value"],"description":"Basic Auth"},{"type":"object","properties":{"externalId":{"type":"string"},"displayName":{"type":"string"},"blockName":{"type":"string"},"projectId":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["CUSTOM_AUTH"]},"value":{"type":"object","properties":{"type":{"type":"string","enum":["CUSTOM_AUTH"]},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}}},"required":["type","props"]}},"required":["externalId","displayName","blockName","projectId","type","value"],"description":"Custom Auth"},{"type":"object","properties":{"externalId":{"type":"string"},"displayName":{"type":"string"},"blockName":{"type":"string"},"projectId":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["NO_AUTH"]},"value":{"type":"object","properties":{"type":{"type":"string","enum":["NO_AUTH"]}},"required":["type"]}},"required":["externalId","displayName","blockName","projectId","type","value"],"description":"No Auth"},{"type":"object","properties":{"externalId":{"type":"string"},"displayName":{"type":"string"},"blockName":{"type":"string"},"projectId":{"type":"string"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"blockVersion":{"type":"string"},"type":{"type":"string","enum":["PLACEHOLDER"]}},"required":["externalId","displayName","blockName","projectId","type"],"description":"Placeholder"}]}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

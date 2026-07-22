@@ -7,10 +7,10 @@
 // registry is strictly organization-scoped — every query filters by platformId, and there is at
 // most one app per (organization, integration).
 import {
-    IntellisperError,
-    ibId,
     Cursor,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     OAuthApp,
     SeekPage,

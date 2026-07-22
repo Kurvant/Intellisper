@@ -1,0 +1,54 @@
+---
+title: Plans & limits
+description: What memory includes at each tier — whether it's on, how many facts you can store, and how many facts are recalled per turn — and how it's sold alongside Studio and the Agent.
+sidebar_label: Plans & limits
+sidebar_position: 2
+---
+Memory is a paid capability with its **own** entitlement, independent of the Agent. A workspace can have
+memory whether or not it has the agent — so a Studio-only workspace can use memory to power its Copilot
+and flows.
+
+## The paid door
+
+Memory is gated by a single switch on your plan. When memory isn't included, the memory web and API
+surfaces return an **upgrade prompt** rather than an error — it's an invitation to add memory, not a
+failure. The flow engine's memory calls degrade quietly instead (a flow step just gets no memory rather
+than an error), so automations never break because memory is off.
+
+## What each tier includes
+
+| | Memory | Facts you can store | Recall depth |
+| --- | --- | --- | --- |
+| **Free / None** | Off | — | — |
+| **Starter** | On | 1,000 | Standard |
+| **Pro** | On | 10,000 | Enhanced |
+| **Team** | On | 50,000 | Enhanced |
+| **Enterprise** | On | Unlimited | Deepest |
+
+- **Facts you can store** is a per-user cap. It limits saving *new* facts only — you can always edit and
+  delete your existing facts, even at the cap, so you're never locked out of curating your own data.
+- **Recall depth** is how many relevant facts are brought into a turn to personalise it: Starter recalls
+  a few, Pro and Team more, Enterprise the most.
+
+:::note Free means "capable but forgetful"
+On the Free tier, memory is off: the agent and Copilot still work, but they start each task fresh. Memory
+is the headline reason to move to a paid tier.
+:::
+
+## How memory is sold
+
+Memory is included with paid **Studio**, **Agent**, and **Complete** plans — you don't need the agent to
+get memory. Note one deliberate choice: **Studio Pro** includes the **Team** memory allowance (50,000
+facts), reflecting that org and flow memory are shared team knowledge.
+
+:::info Pricing is still settling
+The exact memory allowance bundled with some tiers — Studio Pro in particular — reflects current shipped
+behaviour and is subject to an open pricing decision. Treat the numbers above as what ships today, not a
+final commitment.
+:::
+
+## What counts against your limits
+
+The meaningful limits are **whether memory is on** and **how many facts you can store**. Recall depth
+scales with your tier. There's no separate per-action memory charge you need to manage on the memory
+product itself — the practical ceiling is your stored-fact cap.

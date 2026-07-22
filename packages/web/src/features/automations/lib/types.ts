@@ -1,9 +1,4 @@
-import {
-  FolderDto,
-  PopulatedFlow,
-  SeekPage,
-  Table,
-} from '@intelblocks/shared';
+import { FolderDto, PopulatedFlow, SeekPage, Table } from '@intelblocks/shared';
 
 export type TreeItemType = 'folder' | 'flow' | 'table' | 'load-more-folder';
 

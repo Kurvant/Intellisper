@@ -14,6 +14,12 @@ export type DomainNavItem = {
   label: string;
   /** Existing route this item navigates to (old routes still work; redirects added later). */
   to: string;
+  /**
+   * True if `to` is a bare project-scoped path (e.g. '/build/automations') that must be prefixed
+   * with the current project ('/projects/:id') before navigating. Non-scoped items (templates,
+   * platform, insights) leave this false and navigate to `to` verbatim.
+   */
+  projectScoped?: boolean;
   /** Optional permission required to see the item (checked via useAuthorization). */
   permission?: Permission;
   /** Optional plan flag key on platform.plan.* that, when false, shows a lock. */
@@ -22,6 +28,11 @@ export type DomainNavItem = {
   adminOnly?: boolean;
   /** Hidden entirely in embed mode. */
   hideInEmbed?: boolean;
+  /**
+   * Only show when the CURRENT project has releases enabled (project.releasesEnabled). Mirrors the
+   * legacy Releases tab's project-level gate, which is distinct from a platform plan flag.
+   */
+  requiresProjectReleases?: boolean;
   /** A "Beta"/"New" style chip. */
   badge?: string;
 };
@@ -41,16 +52,25 @@ export const DOMAIN_NAV: DomainNavGroup[] = [
     icon: 'build',
     items: [
       {
+        icon: 'project',
+        label: 'Projects',
+        to: '/admin/projects',
+        adminOnly: true,
+        hideInEmbed: true,
+      },
+      {
         icon: 'automation',
         label: 'Automations',
-        to: '/automations',
+        to: '/build/automations',
+        projectScoped: true,
         permission: Permission.READ_FLOW,
       },
-      { icon: 'template', label: 'Explore templates', to: '/templates' },
+      { icon: 'template', label: 'Explore templates', to: '/build/explore' },
       {
         icon: 'variable',
         label: 'Variables',
-        to: '/variables',
+        to: '/build/variables',
+        projectScoped: true,
         permission: Permission.READ_VARIABLE,
       },
     ],
@@ -63,8 +83,34 @@ export const DOMAIN_NAV: DomainNavGroup[] = [
       {
         icon: 'run',
         label: 'Runs',
-        to: '/runs',
+        to: '/operate/runs',
+        projectScoped: true,
         permission: Permission.READ_RUN,
+      },
+      {
+        icon: 'ai-agent',
+        label: 'Agent Routines',
+        to: '/insights/agent',
+        planFlag: 'browserAgentEnabled',
+      },
+      {
+        icon: 'memory',
+        label: 'Memory',
+        to: '/operate/memory',
+        projectScoped: true,
+        // Deliberately NOT gated on `browserAgentEnabled`: memory is a cross-product capability, and
+        // a Studio-only platform buys it for org/flow memory with no agent. The entry stays visible
+        // and the page renders its own upgrade prompt off the API's 402 when the plan excludes
+        // memory — a nav lock could not distinguish "no agent" from "agent, but no memory".
+      },
+      {
+        icon: 'package',
+        label: 'Releases',
+        to: '/operate/releases',
+        projectScoped: true,
+        permission: Permission.READ_PROJECT_RELEASE,
+        requiresProjectReleases: true,
+        hideInEmbed: true,
       },
     ],
   },
@@ -74,9 +120,13 @@ export const DOMAIN_NAV: DomainNavGroup[] = [
     icon: 'data',
     items: [
       {
+        // Tables have no standalone list in this app — they are browsed inside the (overhaul)
+        // Automations gallery alongside flows/folders — so the nav item lands there. Opening a
+        // table navigates to the project-scoped editor at /data/tables/:tableId (OverhaulTablesPage).
         icon: 'table',
         label: 'Tables',
-        to: '/automations',
+        to: '/build/automations',
+        projectScoped: true,
         permission: Permission.READ_TABLE,
       },
     ],
@@ -89,7 +139,8 @@ export const DOMAIN_NAV: DomainNavGroup[] = [
       {
         icon: 'connection',
         label: 'Connections',
-        to: '/connections',
+        to: '/connect/connections',
+        projectScoped: true,
         permission: Permission.READ_APP_CONNECTION,
       },
     ],
@@ -102,13 +153,13 @@ export const DOMAIN_NAV: DomainNavGroup[] = [
       {
         icon: 'impact',
         label: 'Impact',
-        to: '/impact',
+        to: '/insights/impact',
         planFlag: 'analyticsEnabled',
       },
       {
         icon: 'leaderboard',
         label: 'Leaderboard',
-        to: '/leaderboard',
+        to: '/insights/leaderboard',
         planFlag: 'analyticsEnabled',
       },
     ],
@@ -121,7 +172,7 @@ export const DOMAIN_NAV: DomainNavGroup[] = [
       {
         icon: 'admin',
         label: 'Platform settings',
-        to: '/platform',
+        to: '/admin',
         adminOnly: true,
         hideInEmbed: true,
       },

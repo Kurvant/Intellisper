@@ -1,0 +1,79 @@
+---
+title: Memory
+description: Memory lets Intellisper remember your preferences, projects, and team knowledge across sessions — with a strict privacy model where personal facts stay private unless you choose to share them.
+sidebar_label: Overview
+sidebar_position: 1
+---
+Memory lets Intellisper **remember** — so you and your team don't have to repeat yourselves. Save a
+preference, a project detail, or a piece of team knowledge once, and it's available to inform future
+work. Memory is built around a strict privacy model: your personal facts stay private by default, and
+nothing crosses between people unless everyone involved has explicitly opted in.
+
+Memory is its **own product** — you can buy and use it whether or not you use the [Agent](/agent/overview).
+A Studio-only workspace can use memory to make its Copilot smarter; an Agent workspace can use it to make
+the agent personal. It sits alongside both.
+
+## What uses memory
+
+Memory is a shared store that several parts of Intellisper can draw on:
+
+- The **[Agent](/agent/overview)** recalls relevant facts when it works on a task, and can save new ones
+  as it learns.
+- The **Studio Copilot** (the in-app AI assistant) recalls your personal and org facts to personalise
+  its answers.
+- **Flow steps** can read and write **org and flow** memory through a dedicated engine surface.
+
+:::note What flows can and can't see
+Flow steps run without a specific user, so they can use **org** and **flow** memory — shared team
+knowledge — but never an individual's **personal** memory. Personal memory is only ever used by
+interactive surfaces that know who you are (the agent and the Copilot).
+:::
+
+## The three scopes
+
+Every remembered fact lives in one of three scopes. This is the core of how memory stays private where
+it should and shared where it's useful.
+
+<CardGroup cols={3}>
+  <Card title="My memory" href="/memory/my-memory">
+    **Personal, private by default.** Only you can read or curate it. This is your own preferences and
+    context.
+  </Card>
+  <Card title="Org memory" href="/memory/org-memory">
+    **Shared team knowledge.** Everyone in the workspace can read *and* curate it — it belongs to the
+    organisation, not to whoever wrote it.
+  </Card>
+  <Card title="Flow memory" href="/memory/flow-memory">
+    **Per-flow knowledge.** Scoped to a single flow and shared across the workspace within that flow.
+  </Card>
+</CardGroup>
+
+Only **facts** carry a scope. Memory also builds a lightweight graph of entities and relationships as it
+learns; those are always kept private to you.
+
+## Privacy in one paragraph
+
+Your **My memory** facts are private to you by default. A personal fact becomes visible to a workspace
+admin **only** when three independent conditions all hold: your admin has turned on sharing for the
+workspace, **you** have opted in to sharing, **and** you have marked that specific fact as shared. Miss
+any one and the fact stays private — and because these are checked live, turning any of them off hides
+the fact again immediately. Marking a fact **private is an absolute veto**: no admin can override it.
+
+Read the full model in [Privacy & sharing](/memory/privacy-and-sharing).
+
+## Explore
+
+<CardGroup cols={2}>
+  <Card title="Privacy & sharing" href="/memory/privacy-and-sharing">
+    The three-condition sharing gate, in full.
+  </Card>
+  <Card title="Settings" href="/memory/settings">
+    Auto-recall, auto-capture, and your sharing opt-in.
+  </Card>
+  <Card title="Export & delete" href="/memory/export-and-delete">
+    Get your data out, or erase it.
+  </Card>
+  <Card title="Plans & limits" href="/memory/plans-and-limits">
+    What each tier includes.
+  </Card>
+</CardGroup>

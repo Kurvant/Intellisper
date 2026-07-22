@@ -1,0 +1,69 @@
+---
+id: list-flow-runs
+title: "List flow runs"
+description: "List Flow Runs"
+sidebar_label: "List flow runs"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVV0tz4jgQ/iuurj3sVjmBzG25McRJuSaBrIF9TIpNKXYDmsiSpyUzw1D+71uSDYbEBJhKDnvyQ/3u1tfdKzBspqFzD1Ohvp1RLjVMfEhQx8Qzw5WEDtxwbbwrob55kT33IWPEUjRIlnMFOp5jyqCzArPMEDrAiNgSfOAGU731XxvicuYEGINkZf973z77nZ396J59nqw+XBS/QFH4wO3R1xzJSpEstczWwDABHwi/5pwwgY6hHAv/dAP2qXCxeAsFPqDMUxvWq254E1yCD3+MB6PuQ/B3Lwgu3Y+wPwqifvfmIYiiQQQ+3HXHw4o0GLuXaNzvh/1r8GE47m0Yb4PbQfTPw014G462BY7C22AwHoEPvW6/F5RqbwbXD8Pwc1ATTvZ5rw0z+ZH+yzx9RII9kgRPudkRNGVCN0tap6RZUpyTVvQ2ogiZwaQ7NfimAj/iVBGeJvHADWjWl5H6grE59g68bvyUcYHJ0GDWtz/eIh61yFvUms2OlfpuaBHlMkyOLOhHpQQyuc83LmORJ9ileM4X2JCBiQ8a45y4WTpMZBn/hPZ1Yo8IdaakRufeh3bbPnYx9hKnLBfGiypK8CFW0qA0lpZlmeAxs7StL9oyNLigHm152HiRypAML9UlzBwT7T3cPGnMf1X7jWd5luw9q2u46bSC+EZGRiiNy2gzK+PiztEM5BXjIidszq4hPpshYfJx2Sio7IendBJr9Z9Imqu9xtUUR+SL60ywpbuWjfpYknBbCUzcbTFW9wuEmukrLrA0hcnlYOoK8rlRW1AuBBSTwl83gP9ZN3N2kxnxMl4neTzlkuv5T7GiXHBSMq1u6L6I3UWDy3FvFA761qdgOLIRmFQFW6Ll4ZKQzbXgH6gVH9IKiBvrqEaw+1LDrrzJoUrTVfMYqRHqhiDYUq3wsmt+ohgx0z2V74R3e+ywLYGJgEjR4QhqlVPcEIc6UUH/OuwH4MNfg+hTELkc7Q+fReek+UDFcU609vn1sFdm1Zp22A9k4JksbrvSGpdrFPZ35obNEN2El8+hzK9Hwu1qP2yWxO+nJzwjXHBV4s8JjM+i4LrdIQuLwiXXzFUCHZihKYeMOXSgtbho1auQbeq0WO85OQnowNyYTHdaLZbxc1uFQnCdIZ3HKoXnm9MdqSSP7Yc3dIJge1AY2g5e1ud6XNi4Z7W8EDfW6C1VTh7LuPeES2+GEsmm2ZuSSj0zR48lKZderKRWwqbUjQmuByIja4C7PFPldHEj7FFYu+Fdqji3aXbDBviwWPctaJ+3z9uuFyttUiZrZCo3RBs2rwrbjt2repR5uUtW/hr8blqZYNw1aRfpVZWTe1hcVLW5WVDnyiLOPaxWj0zjmERR2N/l1GZzlXDNHsVm8HzFol+jqnx+8/aZ82RTU9+dBRO5JXLl+A6KqjX0vdVsLvfrikri9Up3DO1maTuKeHctO4Fls3i9d6C2AfQY+17sVqcx1dvTezu2syS9t7KXK1StcWI/iFuVbmXyYY4sQXJXuWTvxjFm2xX4YieyUjagfh3Y0ZHlFkDqNaCEQH/9stVgmFxuyV6tSoqRekJZFLC5mfbbdZ3iP2tFdyc=
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List flow runs"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/flow-runs"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List Flow Runs
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"array","items":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"}},"in":"query","name":"flowId","required":true},{"schema":{"type":"array","items":{"type":"string"}},"in":"query","name":"tags","required":true},{"schema":{"type":"array","items":{"type":"string","enum":["FAILED","QUOTA_EXCEEDED","INTERNAL_ERROR","PAUSED","QUEUED","RUNNING","SUCCEEDED","MEMORY_LIMIT_EXCEEDED","TIMEOUT","CANCELED","LOG_SIZE_EXCEEDED"]}},"in":"query","name":"status","required":true},{"schema":{"type":"number"},"in":"query","name":"limit","required":false},{"schema":{"type":"string"},"in":"query","name":"cursor","required":false},{"schema":{"type":"string"},"in":"query","name":"createdAfter","required":false},{"schema":{"type":"string"},"in":"query","name":"createdBefore","required":false},{"schema":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"},"in":"query","name":"projectId","required":true},{"schema":{"type":"string"},"in":"query","name":"failedStepName","required":false},{"schema":{"type":"string"},"in":"query","name":"failedStepMessage","required":false},{"schema":{"type":"array","items":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"}},"in":"query","name":"flowRunIds","required":true},{"schema":{"type":"boolean"},"in":"query","name":"includeArchived","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"data":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"projectId":{"type":"string"},"flowId":{"type":"string"},"parentRunId":{"type":"string"},"failParentOnFailure":{"type":"boolean"},"triggeredBy":{"type":"string"},"tags":{"type":"array","items":{"type":"string"}},"flowVersionId":{"type":"string"},"flowVersion":{"type":"object","properties":{"displayName":{"type":"string"}},"additionalProperties":false},"logsFileId":{"anyOf":[{"type":"string"},{"type":"null"}]},"status":{"type":"string","enum":["FAILED","QUOTA_EXCEEDED","INTERNAL_ERROR","PAUSED","QUEUED","RUNNING","SUCCEEDED","MEMORY_LIMIT_EXCEEDED","TIMEOUT","CANCELED","LOG_SIZE_EXCEEDED"]},"startTime":{"anyOf":[{"type":"string"},{"type":"null"}]},"finishTime":{"anyOf":[{"type":"string"},{"type":"null"}]},"environment":{"type":"string","enum":["PRODUCTION","TESTING"]},"failedStep":{"type":"object","properties":{"name":{"type":"string"},"displayName":{"type":"string"},"message":{"type":"string"}},"required":["name","displayName"],"additionalProperties":false},"stepNameToTest":{"type":"string"},"archivedAt":{"anyOf":[{"type":"string"},{"type":"null"}]},"stepsCount":{"type":"number"},"internalError":{"type":"object","properties":{"source":{"type":"string","enum":["ENGINE","WORKER"]},"message":{"type":"string"},"code":{"type":"string"},"occurredAt":{"type":"string"}},"required":["source","message","occurredAt"],"additionalProperties":false}},"required":["id","created","updated","projectId","flowId","failParentOnFailure","flowVersionId","status","environment"],"additionalProperties":false}},"next":{"anyOf":[{"type":"string"},{"type":"null"}]},"previous":{"anyOf":[{"type":"string"},{"type":"null"}]}},"required":["data"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

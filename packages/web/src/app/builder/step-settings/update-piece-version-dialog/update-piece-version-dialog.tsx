@@ -1,5 +1,5 @@
-import { formErrors, BlockAction, BlockTrigger } from '@intelblocks/shared';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { formErrors, BlockAction, BlockTrigger } from '@intelblocks/shared';
 import { useMutation } from '@tanstack/react-query';
 import { t } from 'i18next';
 import { ArrowUp, ArrowUpDown } from 'lucide-react';

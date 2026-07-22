@@ -1,6 +1,6 @@
+import { createGoogleGenerativeAI } from '@ai-sdk/google'
 import { httpClient, HttpMethod } from '@intelblocks/blocks-common'
 import { AIProviderModel, AIProviderModelType, CloudflareGatewayProviderAuthConfig, CloudflareGatewayProviderConfig, isNil, splitCloudflareGatewayModelId } from '@intelblocks/shared'
-import { createGoogleGenerativeAI } from '@ai-sdk/google'
 import { generateText } from 'ai'
 import { FastifyBaseLogger } from 'fastify'
 import { AIProviderStrategy } from './ai-provider'

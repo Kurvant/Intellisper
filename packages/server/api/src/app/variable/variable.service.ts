@@ -1,10 +1,10 @@
 import {
-    IntellisperError,
-    IbId,
-    ibId,
     AppConnectionOwners,
     Cursor,
     ErrorCode,
+    ibId,
+    IbId,
+    IntellisperError,
     isNil,
     Metadata,
     PlatformId,

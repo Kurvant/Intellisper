@@ -1,6 +1,6 @@
 import { McpOAuthToken } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../../database/database-common'
 
 export const McpOAuthTokenEntity = new EntitySchema<McpOAuthToken>({
     name: 'mcp_oauth_token',

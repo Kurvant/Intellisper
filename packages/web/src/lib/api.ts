@@ -12,7 +12,7 @@ import { authenticationSession } from '@/lib/authentication-session';
 export const isRunningCloudInDevMode = import.meta.env.MODE === 'cloud';
 
 export const API_BASE_URL = isRunningCloudInDevMode
-  ? 'https://cloud.activepieces.com'
+  ? 'https://cloud.intellisper.com'
   : window.location.origin;
 export const API_URL = `${API_BASE_URL}/api`;
 

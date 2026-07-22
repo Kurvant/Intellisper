@@ -1,13 +1,13 @@
 import { ibDayjs } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
-    IbEdition,
-    IbId,
     assertNotNullOrUndefined,
     AuthenticationResponse,
     CreatePlatformRequest,
     ErrorCode,
     FileType,
+    IbEdition,
+    IbId,
+    IntellisperError,
     isNil,
     PlatformWithoutSensitiveData,
     PrincipalType,
@@ -18,6 +18,7 @@ import {
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { StatusCodes } from 'http-status-codes'
 import { z } from 'zod'
+import { browserAgentTenancyService } from '../browser-agent/tenancy/browser-agent-tenancy.service'
 import { securityAccess } from '../core/security/authorization/fastify-security'
 import { platformToEditMustBeOwnedByCurrentUser } from '../enterprise/authentication/ee-authorization'
 import { platformPlanService } from '../enterprise/platform/platform-plan/platform-plan.service'
@@ -48,11 +49,25 @@ export const platformController: FastifyPluginAsyncZod = async (app) => {
         const identityId = isOnboarding
             ? req.principal.id
             : (await userService(req.log).getOneOrFail({ id: req.principal.id })).identityId
-        return platformService(req.log).createPlatformWithProject({
+        // Intellisper one-platform-per-email guard — a no-op unless productScope includes the
+        // browser agent, so stock blockunits platform creation is unaffected.
+        await browserAgentTenancyService(req.log).assertCanCreateBrowserAgentPlatform({
+            identityId,
+            productScope: req.body.productScope,
+        })
+        const response = await platformService(req.log).createPlatformWithProject({
             identityId,
             name: req.body.name,
             invalidatePreviousTokens: isOnboarding,
         })
+        // Enable the browser agent on the new platform when the product scope calls for it.
+        if (!isNil(response.platformId)) {
+            await browserAgentTenancyService(req.log).applyProductScope({
+                platformId: response.platformId,
+                productScope: req.body.productScope,
+            })
+        }
+        return response
     })
 
     app.post('/:id', UpdatePlatformRequest, async (req, _res) => {
@@ -282,6 +297,7 @@ const GetPlatformRequest = {
     schema: {
         tags: ['platforms'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Get a platform',
         description: 'Get a platform by id',
         params: z.object({
             id: IbId,

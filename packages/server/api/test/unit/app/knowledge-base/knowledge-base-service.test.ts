@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { FastifyBaseLogger } from 'fastify'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const mockFindOneBy = vi.fn()
 const mockDelete = vi.fn()
@@ -50,7 +51,7 @@ const mockLog = {
     trace: vi.fn(),
     silent: vi.fn(),
     level: 'info',
-} as any
+} as unknown as FastifyBaseLogger
 
 describe('knowledgeBaseService', () => {
     beforeEach(() => {

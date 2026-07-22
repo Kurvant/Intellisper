@@ -7,7 +7,7 @@
 // is server-side only and is read from configuration; it is never exposed to clients.
 // All outbound calls go through the SSRF-filtered HTTP client per the safe-http rule.
 import { safeHttp } from '@intelblocks/server-utils'
-import { IntellisperError, ErrorCode, isNil } from '@intelblocks/shared'
+import { ErrorCode, IntellisperError, isNil } from '@intelblocks/shared'
 import { system } from '../../../../helper/system/system'
 import { AppSystemProp } from '../../../../helper/system/system-props'
 

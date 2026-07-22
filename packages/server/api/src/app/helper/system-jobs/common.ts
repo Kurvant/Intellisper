@@ -16,6 +16,10 @@ export enum SystemJobName {
     FLOW_RUN_TRACKING = 'flow-run-tracking',
     LICENSE_KEY_EXPIRY_SWEEP = 'license-key-expiry-sweep',
     CHAT_METRICS_PRUNE = 'chat-metrics-prune',
+    // Browser-agent automation (Phase 8): a repeated per-schedule cron firing, and a one-time
+    // admission tick per batch row (offline/concurrency-gated kickoff onto the user's live session).
+    BROWSER_AGENT_SCHEDULE_FIRE = 'browser-agent-schedule-fire',
+    BROWSER_AGENT_BATCH_ROW = 'browser-agent-batch-row',
 }
 
 type DeleteFlowDurableSystemJobData =  {
@@ -46,6 +50,17 @@ type ResumeDelayWaitpointSystemJobData = {
     waitpointId: string
 }
 
+type BrowserAgentScheduleFireSystemJobData = {
+    scheduleId: string
+}
+
+type BrowserAgentBatchRowSystemJobData = {
+    batchJobId: string
+    routineRunId: string
+    /** How many times this row's admission has been re-deferred (offline/busy) — bounds retries. */
+    attempt?: number
+}
+
 type SystemJobDataMap = {
     [SystemJobName.BLOCKS_ANALYTICS]: Record<string, never>
     [SystemJobName.BLOCKS_SYNC]: Record<string, never>
@@ -60,6 +75,8 @@ type SystemJobDataMap = {
     [SystemJobName.FLOW_RUN_TRACKING]: Record<string, never>
     [SystemJobName.LICENSE_KEY_EXPIRY_SWEEP]: Record<string, never>
     [SystemJobName.CHAT_METRICS_PRUNE]: Record<string, never>
+    [SystemJobName.BROWSER_AGENT_SCHEDULE_FIRE]: BrowserAgentScheduleFireSystemJobData
+    [SystemJobName.BROWSER_AGENT_BATCH_ROW]: BrowserAgentBatchRowSystemJobData
 }
 
 export type SystemJobData<T extends SystemJobName = SystemJobName> = T extends SystemJobName ? SystemJobDataMap[T] : never

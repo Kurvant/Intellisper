@@ -3,7 +3,15 @@
 // the processor's signature over the raw body, then reconciles the organization's plan
 // record from the event. It is safely repeatable (processors retry). When billing is
 // inert (non-cloud) it acknowledges without acting.
-import { IbSubscriptionStatus, isNil, PlanName, STANDARD_CLOUD_PLAN } from '@intelblocks/shared'
+import {
+    AGENT_FREE_PLAN,
+    COMPLETE_FREE_PLAN,
+    IbSubscriptionStatus,
+    isNil,
+    planLimitsForName,
+    type PlatformPlanWithOnlyLimits,
+    STUDIO_FREE_PLAN,
+} from '@intelblocks/shared'
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { StatusCodes } from 'http-status-codes'
 import Stripe from 'stripe'
@@ -11,6 +19,7 @@ import { securityAccess } from '../../../core/security/authorization/fastify-sec
 import { exceptionHandler } from '../../../helper/exception-handler'
 import { system } from '../../../helper/system/system'
 import { AppSystemProp } from '../../../helper/system/system-props'
+import { planPrice } from './plan-price'
 import { platformAiCreditsService } from './platform-ai-credits.service'
 import { platformPlanService } from './platform-plan.service'
 import { StripeCheckoutType, stripeHelper } from './stripe-helper'
@@ -38,7 +47,8 @@ export const stripeBillingController: FastifyPluginAsyncZod = async (app) => {
 
         try {
             await handleEvent(request.log, stripe, event)
-            return reply.status(StatusCodes.OK).send({ received: true })
+            // await inside the try so a send failure is caught here, not surfaced as an unhandled rejection.
+            return await reply.status(StatusCodes.OK).send({ received: true })
         }
         catch (err) {
             exceptionHandler.handle(err, request.log)
@@ -94,18 +104,30 @@ async function onInvoicePaid(log: Parameters<FastifyPluginAsyncZod>[0]['log'], i
     await platformAiCreditsService(log).creditPaymentSucceeded(metadata.platformId, invoice.amount_paid / 100, StripeCheckoutType.CREDIT_AUTO_TOP_UP)
 }
 
-async function onSubscriptionChanged(log: Parameters<FastifyPluginAsyncZod>[0]['log'], type: string, subscription: Stripe.Subscription): Promise<void> {
+/**
+ * Reconcile the organization's plan from a subscription event. This is the ONLY place a paid tier's
+ * entitlements are written, and it writes them WHOLESALE from the tier's constant
+ * (`planLimitsForName`) — never field-by-field — so a subscription can never leave a platform with a
+ * half-applied entitlement set (e.g. the Agent unlocked but with no caps).
+ *
+ * A subscription carries a BASE-PLAN item plus optional metered ADD-ON items (extra active flows, AI
+ * credits). Only the base-plan item identifies the tier; the add-ons compose on top of it.
+ */
+// Exported for direct testing: this is the function that turns money into entitlements, so it is
+// verified against subscription shapes directly rather than only through a signed HTTP round-trip.
+export async function onSubscriptionChanged(log: Parameters<FastifyPluginAsyncZod>[0]['log'], type: string, subscription: Stripe.Subscription): Promise<void> {
     const platformId = subscription.metadata?.platformId
     if (isNil(platformId)) {
         return
     }
     const ended = type === 'customer.subscription.deleted'
     if (ended) {
-        // Reset to the default tier's entitlements and clear subscription references.
+        // Subscription gone → fall back to the FREE tier of whichever product door this platform
+        // uses, so a cancelling customer keeps the right (free) product, not an unrelated one.
+        const freeTier = await freeTierForPlatform(log, platformId)
         await platformPlanService(log).update({
-            ...STANDARD_CLOUD_PLAN,
+            ...freeTier,
             platformId,
-            plan: PlanName.STANDARD,
             stripeSubscriptionStatus: IbSubscriptionStatus.CANCELED,
             stripeSubscriptionId: undefined,
             stripeSubscriptionStartDate: undefined,
@@ -116,9 +138,37 @@ async function onSubscriptionChanged(log: Parameters<FastifyPluginAsyncZod>[0]['
     }
 
     const { startDate, endDate, cancelDate } = await stripeHelper(log).getSubscriptionPeriod(subscription)
-    const priceId = subscription.items.data[0]?.price.id
-    const extraActiveFlows = subscription.items.data.find((it) => it.price.id === priceId)?.quantity ?? 0
-    const limits = { ...STANDARD_CLOUD_PLAN }
+
+    // Identify the BASE plan: the one subscription item whose price maps to a known tier. Add-on
+    // items (active-flow / ai-credit) deliberately do not map, so they are skipped here.
+    const basePlan = subscription.items.data
+        .map((item) => planPrice.planForPriceId(item.price.id, log))
+        .find((plan) => !isNil(plan))
+
+    if (isNil(basePlan)) {
+        // The subscription carries no recognised tier. Do NOT guess a plan — guessing would grant
+        // entitlements nobody paid for. Record the commercial state and leave entitlements alone.
+        log.warn({ platformId, subscriptionId: subscription.id }, '[billing] subscription has no recognised base-plan price; entitlements left unchanged')
+        await platformPlanService(log).update({
+            platformId,
+            stripeSubscriptionId: subscription.id,
+            stripeSubscriptionStatus: subscription.status as IbSubscriptionStatus,
+            stripeSubscriptionStartDate: startDate,
+            stripeSubscriptionEndDate: endDate,
+            stripeSubscriptionCancelDate: cancelDate ?? null,
+        })
+        return
+    }
+
+    // The tier's full entitlement set — one authoritative definition, applied wholesale.
+    const limits = { ...planLimitsForName(basePlan) }
+
+    // Compose the metered add-on: extra active flows are billed as their own line item, and ADD to
+    // the tier's included allowance. (Matched by the add-on's own price id — not by the base item's,
+    // which would be self-referential and always read back the base quantity.)
+    const extraActiveFlows = subscription.items.data
+        .filter((item) => item.price.id === stripeHelper(log).extraActiveFlowsPriceId())
+        .reduce((sum, item) => sum + (item.quantity ?? 0), 0)
     if (extraActiveFlows > 0) {
         limits.activeFlowsLimit = (limits.activeFlowsLimit ?? 0) + extraActiveFlows
     }
@@ -126,11 +176,29 @@ async function onSubscriptionChanged(log: Parameters<FastifyPluginAsyncZod>[0]['
     await platformPlanService(log).update({
         ...limits,
         platformId,
-        plan: PlanName.STANDARD,
+        plan: basePlan,
         stripeSubscriptionId: subscription.id,
         stripeSubscriptionStatus: subscription.status as IbSubscriptionStatus,
         stripeSubscriptionStartDate: startDate,
         stripeSubscriptionEndDate: endDate,
         stripeSubscriptionCancelDate: cancelDate ?? null,
     })
+}
+
+/**
+ * The free tier a platform reverts to when its subscription ends. Derived from the product door it
+ * currently uses (the agent flag + its active-flow allowance), so an Agent customer lands on Agent
+ * Free and a Studio customer on Studio Free — never the other product's plan.
+ */
+async function freeTierForPlatform(log: Parameters<FastifyPluginAsyncZod>[0]['log'], platformId: string): Promise<PlatformPlanWithOnlyLimits> {
+    const plan = await platformPlanService(log).getOrCreateForPlatform(platformId)
+    const hasAgent = plan.browserAgentEnabled === true
+    const hasStudio = (plan.activeFlowsLimit ?? 0) > 0
+    if (hasAgent && hasStudio) {
+        return COMPLETE_FREE_PLAN
+    }
+    if (hasAgent) {
+        return AGENT_FREE_PLAN
+    }
+    return STUDIO_FREE_PLAN
 }

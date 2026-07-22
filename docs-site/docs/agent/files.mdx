@@ -1,0 +1,50 @@
+---
+title: Files
+description: Attach a document for the agent to read, and get an edited version back to download. Supports PDF, Word, text, and Markdown up to 20 MB.
+sidebar_label: Files
+sidebar_position: 6
+---
+You can attach a document to a task so the agent can read it — and, for editable formats, produce a
+revised version you can download.
+
+## Uploading
+
+Upload a file to make it available to the agent in your conversation.
+
+- **Maximum size:** 20 MB.
+- **Accepted formats:** PDF, Word (`.docx`), plain text (`.txt`), and Markdown (`.md`).
+
+Files are stored securely in object storage. Uploading the same file twice is deduplicated, so you won't
+pay twice for the same content.
+
+## Reading and editing
+
+What the agent can do with a file depends on its format:
+
+| Format | Read | Edit |
+| --- | --- | --- |
+| Plain text (`.txt`) | ✅ | ✅ |
+| Markdown (`.md`) | ✅ | ✅ |
+| Word (`.docx`) | ✅ | ✅ (see note) |
+| PDF | ✅ (text) | ❌ |
+
+- **Text and Markdown** can be read and edited freely.
+- **Word documents** can be read (their text is extracted) and edited. Edited Word documents are
+  returned as **plain text** rather than as a `.docx`.
+- **PDFs** can be attached and read, but **cannot be edited**.
+
+When the agent edits a file, it writes a new version and gives you a **download link** for the result.
+Each edit produces a new version.
+
+<Note>
+**Managing files**
+
+Uploading and downloading are available today. Listing all your files or deleting a file through the
+agent are not yet available.
+</Note>
+
+## Where files fit
+
+The agent uses files as context for a task — for example, *"Using the details in this PDF, fill in the
+form on this page"* attaches the file as source material, then acts on the page. File operations count
+against your plan's file-operation allowance (see [Plans & limits](/agent/plans-and-limits)).

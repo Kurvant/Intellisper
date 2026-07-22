@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { FastifyBaseLogger } from 'fastify'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const mockFindOneBy = vi.fn()
 const mockRepoDelete = vi.fn()
@@ -17,10 +18,15 @@ vi.mock('../../../../src/app/core/db/repo-factory', () => ({
     })),
 }))
 
+// The `system` façade is mocked wholesale, so every accessor the import graph touches must be
+// present — a missing one is a TypeError at module load, not a nice failure. `getNumber` is reached
+// transitively (database/redis reads REDIS_DB at module scope).
 vi.mock('../../../../src/app/helper/system/system', () => ({
     system: {
         getOrThrow: vi.fn().mockReturnValue('DB'),
         getNumberOrThrow: vi.fn().mockReturnValue(30),
+        getNumber: vi.fn().mockReturnValue(undefined),
+        getBoolean: vi.fn().mockReturnValue(false),
         get: vi.fn().mockReturnValue(undefined),
     },
 }))
@@ -49,7 +55,7 @@ import { fileService } from '../../../../src/app/file/file.service'
 const mockLog = {
     info: vi.fn(), debug: vi.fn(), error: vi.fn(), warn: vi.fn(),
     child: vi.fn(), fatal: vi.fn(), trace: vi.fn(), silent: vi.fn(), level: 'info',
-} as any
+} as unknown as FastifyBaseLogger
 
 describe('fileService.delete', () => {
     beforeEach(() => {

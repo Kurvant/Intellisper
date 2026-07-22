@@ -1,0 +1,70 @@
+---
+id: update-the-project-mcp-server
+title: "Update the project MCP server"
+description: "Update the project MCP server configuration"
+sidebar_label: "Update the project MCP server"
+hide_title: true
+hide_table_of_contents: true
+api: eJyVlE1v2zAMhv+KQeywAU6c9jbftnaHYhhWtOllQQowNhOrtSWVotNmhv/7QNlJs7YrMJ/0QYnvSz10B4KbAPkCmsLDMoWSQsHGi3EWcrjxJQolUlHi2d1RIcmPs8skEG+Jk8LZtdm0jDE6BaaHloJ8deUO8g4KZ4Ws6BC9r00R47K7oFd3EIqKGtSR7DxBDm6lCSAFz84Ti6Ggu6UJuKqpnDtXh6NwZMYdpGCEmuP1IGzsBvrhS8EjY0NCrDbfSDvGa6AIsdq+Xcwmn3Hy+8vk17I7Pek/QJ+C0R2PUkEKFhs9OtbkohzNG6YScuGW+mUKgYqWjexiWvTmO+lwqVtMwTsbBoOns1n0+Vflz2mNbS3J1RgJaqUhqVypiV2QQXEFOWTbk2yUErLuIKrPmsJPhrcClaODoQgt15BDJeJDnmXozdRYobo2wRNPC9fASxIu2ZVtoZPkerjx2OK1FnVwszd6qK9meXXdTaBk51pO0JvknnbJhiwxCpXJml0TicOyMVYhC64mNRCTQA4rQlYBfQoK09Uzdt+esPE1vYHNYv/Oy/iUaxcVGtFguHg2n5y7om3Iyh5qrdmgeTadTWdKgla/wQjxCMK7ffLS/FFn/GeDjRUVepLM12isqolv2Y0sLGB7MnRQpAFSyI8hPQJimUKlFOUL6LoVBrrhuu91+aEljqSmsEU2WsUIzb6ikK+xDvSOq49XYzN8Sv6let/EVlt4i3WrM0jhXtk5aqxe36siLImjiGH/bEg1mestz+df/WaU0UPTXP68nkMKq/H31LhSzzA+avfi45DfRTuR5LjWQY120+JGY4c7lTtstdoHxkci0/1Alb7psOuGiLm7J9v3B8OiczXb938AAA/sPQ==
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update the project MCP server"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/projects/{projectId}/mcp-server"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update the project MCP server configuration
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"},"in":"path","name":"projectId","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"disabledTools":{"type":"array","items":{"type":"string"}}}}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -18,12 +18,12 @@
 //   - Every lookup is platform-scoped: a target in another organization surfaces as
 //     ENTITY_NOT_FOUND (404), never leaking cross-tenant existence.
 import {
-    IntellisperError,
+    BlocksFilterType,
     CreatePlatformProjectRequest,
     ErrorCode,
+    IntellisperError,
     isNil,
     ListProjectRequestForPlatformQueryParams,
-    BlocksFilterType,
     PlatformRole,
     PrincipalType,
     Project,
@@ -95,6 +95,9 @@ const platformProjectController: FastifyPluginAsyncZod = async (app) => {
             security: securityAccess.publicPlatform([PrincipalType.USER, PrincipalType.SERVICE]),
         },
         schema: {
+            tags: ['projects'],
+            summary: 'List projects',
+            description: 'List the workspaces the caller can access within their organization.',
             querystring: ListProjectRequestForPlatformQueryParams,
         },
     }, async (request): Promise<SeekPage<ProjectWithLimits>> => {
@@ -119,6 +122,9 @@ const platformProjectController: FastifyPluginAsyncZod = async (app) => {
             security: securityAccess.nonEmbedUsersOnly([PrincipalType.USER, PrincipalType.SERVICE]),
         },
         schema: {
+            tags: ['projects'],
+            summary: 'Create a project',
+            description: 'Create a team workspace under the caller\'s organization.',
             body: CreatePlatformProjectRequest,
         },
     }, async (request, reply): Promise<ProjectWithLimits> => {
@@ -160,6 +166,9 @@ const platformProjectController: FastifyPluginAsyncZod = async (app) => {
             security: securityAccess.nonEmbedUsersOnly([PrincipalType.USER, PrincipalType.SERVICE]),
         },
         schema: {
+            tags: ['projects'],
+            summary: 'Update a project',
+            description: 'Update a workspace. Requires platform ownership or a token scoped to it.',
             params: z.object({ id: z.string() }),
             body: UpdateProjectPlatformRequest,
         },
@@ -195,6 +204,9 @@ const platformProjectController: FastifyPluginAsyncZod = async (app) => {
             security: securityAccess.nonEmbedUsersOnly([PrincipalType.USER, PrincipalType.SERVICE]),
         },
         schema: {
+            tags: ['projects'],
+            summary: 'Delete a project',
+            description: 'Soft-delete a workspace. Requires platform ownership.',
             params: z.object({ id: z.string() }),
         },
     }, async (request, reply): Promise<void> => {

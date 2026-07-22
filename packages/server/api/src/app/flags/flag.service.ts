@@ -1,11 +1,11 @@
 import { ibVersionUtil } from '@intelblocks/server-utils'
-import { IbEdition, IbFlagId, ExecutionMode, Flag, isNil } from '@intelblocks/shared'
+import { ExecutionMode, Flag, IbEdition, IbFlagId, isNil } from '@intelblocks/shared'
 import dayjs from 'dayjs'
 import { FastifyBaseLogger } from 'fastify'
 import { In } from 'typeorm'
 import { repoFactory } from '../core/db/repo-factory'
 import { federatedAuthnService } from '../enterprise/authentication/federated-authn/federated-authn-service'
-import { smtpEmailSender } from '../enterprise/helper/email/email-sender/smtp-email-sender'
+import { getEmailSender } from '../enterprise/helper/email/email-sender'
 import { domainHelper } from '../helper/domain-helper'
 import { system } from '../helper/system/system'
 import { AppSystemProp } from '../helper/system/system-props'
@@ -195,13 +195,13 @@ export const flagService = (log: FastifyBaseLogger) => ({
             },
             {
                 id: IbFlagId.PRIVACY_POLICY_URL,
-                value: 'https://www.activepieces.com/privacy',
+                value: 'https://intellisper.kurvant.com/privacy',
                 created,
                 updated,
             },
             {
                 id: IbFlagId.TERMS_OF_SERVICE_URL,
-                value: 'https://www.activepieces.com/terms',
+                value: 'https://intellisper.kurvant.com/terms',
                 created,
                 updated,
             },
@@ -304,8 +304,10 @@ export const flagService = (log: FastifyBaseLogger) => ({
                 updated,
             },
             {
+                // Flag id kept for web compatibility; semantics are now "a real email
+                // transport (REST or SMTP) is configured".
                 id: IbFlagId.SMTP_CONFIGURED,
-                value: smtpEmailSender(log).isSmtpConfigured(),
+                value: getEmailSender(log).isConfigured(),
                 created,
                 updated,
             },

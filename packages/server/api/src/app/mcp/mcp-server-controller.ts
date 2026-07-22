@@ -38,6 +38,7 @@ export const UpdateMcpRequest = {
     },
     schema: {
         tags: ['mcp'],
+        summary: 'Update the project MCP server',
         description: 'Update the project MCP server configuration',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         params: z.object({
@@ -59,6 +60,7 @@ const GetMcpRequest = {
     },
     schema: {
         tags: ['mcp'],
+        summary: 'Get an MCP server',
         description: 'Get an MCP server by ID',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         params: z.object({
@@ -79,6 +81,7 @@ const RotateTokenRequest = {
     },
     schema: {
         tags: ['mcp'],
+        summary: 'Rotate the MCP server token',
         description: 'Rotate the MCP server token',
     },
     params: z.object({

@@ -30,7 +30,10 @@ import { AIProviderCard } from './universal-pieces/ai-provider-card';
 const INTELLISPER_LOGO_URL =
   'https://cdn.activepieces.com/pieces/activepieces.png';
 
-export default function AIProvidersPage() {
+export default function AIProvidersPage({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { data: providers, refetch } = aiProviderQueries.useAiProviders();
   const { data: currentUser } = userHooks.useCurrentUser();
   const { platform } = platformHooks.useCurrentPlatform();
@@ -70,6 +73,7 @@ export default function AIProvidersPage() {
               )
         }
         actions={<ChatAnalyticsLinkButton />}
+        hideHeader={isOverhaul}
       >
         {allowWrite && configuredProviders.length > 0 && (
           <ChatProviderSelector

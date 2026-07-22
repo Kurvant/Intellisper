@@ -1,7 +1,9 @@
 import { z } from 'zod'
+import { BrowserAgentCaps } from '../../browser-agent/file-audit-usage'
 import { BaseModelSchema, DateOrString, Nullable } from '../../core/common/base-model'
 import { IbId } from '../../core/common/id-generator'
 import { FederatedAuthnProviderConfig, FederatedAuthnProviderConfigWithoutSensitiveData } from '../../core/federated-authn'
+import { MemoryCaps } from '../../memory/memory-caps'
 import { SsoDomainVerification } from './sso-domain-verification'
 
 export type PlatformId = IbId
@@ -14,6 +16,14 @@ export enum FilteredBlockBehavior {
 export enum PlatformUsageMetric {
     AI_CREDITS = 'ai-credits',
     ACTIVE_FLOWS = 'active-flows',
+    // Browser-agent metered dimensions (pooled per platform per UTC month). The counters themselves
+    // live in `browser_agent_usage_counter`; these identify the metric in quota errors + usage reads.
+    AGENT_ACTIONS = 'agent-actions',
+    AGENT_RESEARCH = 'agent-research',
+    AGENT_FILE_OPS = 'agent-file-ops',
+    AGENT_ROUTINE_RUNS = 'agent-routine-runs',
+    AGENT_QUICK_TOOLS = 'agent-quick-tools',
+    AGENT_MEMORY_OPS = 'agent-memory-ops',
 }
 
 export const PlatformUsage = z.object({
@@ -36,6 +46,27 @@ export enum PlanName {
     APPSUMO_INTELLISPER_TIER4 = 'appsumo_intellisper_tier4',
     APPSUMO_INTELLISPER_TIER5 = 'appsumo_intellisper_tier5',
     APPSUMO_INTELLISPER_TIER6 = 'appsumo_intellisper_tier6',
+
+    // ── Subscription-plan rollout (SUBSCRIPTION_PLANS_PROPOSAL §3) ───────────────────────────────
+    // Two products, one billing spine: the browser AGENT (Routines, batch/schedule) and the
+    // automation platform, "Intellisper STUDIO" (visual workflows across ~800 apps). A plan's
+    // product scope selects which doors it opens; its tier selects the caps.
+    // Agent-only (ProductScope.BROWSER)
+    AGENT_FREE = 'agent_free',
+    AGENT_STARTER = 'agent_starter',
+    AGENT_PRO = 'agent_pro',
+    // Studio-only, the automation side (ProductScope.BLOCKUNITS)
+    STUDIO_FREE = 'studio_free',
+    STUDIO_STARTER = 'studio_starter',
+    STUDIO_PRO = 'studio_pro',
+    // Dual / Complete (ProductScope.FULL)
+    COMPLETE_FREE = 'complete_free',
+    COMPLETE_STARTER = 'complete_starter',
+    COMPLETE_PRO = 'complete_pro',
+    // Cloud team plans (self-serve, seat-based)
+    TEAM_AGENT = 'team_agent',
+    TEAM_STUDIO = 'team_studio',
+    TEAM_COMPLETE = 'team_complete',
 }
 
 export enum TeamProjectsLimit {
@@ -95,6 +126,28 @@ export const PlatformPlan = z.object({
 
     projectsLimit: Nullable(z.number()),
     activeFlowsLimit: Nullable(z.number()),
+
+    // ── Browser-agent entitlements (SUBSCRIPTION_PLANS_PROPOSAL §8, Option 1: promoted into the
+    // plan so ONE row is the single source of truth for both products). These columns already
+    // existed in the DB as agent-only flags; they are now surfaced on the shared contract so the
+    // Stripe reconciler sets them like any other limit and the frontend can gate/display them.
+    /** Whether the browser-agent product is unlocked for this platform (product-scope door). */
+    browserAgentEnabled: z.boolean(),
+    /** Admin switch: allows members to opt IN to sharing their agent data (memory stays private). */
+    agentSharingUnlocked: z.boolean(),
+    /**
+     * The platform's browser-agent caps, stored as one jsonb blob so a plan change is atomic.
+     * `null` on rows not yet migrated to a new tier — the resolver falls back to a safe default.
+     */
+    agentCaps: Nullable(BrowserAgentCaps),
+
+    /**
+     * MEMORY entitlement — its own blob, independent of `browserAgentEnabled`/`agentCaps`, because
+     * memory is sold and used by EITHER product (agent → personal memory, Studio → org/flow memory).
+     * A Studio-only plan sets this and nothing agent-related.
+     * `null` = no memory on this plan; the resolver treats it as closed (fail-closed).
+     */
+    memoryCaps: Nullable(MemoryCaps),
 
     /** @deprecated use workerGroupId instead — will be removed in 0.83.0 */
     dedicatedWorkers: Nullable(z.object({

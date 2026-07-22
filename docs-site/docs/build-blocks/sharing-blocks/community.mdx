@@ -1,0 +1,32 @@
+---
+title: "Community (Public NPM)"
+description: "Learn how to publish your block to the community."
+---
+
+You can publish your blocks to the npm registry and share them with the community. Users can install your block from Settings -> My Blocks -> Install Block -> type in the name of your block package.
+
+<Steps>
+  <Step title="Login to npm">
+    Make sure you are logged in to npm. If not, please run:
+    ```bash
+    npm login
+    ```
+  </Step>
+  <Step title="Rename Block">
+    Rename the block name in `package.json` to something unique or related to your organization's scope (e.g., `@my-org/block-BLOCK_NAME`). You can find it at `packages/blocks/BLOCK_NAME/package.json`.
+    <Tip>
+    Don't forget to increase the version number in `package.json` for each new release.
+    </Tip>
+  </Step>
+  <Step title="Publish">
+    <Tip>
+    Replace `BLOCK_FOLDER_NAME` with the name of the folder.
+    </Tip>
+    Run the following command:
+    ```bash
+    npm run publish-block BLOCK_FOLDER_NAME
+    ```
+  </Step>
+</Steps>
+
+**Congratulations! You can now import the block from the settings page.**

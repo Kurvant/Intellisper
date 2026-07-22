@@ -3,7 +3,7 @@
 // then exchange the returned code for verified identity claims and turn them into an
 // authenticated session via the shared federated sign-in path. Also exposes the OAuth
 // callback URL, which the flag service surfaces to the frontend in every edition.
-import { AuthenticationResponse, FederatedAuthnLoginResponse, UserIdentityProvider } from '@intelblocks/shared'
+import { AuthenticationResponse, ErrorCode, FederatedAuthnLoginResponse, IntellisperError, isNil, UserIdentityProvider } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { authenticationService } from '../../../authentication/authentication.service'
 import { domainHelper } from '../../../helper/domain-helper'
@@ -48,6 +48,33 @@ export const federatedAuthnService = (log: FastifyBaseLogger) => ({
             provider: UserIdentityProvider.GOOGLE,
             predefinedPlatformId: platformId ?? null,
             imageUrl: idToken.imageUrl,
+        })
+    },
+
+    // Sign in with a CLIENT-SUPPLIED Google id_token (the implicit flow used by the browser
+    // extension via chrome.identity). We verify the token against Google's JWKS with the EXTENSION's
+    // own OAuth client id as the audience (a distinct client from the web app), then mint a session
+    // via the same shared federated path as the code flow. On a brand-new cloud user this returns an
+    // onboarding token; the client then creates its browser-agent platform (productScope) exactly as
+    // the email sign-up flow does. Requires GOOGLE_CLIENT_ID_INTELLISPER to be configured.
+    async claimExtensionIdToken({ idToken, platformId }: { idToken: string, platformId: string | undefined }): Promise<AuthenticationResponse> {
+        const audience = system.get(AppSystemProp.GOOGLE_CLIENT_ID_INTELLISPER)
+        if (isNil(audience)) {
+            throw new IntellisperError({
+                code: ErrorCode.INVALID_CREDENTIALS,
+                params: null,
+            }, 'Google sign-in for the extension is not configured (GOOGLE_CLIENT_ID_INTELLISPER unset)')
+        }
+        const claims = await googleAuthnProvider(log).verifyClientIdToken({ audience, idToken })
+        return authenticationService(log).federatedAuthn({
+            email: claims.email,
+            firstName: claims.firstName ?? 'john',
+            lastName: claims.lastName ?? 'doe',
+            trackEvents: true,
+            newsLetter: true,
+            provider: UserIdentityProvider.GOOGLE,
+            predefinedPlatformId: platformId ?? null,
+            imageUrl: claims.imageUrl,
         })
     },
 

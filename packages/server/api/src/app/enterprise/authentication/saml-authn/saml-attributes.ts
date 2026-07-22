@@ -6,7 +6,7 @@
 // may arrive as single-element arrays (how samlify surfaces them); those are flattened.
 // If any required field cannot be resolved the whole response is rejected, because a
 // partial identity must never be trusted for provisioning.
-import { IntellisperError, ErrorCode, isNil, SAMLAttributeMapping } from '@intelblocks/shared'
+import { ErrorCode, IntellisperError, isNil, SAMLAttributeMapping } from '@intelblocks/shared'
 
 export type SamlAttributes = {
     email: string

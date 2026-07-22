@@ -7,7 +7,7 @@
 // is kept bounded by a scheduled retention prune.
 import { Platform, Project, User } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../../database/database-common'
 
 export type ChatMessageMetric = {
     id: string

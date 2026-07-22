@@ -8,10 +8,10 @@
 // deletes the workspace (its GET then 404s), matching SCIM group-removal semantics while keeping
 // the platform's idempotent hard-delete/cleanup path.
 import {
-    IntellisperError,
     CreateScimGroupRequest,
     DefaultProjectRole,
     ErrorCode,
+    IntellisperError,
     isNil,
     Project,
     ProjectType,

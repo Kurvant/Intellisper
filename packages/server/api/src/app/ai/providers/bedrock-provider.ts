@@ -1,4 +1,10 @@
 import {
+    BedrockClient,
+    ListFoundationModelsCommand,
+    ListInferenceProfilesCommand,
+    ModelModality,
+} from '@aws-sdk/client-bedrock'
+import {
     AIProviderModel,
     AIProviderModelType,
     BedrockProviderAuthConfig,
@@ -6,12 +12,6 @@ import {
     isNil,
 } from '@intelblocks/shared'
 
-import {
-    BedrockClient,
-    ListFoundationModelsCommand,
-    ListInferenceProfilesCommand,
-    ModelModality,
-} from '@aws-sdk/client-bedrock'
 
 import { FastifyBaseLogger } from 'fastify'
 import { AIProviderStrategy } from './ai-provider'

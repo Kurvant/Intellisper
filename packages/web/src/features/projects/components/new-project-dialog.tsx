@@ -1,9 +1,9 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   AppConnectionWithoutSensitiveData,
   CreatePlatformProjectRequest,
   ProjectWithLimits,
 } from '@intelblocks/shared';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { t } from 'i18next';
 import { useState } from 'react';

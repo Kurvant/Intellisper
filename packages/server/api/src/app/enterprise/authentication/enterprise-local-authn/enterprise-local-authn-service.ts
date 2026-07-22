@@ -4,10 +4,10 @@
 // require a valid one-time code for the matching purpose; consuming the code is what
 // authorizes the state change, and each action is recorded for audit.
 import {
-    IntellisperError,
     ApplicationEvent,
     ApplicationEventName,
     ErrorCode,
+    IntellisperError,
     isNil,
     OtpType,
     ResetPasswordRequestBody,

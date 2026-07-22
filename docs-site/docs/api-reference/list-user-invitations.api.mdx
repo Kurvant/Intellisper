@@ -1,0 +1,69 @@
+---
+id: list-user-invitations
+title: "List user invitations"
+description: "List user invitations"
+sidebar_label: "List user invitations"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9Vk1v2zgQ/SvCbA+7AGM5Oermjd3Cu01suO4p8IGWxjYbiWT5YdQw9N8XQ8myoshp3AXqiyVxOMP3OG9mjuD41kLyBN6iuRFyLxx3QkkLKwaaG16gQ0MWR7DpDgsOyRHcQSMkIH2xRgMlAyEhge8ezQEYSF7Qai4K4YCBwe9eGMwg2fDcYsl6PFlnhNxe8pR6Y5W5zhUDlL4gZPPPo+XH2eIBGMwXs38m90tYXQgUXLTDOOM7Ubg8zDaBju7RW7TkOZSXYmijvmHqptkv45k8jqePn4DB6P5+Ml9OxhfxWMedtz2BVgwspt4IdwhYuBb/Ij2uaMmg1UpatHSMu+GQ/jK0qRGacgMSGOOG+9xFi9oSGKRKOpQucKR1LtKQR/E3Sxt6cKk10QCMCNFonKjCZdy1rbgxnAAJh0VY/3ByBDvntE3iEOGm+jpQZhtnhm9cfDe8G97c3sW1OYMPIoME/ohTVWglUTpbr9m4k/vAfnJG8tSTuqlB7rB/zevs4hoWXOS9K/X9XZ8MlfnVmtA5dxtlimn/QU/LC5XjW1o4xxmNH6aPwOBh8vD3ZAEMZvPJYrScLShcj2DO4rhWavVOOtr/29279/ckQqXaPuLRFMLaUJff0EZn36sLvYqS/hQiBBbNvfKV1DudoGyXmifi58zGGXuN9CWuOuKKAc8yQTrk+bzFdlMhOyd9b8hKZexcE+ti36Lo7dgMnHCUH91eGWBL/OF+Ie1wL1Sl8Cs2diCHkvkT3ujHOkX8s7AuIixRu+8zKNDtFBXLLYaU524HCcT7226hJGOLZn8aELzJW3WZazEQ0mGeC6vRDFJVQPcIc6Myn9JL9CU4gnZr+kL1uVLaqUE1XFCUV+6+WowOypuIaxE94yHaokRDCRBtjCoit8OIZ4WQUaqkJbGzqjGRxzVyU+ewkBsVYtUXPj3DiMYq9QXKplUQ+ir6cDAcDINclXUFD22vbsSXqH5x/Aabwx8u1jkXMujNhOZQXcMT7G+B9U5rO2UdGRyPa27xq8nLkj5XIwFdTyYsX+fNEMDgmRht5rQ9zz1FDxl3wbaZxN427sBqRgP4c1Hn7V/Rucu+hFsFqsX5njO1B6r32DcF4Gy8ohcjyDrMQAx2yDM0gbZq1yhNUbdpejXkkJdGOp8mS2DAPd1Zc691hrHTQ0vsXB5avo/HymKpnlGWJTSs0HuoAOV/gQf7bg==
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List user invitations"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/user-invitations"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List user invitations
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"number"},"in":"query","name":"limit","required":false},{"schema":{"type":"string"},"in":"query","name":"cursor","required":false},{"schema":{"type":"string","enum":["PLATFORM","PROJECT"]},"in":"query","name":"type","required":true},{"schema":{"anyOf":[{"type":"string"},{"type":"null"}]},"in":"query","name":"projectId","required":false},{"schema":{"type":"string","enum":["PENDING","ACCEPTED"]},"in":"query","name":"status","required":false}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"data":{"type":"array","items":{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"#/components/schemas/user-invitation","type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"email":{"type":"string"},"status":{"type":"string","enum":["PENDING","ACCEPTED"]},"type":{"type":"string","enum":["PLATFORM","PROJECT"]},"platformId":{"type":"string"},"platformRole":{"anyOf":[{"type":"string","enum":["ADMIN","MEMBER","OPERATOR"]},{"type":"null"}]},"projectId":{"anyOf":[{"type":"string"},{"type":"null"}]},"projectRoleId":{"anyOf":[{"type":"string"},{"type":"null"}]},"projectRole":{"anyOf":[{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"name":{"type":"string"},"permissions":{"type":"array","items":{"type":"string"}},"platformId":{"anyOf":[{"type":"string"},{"type":"null"}]},"type":{"type":"string"},"userCount":{"type":"number"}},"required":["id","created","updated","name","permissions","type"],"additionalProperties":false},{"type":"null"}]}},"required":["id","created","updated","email","status","type","platformId"],"additionalProperties":false,"title":"user-invitation"}},"next":{"anyOf":[{"type":"string"},{"type":"null"}]},"previous":{"anyOf":[{"type":"string"},{"type":"null"}]}},"required":["data"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

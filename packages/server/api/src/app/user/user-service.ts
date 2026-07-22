@@ -1,10 +1,10 @@
 import {
-    IntellisperError,
-    IbEdition,
-    ibId,
     assertNotNullOrUndefined,
     Cursor,
     ErrorCode,
+    IbEdition,
+    ibId,
+    IntellisperError,
     isNil,
     PlatformId,
     PlatformRole,

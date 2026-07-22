@@ -1,4 +1,4 @@
-import { IntellisperError, ErrorCode, isNil, Principal, PrincipalForType, PrincipalType, WebsocketServerEvent } from '@intelblocks/shared'
+import { ErrorCode, IntellisperError, isNil, Principal, PrincipalForType, PrincipalType, WebsocketServerEvent } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { Socket } from 'socket.io'
 import { accessTokenManager } from '../authentication/lib/access-token-manager'

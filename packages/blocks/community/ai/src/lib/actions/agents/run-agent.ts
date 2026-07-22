@@ -26,8 +26,10 @@ import { agentOutputBuilder } from './agent-output-builder';
 import { createAIModel, createEmbeddingModel } from '../../common/ai-sdk';
 import { inspect } from 'util';
 import { agentUtils } from './utils';
+import { agentMemory } from './memory';
 import { constructAgentTools } from './tools';
 import { buildWebSearchOptionsProperty, buildWebSearchConfig, WebSearchOptions } from '../../common/web-search';
+import { withAiUsageMeter } from '../../common/with-usage-meter';
 
 const agentToolArrayItems: ArraySubProps<boolean> = {
   type: Property.ShortText({
@@ -130,6 +132,20 @@ export const runAgent = createAction({
       description:
         'Whether to use web search to find information for the AI to use.',
     }),
+    [AgentBlockProps.MEMORY_RECALL]: Property.Checkbox({
+      displayName: 'Use memory',
+      required: false,
+      defaultValue: false,
+      description:
+        'Recall relevant facts from your org memory and this flow\'s memory, and give them to the AI as context. Requires memory on your plan.',
+    }),
+    [AgentBlockProps.MEMORY_CAPTURE]: Property.Checkbox({
+      displayName: 'Remember what it learns',
+      required: false,
+      defaultValue: false,
+      description:
+        'Let this step save durable facts to this flow\'s memory, so later runs can use them. Secrets are never saved.',
+    }),
     [AgentBlockProps.WEB_SEARCH_OPTIONS]: buildWebSearchOptionsProperty(
       (propsValue) => {
         const aiProviderModel = propsValue['aiProviderModel'] as AgentProviderModel | undefined;
@@ -140,221 +156,244 @@ export const runAgent = createAction({
     ),
   },
   async run(context) {
-    const { prompt, maxSteps, aiProviderModel } = context.propsValue;
-    const agentProviderModel = aiProviderModel as AgentProviderModel
-    const provider = agentProviderModel.provider as AIProviderName;
-    const webSearchEnabled = !!(context.propsValue.webSearch);
-    const webSearchOptions = (context.propsValue.webSearchOptions ?? {}) as WebSearchOptions;
+    return withAiUsageMeter(context, 'run-agent', async ({ usageMeter, embeddingUsageMeter }) => {
+      const { prompt, maxSteps, aiProviderModel } = context.propsValue;
+      const agentProviderModel = aiProviderModel as AgentProviderModel
+      const provider = agentProviderModel.provider as AIProviderName;
+      const webSearchEnabled = !!(context.propsValue.webSearch);
+      const webSearchOptions = (context.propsValue.webSearchOptions ?? {}) as WebSearchOptions;
 
-    const { tools: webSearchTools, providerOptions } = buildWebSearchConfig({
-      provider,
-      model: agentProviderModel.model,
-      webSearchEnabled,
-      webSearchOptions,
-    });
-
-    const { provider: effectiveProvider } = getEffectiveProviderAndModel({
-      provider,
-      model: agentProviderModel.model,
-    });
-    const model = await createAIModel({
-      modelId: agentProviderModel.model,
-      provider,
-      engineToken: context.server.token,
-      apiUrl: context.server.apiUrl,
-      projectId: context.project.id,
-      flowId: context.flows.current.id,
-      runId: context.run.id,
-      ...spreadIfDefined('openaiResponsesModel', webSearchEnabled && effectiveProvider === AIProviderName.OPENAI ? true : undefined),
-    });
-    const outputBuilder = agentOutputBuilder(prompt);
-    const hasStructuredOutput =
-      !isNil(context.propsValue.structuredOutput) &&
-      context.propsValue.structuredOutput.length > 0;
-    const structuredOutput = hasStructuredOutput ? context.propsValue.structuredOutput as AgentOutputField[] : undefined;
-    const agentTools = context.propsValue.agentTools as AgentTool[];
-
-    const hasKnowledgeBaseTools = agentTools.some(t => t.type === AgentToolType.KNOWLEDGE_BASE);
-    const kbFileTools = agentTools.filter(
-      (t): t is AgentKnowledgeBaseTool => t.type === AgentToolType.KNOWLEDGE_BASE && t.sourceType === KnowledgeBaseSourceType.FILE,
-    );
-    const hasKbFileTools = kbFileTools.length > 0;
-    let embeddingConfig;
-    if (hasKbFileTools) {
-      try {
-        const result = await createEmbeddingModel({
-          provider: agentProviderModel.provider as AIProviderName,
-          engineToken: context.server.token,
-          apiUrl: context.server.apiUrl,
-        });
-        embeddingConfig = { model: result.model, providerOptions: result.providerOptions };
-      }
-      catch (err) {
-        outputBuilder.addMarkdown(`\n\n**Warning:** Could not create embedding model for knowledge base search: ${err instanceof Error ? err.message : 'Unknown error'}\n\n`);
-      }
-    }
-
-    const { mcpClients, tools, toolKeyToAgentTool } = await constructAgentTools({
-      context,
-      agentTools,
-      model,
-      outputBuilder,
-      structuredOutput,
-      embeddingConfig,
-    });
-    outputBuilder.setToolMap(toolKeyToAgentTool);
-
-    const allTools = webSearchTools
-      ? { ...webSearchTools, ...tools }
-      : tools;
-
-    const errors: { type: string; message: string; details?: unknown }[] = [];
-
-    try {
-      const prompts = agentUtils.getPrompts(prompt, { hasKnowledgeBaseTools });
-      const stream = streamText({
-        model: model,
-        system: prompts.system,
-        prompt: prompts.prompt,
-        tools: allTools,
-        stopWhen: [stepCountIs(maxSteps), hasToolCall(TASK_COMPLETION_TOOL_NAME)],
-        providerOptions,
-        onFinish: async () => {
-          await Promise.all(mcpClients.map(async (client) => client.close()));
-        },
+      const { tools: webSearchTools, providerOptions } = buildWebSearchConfig({
+        provider,
+        model: agentProviderModel.model,
+        webSearchEnabled,
+        webSearchOptions,
       });
 
-      for await (const chunk of stream.fullStream) {
+      const { provider: effectiveProvider } = getEffectiveProviderAndModel({
+        provider,
+        model: agentProviderModel.model,
+      });
+      const model = await createAIModel({
+        modelId: agentProviderModel.model,
+        provider,
+        engineToken: context.server.token,
+        apiUrl: context.server.apiUrl,
+        projectId: context.project.id,
+        flowId: context.flows.current.id,
+        runId: context.run.id,
+        ...spreadIfDefined('openaiResponsesModel', webSearchEnabled && effectiveProvider === AIProviderName.OPENAI ? true : undefined),
+        usageMeter,
+      });
+      const outputBuilder = agentOutputBuilder(prompt);
+      const hasStructuredOutput =
+        !isNil(context.propsValue.structuredOutput) &&
+        context.propsValue.structuredOutput.length > 0;
+      const structuredOutput = hasStructuredOutput ? context.propsValue.structuredOutput as AgentOutputField[] : undefined;
+      const agentTools = context.propsValue.agentTools as AgentTool[];
+
+      const hasKnowledgeBaseTools = agentTools.some(t => t.type === AgentToolType.KNOWLEDGE_BASE);
+      const kbFileTools = agentTools.filter(
+        (t): t is AgentKnowledgeBaseTool => t.type === AgentToolType.KNOWLEDGE_BASE && t.sourceType === KnowledgeBaseSourceType.FILE,
+      );
+      const hasKbFileTools = kbFileTools.length > 0;
+      let embeddingConfig;
+      if (hasKbFileTools) {
         try {
-          switch (chunk.type) {
-            case 'text-delta': {
-              outputBuilder.addMarkdown(chunk.text);
-              break;
-            }
-            case 'reasoning-delta': {
-              if ('text' in chunk && typeof chunk.text === 'string') {
-                outputBuilder.addMarkdown(chunk.text);
-              } else if ('delta' in chunk && typeof chunk.delta === 'string') {
-                outputBuilder.addMarkdown(chunk.delta);
-              }
-              break;
-            }
-            case 'tool-call': {
-              if (agentUtils.isTaskCompletionToolCall(chunk.toolName)) {
-                continue;
-              }
-              outputBuilder.startToolCall({
-                toolName: chunk.toolName,
-                toolCallId: chunk.toolCallId,
-                input: chunk.input as Record<string, unknown>,
-              });
-              break;
-            }
-            case 'tool-result': {
-              if (agentUtils.isTaskCompletionToolCall(chunk.toolName)) {
-                continue;
-              }
-              const rawOutput = chunk.output;
-              const toolOutput = normalizeToolOutputToExecuteResponse(rawOutput);
-              
-              if (toolOutput['status'] === ExecutionToolStatus.FAILED && toolOutput['errorMessage']) {
-                outputBuilder.addMarkdown(
-                  `\n\n**Error:** ${JSON.stringify(toolOutput['errorMessage'])}\n\n`
-                );
-              }
-              
-              outputBuilder.finishToolCall({
-                toolCallId: chunk.toolCallId,
-                output: toolOutput,
-              });
-              break;
-            }
-            case 'tool-error': {
-              errors.push({
-                type: 'tool-error',
-                message: `Tool ${chunk.toolName} failed`,
-                details: chunk.error,
-              });
-              outputBuilder.failToolCall({
-                toolCallId: chunk.toolCallId,
-              });
-              break;
-            }
-            case 'error': {
-              errors.push({
-                type: 'stream-error',
-                message: 'Error during streaming',
-                details: inspect(chunk.error),
-              });
-              break;
-            }
-            case 'start':
-            case 'start-step':
-            case 'tool-input-start':
-            case 'tool-input-delta':
-            case 'tool-input-end':
-            case 'finish-step':
-            case 'finish':
-              break;
-            default:
-              break;
-          }
-          await context.output.update({ data: outputBuilder.build() });
-        } catch (innerError) {
-          let detailsStr: string;
-          try {
-            detailsStr = typeof innerError === 'object' && innerError !== null && 'message' in innerError
-              ? `${(innerError as Error).message}${(innerError as Error).stack ? `\n${(innerError as Error).stack}` : ''}`
-              : inspect(innerError);
-          } catch {
-            detailsStr = String(innerError);
-          }
-          errors.push({
-            type: 'chunk-processing-error',
-            message: `Error processing chunk (type=${chunk.type})`,
-            details: detailsStr,
+          const result = await createEmbeddingModel({
+            provider: agentProviderModel.provider as AIProviderName,
+            engineToken: context.server.token,
+            apiUrl: context.server.apiUrl,
+            usageMeter: embeddingUsageMeter,
           });
+          embeddingConfig = { model: result.model, providerOptions: result.providerOptions };
+        }
+        catch (err) {
+          outputBuilder.addMarkdown(`\n\n**Warning:** Could not create embedding model for knowledge base search: ${err instanceof Error ? err.message : 'Unknown error'}\n\n`);
         }
       }
 
-      if (!outputBuilder.hasTextContent()) {
-        try {
-          const accumulatedText = await stream.text;
-          if (accumulatedText?.trim()) {
-            outputBuilder.addMarkdown(accumulatedText);
+      const { mcpClients, tools, toolKeyToAgentTool } = await constructAgentTools({
+        context,
+        agentTools,
+        model,
+        outputBuilder,
+        structuredOutput,
+        embeddingConfig,
+      });
+      outputBuilder.setToolMap(toolKeyToAgentTool);
+
+      // Capture is opt-in and, when on, is offered as a TOOL rather than done automatically: the
+      // model decides what is worth keeping, the same shape the browser agent's `remember` uses.
+      // Facts land in this flow's own memory (FLOW scope) — never a person's.
+      const memoryTools = context.propsValue[AgentBlockProps.MEMORY_CAPTURE]
+        ? agentMemory.buildRememberTool({ context, flowId: context.flows.current.id })
+        : undefined;
+
+      const allTools = {
+        ...(webSearchTools ?? {}),
+        ...tools,
+        ...(memoryTools ?? {}),
+      };
+
+      const errors: { type: string; message: string; details?: unknown }[] = [];
+
+      try {
+        // Opt-in (see AgentBlockProps.MEMORY_RECALL): recall costs an embedding per run, so a flow
+        // author asks for it explicitly. Returns null on anything unexpected — no memory on the
+        // plan, server unreachable — and the step simply runs without it.
+        const memoryContext = context.propsValue[AgentBlockProps.MEMORY_RECALL]
+          ? await agentMemory.recall({
+              context,
+              query: prompt,
+              flowId: context.flows.current.id,
+            })
+          : null;
+        const prompts = agentUtils.getPrompts(prompt, { hasKnowledgeBaseTools, memoryContext });
+        const stream = streamText({
+          model: model,
+          system: prompts.system,
+          prompt: prompts.prompt,
+          tools: allTools,
+          stopWhen: [stepCountIs(maxSteps), hasToolCall(TASK_COMPLETION_TOOL_NAME)],
+          providerOptions,
+          onFinish: async () => {
+            await Promise.all(mcpClients.map(async (client) => client.close()));
+          },
+        });
+
+        for await (const chunk of stream.fullStream) {
+          try {
+            switch (chunk.type) {
+              case 'text-delta': {
+                outputBuilder.addMarkdown(chunk.text);
+                break;
+              }
+              case 'reasoning-delta': {
+                if ('text' in chunk && typeof chunk.text === 'string') {
+                  outputBuilder.addMarkdown(chunk.text);
+                } else if ('delta' in chunk && typeof chunk.delta === 'string') {
+                  outputBuilder.addMarkdown(chunk.delta);
+                }
+                break;
+              }
+              case 'tool-call': {
+                if (agentUtils.isTaskCompletionToolCall(chunk.toolName)) {
+                  continue;
+                }
+                outputBuilder.startToolCall({
+                  toolName: chunk.toolName,
+                  toolCallId: chunk.toolCallId,
+                  input: chunk.input as Record<string, unknown>,
+                });
+                break;
+              }
+              case 'tool-result': {
+                if (agentUtils.isTaskCompletionToolCall(chunk.toolName)) {
+                  continue;
+                }
+                const rawOutput = chunk.output;
+                const toolOutput = normalizeToolOutputToExecuteResponse(rawOutput);
+
+                if (toolOutput['status'] === ExecutionToolStatus.FAILED && toolOutput['errorMessage']) {
+                  outputBuilder.addMarkdown(
+                    `\n\n**Error:** ${JSON.stringify(toolOutput['errorMessage'])}\n\n`
+                  );
+                }
+
+                outputBuilder.finishToolCall({
+                  toolCallId: chunk.toolCallId,
+                  output: toolOutput,
+                });
+                break;
+              }
+              case 'tool-error': {
+                errors.push({
+                  type: 'tool-error',
+                  message: `Tool ${chunk.toolName} failed`,
+                  details: chunk.error,
+                });
+                outputBuilder.failToolCall({
+                  toolCallId: chunk.toolCallId,
+                });
+                break;
+              }
+              case 'error': {
+                errors.push({
+                  type: 'stream-error',
+                  message: 'Error during streaming',
+                  details: inspect(chunk.error),
+                });
+                break;
+              }
+              case 'start':
+              case 'start-step':
+              case 'tool-input-start':
+              case 'tool-input-delta':
+              case 'tool-input-end':
+              case 'finish-step':
+              case 'finish':
+                break;
+              default:
+                break;
+            }
             await context.output.update({ data: outputBuilder.build() });
+          } catch (innerError) {
+            let detailsStr: string;
+            try {
+              detailsStr = typeof innerError === 'object' && innerError !== null && 'message' in innerError
+                ? `${(innerError as Error).message}${(innerError as Error).stack ? `\n${(innerError as Error).stack}` : ''}`
+                : inspect(innerError);
+            } catch {
+              detailsStr = String(innerError);
+            }
+            errors.push({
+              type: 'chunk-processing-error',
+              message: `Error processing chunk (type=${chunk.type})`,
+              details: detailsStr,
+            });
           }
-        } catch {
-          // ignore
         }
-      }
 
-      if (errors.length > 0) {
-        const errorSummary = errors.map(e => {
-          const detail = e.details != null ? `\n  ${String(e.details)}` : '';
-          return `${e.type}: ${e.message}${detail}`;
-        }).join('\n');
-        outputBuilder.addMarkdown(`\n\n**Errors encountered:**\n${errorSummary}`);
-        outputBuilder.fail({ message: 'Agent completed with errors' });
+        if (!outputBuilder.hasTextContent()) {
+          try {
+            const accumulatedText = await stream.text;
+            if (accumulatedText?.trim()) {
+              outputBuilder.addMarkdown(accumulatedText);
+              await context.output.update({ data: outputBuilder.build() });
+            }
+          } catch {
+            // ignore
+          }
+        }
+
+        if (errors.length > 0) {
+          const errorSummary = errors.map(e => {
+            const detail = e.details != null ? `\n  ${String(e.details)}` : '';
+            return `${e.type}: ${e.message}${detail}`;
+          }).join('\n');
+          outputBuilder.addMarkdown(`\n\n**Errors encountered:**\n${errorSummary}`);
+          outputBuilder.fail({ message: 'Agent completed with errors' });
+          await context.output.update({ data: outputBuilder.build() });
+        } else {
+          outputBuilder.setStatus(AgentTaskStatus.COMPLETED)
+        }
+
+      } catch (error) {
+        let errorMessage = `Agent failed unexpectedly: ${inspect(error)}`;
+        if (errors.length > 0) {
+          const collectedErrors = errors.map(e => {
+            const detail = e.details != null ? `\n  ${String(e.details)}` : '';
+            return `${e.type}: ${e.message}${detail}`;
+          }).join('\n');
+          errorMessage += `\n\nCollected stream errors:\n${collectedErrors}`;
+        }
+        outputBuilder.fail({ message: errorMessage });
         await context.output.update({ data: outputBuilder.build() });
-      } else {
-        outputBuilder.setStatus(AgentTaskStatus.COMPLETED)
+        await Promise.all(mcpClients.map(async (client) => client.close()));
       }
 
-    } catch (error) {
-      let errorMessage = `Agent failed unexpectedly: ${inspect(error)}`;
-      if (errors.length > 0) {
-        const collectedErrors = errors.map(e => {
-          const detail = e.details != null ? `\n  ${String(e.details)}` : '';
-          return `${e.type}: ${e.message}${detail}`;
-        }).join('\n');
-        errorMessage += `\n\nCollected stream errors:\n${collectedErrors}`;
-      }
-      outputBuilder.fail({ message: errorMessage });
-      await context.output.update({ data: outputBuilder.build() });
-      await Promise.all(mcpClients.map(async (client) => client.close()));
-    }
-
-    return outputBuilder.build();
+      return outputBuilder.build();
+    });
   }
 });

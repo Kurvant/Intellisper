@@ -1,0 +1,85 @@
+INTELLISPER UNIT-ECONOMICS (COGS) MODEL,,,,
+"Bottom-up cost per feature. Cost first; pricing later. All rates editable. Provenance: code=verified in source, src=researched market rate (mid-2026 cited), est=usage-shape assumption to tune.",,,,
+Generated with default assumptions. See COST_MODEL_METHODOLOGY.md and the interactive model for live recompute.,,,,
+,,,,
+SECTION 1 — AI TOKEN RATES ($ per 1M tokens),,,,
+Model / tier,Input,Output,Cache-read (0.1x),Provenance / source
+Claude Haiku 4.5 (default/distill),1.00,5.00,0.10,src — Anthropic pricing page
+Claude Sonnet 4.6 / 5 std (escalation),3.00,15.00,0.30,src — Anthropic (Sonnet-5 intro $2/$10 thru Aug 31 2026)
+Claude Opus 4.5-4.8 (reasoning; OFF in code today),5.00,25.00,0.50,src — Anthropic
+GPT-4o (fallback),2.50,10.00,,src — off OpenAI main page; 3P trackers (MEDIUM)
+text-embedding-3-small,0.02,,,src — OpenAI model page
+Gemini 2.5 Flash-Lite,0.10,0.40,0.025,src — Google
+Gemini 2.5 Pro (<=200k),1.25,10.00,0.125,src — Google
+Mistral Small 4,0.15,0.60,,src — Mistral
+Mistral Large 3,0.50,1.50,,src — Mistral (page conflict; legacy $2/$6)
+OpenRouter,provider list + ~5.5% surcharge,,,src — OpenRouter FAQ
+,,,,
+BLENDED tiers (equal-weight Anthropic+OpenAI+Google — provider-agnostic DEFAULT),Input,Output,,
+small (default/distill/grammar),0.50,2.00,,src blend
+mid (escalation),2.25,11.50,,src blend
+large (reasoning; off today),10.00,45.00,,src blend
+embeddings,0.06,,,src blend (OpenAI 0.02 / Google 0.15)
+,,,,
+SECTION 2 — INFRASTRUCTURE RATES,,,,
+Item,Rate,Unit,,Provenance
+S3 Standard storage,0.023,$/GB-mo,,src — AWS
+S3 PUT,0.005,$/1k req,,src
+S3 GET,0.0004,$/1k req,,src
+Data egress,0.09,$/GB,,src — first tier
+Fargate vCPU,0.0405,$/vCPU-hr,,src — AWS
+Fargate memory,0.00445,$/GB-hr,,src — AWS
+RDS gp3 storage,0.115,$/GB-mo,,src — AWS
+RDS instance (mid),220,$/mo,,src anchor (editable — your contract)
+ElastiCache Redis (mid),115,$/mo,,src anchor (editable)
+Email (SES),0.0001,$/send,,src — AWS SES $0.10/1k
+,,,,
+SECTION 3 — TOKEN ACCOUNTING (code-exact),,,,
+billedTokens,= uncachedInput + cachedInput x 0.1 + output,,,code — model-provider.service.ts
+Cache-read weight,0.10,,,code — CACHE_READ_WEIGHT
+Cached input fraction (assumption),0.70,,,est
+MAX_STEPS per run,25,,,code
+COST_CEILING (billed tokens),200000,,,code
+,,,,
+SECTION 4 — PER-FEATURE COGS (computed at default assumptions),,,,
+Feature,Meter,Total $/unit,Dominant driver,Note
+Interactive agentic task,ACTIONS,0.017172,AI tokens (~99%),Full model loop; browser actions run on user extension ($0 to us)
+Research run,RESEARCH,0.030011,AI tokens (~99%),Distill per source + compile; most expensive single action
+Memory op (remember/recall),MEMORY_OPS,0.000007,Embeddings,~free
+Grammar / quick tool,QUICK_TOOLS,0.007500,AI tokens,One cheap-tier call
+File op (read/edit),FILE_OPS,0.005018,AI tokens (edit),Read-only ~free; edit adds a rewrite call
+Routine replay / batch row,ROUTINE_RUNS,0.000858,AI (self-heal only),~0 on happy path — THE MARGIN LEVER (~20x cheaper than an interactive task)
+Flow run (no AI),-,0.000030,Compute,Engine exec + tiny zstd log
+Flow run (with AI step),-,0.000030,Compute + in-flow AI,Add OpenRouter credits for the AI step (0 by default)
+KB query,-,0.000007,Embeddings,768-dim embed + cosine
+,,,,
+SECTION 5 — REPRESENTATIVE USER-MONTH (a paid user; edit quantities),,,,
+Feature,Uses / mo,Each $,Subtotal $,
+Interactive agentic tasks,40,0.017172,0.6869,
+Research runs,8,0.030011,0.2401,
+Routine / batch rows,250,0.000858,0.2145,
+Grammar / quick tools,60,0.007500,0.4500,
+Memory ops,120,0.000007,0.0008,
+File ops,15,0.005018,0.0753,
+Flow runs (no AI),400,0.000030,0.0118,
+Flow runs (with AI),30,0.000030,0.0009,
+Marginal COGS / user / mo,,,1.6802,
+Fixed infra / user / mo (RDS+Redis+compute+other=695 / 500 users),,,1.3900,est
+FULLY-LOADED COGS / user / mo,,,3.0702,
+,,,,
+SECTION 6 — GROSS-MARGIN CHECK (illustrative),,,,
+Illustrative price $/mo,Fully-loaded COGS,Gross margin %,,
+15,3.07,79.5%,,
+20,3.07,84.6%,,
+49,3.07,93.7%,,
+,,,,
+SECTION 7 — REPRESENTATIVE WORKFLOWS,,,,
+Workflow,Composition,Total $,,
+Lead enrichment + outreach,1 research + 1 task + 2 memory,0.0472,,
+Weekly report automation,1 flow+AI + 2 flow,0.0001,,
+Bulk form-fill (200 rows own session),200 batch + 1 file,0.2166,,
+Research report (deep),1 research + 2 task,0.0644,,
+,,,,
+KEY FINDING,,,,
+"Unattended/batch browser runs execute on the USER's own machine (never a cloud browser) and deterministic replay uses ZERO model turns on the happy path. A batch of 200 rows (~$0.22) costs a tiny fraction of 200 interactive tasks (~$3.43). This is the structural margin lever.",,,,
+"CAVEAT: usage_counter exists but is unwritten (Phase 9) - no production telemetry yet. The 'est' inputs are the largest error source; replace with measured AgentRun.tokenCost/stepCount when traffic exists.",,,,

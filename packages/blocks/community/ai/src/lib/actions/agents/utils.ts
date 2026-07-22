@@ -40,10 +40,11 @@ export const agentUtils = {
     }
     return Object.keys(shape).length > 0 ? z.object(shape) : undefined;
   },
-  getPrompts(userPrompt: string, options?: { hasKnowledgeBaseTools?: boolean }) {
+  getPrompts(userPrompt: string, options?: { hasKnowledgeBaseTools?: boolean; memoryContext?: string | null }) {
     return {
        prompt: `
         ${userPrompt}
+        ${options?.memoryContext ?? ''}
         <important_note>
         As your FINAL ACTION, you must call the \`${TASK_COMPLETION_TOOL_NAME}\` tool to indicate if the task is complete or not.
         Call this tool only once you have done everything you can to achieve the user's goal, or if you are unable to continue (e.g., after handling errors appropriately and exhausting alternatives).

@@ -1,0 +1,69 @@
+---
+id: list-records
+title: "List records"
+description: "List records"
+sidebar_label: "List records"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVV1GL2zAM/itBTxuEa7fHvA02xrGxje3u6QjDddTWd47ts5VyJeS/DzlNk7Zp7o6xQZ/aRNKnT7IsKTWQWAXI7sCjtL4IkKdQYJBeOVLWQAZfVaCkk6bghBclEnq2qiHINZYCshpo6xAyCOSVWUGTgmLrxwr9FlIwomQpiYXG6wJS8PhYKY8FZOQrbNIRKFOVC/TnoLQqFR0ALYUO40jTpGTlg/UvhBLeC7ZVhGXg99bg92XMxU7DLu5RMjPnrUNPCqPeUqEurotRVqwnyPpTYQpoqpIPCB8hb1LYCF3hCEgzpH+39zbA7mxzjuvfcjWXRHZFl8QVL4esvqDE6ktKrLSXwxWfVKAA+QtY/Y/GZOn3qxhFrbGhsVQ6DsGTSZanEFBWXtE2TgXh1BfkvzmLPAZnTWijeT+f88/hvP2IS1FpSn7uNCEFaQ2hIdYVzmklBevO7gMbjMyoM8krBE1OsmlrNZ516VEQjssqV5yVdZvAmMx5yxTOSCVqPcV3+02UGEZNRVEoTp3QPw5im458Koyp8Lv72aRtbX2LlfPcde289dgd0hAmPxdMu7kcg6pDvN5Hv5D1Se9S/JyPFAw+tVVptoc70D4Jg2VOa2jyeLq4UbYKrzQ8iigW87NZYKsSaW0LyGCF8WwFrSGD2ebdrN9qA/pNt9JWXkMGayIXstlMOHWlDKHWKjj0V9KWcLwi//C2qCQ/JL8iEAy7wC++nm0ldb1gHxx7OYG7DZhsbeUT4VTygNtkhYYbEhbJ0tsyoTUmoiiVSaQ1wWqujNgDGHGBwjOB2LaWNvpSpFl03YeRfLSyKtFQ7CRcYehD631+Nb+ax1toA5Uidphdzzv6FDhgXfdd6lhvFyvhE82cFsrE3sBZrnencQebd7GT7r9B1jYQv6/rhQh463XT8Ou2CfMpFSpw6Xa7+gSbNz93ZfM2OUfmgQ9lcBd2NxdiHZ54arW774+X6O6/MKaV/z6Efir1nnJ+8IpdxSmUwhpFgT6msTX7ICW6YTAnY4ZR9hfp86cbSEFUfHT7Ut4VXtr9GVxqYbYD7LpuNW7sA5qmgX36+Tne9OYPZ8z/bQ==
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List records"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/records"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List records
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"query","name":"tableId","required":true},{"schema":{"type":"number"},"in":"query","name":"limit","required":false},{"schema":{"type":"string"},"in":"query","name":"cursor","required":false},{"schema":{"type":"array","items":{"oneOf":[{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["eq"]},"value":{"type":"string"}},"required":["fieldId","operator","value"]},{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["neq"]},"value":{"type":"string"}},"required":["fieldId","operator","value"]},{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["gt"]},"value":{"type":"string"}},"required":["fieldId","operator","value"]},{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["gte"]},"value":{"type":"string"}},"required":["fieldId","operator","value"]},{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["lt"]},"value":{"type":"string"}},"required":["fieldId","operator","value"]},{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["lte"]},"value":{"type":"string"}},"required":["fieldId","operator","value"]},{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["co"]},"value":{"type":"string"}},"required":["fieldId","operator","value"]},{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["exists"]}},"required":["fieldId","operator"]},{"type":"object","properties":{"fieldId":{"type":"string"},"operator":{"type":"string","enum":["not_exists"]}},"required":["fieldId","operator"]}]}},"in":"query","name":"filters","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"data":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"tableId":{"type":"string"},"projectId":{"type":"string"},"cells":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"updated":{"type":"string"},"created":{"type":"string"},"value":{},"fieldName":{"type":"string"}},"required":["updated","created","value","fieldName"],"additionalProperties":false}}},"required":["id","created","updated","tableId","projectId","cells"],"additionalProperties":false}},"next":{"anyOf":[{"type":"string"},{"type":"null"}]},"previous":{"anyOf":[{"type":"string"},{"type":"null"}]}},"required":["data"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

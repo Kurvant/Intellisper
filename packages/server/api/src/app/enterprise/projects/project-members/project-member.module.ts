@@ -4,10 +4,12 @@
 // member's role or removing a member requires the WRITE_PROJECT_MEMBER permission on that
 // project, enforced through the RBAC layer.
 import {
+    GetCurrentProjectMemberRoleQuery,
     ListProjectMembersRequestQuery,
     Permission,
     PrincipalType,
     ProjectMemberWithUser,
+    ProjectRole,
     SeekPage,
     UpdateProjectMemberRoleRequestBody,
 } from '@intelblocks/shared'
@@ -39,6 +41,17 @@ const projectMemberController: FastifyPluginAsyncZod = async (app) => {
         })
     })
 
+    // Resolve the CALLER's own effective role for a project. Project-scoped: the caller must
+    // belong to the project named in the query. Used by the web client's authorization layer
+    // (checkAccess) to gate the UI by permission. Declared before the '/:id' routes so the
+    // literal '/role' path is matched first and never shadowed by a param route.
+    app.get('/role', GetRoleRequest, async (request): Promise<ProjectRole | null> => {
+        return projectMemberService(request.log).getRole({
+            projectId: request.query.projectId,
+            userId: request.principal.id,
+        })
+    })
+
     // Change a member's role. Requires WRITE_PROJECT_MEMBER on the member's project — a
     // caller outside the member's tenant is rejected by that authorization check (403).
     app.post('/:id', UpdateRequest, async (request) => {
@@ -63,7 +76,21 @@ const ListRequest = {
         }),
     },
     schema: {
+        tags: ['project-members'],
+        summary: 'List project members',
+        description: 'List a project\'s members. The caller must belong to the project named in the query.',
         querystring: ListProjectMembersRequestQuery,
+    },
+}
+
+const GetRoleRequest = {
+    config: {
+        security: securityAccess.project([PrincipalType.USER, PrincipalType.SERVICE], Permission.READ_PROJECT_MEMBER, {
+            type: ProjectResourceType.QUERY,
+        }),
+    },
+    schema: {
+        querystring: GetCurrentProjectMemberRoleQuery,
     },
 }
 
@@ -82,6 +109,9 @@ const DeleteRequest = {
         security: securityAccess.publicPlatform([PrincipalType.USER, PrincipalType.SERVICE]),
     },
     schema: {
+        tags: ['project-members'],
+        summary: 'Remove a project member',
+        description: 'Remove a member. Requires WRITE_PROJECT_MEMBER on the member\'s project.',
         params: z.object({ id: z.string() }),
     },
 }

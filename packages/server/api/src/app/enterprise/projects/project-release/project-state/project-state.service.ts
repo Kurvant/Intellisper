@@ -86,10 +86,11 @@ export const projectStateService = (log: FastifyBaseLogger) => ({
     // Snapshot an entire workspace into a portable, credential-free ProjectState: its
     // flows (published where available, otherwise latest draft), its connection references
     // (external id + block + name only — never the secret value), and its tables.
-    async getProjectState({ projectId, platformId }: GetProjectStateParams): Promise<ProjectState> {
+    async getProjectState({ projectId }: GetProjectStateParams): Promise<ProjectState> {
+        // `list` takes projectIds XOR platformId. Scoping to the single project is the tighter
+        // filter, so passing platformId alongside it is both invalid and redundant.
         const flowsPage = await flowService(log).list({
             projectIds: [projectId],
-            platformId,
             cursorRequest: null,
             limit: EXPORT_FLOW_LIMIT,
             folderId: undefined,

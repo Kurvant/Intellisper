@@ -52,7 +52,12 @@ function StatCard({ label, value }: { label: string; value: number | string }) {
   );
 }
 
-export default function ChatAnalyticsPage() {
+export default function ChatAnalyticsPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const [from, setFrom] = useState(isoDaysAgo(30));
   const [to, setTo] = useState(isoDaysAgo(0));
   const [groupBy, setGroupBy] = useState<UsageGroupBy>('day');
@@ -89,10 +94,14 @@ export default function ChatAnalyticsPage() {
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <DashboardPageHeader
-        title={t('Chat Analytics')}
-        description={t('Internal usage, billing and ops metrics for AI chat.')}
-      />
+      {!isOverhaul && (
+        <DashboardPageHeader
+          title={t('Chat Analytics')}
+          description={t(
+            'Internal usage, billing and ops metrics for AI chat.',
+          )}
+        />
+      )}
 
       <div className="flex items-end gap-3">
         <div className="flex flex-col gap-1">

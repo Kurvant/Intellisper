@@ -40,7 +40,12 @@ const REPORT_TTL_MS = 1000 * 60 * 60 * 24;
 
 type TabValue = 'analytics' | 'details';
 
-export default function ImpactPage() {
+export default function ImpactPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedProjectId = searchParams.get('projectId') || undefined;
@@ -96,6 +101,70 @@ export default function ImpactPage() {
 
   const report = isLoading ? undefined : data ?? undefined;
 
+  // The header controls (freshness + refresh, time-period, project) are identical in both
+  // variants — only the surrounding chrome differs. Rendered once here so no capability is lost.
+  const headerControls = (
+    <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 px-3 py-1.5 border border-dashed rounded-md text-sm text-muted-foreground">
+        <span>
+          {t('Updated')} {dayjs(data?.updated).format('MMM DD, hh:mm A')} —{' '}
+          {t('Refreshes daily')}
+        </span>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-6 w-6"
+              onClick={() =>
+                refreshAnalytics(undefined, {
+                  onSuccess: () =>
+                    toast.success(t('Data refreshed successfully')),
+                })
+              }
+              disabled={isRefreshing}
+            >
+              <RefreshCcw
+                className={`h-3.5 w-3.5 ${isRefreshing ? 'animate-spin' : ''}`}
+              />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>{t('Refresh analytics')}</TooltipContent>
+        </Tooltip>
+      </div>
+
+      <Select value={selectedTimePeriod} onValueChange={handleTimePeriodChange}>
+        <SelectTrigger className="w-auto gap-2 h-8">
+          <Calendar className="h-4 w-4" />
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent side="bottom" align="end">
+          <SelectItem value={AnalyticsTimePeriod.LAST_WEEK}>
+            {t('Last 7 days')}
+          </SelectItem>
+          <SelectItem value={AnalyticsTimePeriod.LAST_MONTH}>
+            {t('Last 30 days')}
+          </SelectItem>
+          <SelectItem value={AnalyticsTimePeriod.LAST_THREE_MONTHS}>
+            {t('Last 3 months')}
+          </SelectItem>
+          <SelectItem value={AnalyticsTimePeriod.LAST_SIX_MONTHS}>
+            {t('Last 6 months')}
+          </SelectItem>
+          <SelectItem value={AnalyticsTimePeriod.LAST_YEAR}>
+            {t('Last year')}
+          </SelectItem>
+        </SelectContent>
+      </Select>
+
+      <ProjectSelect
+        projects={projects ?? []}
+        selectedProjectId={selectedProjectId}
+        onProjectChange={handleProjectChange}
+      />
+    </div>
+  );
+
   return (
     <LockedFeatureGuard
       featureKey="ANALYTICS"
@@ -106,90 +175,39 @@ export default function ImpactPage() {
       )}
     >
       <div className="flex flex-col gap-4 w-full">
-        <PageHeader
-          showSidebarToggle={true}
-          title={
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-medium">{t('Impact')}</span>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  {t('View impact analytics and metrics for the active flows.')}
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          }
-          rightContent={
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 px-3 py-1.5 border border-dashed rounded-md text-sm text-muted-foreground">
-                <span>
-                  {t('Updated')}{' '}
-                  {dayjs(data?.updated).format('MMM DD, hh:mm A')} —{' '}
-                  {t('Refreshes daily')}
-                </span>
+        {isOverhaul ? (
+          // Overhaul: the shell already renders the page title, so we surface the same
+          // freshness/refresh/time-period/project controls on a glass toolbar instead.
+          <div
+            className={cn(
+              'ov-glass ov-slide-in-up flex flex-wrap items-center justify-end gap-3 rounded-2xl px-4 py-3',
+              DASHBOARD_CONTENT_PADDING_X,
+            )}
+          >
+            {headerControls}
+          </div>
+        ) : (
+          <PageHeader
+            showSidebarToggle={true}
+            title={
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-medium">{t('Impact')}</span>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-6 w-6"
-                      onClick={() =>
-                        refreshAnalytics(undefined, {
-                          onSuccess: () =>
-                            toast.success(t('Data refreshed successfully')),
-                        })
-                      }
-                      disabled={isRefreshing}
-                    >
-                      <RefreshCcw
-                        className={`h-3.5 w-3.5 ${
-                          isRefreshing ? 'animate-spin' : ''
-                        }`}
-                      />
-                    </Button>
+                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
                   </TooltipTrigger>
-                  <TooltipContent>{t('Refresh analytics')}</TooltipContent>
+                  <TooltipContent>
+                    {t(
+                      'View impact analytics and metrics for the active flows.',
+                    )}
+                  </TooltipContent>
                 </Tooltip>
               </div>
-
-              <Select
-                value={selectedTimePeriod}
-                onValueChange={handleTimePeriodChange}
-              >
-                <SelectTrigger className="w-auto gap-2 h-8">
-                  <Calendar className="h-4 w-4" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent side="bottom" align="end">
-                  <SelectItem value={AnalyticsTimePeriod.LAST_WEEK}>
-                    {t('Last 7 days')}
-                  </SelectItem>
-                  <SelectItem value={AnalyticsTimePeriod.LAST_MONTH}>
-                    {t('Last 30 days')}
-                  </SelectItem>
-                  <SelectItem value={AnalyticsTimePeriod.LAST_THREE_MONTHS}>
-                    {t('Last 3 months')}
-                  </SelectItem>
-                  <SelectItem value={AnalyticsTimePeriod.LAST_SIX_MONTHS}>
-                    {t('Last 6 months')}
-                  </SelectItem>
-                  <SelectItem value={AnalyticsTimePeriod.LAST_YEAR}>
-                    {t('Last year')}
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-
-              <ProjectSelect
-                projects={projects ?? []}
-                selectedProjectId={selectedProjectId}
-                onProjectChange={handleProjectChange}
-              />
-            </div>
-          }
-          className="min-w-full"
-        />
+            }
+            rightContent={headerControls}
+            className="min-w-full"
+          />
+        )}
 
         <Tabs
           value={activeTab}
@@ -214,7 +232,7 @@ export default function ImpactPage() {
             <div
               className={cn('flex flex-col gap-6', DASHBOARD_CONTENT_PADDING_X)}
             >
-              <Summary report={report ?? undefined} />
+              <Summary report={report ?? undefined} variant={variant} />
               <Trends report={report ?? undefined} />
             </div>
           </TabsContent>

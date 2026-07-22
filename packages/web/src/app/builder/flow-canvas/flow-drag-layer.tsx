@@ -1,10 +1,4 @@
 import {
-  FlowOperationType,
-  StepLocationRelativeToParent,
-  flowStructureUtil,
-  isNil,
-} from '@intelblocks/shared';
-import {
   DndContext,
   DragEndEvent,
   DragOverlay,
@@ -16,6 +10,12 @@ import {
   useSensors,
   PointerSensorOptions,
 } from '@dnd-kit/core';
+import {
+  FlowOperationType,
+  StepLocationRelativeToParent,
+  flowStructureUtil,
+  isNil,
+} from '@intelblocks/shared';
 import { ReactFlowInstance, useReactFlow } from '@xyflow/react';
 import { t } from 'i18next';
 import type { PointerEvent } from 'react';

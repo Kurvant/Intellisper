@@ -1,8 +1,8 @@
 import { File, Flow, Project, TriggerEvent } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
 import {
-    IbIdSchema,
     BaseColumnSchemaPart,
+    IbIdSchema,
 } from '../../database/database-common'
 
 type TriggerEventSchema = {

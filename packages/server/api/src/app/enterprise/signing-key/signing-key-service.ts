@@ -11,10 +11,10 @@
 // are tenant-scoped.
 import { generateKeyPairSync } from 'node:crypto'
 import {
-    IntellisperError,
     AddSigningKeyResponse,
-    ibId,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     KeyAlgorithm,
     PlatformId,

@@ -50,11 +50,7 @@ function computeCreditsWarning({
   const isIntellisper = providers?.some(
     (p) => p.provider === AIProviderName.INTELLISPER && p.enabledForChat,
   );
-  if (
-    !isIntellisper ||
-    !platform.usage ||
-    platform.usage.aiCreditsLimit <= 0
-  ) {
+  if (!isIntellisper || !platform.usage || platform.usage.aiCreditsLimit <= 0) {
     return null;
   }
   const { totalAiCreditsUsed, aiCreditsLimit } = platform.usage;

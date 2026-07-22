@@ -1,7 +1,4 @@
 import {
-    IntellisperError,
-    IbEdition,
-    IbId,
     BulkActionOnRunsRequestBody,
     BulkArchiveActionOnRunsRequestBody,
     BulkCancelFlowRequestBody,
@@ -9,6 +6,9 @@ import {
     CountFlowRunsByStatusResponse,
     ErrorCode,
     FlowRun,
+    IbEdition,
+    IbId,
+    IntellisperError,
     isNil,
     ListFlowRunsRequestQuery,
     omit,
@@ -160,6 +160,7 @@ const ListRequest = {
     },
     schema: {
         tags: ['flow-runs'],
+        summary: 'List flow runs',
         description: 'List Flow Runs',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         querystring: ListFlowRunsRequestQuery,
@@ -180,6 +181,7 @@ const GetRequest = {
     },
     schema: {
         tags: ['flow-runs'],
+        summary: 'Get a flow run',
         description: 'Get Flow Run',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         params: z.object({
@@ -218,6 +220,7 @@ const BulkCancelFlowRequest = {
     },
     schema: {
         tags: ['flow-runs'],
+        summary: 'Cancel flow runs',
         description: 'Cancel multiple paused/queued flow runs',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         body: BulkCancelFlowRequestBody,
@@ -247,6 +250,7 @@ const CountByStatusRouteConfig = {
     },
     schema: {
         tags: ['flow-runs'],
+        summary: 'Count flow runs by status',
         description: 'Count Flow Runs by Status',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         querystring: CountFlowRunsByStatusRequest,

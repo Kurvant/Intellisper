@@ -1,0 +1,70 @@
+---
+id: update-a-record
+title: "Update a record"
+description: "Update a record"
+sidebar_label: "Update a record"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVUtv2zAM/isGTxvgNemOvm3rDsWAtujjFPjAWEyiVpZUSW5nGPrvA2U7cR5NLztFMd8fP5IdBFx7KBbgqDJOeChzEOQrJ22QRkMBT1ZgoAyzXgNycPTakA8/jWih6KAyOpAO/ERrlayQLWfPns078NWGauRXaC1BAWb5TFWAHKwzllyQ5JMbUspP1NA5bCEHGaj2n5uvJClxLSaKPjip1xBzeEPVUMpPt7crKBbHOtsvulEKYhljX6d0JBie0f3oLCkEXCr6ICauSYceu4l8aYwi1HDofvRUxn1JcA3FHCw6rCmQ8yn5I0h3YSW3zGLYQA4aaxbKsWcTl2UOnqrGydAmj2jlH+JnySJH3hrte2C/z+f8s0+KK1pho0J2P2hC/r9oIE/DWTnCQKdlTUL5tOxci6wznMIH0kM+Hubb3mBN/nTvhZBcPKq7vdrOV36ujHPlj+yOec/Sm9T2I8UDxo3Rdr5HT1M35UfFrFB5iodO5b6/XYyxDVPQR4g/jcFRagobI5jbxifomOIFzN4uZ8PmmnVSRGBeu7dxUBqnoIBNCNYXsxlaeSF1IKWkt+QuKlPD4ba7c0Y0Ff/JHpIjmM7KA5O479Y4MVucOcqRuydPWWsal6GV2Qu12Zo0OQYlWzlTZ2FDGYpa6qwy2hvF6KdJScuC0HECMQeeovvd2v39F2uraLI2F5MNOLZ8S40tB8rJQOy09lbVsHGkXplUnAwcB653uGVXpmpq0iENOEch5/ty5xfzi3kaLeNDjWnwhy10fEb2kJqckROqA8SB/oaZVSh1GntubjcwYQFvl2nN9Vcsh0IKZtaG6VIsoOuW6OnJqRj582tDLq07xshJxiRhKKTntxjIdybJL/cD779mHyU4HjLdTloBObwwb3hWYhlz2BAKcil6L/jVx/j2yOY7w6Olykert/hRVWTDWd1yMkJ3tw+PkMNyuN+1EWzj8J0BxPc+SZNqTlRP3zpQqNcNrlm398nExIbR3923nrL5+Jic2n0Yuq7XeDQvpGPcohL4f7q/8R9xsfXe
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a record"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/records/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update a record
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"cells":{"type":"array","items":{"type":"object","properties":{"fieldId":{"type":"string"},"value":{"anyOf":[{"type":"string"},{"type":"null"}]}},"required":["fieldId","value"]}},"tableId":{"type":"string"},"agentUpdate":{"type":"boolean"}},"required":["tableId"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"tableId":{"type":"string"},"projectId":{"type":"string"},"cells":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"updated":{"type":"string"},"created":{"type":"string"},"value":{},"fieldName":{"type":"string"}},"required":["updated","created","value","fieldName"],"additionalProperties":false}}},"required":["id","created","updated","tableId","projectId","cells"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

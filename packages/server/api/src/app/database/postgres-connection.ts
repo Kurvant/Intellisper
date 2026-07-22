@@ -9,6 +9,12 @@ import { AppSystemProp } from '../helper/system/system-props'
 import { commonProperties } from './database-connection'
 import { Migration } from './migration'
 import { CleanRoomBaseline1781764568389 } from './migration/postgres/1781764568389-CleanRoomBaseline'
+import { CreateBrowserAgentTables3169900000000 } from './migration/postgres/3169900000000-CreateBrowserAgentTables'
+import { BrowserAgentAutomationColumns3169900000001 } from './migration/postgres/3169900000001-BrowserAgentAutomationColumns'
+import { SubscriptionPlanTiers3169900000002 } from './migration/postgres/3169900000002-SubscriptionPlanTiers'
+import { AiUsageLedger3169900000003 } from './migration/postgres/3169900000003-AiUsageLedger'
+import { MemoryVisibilityAndScopes3169900000004 } from './migration/postgres/3169900000004-MemoryVisibilityAndScopes'
+import { MemoryEntitlementDecoupling3169900000005 } from './migration/postgres/3169900000005-MemoryEntitlementDecoupling'
 
 const getSslConfig = (): boolean | TlsOptions => {
     const useSsl = system.get(AppSystemProp.POSTGRES_USE_SSL)
@@ -27,7 +33,15 @@ const getSslConfig = (): boolean | TlsOptions => {
 // every edition applies it in the same order, and the rollback tooling and the embedded/test
 // data store derive from this same function, so ordering can never diverge.
 export const getMigrations = (): (new () => Migration)[] => {
-    const coreMigrations: (new () => Migration)[] = [CleanRoomBaseline1781764568389]
+    const coreMigrations: (new () => Migration)[] = [
+        CleanRoomBaseline1781764568389,
+        CreateBrowserAgentTables3169900000000,
+        BrowserAgentAutomationColumns3169900000001,
+        SubscriptionPlanTiers3169900000002,
+        AiUsageLedger3169900000003,
+        MemoryVisibilityAndScopes3169900000004,
+        MemoryEntitlementDecoupling3169900000005,
+    ]
     const allMigrations = [...coreMigrations, ...getEnterpriseMigrations()]
     return allMigrations.sort((a, b) => migrationTimestamp(a) - migrationTimestamp(b))
 }

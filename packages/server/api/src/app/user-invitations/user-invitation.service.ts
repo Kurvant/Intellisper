@@ -1,9 +1,9 @@
-import { IntellisperError, ibId, assertEqual, assertNotNullOrUndefined, ErrorCode, InvitationStatus, InvitationType, isNil, PlatformRole, SeekPage, spreadIfDefined, UserInvitation, UserInvitationWithLink } from '@intelblocks/shared'
+import { assertEqual, assertNotNullOrUndefined, ErrorCode, ibId, IntellisperError, InvitationStatus, InvitationType, isNil, PlatformRole, SeekPage, spreadIfDefined, UserInvitation, UserInvitationWithLink } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { IsNull } from 'typeorm'
 import { userIdentityService } from '../authentication/user-identity/user-identity-service'
 import { repoFactory } from '../core/db/repo-factory'
-import { smtpEmailSender } from '../enterprise/helper/email/email-sender/smtp-email-sender'
+import { getEmailSender } from '../enterprise/helper/email/email-sender'
 import { emailService } from '../enterprise/helper/email/email-service'
 import { projectMemberService } from '../enterprise/projects/project-members/project-member.service'
 import { projectRoleService } from '../enterprise/projects/project-role/project-role.service'
@@ -130,7 +130,7 @@ export const userInvitationsService = (log: FastifyBaseLogger) => ({
                 invitationId: id,
                 platformId,
             })
-            if (smtpEmailSender(log).isSmtpConfigured()) {
+            if (getEmailSender(log).isConfigured()) {
                 await emailService(log).sendProjectMemberAdded({
                     userInvitation,
                 })
@@ -254,7 +254,7 @@ async function generateInvitationLink(userInvitation: UserInvitation, expireyInS
 }
 const enrichWithInvitationLink = async (userInvitation: UserInvitation, expireyInSeconds: number, log: FastifyBaseLogger) => {
     const invitationLink = await generateInvitationLink(userInvitation, expireyInSeconds)
-    if (!smtpEmailSender(log).isSmtpConfigured()) {
+    if (!getEmailSender(log).isConfigured()) {
         return {
             ...userInvitation,
             link: invitationLink,

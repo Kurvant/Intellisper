@@ -1,4 +1,4 @@
-import { IbId, FlowRunStatus, PauseType, RespondResponse, WaitpointVersion } from '@intelblocks/shared'
+import { FlowRunStatus, IbId, PauseType, RespondResponse, WaitpointVersion } from '@intelblocks/shared'
 
 enum WaitpointStatus {
     PENDING = 'PENDING',

@@ -8,6 +8,8 @@ import { Error, Success } from '@/features/billing';
 import { PlatformLayout } from '../components/platform-layout';
 
 const SettingsBilling = React.lazy(() => import('./platform/billing'));
+const AiSpendPage = React.lazy(() => import('./platform/ai-spend'));
+const AgentActivityPage = React.lazy(() => import('./platform/agent-activity'));
 const EventDestinationsPage = React.lazy(
   () => import('./platform/infra/event-destinations'),
 );
@@ -211,6 +213,34 @@ export const platformRoutes = [
         <PageTitle title="Billing">
           <SuspenseWrapper>
             <SettingsBilling />
+          </SuspenseWrapper>
+        </PageTitle>
+      </PlatformLayout>
+    ),
+  },
+  {
+    // AI Gateway — what our AI actually costs, by product surface and model, against what we charged.
+    // Sits under observability alongside Chat Analytics: it is a measurement surface, not a setting.
+    path: '/platform/observability/ai-spend',
+    element: (
+      <PlatformLayout>
+        <PageTitle title="AI Spend">
+          <SuspenseWrapper>
+            <AiSpendPage />
+          </SuspenseWrapper>
+        </PageTitle>
+      </PlatformLayout>
+    ),
+  },
+  {
+    // Agent Oversight — platform-wide browser-agent activity across the tenant's users.
+    // Sits under observability alongside AI Spend: it is a measurement surface, not a setting.
+    path: '/platform/observability/agent-activity',
+    element: (
+      <PlatformLayout>
+        <PageTitle title="Agent Activity">
+          <SuspenseWrapper>
+            <AgentActivityPage />
           </SuspenseWrapper>
         </PageTitle>
       </PlatformLayout>

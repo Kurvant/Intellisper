@@ -1,0 +1,39 @@
+---
+title: "Telemetry"
+description: ""
+---
+
+# Telemetry has been removed
+
+This edition ships with **no telemetry**. All code that relayed usage data to
+external services has been removed, not merely disabled:
+
+- The backend Segment relay and the frontend Segment + PostHog relays are gone,
+  including their hardcoded write keys.
+- The template-telemetry relay (which posted template view/install events to
+  external hosts) is gone.
+
+No usage data, behavioral events, or personal information leaves your server.
+
+# `IB_TELEMETRY_ENABLED`
+
+The `IB_TELEMETRY_ENABLED` environment variable is retained only for
+compatibility. It no longer causes any network request — when enabled it merely
+gates local debug logging of captured events in non-production environments. It
+defaults to `false`.
+
+# Related outbound paths
+
+For completeness, other paths that previously contacted external (upstream)
+servers have also been made opt-in / configurable and default to off:
+
+- **Version check** — the server no longer fetches the "latest release" from a
+  remote host; it reports its locally-installed version.
+- **Block registry sync** — see [Block syncing](/install/architecture/block-syncing);
+  no hardcoded registry, controlled by `IB_BLOCKS_SYNC_MODE` /
+  `IB_BLOCKS_REGISTRY_URL`, default `NONE`.
+- **Template marketplace** — controlled by `IB_TEMPLATES_SOURCE_URL`, empty by
+  default (no outbound request).
+
+Error reporting via Sentry remains available but only activates when an operator
+sets their own `IB_SENTRY_DSN`; it is never pointed at a third party by default.

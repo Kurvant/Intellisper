@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { ProductScopeSchema } from '../../browser-agent/product-scope'
 import { SAFE_STRING_PATTERN } from '../../core/common'
 import { OptionalArrayFromQuery, OptionalBooleanFromQuery } from '../../core/common/base-model'
 import { IbId } from '../../core/common/id-generator'
@@ -34,6 +35,10 @@ export type Base64EncodedFile = z.infer<typeof Base64EncodedFile>
 
 export const CreatePlatformRequest = z.object({
     name: z.string().regex(new RegExp(SAFE_STRING_PATTERN)).min(1).max(100),
+    // Intellisper product scope for the new (personal) platform. Optional + backward-compatible:
+    // absent → stock blockunits platform. BROWSER/FULL sets browserAgentEnabled and triggers the
+    // one-platform-per-email tenancy rule.
+    productScope: ProductScopeSchema.optional(),
 })
 
 export type CreatePlatformRequest = z.infer<typeof CreatePlatformRequest>

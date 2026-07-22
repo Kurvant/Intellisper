@@ -75,7 +75,12 @@ const filters: DataTableFilters<keyof AppConnectionWithoutSensitiveData>[] = [
   },
 ];
 
-const GlobalConnectionsTable = () => {
+const GlobalConnectionsTable = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const [refresh, setRefresh] = useState(0);
   const [selectedRows, setSelectedRows] = useState<
     Array<AppConnectionWithoutSensitiveData>
@@ -317,12 +322,14 @@ const GlobalConnectionsTable = () => {
         )}
         lockVideoUrl="https://cdn.activepieces.com/videos/showcase/global-connections.mp4"
       >
-        <DashboardPageHeader
-          description={t(
-            'Manage platform-wide connections to external systems.',
-          )}
-          title={t('Global Connections')}
-        />
+        {!isOverhaul && (
+          <DashboardPageHeader
+            description={t(
+              'Manage platform-wide connections to external systems.',
+            )}
+            title={t('Global Connections')}
+          />
+        )}
         <DataTable
           emptyStateTextTitle={t('No global connections found')}
           emptyStateTextDescription={t(

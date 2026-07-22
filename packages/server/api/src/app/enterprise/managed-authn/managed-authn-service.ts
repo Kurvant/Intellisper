@@ -9,10 +9,10 @@
 // Everything the token requests is scoped to the platform that owns the signing key that validated
 // it (I.3 fail-safe scoping).
 import {
-    ibId,
     AuthenticationResponse,
-    isNil,
     BlocksFilterType,
+    ibId,
+    isNil,
     PlatformRole,
     Project,
     ProjectType,
@@ -143,7 +143,9 @@ async function maybeAssignConcurrencyPool(log: FastifyBaseLogger, principal: Ext
         key: principal.concurrencyPoolKey,
         maxConcurrentJobs: principal.concurrencyPoolLimit,
     })
-    await projectService(log).update(projectId, { poolId })
+    // Managed/embed workspaces are always created as TEAM projects (see getOrCreateProject), and
+    // `update` discriminates its params on that type.
+    await projectService(log).update(projectId, { type: ProjectType.TEAM, poolId })
     await concurrencyPoolService(log).assignProject({ projectId, poolId })
 }
 

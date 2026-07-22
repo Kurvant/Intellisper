@@ -1,0 +1,69 @@
+---
+id: export-a-table
+title: "Export a table"
+description: "Export a table"
+sidebar_label: "Export a table"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVE1v2zAM/SsCTxsgxOmOvg1oMQwDhqIfpyAHxmJiNbakSnTWwPB/Hyg7abpkXbFTpOiR75F8dA+MmwTlAhhXDSVYajCUqmgDW++ghJuX4CMrVBkAGgJGbIkpSlgPqaqpRSh74H0gKCFxtG4DgwYr8QG5Bg0OW3m0BjREeu5sJAMlx46GpYZEVRct73NGDPYHyXEpT5FS8C5REoov87n8vFV4TWvsGlZ3ExI0VN4xORYshtDYCgVbPCUJuKDZr56oYiku+kCR7Ui3ttSYdILDGHEPGixTm/4db83Fvoy9OHsYTjuzGFuVoUsNaIyVErC5PWFYY5Mox/lf/yNz/xNbShc1XiY81/zhcqZeTlo/WFnO3xLX3kAJG8raxVAlFLurYvRs0VszFJR9CuKluDuYs4sNlFAzh1QWBQY7s46paWwKFGeVb+FPu99Gb7pKLuo+J4JTf96LccZGHFx6rFtYztI9JlJ730WFwaot7dWGHEVkMmodfau4JoWmtU5V3iWfFyy7UzKuCKMIyKu09pnLciNP31/LUNe+6lpynD0OGqT6kX0+m8/mMs3gE7eYvT8t4tlav9Hdv27QOXKql+mFi9CgdcKQO91Pw1nA7kqA4ydFQ5m9PE1oqaH2iQXV9ytM9BibYZC/nzuKee817DDaTCdTNDbJ2Uy2eEfrp7vJcZ/V34QeVsTJguyw6eQGGrYyTFm6YTloqAkNxcw+PnytKgp8EnL2XRGfHK367eYBNGAn3Tg6ZJqnPhwk+0U5fT8iHvyW3DAc1bHcReAw/AaGjvY/
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Export a table"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/tables/{id}/export"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Export a table
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"fields":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"}},"required":["id","name"],"additionalProperties":false}},"rows":{"type":"array","items":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"string"}}},"name":{"type":"string"}},"required":["fields","rows","name"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

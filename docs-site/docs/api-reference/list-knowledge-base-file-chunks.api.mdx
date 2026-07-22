@@ -1,0 +1,69 @@
+---
+id: list-knowledge-base-file-chunks
+title: "List knowledge base file chunks"
+description: "List chunks for a knowledge base file, optionally filtered by embedding status"
+sidebar_label: "List knowledge base file chunks"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1Uz2P2zAM/SsCpxZQ41xHz1cURTsU9zEdMjAWEwuRJZ9EpTUM//eCipNLrsl4k2WJ5Ht8jxyBcZugfoGdD38cmS19WWMiWGkwlJpoe7bBQw2/bGLVtNnvktqEqFCdMpRkqI11pFUo8ejcIBdMkYxaD4q6NRlj/VYlRs4JNPQYsSOmKPAjpKalDqEegYeeoIbE0fotaCCfO2HIMRNo2KATfpMGK7xeM8UBNHjsJOsARAY0RHrNNpKBuqRM+jbIsViP3L7VspdVBH9aaUjU5Gh5KLSxtz9Jjit5ipT64BMlgfi6XMrnUsZ72mB2rB7mSJgmDR1xGwzUsCUuynALNVT7u+rSlUo0TtVozVQdrAChE/dHEXN0UEPL3Ke6qrC3C+uZnLOpp7hoQgfvbf0dg8mN/KjHUgjOW3wUvQ7dHBs9SSco/5V7TqSGkKPC3qodDWpLniIyGbWJoVPckkLTWa+a4FNwYmgxRSquCaMQKG5sQsGy7OTpx1sb6j40uSPPWDA1SPcH9OViuViKmX1I3KGXCrOXZXyvTKw66XjRyAhN8EyeP2LyZwGZ/nLVO7ReKBfrxtn7F9jfgX6/kxqK/6ChLqM5U19paENiyRpHCXyObprk+rAbMhjGJly70y5o2ImX59uyR5eFVfF/j9FK/PXcm0p9epiX5bO61eZ8iX44xzzysQam1flCfP/2BBowiyinyZvnRB8PQvJq3XE8RDyFHflpOsGw/AvSNP0DJ6W33g==
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List knowledge base file chunks"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/knowledge-base/files/{id}/chunks"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List chunks for a knowledge base file, optionally filtered by embedding status
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string","enum":["true","false"]},"in":"query","name":"embedded","required":false},{"schema":{"type":"string"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

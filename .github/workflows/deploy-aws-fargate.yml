@@ -8,9 +8,11 @@ name: Deploy to AWS Fargate
 # hand when infra or environment variables change. This workflow only swaps the running image.
 
 on:
-  # Deploy automatically when application code lands on main.
+  # Deploy automatically when application code lands on the default branch. This repo's default
+  # is `firstWholeCommit` (not `main`); `main` is listed too so the trigger keeps working if the
+  # default is ever renamed.
   push:
-    branches: [main]
+    branches: [firstWholeCommit, main]
     paths:
       - 'packages/**'
       - 'Dockerfile'

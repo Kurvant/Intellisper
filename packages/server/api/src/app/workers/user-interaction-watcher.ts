@@ -1,4 +1,4 @@
-import { IntellisperError, ibId, ErrorCode, isNil, LATEST_JOB_DATA_SCHEMA_VERSION, UserInteractionJobDataWithoutWatchingInformation } from '@intelblocks/shared'
+import { ErrorCode, ibId, IntellisperError, isNil, LATEST_JOB_DATA_SCHEMA_VERSION, UserInteractionJobDataWithoutWatchingInformation } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { engineResponseWatcher } from './engine-response-watcher'
 import { jobQueue, JobType } from './job-queue/job-queue'

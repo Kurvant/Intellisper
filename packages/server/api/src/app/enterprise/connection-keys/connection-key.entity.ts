@@ -4,7 +4,7 @@
 // NOT derived from any licensed source.
 import { ConnectionKey, Project } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../database/database-common'
 
 type ConnectionKeySchema = ConnectionKey & {
     project: Project

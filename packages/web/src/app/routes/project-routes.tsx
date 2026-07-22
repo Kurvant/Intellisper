@@ -20,6 +20,7 @@ const FlowBuilderPage = React.lazy(() =>
 );
 const AnalyticsPage = React.lazy(() => import('./impact'));
 const LeaderboardPage = React.lazy(() => import('./leaderboard'));
+const AgentActivityPage = React.lazy(() => import('./agent'));
 const ProjectReleasesPage = React.lazy(() =>
   import('./project-release').then((m) => ({
     default: m.ProjectReleasesPage,
@@ -226,6 +227,18 @@ export const projectRoutes = [
         <PageTitle title="Impact">
           <SuspenseWrapper>
             <AnalyticsPage />
+          </SuspenseWrapper>
+        </PageTitle>
+      </ProjectDashboardLayout>
+    ),
+  },
+  {
+    path: '/agent',
+    element: (
+      <ProjectDashboardLayout>
+        <PageTitle title="My Agent">
+          <SuspenseWrapper>
+            <AgentActivityPage />
           </SuspenseWrapper>
         </PageTitle>
       </ProjectDashboardLayout>

@@ -9,7 +9,7 @@
 // Here the platform is DERIVED from the resolved key (the embed token carries none), and an
 // unknown `kid` is surfaced as an AUTHENTICATION failure (401) with the message contract managed
 // auth exposes; a bad embed token is an authentication failure, not a not-found.
-import { IntellisperError, ErrorCode, BlocksFilterType, PlatformId } from '@intelblocks/shared'
+import { BlocksFilterType, ErrorCode, IntellisperError, PlatformId } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { jwtUtils } from '../../../helper/jwt-utils'
 import { signingKeyService } from '../../signing-key/signing-key-service'

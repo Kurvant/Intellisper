@@ -6,10 +6,10 @@
 // persisted (never the resolved secret), and it is encrypted at rest — all handled by the
 // shared appConnectionService, which this module drives with PLATFORM scope.
 import {
-    ibId,
     AppConnectionScope,
     AppConnectionWithoutSensitiveData,
     ApplicationEventName,
+    ibId,
     ListGlobalConnectionsRequestQuery,
     PrincipalType,
     SeekPage,
@@ -22,7 +22,6 @@ import { z } from 'zod'
 import { appConnectionService } from '../../app-connection/app-connection-service/app-connection-service'
 import { securityAccess } from '../../core/security/authorization/fastify-security'
 import { applicationEvents } from '../../helper/application-events'
-import { paginationHelper } from '../../helper/pagination/pagination-utils'
 import { platformMustBeOwnedByCurrentUser, platformMustHaveFeatureEnabled } from '../authentication/ee-authorization'
 
 const DEFAULT_LIST_LIMIT = 100
@@ -44,7 +43,12 @@ const globalConnectionController: FastifyPluginAsyncZod = async (app) => {
     // minted for a new connection; invalid project ids are rejected (404) by the service.
     app.post('/', {
         ...adminOnly,
-        schema: { body: UpsertGlobalConnectionRequestBody },
+        schema: {
+            tags: ['global-connections'],
+            summary: 'Upsert a global connection',
+            description: 'Create or update an organization-shared connection (administrator-only).',
+            body: UpsertGlobalConnectionRequestBody,
+        },
     }, async (request, reply): Promise<AppConnectionWithoutSensitiveData> => {
         await platformMustBeOwnedByCurrentUser.call(app, request, reply)
         const body = request.body
@@ -72,7 +76,12 @@ const globalConnectionController: FastifyPluginAsyncZod = async (app) => {
     // List the organization's shared connections (administrator-only).
     app.get('/', {
         ...adminOnly,
-        schema: { querystring: ListGlobalConnectionsRequestQuery },
+        schema: {
+            tags: ['global-connections'],
+            summary: 'List global connections',
+            description: 'List the organization\'s shared connections (administrator-only).',
+            querystring: ListGlobalConnectionsRequestQuery,
+        },
     }, async (request, reply): Promise<SeekPage<AppConnectionWithoutSensitiveData>> => {
         await platformMustBeOwnedByCurrentUser.call(app, request, reply)
         const page = await appConnectionService(request.log).listForPlatform({
@@ -86,13 +95,18 @@ const globalConnectionController: FastifyPluginAsyncZod = async (app) => {
             cursorRequest: request.query.cursor ?? null,
             limit: request.query.limit ?? DEFAULT_LIST_LIMIT,
         })
-        return paginationHelper.createPage(page.data as unknown as AppConnectionWithoutSensitiveData[], page.cursor)
+        // `listForPlatform` already returns a fully-formed SeekPage (its next/previous cursors are
+        // encoded by the underlying list call). Re-wrapping it would discard those cursors.
+        return { ...page, data: page.data as unknown as AppConnectionWithoutSensitiveData[] }
     })
 
     // Update a shared connection's display name / workspace attachments (administrator-only).
     app.post('/:id', {
         ...adminOnly,
         schema: {
+            tags: ['global-connections'],
+            summary: 'Update a global connection',
+            description: 'Update a shared connection\'s display name / workspace attachments (administrator-only).',
             params: z.object({ id: z.string() }),
             body: UpdateGlobalConnectionValueRequestBody,
         },
@@ -122,7 +136,12 @@ const globalConnectionController: FastifyPluginAsyncZod = async (app) => {
     // Disconnect (delete) a shared connection (administrator-only).
     app.delete('/:id', {
         ...adminOnly,
-        schema: { params: z.object({ id: z.string() }) },
+        schema: {
+            tags: ['global-connections'],
+            summary: 'Delete a global connection',
+            description: 'Disconnect (delete) a shared connection (administrator-only).',
+            params: z.object({ id: z.string() }),
+        },
     }, async (request, reply): Promise<void> => {
         await platformMustBeOwnedByCurrentUser.call(app, request, reply)
         await appConnectionService(request.log).delete({

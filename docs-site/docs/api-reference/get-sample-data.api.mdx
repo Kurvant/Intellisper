@@ -1,0 +1,69 @@
+---
+id: get-sample-data
+title: "Get sample data"
+description: "Get sample data"
+sidebar_label: "Get sample data"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1VE1v2zAM/SsCTxugJemOPncoggFd0Sa7FDkoNhNrkSVVorIZhv77QMdJ3GY7bGhOoUzmPX48sgNS2wjFM0TVeIOfKkUKVhK8CqpBwsDODmJZY6Og6IBaj1BApKDtFrIEbaGAl4ShBQlWNezdGPdzXoGEgC9JB6ygoJAwy/9C+o4hamffBzAS+ns23wHLB/cDS/rHxCSgTQ33fH7/sFyAhG/LBRurv9D0f79gWEmIWKagqe1HpLz+imyu2BUwemcjRub/PJvxT4WxDNqTdkxyixuVDInHIRJylm9C7pDEQRei14WEBql2FRSwRQJWCdVQwHR/Mx3rhzML+6N2UjBQQE3kYzGdKq8n2hIao6PHMCldA295H4KrUskP8dQDwbjaJ+7robBjzacWM8sF3DKiaF0KQnktdtiKLVoMirASm+AaQTUKVTXaitLZ6Aw3ux8eI65RBU6gn83G9VyaDLvm5zLErStTg5ZUzylhf9AsFDCbzCYzVpB3kRplGWEY7GV/XyV+qorwF029UdoyTt/Pbuj9M+xvON3X21u7SOzrurWKuAwmZ/580BXPpNJRrQ1raaNMxAvi0llCS1DAh8dBdh8FyD8ntOMRnHd+r0ziIOAluBLR+CRcm290Ma5NNT4o1+YarsqZZsWPoJmnvyKjbb/7wmdKJVbcSZXDZsijwboaXMq2I+iuO0Qs3A5tznDKgN+QVznn3zihNhE=
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get sample data"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/sample-data"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get sample data
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"query","name":"flowId","required":true},{"schema":{"type":"string"},"in":"query","name":"flowVersionId","required":true},{"schema":{"type":"string"},"in":"query","name":"stepName","required":true},{"schema":{"type":"string"},"in":"query","name":"projectId","required":true},{"schema":{"type":"string","enum":["INPUT","OUTPUT"]},"in":"query","name":"type","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

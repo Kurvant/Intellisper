@@ -4,9 +4,9 @@
 // resolved identity attributes. Clients are cached per platform because building one
 // parses IdP metadata (and may fetch it over the network); the cache is invalidated
 // whenever a platform's SAML settings change (platform.service.update).
-import { safeHttp } from '@intelblocks/server-utils'
-import { IntellisperError, ErrorCode, isNil, SAMLAttributeMapping, SAMLAuthnProviderConfig, tryCatch } from '@intelblocks/shared'
 import * as xmlValidator from '@authenio/samlify-node-xmllint'
+import { safeHttp } from '@intelblocks/server-utils'
+import { ErrorCode, IntellisperError, isNil, SAMLAttributeMapping, SAMLAuthnProviderConfig, tryCatch } from '@intelblocks/shared'
 import * as samlify from 'samlify'
 import { resolveSamlAttributes, SamlAttributes } from './saml-attributes'
 

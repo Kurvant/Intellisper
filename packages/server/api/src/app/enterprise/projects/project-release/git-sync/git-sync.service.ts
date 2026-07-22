@@ -16,8 +16,6 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import {
-    IntellisperError,
-    ibId,
     ConfigureRepoRequest,
     ErrorCode,
     FlowState,
@@ -25,6 +23,8 @@ import {
     GitPushOperationType,
     GitRepo,
     GitRepoWithoutSensitiveData,
+    ibId,
+    IntellisperError,
     isNil,
     PlatformId,
     ProjectId,

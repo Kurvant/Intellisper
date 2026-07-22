@@ -1,8 +1,8 @@
 encryptionsalt: v1:wHCVNl3bj/g=:v1:mxogi9ZeBjIcxNZC:q+bjpLv9rnJnu8qq7xwKGLd/GAZOqA==
 config:
   intellisper:environment: "dev"
-  intellisper:apEncryptionKey:  
-  intellisper:apJwtSecret: 
+  intellisper:ibEncryptionKey:  
+  intellisper:ibJwtSecret: 
   intellisper:deployLocalBuild: "false"
   intellisper:repoName:
   intellisper:containerCpu: "256"

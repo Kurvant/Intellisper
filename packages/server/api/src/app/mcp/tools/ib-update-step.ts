@@ -1,4 +1,5 @@
 import {
+    BlockActionSettings,
     FlowActionType,
     FlowOperationRequest,
     FlowOperationType,
@@ -6,7 +7,6 @@ import {
     isNil,
     McpToolDefinition,
     Permission,
-    BlockActionSettings,
     ProjectScopedMcpServer,
     UpdateActionRequest,
 } from '@intelblocks/shared'

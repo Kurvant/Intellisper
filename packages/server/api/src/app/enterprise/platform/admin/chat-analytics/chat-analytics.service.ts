@@ -12,7 +12,7 @@ import { repoFactory } from '../../../../core/db/repo-factory'
 import { PlatformEntity } from '../../../../platform/platform.entity'
 import { ChatConversationEntity } from '../../../chat/chat-conversation-entity'
 import { chatRolloutService, FunnelSnapshot } from '../../../chat/chat-rollout.service'
-import { ChatMessageMetricEntity } from '../../../chat/telemetry/chat-message-metric.entity'
+import { ChatMessageMetric, ChatMessageMetricEntity } from '../../../chat/telemetry/chat-message-metric.entity'
 
 const metricRepo = repoFactory(ChatMessageMetricEntity)
 const conversationRepo = repoFactory(ChatConversationEntity)
@@ -74,8 +74,10 @@ function toListItem(conversation: ChatConversation): ConversationListItem {
         id: conversation.id,
         platformId: conversation.platformId,
         userId: conversation.userId,
-        title: conversation.title,
-        modelName: conversation.modelName,
+        // `Nullable()` in shared is `.nullable().optional()` (for OpenAPI), so these read as
+        // `string | null | undefined`; the list-item contract is `string | null`.
+        title: conversation.title ?? null,
+        modelName: conversation.modelName ?? null,
         status: conversation.status,
         messageCount: messageCountOf(conversation),
         created: conversation.created,
@@ -87,7 +89,9 @@ export const chatAnalyticsService = (log: FastifyBaseLogger) => ({
     // Usage/billing summary over the metric table for [from,to], optionally one platform, grouped by
     // the requested bucket.
     async usage({ from, to, platformId, groupBy }: Range & { platformId?: string, groupBy: UsageGroupBy }): Promise<UsageSummary> {
-        const applyFilters = (qb: SelectQueryBuilder<unknown>): SelectQueryBuilder<unknown> => {
+        // The builder always comes from `metricRepo()`, so it is typed to that entity — TypeORM's
+        // SelectQueryBuilder requires an ObjectLiteral, which `unknown` is not.
+        const applyFilters = (qb: SelectQueryBuilder<ChatMessageMetric>): SelectQueryBuilder<ChatMessageMetric> => {
             qb.where('metric.created >= :from', { from })
                 .andWhere('metric.created <= :to', { to })
             if (!isNil(platformId)) {
@@ -221,7 +225,7 @@ export const chatAnalyticsService = (log: FastifyBaseLogger) => ({
         }
         return {
             ...toListItem(conversation),
-            projectId: conversation.projectId,
+            projectId: conversation.projectId ?? null,
             messages: conversation.uiMessages ?? [],
         }
     },

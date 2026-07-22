@@ -1,0 +1,68 @@
+---
+id: send-a-user-invitation
+title: "Send a user invitation"
+description: "Send a user invitation to a user. If the user already has an invitation, the invitation will be updated."
+sidebar_label: "Send a user invitation"
+hide_title: true
+hide_table_of_contents: true
+api: eJy9VsGS2jgQ/RVXnxWY2aNvBMgW2Z2BYsiJ8qGxG1BGlhRJZkJR/vctyTYYMEymspUTRt1qqV+/fq0DONxYiJdQWDKfuNxxh44raSFhkJFNDdf+P8TwQjKLMPKO0ckxcqpe7EWTdeS2VHmgMITZPtqijVC2NrDg0wrwxoWIVhQVOkNHWQ8YGPpRkHWfVbaH+ACpko6k85+oteBp2Nj/bv29DmDTLeUYrHI/XUO8PIDba4IY1Oo7pQ4YaKM0GcfJer/KevSyznC5AQYki9yDMZtPv46HC0hKBpQjF9fOZYjpo0+ye9a5Eh1HlWWVJDeU+QODtTmrHfk8TlKy307t38Hiy3T+9F5uAt1ambz7+qdwg9HT5BkYPI2fPo/nwGA6G88Hi+kckvdybJ+QlElZ+g2W0sJwtw9FRM3/If+ZlImPZbWStkrzr4dH/3PO0BGtsRAumteewH6dOvdR5d01Tg15ynbaajp32m7jbh26wt4t4Ph5NHn+GxgMhsPxbDEehVL+ct3ZGbubKtwi8QUNrhrsQ4Q4kVcWQkCZXDbRrfD3dvqr/d7ujyjH/0wEiXmXOjDQZHJubVDikx2NwT0w4I7yDpKUVwX9ECTdFPIZWDJDVVRtdNyWr8hcCRn3ktWgccq9zvQ8r/rEhAFmGfd9iWLWQnuNwlLnTQWXr++L6s27NBJUNxtrpKmF3TuXqsQqJ7dVGcSglQ1UQbeFGPq7x/7VOPXSZnZkbKhGYQTEsHVO27jfR817XDoSgltNppeqHC6n78yorEjDwHwJgcBrYiOXL17HKoY2onlEx59yFe6bpWivChOh5tEr7aMNSTIen2htVB5mNGY5l1GqpPVNwiqx9BFXhKauvRfS+Wlaj39irs8mRiM2R9E7SUar9a8Wq75scZDLtQphuQuWyQmvaKTSIidZQQ0MPMxVmg+9h95D6CdlXY5B86ueu/GcuQSq9fj4kw+gGjxHP11fC+QytKEJM6Ni2RJ2j8A6n21bz8Z4CYfDCi19M6Is/fKPgkwYpgx2aDiuPI5L305bwoxMIOarpw4Mq5w/Laq+2KEogvxcTlDfnNWOQZqSdnd9k1bDzKYvnhKr+oGXq8zvMfjmH3/4BjEAA6Vdo39h7QAC5abAjfetYnoKYuHxOBKuJidrPlrih3LfuuHhUHks1CvJsgRWp+L8fwgPkv8Axp3Ndg==
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Send a user invitation"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/user-invitations"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Send a user invitation to a user. If the user already has an invitation, the invitation will be updated.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"anyOf":[{"type":"object","properties":{"type":{"type":"string","enum":["PROJECT"]},"email":{"type":"string"},"projectId":{"type":"string"},"projectRole":{"type":"string"}},"required":["type","email","projectId","projectRole"]},{"type":"object","properties":{"type":{"type":"string","enum":["PLATFORM"]},"email":{"type":"string"},"platformRole":{"type":"string","enum":["ADMIN","MEMBER","OPERATOR"]}},"required":["type","email","platformRole"]}]}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"201":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"email":{"type":"string"},"status":{"type":"string","enum":["PENDING","ACCEPTED"]},"type":{"type":"string","enum":["PLATFORM","PROJECT"]},"platformId":{"type":"string"},"platformRole":{"anyOf":[{"type":"string","enum":["ADMIN","MEMBER","OPERATOR"]},{"type":"null"}]},"projectId":{"anyOf":[{"type":"string"},{"type":"null"}]},"projectRoleId":{"anyOf":[{"type":"string"},{"type":"null"}]},"projectRole":{"anyOf":[{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"name":{"type":"string"},"permissions":{"type":"array","items":{"type":"string"}},"platformId":{"anyOf":[{"type":"string"},{"type":"null"}]},"type":{"type":"string"},"userCount":{"type":"number"}},"required":["id","created","updated","name","permissions","type"],"additionalProperties":false},{"type":"null"}]},"link":{"type":"string"}},"required":["id","created","updated","email","status","type","platformId"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

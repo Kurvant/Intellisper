@@ -2,7 +2,7 @@
 // (packages/shared/.../ee/git-repo/index.ts) — NOT from any licensed source.
 import { GitBranchType, GitRepo, Project } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../../../database/database-common'
 
 type GitRepoSchema = GitRepo & {
     project: Project

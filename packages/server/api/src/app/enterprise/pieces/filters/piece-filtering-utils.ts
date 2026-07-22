@@ -30,7 +30,7 @@
 // and project only; a principal without a platform (unauthenticated / worker) has no governance
 // applied and sees the ungoverned catalog, which the private-visibility layer above has already
 // reduced to public blocks.
-import { FilteredBlockBehavior, isNil, BlocksFilterType, PlatformId } from '@intelblocks/shared'
+import { BlocksFilterType, FilteredBlockBehavior, isNil, PlatformId } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { repoFactory } from '../../../core/db/repo-factory'
 import { BlockMetadataSchema } from '../../../pieces/metadata/piece-metadata-entity'

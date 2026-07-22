@@ -44,7 +44,12 @@ import { projectCollectionUtils } from '@/features/projects';
 import { platformHooks } from '@/hooks/platform-hooks';
 import { formatUtils } from '@/lib/format-utils';
 
-export default function AuditLogsPage() {
+export default function AuditLogsPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   const [selectedEvent, setSelectedEvent] = useState<ApplicationEvent | null>(
     null,
@@ -113,12 +118,18 @@ export default function AuditLogsPage() {
       )}
     >
       <div className="flex flex-col  w-full">
-        <DashboardPageHeader
-          description={t('Track activities done within your platform')}
-          title={t('Audit Logs')}
-        >
-          <ChatAnalyticsLinkButton />
-        </DashboardPageHeader>
+        {isOverhaul ? (
+          <div className="flex justify-end px-4 pt-4">
+            <ChatAnalyticsLinkButton />
+          </div>
+        ) : (
+          <DashboardPageHeader
+            description={t('Track activities done within your platform')}
+            title={t('Audit Logs')}
+          >
+            <ChatAnalyticsLinkButton />
+          </DashboardPageHeader>
+        )}
         <DataTable
           emptyStateTextTitle={t('No audit logs found')}
           emptyStateTextDescription={t(

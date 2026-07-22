@@ -120,6 +120,7 @@ const CreateFolderParams = {
     },
     schema: {
         tags: ['folders'],
+        summary: 'Create a folder',
         description: 'Create a new folder',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         body: CreateFolderRequest,
@@ -137,6 +138,7 @@ const UpdateFolderParams = {
     },
     schema: {
         tags: ['folders'],
+        summary: 'Update a folder',
         description: 'Update an existing folder',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         params: z.object({
@@ -160,6 +162,7 @@ const GetFolderParams = {
         params: z.object({
             id: z.string(),
         }),
+        summary: 'Get a folder',
         description: 'Get a folder by id',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },
@@ -175,6 +178,7 @@ const ListFoldersParams = {
     },
     schema: {
         tags: ['folders'],
+        summary: 'List folders',
         description: 'List folders',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         querystring: ListFolderRequest,
@@ -193,6 +197,7 @@ const DeleteFolderParams = {
     schema: {
         params: DeleteFolderRequest,
         tags: ['folders'],
+        summary: 'Delete a folder',
         description: 'Delete a folder',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },

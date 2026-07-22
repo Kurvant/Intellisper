@@ -1,0 +1,68 @@
+---
+id: create-a-project
+title: "Create a project"
+description: "Create a team workspace under the caller's organization."
+sidebar_label: "Create a project"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVU1v00AQ/StmhASljhO44QsfpQdAgqqFC7ZBE3uSLF3vmtl1Wjfyf0ezDombRnAgp9Vkdubtm/fGG/C4dJBm0LD9SaV3UMRQkStZNV5ZAymcMaGnCCNPWEc3lq9dgyVFramII7+iqEStiZ+4yPISjbpDuZlADEy/WnL+ra06SDdQWuPJeDli02hVhsTpTyd9NuDKFdUoJ981BCnYuUCCWMA1xF6Rk38r5RqN3SesaZTsPCuzlGT0nliQf8++J9Pi9DH0MdCtBFG/r0J7031eQJod3u7jXcS0WkNf9DHU5LFCj0cvHmIMsNxDXH0MWFVKHoz6Yvye/nhTvD2zpmyZyfgPdu6OdjdtPSc+Dnup7Rz1mTWGSml7vmNgDA+ZsYMYlKf6GGzBrYn9JZWk1sTnNSr9NwpjWFiu0UMKFHLvTeTpq0d5npw8ffUoeZbnSThnbybfcHI3m7z88eQ0zyd5nhTPTkbR00nxepRV7I95PimkzsnpNlZsXsT942OE9IMcFVMleh+LqOjv/+u5pRBwjTVumOaL2Sxo75413tECW+2jy21moKsmv7IVpNBY54fXryCF6fr5dGeyGBzxmtgFAlvWkMLK+8al0yk2KlHGk9bKNcRJaWs49OQF26oNU42uQiHoC6lZtqx8dyVGGmBjoz5SN5qrdHlQ7qujqLMtR9io6Jq6aEmGGD1V0YJtHUyOVa1MVFrjrCZ5QGgCKcwJWQD0MYiTL/eeP7/FutH0wLN7qYxduY+ODHfcCbN/qDv7U6s4rl5oHfFrGuAFgvsYlFnYQJTyghne72cQvbNlW5PxYWFBDDK6gbpZMktmcl2mXWNYZGZ45W5xbsd+SPtoIf7Pkt0O1tOtnzYalRE0QVKbrfYyWD8fNtRuxa9Em2kGm80cHX1l3fcS/tUSd5BmRQxrZIVzYSKTbbIirIiDXK9FUHA2YJ98kfaSrtuwTw4XuwhzZ4mLz1dfIIb59oNQ20ruMN7IxwJvIAWIwQZ+gnxDbAMazbLFpeQONeX3G+I9UVs=
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create a project"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/projects"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a team workspace under the caller's organization.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"displayName":{"type":"string","pattern":"^[^./]+$"},"externalId":{"anyOf":[{"type":"string"},{"type":"null"}]},"metadata":{"anyOf":[{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},{"type":"null"}]},"maxConcurrentJobs":{"anyOf":[{"type":"number"},{"type":"null"}]},"globalConnectionExternalIds":{"type":"array","items":{"type":"string"}},"alertReceiverEmail":{"anyOf":[{"type":"string","format":"email","pattern":"^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"},{"type":"null"}]}},"required":["displayName"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

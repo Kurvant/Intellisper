@@ -5,7 +5,7 @@
 // local table read only by the operator admin API. Called from the chat save path without being
 // awaited into the response; every failure is caught and logged so a metric write can never slow or
 // fail a turn. Gated by CHAT_METRICS_ENABLED (default on).
-import { ibId, ChatConversation, isNil, PersistedChatPartType, tryCatch } from '@intelblocks/shared'
+import { ChatConversation, ibId, isNil, PersistedChatPartType, tryCatch } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { aiProviderService } from '../../../ai/ai-provider-service'
 import { repoFactory } from '../../../core/db/repo-factory'
@@ -48,7 +48,9 @@ export const chatMetricsRecorder = (log: FastifyBaseLogger) => ({
         const { error } = await tryCatch(async () => {
             // Provider name (no secret decryption) + concrete model id from the stored tier.
             const provider = await aiProviderService(log).getChatProviderName({ platformId: conversation.platformId })
-            const model = resolveModelId({ tierId: conversation.modelName, provider })
+            // `Nullable()` fields read as `T | null | undefined`; these contracts are `T | null`
+            // and already treat null as "unset" (resolveModelId returns null for a nil tier).
+            const model = resolveModelId({ tierId: conversation.modelName ?? null, provider })
             const plan = await platformPlanService(log).getOrCreateForPlatform(conversation.platformId)
             const licenseKey = plan.licenseKey ?? null
 
@@ -57,7 +59,7 @@ export const chatMetricsRecorder = (log: FastifyBaseLogger) => ({
                 created: new Date().toISOString(),
                 updated: new Date().toISOString(),
                 platformId: conversation.platformId,
-                projectId: conversation.projectId,
+                projectId: conversation.projectId ?? null,
                 userId: conversation.userId,
                 conversationId: conversation.id,
                 provider: isNil(provider) ? null : String(provider),

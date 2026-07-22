@@ -1,0 +1,68 @@
+---
+id: delete-records
+title: "Delete records"
+description: "Delete records"
+sidebar_label: "Delete records"
+hide_title: true
+hide_table_of_contents: true
+api: eJyVVclu2zAQ/RVhzqzt9Khb2/gQtCiCLCfDB5oc20wokiFHTgRB/14MZXmJl6AncRnO8ubNUwskVwnKGURUPuoEcwEak4omkPEOSrhFi4TFcC8g4luNiX563UDZgvKO0BEvZQjWKMkPxy+JX7eQ1BoryStqAkIJfvGCikBAiD5gJIMp38qFxTt9YJgoGreCToDR6eBcxigbEGAIq3TGvuv6HE1EzZUNnns/80/3FGvsBCRUdTTUQDnjOsxv5OW8m7NtCt6lPs3vkwl/PkO0lLWl4mFrCeK/UblU1AW0zHmgVERJeP6uDvri3TXwQ/ScwoVbhdZey7f5Kys81yUBUmvDoEh7f8yEq5VfK+Na+Rtpa4Sy7QQsDVrNeZ0jzzF3hmh734OnQzfzS8UspU14Qkhz7G8fY8/UPegDxF/GyGEqpLXXUILOU8ueJK2hhPHmZrwf4YRxgzFlstfRQglropDK8VgGMzKO0FqTAsaR8hV8VoT76HWteFM8ZkfAYzJM0CNTu+/VMEc7lDnKibvnhEXj61jIYIpXbIoVOowMSbGMvipojYXUlXGF8i55y1Xl+WGPC5SRE+gE8Gw97LVp+iGrYPFIW4Y2byVlNuznLDJu6bOxIX4Fd3sUiluv6god5SFmCmBMffKT0WQ0yWPiE1UyD7fL1DoVzqOyD4Tz1HILF+EHjYOVxuUB5ka124bOYHOTtXin2mufiM/bdiETPkfbdXz8VmPMUsbEjYaRyMImYI1SY8wceOUuwa8+oW9PHH03Maf61YnhxQ+lMNBV2/kBKW+nf6ZPUxCw2P47Kq/5VZTvXIt8hxJAgM8QZQblsxasdKtarti298r9ljUDsePWlgliWHBdg7i65iDHtu0tnvwruq4DsS2GeA8d/yD+AXNgcnM=
+sidebar_class_name: "delete api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete records"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/records"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete records
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"tableId":{"type":"string"},"ids":{"type":"array","items":{"type":"string"}}},"required":["tableId","ids"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"tableId":{"type":"string"},"projectId":{"type":"string"},"cells":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"object","properties":{"updated":{"type":"string"},"created":{"type":"string"},"value":{},"fieldName":{"type":"string"}},"required":["updated","created","value","fieldName"],"additionalProperties":false}}},"required":["id","created","updated","tableId","projectId","cells"],"additionalProperties":false}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

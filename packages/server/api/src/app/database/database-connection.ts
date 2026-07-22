@@ -4,8 +4,10 @@ import {
     EntitySchema,
 } from 'typeorm'
 import { AIProviderEntity } from '../ai/ai-provider-entity'
+import { AiUsageLedgerEntity } from '../ai-gateway/ai-usage-ledger.entity'
 import { AppConnectionEntity } from '../app-connection/app-connection.entity'
 import { UserIdentityEntity } from '../authentication/user-identity/user-identity-entity'
+import { browserAgentEntities } from '../browser-agent/entities'
 import { getEnterpriseEntities } from '../enterprise/database-manager'
 import { FileEntity } from '../file/file.entity'
 import { FlagEntity } from '../flags/flag.entity'
@@ -82,6 +84,11 @@ function getEntities(): EntitySchema<unknown>[] {
         TriggerSourceEntity,
         UserBadgeEntity,
         WaitpointEntity,
+        // Browser-agent (Intellisper) entities — all platformId+userId scoped; see browser-agent/.
+        ...browserAgentEntities,
+        // AI Gateway — one row per AI call across every plane; the sole platform-owned record of
+        // what inference costs us and what we charged for it. Always platformId-scoped on read.
+        AiUsageLedgerEntity,
         // Enterprise/commercial entities are owned by the enterprise database-manager and
         // composed here into the single unified registry (capability spec I.9). Every edition
         // registers them; an unused table simply stays unused.

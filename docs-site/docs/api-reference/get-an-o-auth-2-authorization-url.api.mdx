@@ -1,0 +1,68 @@
+---
+id: get-an-o-auth-2-authorization-url
+title: "Get an OAuth2 authorization URL"
+description: "Get OAuth2 authorization URL"
+sidebar_label: "Get an OAuth2 authorization URL"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVU1v2zAM/SsGz2qc9uhb94Gh2LAWbdNL4IMiM7EaWVIlOa1n+L8PtJza+Wh32SkySVHke3xMC4FvPGRL4NZeCKM1iiCN9pAzKNALJy19QwY/MCS313UorxJeh9I4+YeTK1nc/wIGDl9q9OGLKRrIWhBGB9SBjtxaJUUfmz57ytWCFyVWnE6hsQgZmNUzigAMrDMWXZDoybtSRmx/8wonoT44qTfQseh9QudlzHoSYJ2htDfFWa9QEvVHToeFdCjCwqmzfi+MjTUOLu4cb4CBDFj5M1diOdZ/0nRDnZ67y4AXhSQEubqbAtR1XYReOiyIxhGwSX+H3eRHl4KrkRpCUTsZGsiWxJn8iXTMu5xivTXax9Ku5nP6ORyOb7jmtQrJ/RBJr/+fCTiYtY/IEKbAJ3RyLdGdh36K0UnK/CN811x57LoesApDaQrIwBrfl8lDCRmku8v0SDupoReu0oN3LmqngFB2O3S+B5ksGZQhWJ+lKbdyJnVApaS36GbCVHCswTtnirp/JHnoEwHRs2fugSAdUBv4e4eCXjlJt/CYNKZ2Cbcy2WKTbFCj4wGLZO1MlYQSE15UUifCaG8U0drzRhlXyB0V0DEgTu9H/X9/45VVeKTfPRvHsh3tE7WOxlGko+1Am6N5L8nl3pSPkqMypV6bHhIZqDq4GdFOvhlRV6hDzxUw2L2XN5/NZ/N+mRgfKt4Pr44d0Urk+rOteID3ZCv+a5sOrAV8C6lVXGoqoI7THwdvCbtLYCdrm0EcPnKdjF/OoKThzZbQtivuceFU15H5pUbXy53BjjvJVwTQMu8YlMgLEtWyhS1NFHyNPVw8UokUrup+/R1rvGP7G9dCoA2fxuYTfd3dPjzSlAz/JJUp6I7jr8Q8f4UMqEsb+83aaGtBcb2p+YZiY06inDCYqGCYWbY/UFf79a2bSYVtGyMezRZ11wEbWgn0DR2t0L/OzIZV
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get an OAuth2 authorization URL"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/app-connections/oauth2/authorization-url"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get OAuth2 authorization URL
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"blockName":{"type":"string"},"blockVersion":{"type":"string"},"projectId":{"type":"string"},"clientId":{"type":"string"},"redirectUrl":{"type":"string"},"scopes":{"type":"array","items":{"type":"string"}},"props":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}}},"required":["blockName","clientId","redirectUrl"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"authorizationUrl":{"type":"string"},"codeVerifier":{"type":"string"}},"required":["authorizationUrl"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

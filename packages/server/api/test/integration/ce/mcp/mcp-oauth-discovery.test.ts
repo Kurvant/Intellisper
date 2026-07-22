@@ -5,7 +5,7 @@ import { AppSystemProp } from '../../../../src/app/helper/system/system-props'
 import { setupTestEnvironment } from '../../../helpers/test-setup'
 
 let app: FastifyInstance
-const DEFAULT_FRONTEND_URL = 'https://example.com/activepieces'
+const DEFAULT_FRONTEND_URL = 'https://example.com/intellisper'
 let frontendUrl = DEFAULT_FRONTEND_URL
 
 const subpathHeaders = {
@@ -42,11 +42,11 @@ describe('MCP OAuth discovery', () => {
 
         expect(res.statusCode).toBe(200)
         const body = res.json()
-        expect(body.issuer).toBe('https://example.com/activepieces')
-        expect(body.authorization_endpoint).toBe('https://example.com/activepieces/authorize')
-        expect(body.token_endpoint).toBe('https://example.com/activepieces/token')
-        expect(body.registration_endpoint).toBe('https://example.com/activepieces/register')
-        expect(body.revocation_endpoint).toBe('https://example.com/activepieces/revoke')
+        expect(body.issuer).toBe('https://example.com/intellisper')
+        expect(body.authorization_endpoint).toBe('https://example.com/intellisper/authorize')
+        expect(body.token_endpoint).toBe('https://example.com/intellisper/token')
+        expect(body.registration_endpoint).toBe('https://example.com/intellisper/register')
+        expect(body.revocation_endpoint).toBe('https://example.com/intellisper/revoke')
     })
 
     it('advertises the protected resource under the configured base path', async () => {
@@ -58,8 +58,8 @@ describe('MCP OAuth discovery', () => {
 
         expect(res.statusCode).toBe(200)
         const body = res.json()
-        expect(body.resource).toBe('https://example.com/activepieces/mcp')
-        expect(body.authorization_servers).toEqual(['https://example.com/activepieces'])
+        expect(body.resource).toBe('https://example.com/intellisper/mcp')
+        expect(body.authorization_servers).toEqual(['https://example.com/intellisper'])
     })
 
     it('returns WWW-Authenticate pointing at the prefixed resource metadata on a project 401', async () => {
@@ -72,7 +72,7 @@ describe('MCP OAuth discovery', () => {
 
         expect(res.statusCode).toBe(401)
         expect(res.headers['www-authenticate']).toBe(
-            'Bearer resource_metadata="https://example.com/activepieces/.well-known/oauth-protected-resource/mcp"',
+            'Bearer resource_metadata="https://example.com/intellisper/.well-known/oauth-protected-resource/mcp"',
         )
     })
 
@@ -86,7 +86,7 @@ describe('MCP OAuth discovery', () => {
 
         expect(res.statusCode).toBe(401)
         expect(res.headers['www-authenticate']).toBe(
-            'Bearer resource_metadata="https://example.com/activepieces/.well-known/oauth-protected-resource/mcp/platform"',
+            'Bearer resource_metadata="https://example.com/intellisper/.well-known/oauth-protected-resource/mcp/platform"',
         )
     })
 

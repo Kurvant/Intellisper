@@ -89,6 +89,12 @@ interface DataTableProps<
   clientPagination?: boolean;
   getRowClassName?: (row: RowDataWithActions<TData>, index: number) => string;
   virtualizeRows?: boolean;
+  /**
+   * Visual variant. 'overhaul' applies the Intellisper overhaul look — a sky-blue tinted,
+   * bordered header and a colored rounded frame around the table — without changing any
+   * behavior. Opt-in so legacy pages keep the default look untouched.
+   */
+  variant?: 'default' | 'overhaul';
 }
 
 export type DataTableFilters<Keys extends string> = DataTableFilterProps & {
@@ -126,7 +132,9 @@ export function DataTable<
   clientPagination = false,
   getRowClassName,
   virtualizeRows = false,
+  variant = 'default',
 }: DataTableProps<TData, TValue, Keys>) {
+  const isOverhaul = variant === 'overhaul';
   const selectColumnDef: ColumnDef<RowDataWithActions<TData>, TValue> = {
     id: 'select',
     accessorKey: 'select',
@@ -253,8 +261,11 @@ export function DataTable<
   });
 
   useEffect(() => {
+    const allColumns = table.getAllColumns();
     filters?.forEach((filter) => {
-      const column = table.getColumn(filter.accessorKey);
+      // Resolve via the known column list so URL-param-only filters (no matching column, e.g.
+      // `failedStepMessage` / `archivedAt`) don't trigger TanStack's "Column does not exist" warning.
+      const column = allColumns.find((c) => c.id === filter.accessorKey);
       const values = searchParams.getAll(filter.accessorKey);
       if (column && values) {
         column.setFilterValue(values);
@@ -332,7 +343,13 @@ export function DataTable<
                 filters.map((filter) => (
                   <DataTableFilter
                     key={filter.accessorKey}
-                    column={table.getColumn(filter.accessorKey)}
+                    // Resolve via the known column list so a filter whose accessorKey has no
+                    // matching column (e.g. URL-param-only filters like `failedStepMessage` /
+                    // `archivedAt`) doesn't trigger TanStack's "Column does not exist" dev warning.
+                    // DataTableFilter treats `column` as optional and drives off accessorKey.
+                    column={table
+                      .getAllColumns()
+                      .find((c) => c.id === filter.accessorKey)}
                     {...filter}
                   />
                 ))}
@@ -354,14 +371,23 @@ export function DataTable<
 
       <div
         ref={scrollContainerRef}
-        className={cn('mt-0', {
-          'overflow-hidden': !virtualizeRows,
-          'flex-1 min-h-0 overflow-auto': virtualizeRows,
-        })}
+        className={cn(
+          'mt-0',
+          {
+            'overflow-hidden': !virtualizeRows,
+            'flex-1 min-h-0 overflow-auto': virtualizeRows,
+          },
+          isOverhaul &&
+            'rounded-xl border border-[#3B6EF5]/50 dark:border-[#3B6EF5]/45 shadow-sm',
+        )}
       >
         <Table className="table-fixed">
           <TableHeader
-            className={cn(virtualizeRows ? 'sticky top-0 z-10' : undefined)}
+            className={cn(
+              virtualizeRows ? 'sticky top-0 z-10' : undefined,
+              isOverhaul &&
+                '[&_th]:bg-[#3B6EF5]/12 dark:[&_th]:bg-[#3B6EF5]/18 [&_th]:text-[#1E4FD1] dark:[&_th]:text-[#8FB0FF] [&_th]:font-semibold [&_th]:border-b [&_th]:border-[#3B6EF5]/40 dark:[&_th]:border-[#3B6EF5]/35',
+            )}
           >
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="hover:bg-transparent">

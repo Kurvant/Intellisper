@@ -8,11 +8,11 @@
 // unavailable and the caller degrades to a records-less pending registration rather than failing.
 import { safeHttp } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
     EmbedVerificationRecord,
     EmbedVerificationRecordPurpose,
     EmbedVerificationRecordType,
     ErrorCode,
+    IntellisperError,
     isNil,
 } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'

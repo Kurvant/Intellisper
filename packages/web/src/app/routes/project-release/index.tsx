@@ -44,8 +44,18 @@ import { ApplyButton } from './apply-plan';
 import { PushEverythingDialog } from './push-everything-dialog';
 import { SelectionButton } from './selection-dialog';
 
-const ProjectReleasesPage = () => {
+const ProjectReleasesPage = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
   const navigate = useNavigate();
+  const releaseDetailRoute = (releaseId: string) =>
+    variant === 'overhaul'
+      ? authenticationSession.appendProjectRoutePrefix(
+          `/operate/releases/${releaseId}`,
+        )
+      : `/releases/${releaseId}`;
   const { checkAccess } = useAuthorization();
   const doesUserHavePermissionToWriteRelease = checkAccess(
     Permission.WRITE_PROJECT_RELEASE,
@@ -231,7 +241,7 @@ const ProjectReleasesPage = () => {
         page={data}
         isLoading={isLoading}
         onRowClick={(row) => {
-          navigate(`/releases/${row.id}`);
+          navigate(releaseDetailRoute(row.id));
         }}
       />
     </div>

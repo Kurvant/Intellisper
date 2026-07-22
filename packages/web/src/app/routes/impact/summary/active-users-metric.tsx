@@ -6,11 +6,17 @@ import { MetricCard, MetricCardSkeleton } from './metric-card';
 
 type ActiveUsersMetricProps = {
   report?: PlatformAnalyticsReport;
+  variant?: 'default' | 'overhaul';
+  index?: number;
 };
 
-export const ActiveUsersMetric = ({ report }: ActiveUsersMetricProps) => {
+export const ActiveUsersMetric = ({
+  report,
+  variant = 'default',
+  index = 0,
+}: ActiveUsersMetricProps) => {
   if (!report) {
-    return <MetricCardSkeleton />;
+    return <MetricCardSkeleton variant={variant} />;
   }
 
   const activeUsers = report.users.filter(
@@ -33,6 +39,8 @@ export const ActiveUsersMetric = ({ report }: ActiveUsersMetricProps) => {
       })}
       iconColor="text-chart-2"
       iconBgColor="bg-chart-2/10"
+      variant={variant}
+      index={index}
     />
   );
 };

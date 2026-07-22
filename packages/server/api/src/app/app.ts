@@ -1,7 +1,7 @@
-import { BlockMetadata } from '@intelblocks/blocks-framework'
-import { AddAllowedEmbedOriginsRequestBody, IbEdition, IbEnvironment, AppConnectionWithoutSensitiveData, ApplicationEventName, ConnectionDeletedEvent, ConnectionUpsertedEvent, Flow, FlowActivatedEvent, FlowCreatedEvent, FlowDeactivatedEvent, FlowDeletedEvent, FlowPublishedEvent, FlowRun, FlowRunFinishedEvent, FlowRunRetriedEvent, FlowRunStartedEvent, FlowUpdatedEvent, Folder, FolderCreatedEvent, FolderDeletedEvent, FolderUpdatedEvent, GitRepoWithoutSensitiveData, isNil, ProjectMember, ProjectRelease, ProjectReleaseEvent, ProjectRoleEvent, ProjectWithLimits, SigningKeyEvent, SignUpEvent, Template, UserEmailVerifiedEvent, UserInvitation, UserPasswordResetEvent, UserSignedInEvent, UserWithMetaInformation } from '@intelblocks/shared'
 import replyFrom from '@fastify/reply-from'
 import swagger from '@fastify/swagger'
+import { BlockMetadata } from '@intelblocks/blocks-framework'
+import { AddAllowedEmbedOriginsRequestBody, AppConnectionWithoutSensitiveData, ApplicationEventName, ConnectionDeletedEvent, ConnectionUpsertedEvent, Flow, FlowActivatedEvent, FlowCreatedEvent, FlowDeactivatedEvent, FlowDeletedEvent, FlowPublishedEvent, FlowRun, FlowRunFinishedEvent, FlowRunRetriedEvent, FlowRunStartedEvent, FlowUpdatedEvent, Folder, FolderCreatedEvent, FolderDeletedEvent, FolderUpdatedEvent, GitRepoWithoutSensitiveData, IbEdition, IbEnvironment, isNil, ProjectMember, ProjectRelease, ProjectReleaseEvent, ProjectRoleEvent, ProjectWithLimits, SigningKeyEvent, SignUpEvent, Template, UserEmailVerifiedEvent, UserInvitation, UserPasswordResetEvent, UserSignedInEvent, UserWithMetaInformation } from '@intelblocks/shared'
 import { createAdapter } from '@socket.io/redis-adapter'
 import { FastifyInstance, FastifyRequest, HTTPMethods } from 'fastify'
 import { jsonSchemaTransform, jsonSchemaTransformObject } from 'fastify-type-provider-zod'
@@ -10,11 +10,18 @@ import { globalRegistry } from 'zod/v4/core'
 import { agentsModule } from './agents/agents-module'
 import { aiProviderService } from './ai/ai-provider-service'
 import { aiProviderModule } from './ai/ai-provider.module'
+import { aiGatewayAdminModule } from './ai-gateway/ai-gateway-admin.module'
+import { aiGatewayModule } from './ai-gateway/ai-gateway.module'
+import { aiUsageSink } from './ai-gateway/ai-usage-sink'
 import { platformAnalyticsModule } from './analytics/platform-analytics.module'
 import { setPlatformOAuthService } from './app-connection/app-connection-service/oauth2'
 import { appConnectionModule } from './app-connection/app-connection.module'
 import { platformAppConnectionModule } from './app-connection/platform-app-connection.module'
 import { authenticationModule } from './authentication/authentication.module'
+import { registerBrowserAgentAutomationJobs } from './browser-agent/automation/browser-agent-automation.jobs'
+import { registerBrowserAgentPresenceGateway } from './browser-agent/automation/presence.gateway'
+import { browserAgentModule } from './browser-agent/browser-agent.module'
+import { browserAgentActivityAdminModule } from './browser-agent/runtime/browser-agent-activity-admin.module'
 import { canaryRoutingMiddleware } from './core/canary/canary-routing.middleware'
 import { collaborativeModule } from './core/collaborative/collaborative.module'
 import { rateLimitModule } from './core/security/rate-limit'
@@ -80,6 +87,7 @@ import { validateEnvPropsOnStartup } from './helper/system-validator'
 import { knowledgeBaseModule } from './knowledge-base/knowledge-base.module'
 import { mcpServerModule } from './mcp/mcp-module'
 import { mcpOAuthApproveController } from './mcp/oauth/code/mcp-oauth-approve.controller'
+import { memoryModule } from './memory/memory.module'
 import { communityBlocksModule } from './pieces/community-piece-module'
 import { startDevBlockWatcher } from './pieces/dev-piece-watcher'
 import { blockModule } from './pieces/metadata/piece-metadata-controller'
@@ -120,7 +128,11 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
             openapi: '3.1.0',
             servers: [
                 {
-                    url: 'https://cloud.activepieces.com/api',
+                    // TODO: stub — confirm the canonical Intellisper production API host before release.
+                    // This is the base URL advertised to API consumers and the docs' request playground.
+                    // No trailing /v1: every route path already begins with /v1, and OpenAPI
+                    // concatenates server.url + path (so /v1 here would render /v1/v1/flows).
+                    url: 'https://api.intellisper.com',
                     description: 'Production Server',
                 },
             ],
@@ -141,7 +153,8 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
                 version: '0.0.0',
             },
             externalDocs: {
-                url: 'https://www.activepieces.com/docs',
+                // TODO: stub — confirm the canonical Intellisper docs host before release.
+                url: 'https://docs.intellisper.com',
                 description: 'Find more info here',
             },
         },
@@ -184,6 +197,10 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
     // Chat analytics retention prune (H.2.m). Registered unconditionally; deletes local
     // chat_message_metric rows older than the retention window on a daily schedule.
     await chatMetricsPrune(app.log).init()
+    // AI Gateway — start the ledger's periodic flush. The sink is the ONLY write path for AI spend;
+    // it buffers in memory and never blocks an inference call.
+    aiUsageSink(app.log).init()
+    await app.register(aiGatewayModule)
     await app.register(fileModule)
     await app.register(flagModule)
     await app.register(storeEntryModule)
@@ -251,6 +268,11 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
     switch (edition) {
         case IbEdition.CLOUD:
             await app.register(adminPlatformModule)
+            // AI Gateway operator surface — cross-tenant spend, gated by the operator key. CLOUD-only
+            // (like adminPlatformModule) so a cross-tenant read can never ship to a self-hosted client.
+            await app.register(aiGatewayAdminModule)
+            // Browser-agent operator surface — cross-tenant agent activity, operator-key gated, CLOUD-only.
+            await app.register(browserAgentActivityAdminModule)
             await app.register(adminPlatformTemplatesCloudModule)
             await app.register(appCredentialModule)
             await app.register(connectionKeyModule)
@@ -278,6 +300,15 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
             await app.register(embedSubdomainModule)
             await app.register(chatModule)
             await app.register(chatAnalyticsModule)
+            // Intellisper browser-automation agent (distinct from agentsModule = flow-step agents).
+            await app.register(browserAgentModule)
+            // Memory — cross-product (agent + Studio), so registered separately from the agent module
+            // and gated on its own `memoryCaps` entitlement rather than on `browserAgentEnabled`.
+            await app.register(memoryModule)
+            // Automation (Phase 8): register the batch/schedule system-job handlers + runtime hooks,
+            // and the presence gateway (app.io userId rooms → work-available push).
+            registerBrowserAgentAutomationJobs(app.log)
+            registerBrowserAgentPresenceGateway(app.log)
             setPlatformOAuthService(platformOAuth2Service(app.log))
             projectHooks.set(projectEnterpriseHooks)
             flagHooks.set(enterpriseFlagsHooks)
@@ -309,6 +340,15 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
             await app.register(embedSubdomainModule)
             await app.register(chatModule)
             await app.register(chatAnalyticsModule)
+            // Intellisper browser-automation agent (distinct from agentsModule = flow-step agents).
+            await app.register(browserAgentModule)
+            // Memory — cross-product (agent + Studio), so registered separately from the agent module
+            // and gated on its own `memoryCaps` entitlement rather than on `browserAgentEnabled`.
+            await app.register(memoryModule)
+            // Automation (Phase 8): register the batch/schedule system-job handlers + runtime hooks,
+            // and the presence gateway (app.io userId rooms → work-available push).
+            registerBrowserAgentAutomationJobs(app.log)
+            registerBrowserAgentPresenceGateway(app.log)
             setPlatformOAuthService(platformOAuth2Service(app.log))
             projectHooks.set(projectEnterpriseHooks)
             flagHooks.set(enterpriseFlagsHooks)
@@ -329,6 +369,10 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
 
     app.addHook('onClose', async () => {
         app.log.info('Shutting down')
+        // Drain the AI-usage ledger FIRST — while the DB connection is still alive. Anything still
+        // buffered is real, already-incurred spend; losing it on every deploy would leave a permanent
+        // hole in the cost record.
+        await aiUsageSink(app.log).close()
         await systemJobsSchedule(app.log).close()
         await redisConnections.destroy()
         await distributedLock(app.log).destroy()

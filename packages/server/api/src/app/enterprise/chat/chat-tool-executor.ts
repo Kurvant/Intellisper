@@ -267,7 +267,8 @@ async function listResourceInProject({ resource, projectId, platformId, log }: {
     switch (resource) {
         case 'flows': {
             const page = await flowService(log).list({
-                projectId,
+                // `list` takes projectIds XOR platformId; this helper is already project-scoped.
+                projectIds: [projectId],
                 cursorRequest: null,
                 limit: CROSS_PROJECT_LIST_LIMIT,
                 folderId: undefined,
@@ -280,7 +281,8 @@ async function listResourceInProject({ resource, projectId, platformId, log }: {
             return page.data.map((flow) => `flow ${flow.id}: ${flow.version.displayName} [${flow.status}]`)
         }
         case 'tables': {
-            const page = await tableService(log).list({
+            // `tableService` is a plain object, not a logger-bound factory (cf. project-state.service).
+            const page = await tableService.list({
                 projectId,
                 cursor: undefined,
                 limit: CROSS_PROJECT_LIST_LIMIT,
@@ -294,8 +296,8 @@ async function listResourceInProject({ resource, projectId, platformId, log }: {
         }
         case 'runs': {
             const page = await flowRunService(log).list({
+                // `list` is project-scoped; it has no platformId param (projectId is the tighter filter).
                 projectId,
-                platformId,
                 cursor: null,
                 limit: CROSS_PROJECT_LIST_LIMIT,
                 flowId: undefined,

@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner } from 'typeorm'
+import { MigrationInterface } from 'typeorm'
 
 // DISABLED — dead upstream migration, intentionally kept for historical record.
 //

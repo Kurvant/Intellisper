@@ -1,0 +1,113 @@
+---
+title: Chat & runs
+description: How an agent turn executes, what streams back live, and the SAFE / REVERSIBLE / CONSEQUENTIAL approval model that keeps consequential actions behind your explicit approval.
+sidebar_label: Chat & runs
+sidebar_position: 3
+---
+Every task you give the agent is a **run**: a conversation plus the sequence of actions the agent takes
+to complete it. This page explains how a run executes, what you see while it works, and — most
+importantly — how the approval model keeps you in control.
+
+## A conversation, made of runs
+
+You talk to the agent in a **conversation**. Each message you send starts a **turn**, and each turn
+becomes a run. Conversations are saved: you can list them, reopen one to see its messages, or delete a
+conversation you no longer need.
+
+The agent brings limited context into each turn: your recent conversation history, optionally the page
+you're on, any file you've attached, and — if [Memory](/memory/overview) is on — relevant remembered
+facts. It does **not** silently pull in your entire history; context is bounded and purposeful.
+
+## How a turn runs
+
+When you send a message, the agent runs a loop on the server:
+
+<Steps>
+  <Step title="It thinks">
+    The agent calls its model to decide the next step, given your request and the context above.
+  </Step>
+  <Step title="It acts">
+    If the next step is an action — read the page, fetch a URL, click a button — the agent runs it.
+    Server-side actions (research, reading a file, recalling memory) run immediately. On-page actions
+    are handed to your browser extension to perform.
+  </Step>
+  <Step title="It observes">
+    The result of each action feeds back into the next round of thinking, so the agent adapts as it
+    goes.
+  </Step>
+  <Step title="It finishes">
+    When the task is done, the run completes. If it hits its step or cost ceiling, or needs something it
+    can't get, it stops cleanly rather than looping forever.
+  </Step>
+</Steps>
+
+A single run is bounded — it won't run indefinitely. Each run has a step limit and a token-cost ceiling;
+if either is reached, the run **halts** with a clear reason rather than continuing.
+
+## Watching a run (streaming)
+
+Runs stream live to your screen as they happen. As the agent works, you'll see events like:
+
+- **Text** — the agent's narration and answers.
+- **Tool / action** — an action being run, with its result.
+- **Citations** and **research sources** — where a researched answer came from.
+- **File ready** — a produced file is available to download.
+- **Awaiting confirmation** — the agent has paused for your approval (see below).
+- **Done** or **halted** — the run finished, or stopped with a reason.
+
+Because the full state of a run is saved on the server, streaming is just a live view — if you lose the
+connection or close the tab, the run continues and you can pick it back up.
+
+## Approvals
+
+This is the heart of how the agent stays trustworthy. Every action the agent can take is classified into
+one of three levels:
+
+<CardGroup cols={3}>
+  <Card title="Safe">
+    Reading the page, scrolling, taking a screenshot. **Runs automatically** — no approval needed.
+  </Card>
+  <Card title="Reversible">
+    Clicking, typing, selecting an option. **Runs automatically**, but easily undone.
+  </Card>
+  <Card title="Consequential">
+    Submitting a form. **Stops and waits for your explicit approval** before it runs.
+  </Card>
+</CardGroup>
+
+Only **consequential** actions gate on approval. When the agent reaches one, the run pauses in an
+**awaiting confirmation** state and hands the decision to you:
+
+- **Approve** — the action is dispatched to your browser to execute, then the run continues.
+- **Reject** — the agent is told you declined, and it continues without that action (it won't retry it).
+
+Reading and typing don't interrupt you; only the irreversible step — hitting *Submit* — does. This is
+deliberate: the agent can do the tedious 90% of a task unattended and still never take a
+consequential action without you.
+
+<Note>
+**Typed input is guarded, too**
+
+The agent's typing action refuses to enter passwords or payment details, independent of the approval
+model.
+</Note>
+
+## Run outcomes
+
+A run ends in one of these states:
+
+| State | Meaning |
+| --- | --- |
+| **Completed** | The task finished successfully. |
+| **Awaiting confirmation** | Paused for your approval of a consequential action (not terminal — resumes when you decide). |
+| **Halted** | Stopped cleanly — e.g. it reached its step/cost limit, or you rejected a required action. Carries a reason. |
+| **Failed** | An error ended the run. |
+
+Every run — completed, halted, or failed — is saved with its step count, token cost, and timing, and is
+visible under [My Agent](/agent/monitoring).
+
+## Research: going deeper
+
+When the agent is researching, it works within a per-run budget of sources. If it wants to look at more
+sources than the budget allows, it pauses and asks whether to **expand** (go deeper) or **compile now**
+from what it has gathered. You stay in control of how far a research task ranges.

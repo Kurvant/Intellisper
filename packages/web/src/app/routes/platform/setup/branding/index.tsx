@@ -5,7 +5,10 @@ import LockedFeatureGuard from '@/app/components/locked-feature-guard';
 import { AppearanceSection } from '@/app/routes/platform/setup/branding/appearance-section';
 import { platformHooks } from '@/hooks/platform-hooks';
 
-export const BrandingPage = () => {
+export const BrandingPage = ({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   return (
     <LockedFeatureGuard
@@ -20,6 +23,7 @@ export const BrandingPage = () => {
       <CenteredPage
         title={t('Branding')}
         description={t('Configure the appearance for your platform.')}
+        hideHeader={isOverhaul}
       >
         <AppearanceSection />
       </CenteredPage>

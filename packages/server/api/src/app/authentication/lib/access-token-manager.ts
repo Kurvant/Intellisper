@@ -1,4 +1,4 @@
-import { IntellisperError, ALL_PRINCIPAL_TYPES, ibId, EnginePrincipal, ErrorCode, PlatformId, Principal, PrincipalType, ProjectId, UserStatus, WorkerPrincipal } from '@intelblocks/shared'
+import { ALL_PRINCIPAL_TYPES, EnginePrincipal, ErrorCode, ibId, IntellisperError, PlatformId, Principal, PrincipalType, ProjectId, UserStatus, WorkerPrincipal } from '@intelblocks/shared'
 import dayjs from 'dayjs'
 import { FastifyBaseLogger } from 'fastify'
 import { jwtUtils } from '../../helper/jwt-utils'

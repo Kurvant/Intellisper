@@ -42,7 +42,12 @@ import { platformAppConnectionsQueries } from '@/features/platform-admin/hooks/p
 import { getProjectName, projectCollectionUtils } from '@/features/projects';
 import { formatUtils } from '@/lib/format-utils';
 
-export default function PlatformConnectionsPage() {
+export default function PlatformConnectionsPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { data: connections, isLoading } =
     platformAppConnectionsQueries.useList();
   const { data: owners } = platformAppConnectionsQueries.useOwners();
@@ -220,12 +225,14 @@ export default function PlatformConnectionsPage() {
 
   return (
     <div className="flex flex-col w-full">
-      <DashboardPageHeader
-        title={t('Connections')}
-        description={t(
-          'All app connections across every project on this platform',
-        )}
-      />
+      {!isOverhaul && (
+        <DashboardPageHeader
+          title={t('Connections')}
+          description={t(
+            'All app connections across every project on this platform',
+          )}
+        />
+      )}
       {owners?.truncated && (
         <div className="px-6 pb-2 text-xs text-muted-foreground">
           {t('Owner filter is limited to the first {count} owners', {

@@ -32,7 +32,7 @@ const setDevDataSeededFlag = async (): Promise<void> => {
 }
 
 const seedDevUser = async (): Promise<void> => {
-    const DEV_EMAIL = 'dev@ap.com'
+    const DEV_EMAIL = 'dev@intellisper.local'
     const DEV_PASSWORD = '12345678'
 
 

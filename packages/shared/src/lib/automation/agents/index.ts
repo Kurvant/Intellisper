@@ -62,6 +62,14 @@ export enum AgentBlockProps {
     AI_PROVIDER_MODEL = 'aiProviderModel',
     WEB_SEARCH = 'webSearch',
     WEB_SEARCH_OPTIONS = 'webSearchOptions',
+    /**
+     * Recall org/flow memory into this step's prompt. OPT-IN like `WEB_SEARCH`, and for the same
+     * reason: recall spends an embedding on every call, so a flow running thousands of times a month
+     * would carry a real recurring cost the author never asked for. Off by default.
+     */
+    MEMORY_RECALL = 'memoryRecall',
+    /** Let this step save durable facts to the flow's own memory across runs. Opt-in. */
+    MEMORY_CAPTURE = 'memoryCapture',
 }
 
 export type AgentProviderModel = {

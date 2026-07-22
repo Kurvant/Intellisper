@@ -60,7 +60,11 @@ import { userHooks } from '@/hooks/user-hooks';
 import { authenticationSession } from '@/lib/authentication-session';
 import { formatUtils } from '@/lib/format-utils';
 
-function AppConnectionsPage() {
+function AppConnectionsPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
   const navigate = useNavigate();
   const [refresh, setRefresh] = useState(0);
   const [selectedRows, setSelectedRows] = useState<
@@ -435,6 +439,7 @@ function AppConnectionsPage() {
         onSelectedRowsChange={setSelectedRows}
         bulkActions={bulkActions}
         toolbarButtons={toolbarButtons}
+        variant={variant}
       />
     </div>
   );

@@ -1,0 +1,335 @@
+<title>Intellisper Cost Model</title>
+<style>
+:root{
+  --bg:#F4F2EF; --panel:#FFFFFF; --ink:#22201C; --ink-2:#6B6459; --line:#E2DDD4;
+  --accent:#B5652F; --accent-soft:#F3E4D8;
+  --good:#188A4E; --warn:#B87F0A; --bad:#C23B2B;
+  --chip-h:#B5652F; --chip-s:#8A5A9E; --chip-o:#3E5F8A; --chip-x:#6B6459;
+  --mono:ui-monospace,'Cascadia Mono','Consolas',Menlo,monospace;
+  --sans:system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#16130F; --panel:#1F1B15; --ink:#EDE7DE; --ink-2:#9B9284; --line:#332D24;
+  --accent:#D08A50; --accent-soft:#3A2A1C;
+  --good:#4CBB7F; --warn:#D9A33B; --bad:#E06B5A;
+  --chip-h:#D08A50; --chip-s:#B187C4; --chip-o:#7FA3D4; --chip-x:#9B9284;
+}}
+:root[data-theme="dark"]{
+  --bg:#16130F; --panel:#1F1B15; --ink:#EDE7DE; --ink-2:#9B9284; --line:#332D24;
+  --accent:#D08A50; --accent-soft:#3A2A1C;
+  --good:#4CBB7F; --warn:#D9A33B; --bad:#E06B5A;
+  --chip-h:#D08A50; --chip-s:#B187C4; --chip-o:#7FA3D4; --chip-x:#9B9284;
+}
+:root[data-theme="light"]{
+  --bg:#F4F2EF; --panel:#FFFFFF; --ink:#22201C; --ink-2:#6B6459; --line:#E2DDD4;
+  --accent:#B5652F; --accent-soft:#F3E4D8;
+  --good:#188A4E; --warn:#B87F0A; --bad:#C23B2B;
+  --chip-h:#B5652F; --chip-s:#8A5A9E; --chip-o:#3E5F8A; --chip-x:#6B6459;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--sans)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 64px}
+header.top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+header.top h1{font-size:21px;margin:0;letter-spacing:-.01em}
+header.top .tag{color:var(--ink-2);font-size:13px}
+.src{color:var(--ink-2);font-size:12px;margin:0 0 18px}
+.src code{font-family:var(--mono);font-size:11px}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:18px;align-items:start}
+@media (max-width:880px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+.eyebrow{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink-2);margin:0 0 10px;font-weight:600}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.presets button{font:12px var(--sans);padding:5px 10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:99px;cursor:pointer}
+.presets button:hover{border-color:var(--accent)}
+.presets button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.presets button:focus-visible,.ctl input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+fieldset{border:0;padding:0;margin:0 0 16px}
+fieldset legend{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);font-weight:700;padding:0;margin-bottom:8px}
+.ctl{display:grid;grid-template-columns:1fr 72px;gap:8px;align-items:center;margin-bottom:8px}
+.ctl label{font-size:12.5px;color:var(--ink)}
+.ctl label small{display:block;color:var(--ink-2);font-size:11px}
+.ctl .val{font-family:var(--mono);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.ctl input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--accent);margin:0}
+select,.ctl input[type=number]{font:12.5px var(--mono);background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:4px 6px;width:100%}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.kpi .n{font-family:var(--mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi .l{font-size:11px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
+.kpi.good .n{color:var(--good)} .kpi.warn .n{color:var(--warn)} .kpi.bad .n{color:var(--bad)}
+.bar{display:flex;height:26px;border-radius:5px;overflow:hidden;border:1px solid var(--line)}
+.bar div{min-width:2px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:11.5px;color:var(--ink-2)}
+.legend .sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-2);text-align:left;font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+td{padding:6px 8px;border-bottom:1px solid var(--line);font-family:var(--mono);font-variant-numeric:tabular-nums}
+td:first-child{font-family:var(--sans)}
+td.r,th.r{text-align:right}
+tr:last-child td{border-bottom:0}
+.pos{color:var(--good)} .neg{color:var(--bad)} .mid{color:var(--warn)}
+.note{font-size:11.5px;color:var(--ink-2);margin-top:10px;line-height:1.55}
+.section{margin-bottom:18px}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:720px){.twocol{grid-template-columns:1fr}}
+.scen td:first-child{font-size:12px}
+.overx{overflow-x:auto}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <h1>Intellisper Cost Model</h1>
+  <span class="tag">per-feature COGS · plan simulator · break-even</span>
+</header>
+<p class="src">Rates verified 2026-07-14 from public list prices — full sources in <code>docs/pricing/01-rates-*.md</code>. Every input below is an assumption you can move; results recompute live.</p>
+
+<div class="grid">
+<aside>
+  <div class="card">
+    <p class="eyebrow">Assumptions</p>
+    <div class="presets" id="presets">
+      <button data-p="light">Light user</button>
+      <button data-p="typical" class="on">Typical</button>
+      <button data-p="power">Power user</button>
+      <button data-p="team">Team (5)</button>
+    </div>
+
+    <fieldset>
+      <legend>Plan &amp; scale</legend>
+      <div class="ctl"><label>Plan price / mo</label><div class="val">$<span id="v-price"></span></div>
+        <input type="range" id="price" min="0" max="200" step="1"></div>
+      <div class="ctl"><label>Paying customers</label><div class="val" id="v-cust"></div>
+        <input type="range" id="cust" min="1" max="1000" step="1"></div>
+      <div class="ctl"><label>International cards <small>adds ~2.5% Stripe</small></label><div class="val"><span id="v-intl"></span>%</div>
+        <input type="range" id="intl" min="0" max="100" step="5"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Browser-agent sessions</legend>
+      <div class="ctl"><label>Sessions / customer / mo</label><div class="val" id="v-sess"></div>
+        <input type="range" id="sess" min="0" max="300" step="1"></div>
+      <div class="ctl"><label>LLM steps / session</label><div class="val" id="v-steps"></div>
+        <input type="range" id="steps" min="5" max="80" step="1"></div>
+      <div class="ctl"><label>Input tokens / step</label><div class="val" id="v-intok"></div>
+        <input type="range" id="intok" min="2000" max="20000" step="500"></div>
+      <div class="ctl"><label>Output tokens / step</label><div class="val" id="v-outtok"></div>
+        <input type="range" id="outtok" min="100" max="2000" step="50"></div>
+      <div class="ctl"><label>Cache hit on input</label><div class="val"><span id="v-cache"></span>%</div>
+        <input type="range" id="cache" min="0" max="95" step="5"></div>
+      <div class="ctl"><label>Sonnet escalation share</label><div class="val"><span id="v-esc"></span>%</div>
+        <input type="range" id="esc" min="0" max="60" step="1"></div>
+      <div class="ctl"><label>Opus reasoning share</label><div class="val"><span id="v-opus"></span>%</div>
+        <input type="range" id="opus" min="0" max="30" step="1"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Flows, chat, credits</legend>
+      <div class="ctl"><label>Flow runs / customer / mo</label><div class="val" id="v-runs"></div>
+        <input type="range" id="runs" min="0" max="50000" step="100"></div>
+      <div class="ctl"><label>Chat messages / customer / mo</label><div class="val" id="v-chat"></div>
+        <input type="range" id="chat" min="0" max="5000" step="10"></div>
+      <div class="ctl"><label>Chat model tier</label><div class="val"></div>
+        <select id="chattier" style="grid-column:1/-1">
+          <option value="h">Haiku 4.5 ($1 / $5)</option>
+          <option value="s" selected>Sonnet 4.6 ($3 / $15)</option>
+          <option value="o">Opus 4.6 ($5 / $25)</option>
+        </select></div>
+      <div class="ctl"><label>AI credits (USD face) / customer / mo <small>COGS = 1.055× via OpenRouter</small></label><div class="val">$<span id="v-credits"></span></div>
+        <input type="range" id="credits" min="0" max="50" step="0.5"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Fixed infrastructure</legend>
+      <div class="ctl"><label>Host / stack</label><div class="val"></div>
+        <select id="host" style="grid-column:1/-1">
+          <option value="101">Railway — starter ($101/mo)</option>
+          <option value="237">Railway — growth ($237/mo)</option>
+          <option value="10">Hetzner EU — starter ($10/mo)</option>
+          <option value="28">Hetzner EU — growth ($28/mo)</option>
+          <option value="73">Hetzner US — starter ($73/mo)</option>
+          <option value="147">Hetzner US — growth ($147/mo)</option>
+        </select></div>
+      <div class="ctl"><label>Add-ons (S3/R2, SES, registry…)</label><div class="val">$<span id="v-addons"></span></div>
+        <input type="range" id="addons" min="0" max="100" step="1"></div>
+    </fieldset>
+    <p class="note">Token prices baked in from the rate card: Haiku $1/$5, Sonnet $3/$15, Opus $5/$25 per 1M in/out; cache reads at 0.1× input. Flow run ≈ CPU + Redis + log ($0.00005 on Railway). Stripe 2.9% + $0.30 + 0.7% Billing.</p>
+  </div>
+</aside>
+
+<main>
+  <div class="kpis">
+    <div class="kpi"><div class="n" id="k-session">–</div><div class="l">Cost / agent session</div></div>
+    <div class="kpi"><div class="n" id="k-cogs">–</div><div class="l">COGS / customer / mo</div></div>
+    <div class="kpi" id="k-margin-card"><div class="n" id="k-margin">–</div><div class="l">Gross margin / customer</div></div>
+    <div class="kpi"><div class="n" id="k-breakeven">–</div><div class="l">Break-even customers</div></div>
+  </div>
+
+  <div class="card section">
+    <p class="eyebrow">Where a customer's COGS goes</p>
+    <div class="bar" id="cogsbar" aria-label="COGS composition"></div>
+    <div class="legend" id="cogslegend"></div>
+    <div class="overx" style="margin-top:12px">
+      <table id="cogstable">
+        <thead><tr><th>Feature</th><th class="r">Unit cost</th><th class="r">Units / mo</th><th class="r">$ / customer / mo</th><th class="r">Share</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="twocol section">
+    <div class="card">
+      <p class="eyebrow">Monthly P&amp;L at <span id="pl-n">–</span> customers</p>
+      <div class="overx"><table id="pltable"><tbody></tbody></table></div>
+    </div>
+    <div class="card">
+      <p class="eyebrow">Session cost scenarios (same assumptions, shape varied)</p>
+      <div class="overx"><table class="scen" id="scentable"><tbody></tbody></table></div>
+      <p class="note">Cache discipline ≈ 2× on session cost; Haiku-default tier routing ≈ 3× vs all-Sonnet. Server browser runtime is $0 — execution happens in the user's own Chrome (never headless).</p>
+    </div>
+  </div>
+
+  <div class="card section">
+    <p class="eyebrow">Zero-marginal-cost features (price on value)</p>
+    <p class="note" style="margin-top:0">SSO/SAML, RBAC &amp; project roles, audit logs, analytics, environments + git sync, embedding SDK, SCIM, secret managers, global connections: ≈ $0/customer/mo (Postgres rows + queries; 100k audit events ≈ $0.002). Knowledge-base ingestion ≈ $0.001 per 100-page document. Custom domains: first 100 free (Cloudflare for SaaS), then $0.10/mo each. These gate tiers — they don't add COGS.</p>
+  </div>
+</main>
+</div>
+</div>
+
+<script>
+// ---- rate card (per 1M tokens), from docs/pricing/01-rates-*.md, verified 2026-07-14
+const R = {
+  h:{i:1, o:5}, s:{i:3, o:15}, o:{i:5, o:25},       // haiku / sonnet / opus
+  cacheMult:0.1,
+  embedPerM:0.02,
+  runCost:0.00005,                                   // flow run: CPU+Redis+log (Railway)
+  emailPerUser:0.01,                                 // ~10 SES sends
+  stripePct:0.036, stripeFix:0.30, intlExtra:0.025,
+  creditMult:1.055,
+  distillIn:20000, distillOut:1000, embedTok:50000,
+};
+
+const els = {};
+['price','cust','intl','sess','steps','intok','outtok','cache','esc','opus',
+ 'runs','chat','credits','addons'].forEach(id=>els[id]=document.getElementById(id));
+const sel = { chattier:document.getElementById('chattier'), host:document.getElementById('host') };
+
+const PRESETS = {
+  light:  {price:25,cust:50,intl:20,sess:5, steps:10,intok:5000, outtok:300,cache:75,esc:5, opus:0, runs:500,  chat:0,   credits:0.5,addons:9, chattier:'h',host:'101'},
+  typical:{price:25,cust:50,intl:20,sess:20,steps:25,intok:8000, outtok:500,cache:75,esc:15,opus:5, runs:2000, chat:0,   credits:1,  addons:9, chattier:'s',host:'101'},
+  power:  {price:25,cust:50,intl:20,sess:100,steps:25,intok:8000,outtok:500,cache:75,esc:15,opus:5, runs:10000,chat:0,   credits:3,  addons:9, chattier:'s',host:'101'},
+  team:   {price:120,cust:20,intl:30,sess:150,steps:25,intok:8000,outtok:500,cache:75,esc:15,opus:5,runs:25000,chat:2000,credits:10, addons:15,chattier:'s',host:'237'},
+};
+
+function tierCost(t, inTok, outTok, cacheHit){
+  const iC = inTok*(cacheHit*R[t].i*R.cacheMult + (1-cacheHit)*R[t].i)/1e6;
+  return iC + outTok*R[t].o/1e6;
+}
+function sessionCost(a){
+  const cache=a.cache/100, esc=a.esc/100, opus=a.opus/100, hk=Math.max(0,1-esc-opus);
+  const perStep = hk*tierCost('h',a.intok,a.outtok,cache)
+                + esc*tierCost('s',a.intok,a.outtok,cache)
+                + opus*tierCost('o',a.intok,a.outtok,cache);
+  const distill = R.distillIn*R.h.i/1e6 + R.distillOut*R.h.o/1e6;
+  const embed = R.embedTok*R.embedPerM/1e6;
+  return a.steps*perStep + distill + embed;
+}
+function read(){
+  const a={};
+  for(const k in els) a[k]=parseFloat(els[k].value);
+  a.chattier=sel.chattier.value; a.fixedHost=parseFloat(sel.host.value);
+  return a;
+}
+const fmt=(n,d=2)=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmtC=n=> n>=0.01?fmt(n):(n>=0.0001?fmt(n,4):'$'+n.toExponential(1));
+
+function recalc(){
+  const a=read();
+  // reflect slider values
+  const V=(id,v)=>document.getElementById('v-'+id).textContent=v;
+  V('price',a.price);V('cust',a.cust.toLocaleString());V('intl',a.intl);V('sess',a.sess);
+  V('steps',a.steps);V('intok',a.intok.toLocaleString());V('outtok',a.outtok);V('cache',a.cache);
+  V('esc',a.esc);V('opus',a.opus);V('runs',a.runs.toLocaleString());V('chat',a.chat.toLocaleString());
+  V('credits',a.credits);V('addons',a.addons);
+
+  const sCost=sessionCost(a);
+  const chatMsg=tierCost(a.chattier,3000,500,0.5);
+  const items=[
+    {k:'Agent sessions', c:'var(--chip-h)', unit:sCost,    n:a.sess,   total:a.sess*sCost},
+    {k:'Chat messages',  c:'var(--chip-s)', unit:chatMsg,  n:a.chat,   total:a.chat*chatMsg},
+    {k:'AI credits',     c:'var(--chip-o)', unit:R.creditMult, n:a.credits, total:a.credits*R.creditMult},
+    {k:'Flow runs',      c:'var(--chip-x)', unit:R.runCost,n:a.runs,   total:a.runs*R.runCost},
+    {k:'Email + misc',   c:'var(--line)',   unit:R.emailPerUser, n:1,  total:R.emailPerUser},
+  ];
+  const cogs=items.reduce((s,i)=>s+i.total,0);
+  const stripe=a.price>0 ? a.price*(R.stripePct + (a.intl/100)*R.intlExtra)+R.stripeFix : 0;
+  const contrib=a.price-stripe-cogs;
+  const fixed=a.fixedHost+a.addons;
+  const be=contrib>0?Math.ceil(fixed/contrib):Infinity;
+  const marginPct=a.price>0?contrib/a.price*100:0;
+
+  // KPIs
+  document.getElementById('k-session').textContent=fmt(sCost,3);
+  document.getElementById('k-cogs').textContent=fmt(cogs);
+  const mEl=document.getElementById('k-margin'), mCard=document.getElementById('k-margin-card');
+  mEl.textContent=fmt(contrib)+' ('+marginPct.toFixed(0)+'%)';
+  mCard.className='kpi '+(marginPct>=60?'good':marginPct>=20?'warn':'bad');
+  document.getElementById('k-breakeven').textContent=isFinite(be)?be.toLocaleString():'never';
+
+  // COGS bar + table
+  const bar=document.getElementById('cogsbar'); bar.innerHTML='';
+  const leg=document.getElementById('cogslegend'); leg.innerHTML='';
+  items.filter(i=>i.total>0).forEach(i=>{
+    const d=document.createElement('div');
+    d.style.cssText=`width:${(i.total/cogs*100)}%;background:${i.c}`;
+    d.title=`${i.k}: ${fmt(i.total)}`; bar.appendChild(d);
+    const s=document.createElement('span');
+    s.innerHTML=`<span class="sw" style="background:${i.c}"></span>${i.k} ${(i.total/cogs*100).toFixed(0)}%`;
+    leg.appendChild(s);
+  });
+  const tb=document.querySelector('#cogstable tbody');
+  tb.innerHTML=items.map(i=>
+    `<tr><td>${i.k}</td><td class="r">${fmtC(i.unit)}</td><td class="r">${i.n.toLocaleString()}</td><td class="r">${fmt(i.total)}</td><td class="r">${cogs>0?(i.total/cogs*100).toFixed(1):0}%</td></tr>`
+  ).join('')+`<tr><td><strong>Total COGS</strong></td><td></td><td></td><td class="r"><strong>${fmt(cogs)}</strong></td><td class="r">100%</td></tr>`;
+
+  // P&L
+  document.getElementById('pl-n').textContent=a.cust.toLocaleString();
+  const rev=a.price*a.cust, tCogs=cogs*a.cust, tStripe=stripe*a.cust, profit=rev-tCogs-tStripe-fixed;
+  const netPct=rev>0?profit/rev*100:0;
+  document.querySelector('#pltable tbody').innerHTML=`
+    <tr><td>Revenue</td><td class="r">${fmt(rev)}</td></tr>
+    <tr><td>− Variable COGS</td><td class="r">${fmt(tCogs)}</td></tr>
+    <tr><td>− Stripe fees</td><td class="r">${fmt(tStripe)}</td></tr>
+    <tr><td>− Fixed infra</td><td class="r">${fmt(fixed)}</td></tr>
+    <tr><td><strong>Operating profit</strong></td><td class="r ${profit>=0?'pos':'neg'}"><strong>${fmt(profit)}</strong></td></tr>
+    <tr><td>Net margin</td><td class="r ${netPct>=40?'pos':netPct>=0?'mid':'neg'}">${netPct.toFixed(1)}%</td></tr>`;
+
+  // scenarios
+  const scen=[
+    ['Light (10 steps, all-Haiku, cached)', sessionCost({...a,steps:10,esc:0,opus:0,cache:90})],
+    ['Current assumptions', sCost],
+    ['No cache (same shape)', sessionCost({...a,cache:0})],
+    ['Heavy (60 steps, 15K ctx)', sessionCost({...a,steps:60,intok:15000})],
+    ['All-Sonnet (no tier routing)', sessionCost({...a,esc:100,opus:0})],
+  ];
+  document.querySelector('#scentable tbody').innerHTML=
+    scen.map(([k,v])=>`<tr><td>${k}</td><td class="r">${fmt(v,3)}</td></tr>`).join('');
+}
+
+function applyPreset(name){
+  const p=PRESETS[name];
+  for(const k in p){
+    if(els[k]) els[k].value=p[k];
+    else if(sel[k]) sel[k].value=p[k];
+  }
+  document.querySelectorAll('#presets button').forEach(b=>b.classList.toggle('on',b.dataset.p===name));
+  recalc();
+}
+document.getElementById('presets').addEventListener('click',e=>{
+  if(e.target.dataset.p) applyPreset(e.target.dataset.p);
+});
+[...Object.values(els),sel.chattier,sel.host].forEach(el=>el.addEventListener('input',()=>{
+  document.querySelectorAll('#presets button').forEach(b=>b.classList.remove('on'));
+  recalc();
+}));
+applyPreset('typical');
+</script>

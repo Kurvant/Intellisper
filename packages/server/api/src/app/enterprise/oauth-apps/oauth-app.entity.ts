@@ -8,7 +8,7 @@
 // stored credentials are used in place of the platform defaults.
 import { OAuthApp, Platform } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../database/database-common'
 import { EncryptedObject } from '../../helper/encryption'
 
 // The persisted row: the public app plus the encrypted client secret and the platform relation.

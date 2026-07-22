@@ -3,8 +3,8 @@
 // module-level code reads it, mirroring bootstrap.ts.
 export {}
 
-const nodePath = require('path')
 const { existsSync } = require('fs')
+const nodePath = require('path')
 
 // Prefer .env (what a local/self-hosted instance uses); fall back to .env.dev.
 const repoRoot = nodePath.resolve(__dirname, '../../../..')

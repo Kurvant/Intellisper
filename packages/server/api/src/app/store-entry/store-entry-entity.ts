@@ -1,8 +1,8 @@
 import { STORE_KEY_MAX_LENGTH, StoreEntry } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
 import {
-    IbIdSchema,
     BaseColumnSchemaPart,
+    IbIdSchema,
 } from '../database/database-common'
 
 type StoreEntrySchema = StoreEntry

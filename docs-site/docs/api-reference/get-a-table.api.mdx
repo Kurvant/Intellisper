@@ -1,0 +1,69 @@
+---
+id: get-a-table
+title: "Get a table"
+description: "Get a table by id"
+sidebar_label: "Get a table"
+hide_title: true
+hide_table_of_contents: true
+api: eJyNVN9v2jAQ/lei0x42yQXat+WNDVShTVDRVpOGWGWSg7h1bNe+oLIo//t0TqC0pdXyEtt3vh/ffZ9rILkJkC6A5EpjgKWAHEPmlSNlDaRwiZTIJFqT1S5ROQhw0ssSCT3frCFkBZYS0hpo5xBSCOSV2URHIvQc5s9icPZVnv0dnv1e1hfnzSdoBCi2OEkFCDCy5KsxvsfHSnnMISVfYbMUEDCrvKJdzCed+oG8XLLJY3DWBAxcwMVgwL+XLYxwLStNybzzBAGZNYSG2Fc6p1Um2bd/H/jCiY7s6h4z4o68dehJtelU/rbrRkDmURKetlUuf9fWYnDCsLY6Rz+Jt6TZzdYRh9duhxNTaQ3NsonlcuGT0/nwiacj9TvmQJKq8FFOAWiqkukzng6//RyPQMBoct0ulycrIq82G/T/F3U2vZuOf93Nx99nc449m97dXo2GN+P90akczTGBFi2j9hN5xr9D+xiiF4AsBcg8V0wLqa+Opr6WOmDDn4ASqbA5pLBBauleQAr97Xm/lVO/VnkDTF+/3aul8hpSKIhcSPt96VRPGUKtVXDoe5kt4bUEr7zNq4w3yXUMBMeSuGautnTcC+MACWd5E+42YLKzlU+kU8kD7pINGvQMSrL2tkyowETmpTJJZk2wmkGKguCIK5SeC4jqXduYS5Fm0+S5jWRks6pEQ1FWIIC7b7MPeoPegNnlbKBSRrl12j96al4XXT8r9uSL1PVL+ER9p6UyUWqMdN1NZQHbc3ZsnzkBqYozLmwgNtb1Sga89bpp+PixQh9fGAFb6VUsiYeXq8DrvKPBB1V+nncc/JK8V193KM2OEZK64h0IeOAZMm+jYAqUOetlUXeGYZaho6Mrb14wpseBmpfjGxAgKwbhQIxujGK/OBLhy3LquvW4sQ9omuZQHfE+qq35B7haHGk=
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a table"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/tables/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get a table by id
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"name":{"type":"string"},"folderId":{"anyOf":[{"type":"string"},{"type":"null"}]},"projectId":{"type":"string"},"externalId":{"type":"string"},"status":{"anyOf":[{"type":"string","enum":["ENABLED","DISABLED"]},{"type":"null"}]},"trigger":{"anyOf":[{"type":"string","enum":["ON_NEW_RECORD","ON_UPDATE_RECORD"]},{"type":"null"}]}},"required":["id","created","updated","name","projectId","externalId"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

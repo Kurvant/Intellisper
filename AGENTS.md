@@ -12,7 +12,7 @@ Open-source AI-first workflow automation platform. Self-hosted or cloud. 400+ bl
 - **Security**: Every endpoint needs `securityAccess` config.
 - **Side effects**: Separated into `*-side-effects.ts` files, called explicitly after mutations.
 - **Multi-server**: Use `distributedLock`, BullMQ deduplication, or `FOR UPDATE SKIP LOCKED` for concurrent operations.
-- **Managed PostgreSQL**: No custom extensions. Use `sanitizeObjectForPostgresql()` for external data.
+- **Managed PostgreSQL**: Prefer no custom extensions; use `sanitizeObjectForPostgresql()` for external data. **Exception — `pgvector` is permitted** (already required by Knowledge Base + Platform Copilot, and by the browser-agent memory layer; the dev image `pgvector/pgvector:pg16` ships it). Features depending on it must degrade gracefully when the extension is absent, so vanilla-Postgres installs still boot.
 - **Before modifying a module**: Read its `.agents/features/<name>.md` file for entities, services, and integration details.
 | `.agents/features/*.md` | ~60 lines each | When Claude explores the feature | Entity schemas, services, data flows |
 | `.claude/rules/` | 3-5 lines each | Every session | Critical safety checks (entity registration, data isolation, edition safety) |

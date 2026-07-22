@@ -14,10 +14,10 @@
 import { OAuth2AuthorizationMethod } from '@intelblocks/blocks-framework'
 import { safeHttp } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
     AppConnectionType,
     BaseOAuth2ConnectionValue,
     ErrorCode,
+    IntellisperError,
     isNil,
     OAuth2GrantType,
     PlatformOAuth2ConnectionValue,

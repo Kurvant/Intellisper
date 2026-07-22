@@ -1,0 +1,68 @@
+---
+id: configure-git-sync
+title: "Configure git sync"
+description: "Create or update the git repository configuration for a project."
+sidebar_label: "Configure git sync"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVMtu2zAQ/BV1kUOCyK8ABVpd0tb2IWgaG4nTQ223oKW1xEQiGXLlRDX078VSTvxIgfRQXURR5HA4M7trIJE6iKaQSmpZNNrBPIQEXWylIakVRNC3KAgDbYPSJDyiDINUUuDXS9K2CmKtljItreA9wVLbQATG6juMqQ0hWHwo0dEXnVQQrSHWilARD4UxuYz9ts6d4/PW4OIMC8EjqgxCBHrBQBCCsdqgJYmO/24OuEh2ljqyUqUQQiHVJaqUMoh6NTMoNOGtzf+21ggitHzXn6mkT9PPrR+i9bvb+thuzU+jnc9fndb89Hg2a6eSTs6PoA5hYYWKszdQj8/ftU4OcNa98Oz9+3oHZOIBXgOhKgv2aHw9Gtz2JxejKwhhMPw+vByNvw2vJjCvQ3AuG1u5EoRfsfoHQVxepm+zns3azLM+2mPvyffOPjD5unFXWkyY49aTXc1fZNq76iHpDal5vQ9KtkQ/4YxWrrH+rNvl135QB7gUZU7B9WalJ1cgZTqBCIx21Nwvgwg6q15nm/kQHNoVWi6FNZScEsiIjIs6HWFkWyrCPJfOoG3HuoDDEhlbnZSxz/6NB4J6zphxaSVVN5znhrcwct8ePuUV3K3DoNKlDYSRwT1WQYoKrSBMgqXVhS9AkRRScd05nXsp/SEQwQKFZQJ1CFxQ19vSGz6JwuR4UDpb63dqZDv5nO/DmSas+5k8yOB2SxO25+86BKmW2qsgiQnBxVbgYKDjskBFvilACOxLo0u33W13eTt7WQjfLJTwt+5vGlDTmVyl4kNVd9rO/2hpG/8In6hjciEV8yqb/tJkbAqrHoT7nTXjEEZTWK8XwrHUdc3TDyXaCqLpPISVsFIsWJQpl3WGIkHrY3nvNe03l2htKmgl8pJ5vOqjHMCX7I9HNxN2btN/C53wHise2XXxCBFACNoL5WPq59aQC5WWIuW1DSY/fwA6whmw
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Configure git sync"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/git-repos"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create or update the git repository configuration for a project.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"projectId":{"type":"string","minLength":1},"remoteUrl":{"type":"string","pattern":"^git@[A-Za-z0-9.-]+:[A-Za-z0-9._/-]+(\\.git)?$"},"branch":{"type":"string","pattern":"^(?!-)[A-Za-z0-9._/-]{1,255}$"},"branchType":{"type":"string","enum":["PRODUCTION","DEVELOPMENT"]},"sshPrivateKey":{"type":"string","minLength":1},"slug":{"type":"string","pattern":"^(?!\\.{1,2}$)[A-Za-z0-9._-]{1,128}$"}},"required":["projectId","remoteUrl","branch","branchType","sshPrivateKey","slug"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

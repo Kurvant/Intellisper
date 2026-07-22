@@ -1,14 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import {
-  IntellisperClientAuthenticationFailed,
-  IntellisperClientAuthenticationSuccess,
-  IntellisperClientConfigurationFinished,
-  IntellisperClientEventName,
-  IntellisperClientInit,
-  IntellisperVendorEventName,
-  IntellisperVendorInit,
-  IntellisperVendorRouteChanged,
-} from 'ee-embed-sdk';
 import React from 'react';
 import { flushSync } from 'react-dom';
 import { useTranslation } from 'react-i18next';
@@ -26,6 +16,16 @@ import {
   determineDefaultRoute,
   routesThatRequireProjectId,
 } from '@/lib/route-utils';
+import {
+  IntellisperClientAuthenticationFailed,
+  IntellisperClientAuthenticationSuccess,
+  IntellisperClientConfigurationFinished,
+  IntellisperClientEventName,
+  IntellisperClientInit,
+  IntellisperVendorEventName,
+  IntellisperVendorInit,
+  IntellisperVendorRouteChanged,
+} from 'ee-embed-sdk';
 
 const notifyVendorPostAuthentication = () => {
   const authenticationSuccessEvent: IntellisperClientAuthenticationSuccess = {
@@ -124,7 +124,12 @@ const EmbedPage = React.memo(() => {
               authenticationSession.saveResponse(data, true);
               const configuredRoute = event.data.data.initialRoute ?? '/';
 
-              const defaultRoute = determineDefaultRoute(checkAccess);
+              // Embed is a legacy-shell context (hidden sidebar / flows navbar / page header),
+              // so it keeps landing on the legacy project routes, not the overhaul shell.
+              const defaultRoute = determineDefaultRoute(
+                checkAccess,
+                'default',
+              );
               const initialRoute =
                 configuredRoute === '/' ? defaultRoute : configuredRoute;
               //must use it to ensure that the correct router in RouterProvider is used before navigation

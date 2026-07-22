@@ -9,8 +9,8 @@
 //
 // A CUSTOM template is scoped to its owning organization (platformId) and published on create.
 import {
-    ibId,
     FlowVersionTemplate,
+    ibId,
     isNil,
     Metadata,
     spreadIfDefined,

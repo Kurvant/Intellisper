@@ -1,10 +1,10 @@
 import {
-    IntellisperError,
-    IbEdition,
-    ibId,
     AuthenticationResponse,
     ErrorCode,
     FilteredBlockBehavior,
+    IbEdition,
+    ibId,
+    IntellisperError,
     isNil,
     OPEN_SOURCE_PLAN,
     Platform,
@@ -175,8 +175,8 @@ export const platformService = (log: FastifyBaseLogger) => ({
             ...spreadIfDefined('logoIconUrl', params.logoIconUrl),
             ...spreadIfDefined('fullLogoUrl', params.fullLogoUrl),
             ...spreadIfDefined('favIconUrl', params.favIconUrl),
-            ...spreadIfDefined('filteredPieceNames', params.filteredBlockNames),
-            ...spreadIfDefined('filteredPieceBehavior', params.filteredBlockBehavior),
+            ...spreadIfDefined('filteredBlockNames', params.filteredBlockNames),
+            ...spreadIfDefined('filteredBlockBehavior', params.filteredBlockBehavior),
             ...spreadIfDefined('cloudAuthEnabled', params.cloudAuthEnabled),
             ...spreadIfDefined('googleAuthEnabled', params.googleAuthEnabled),
             ...spreadIfDefined('emailAuthEnabled', params.emailAuthEnabled),
@@ -188,7 +188,7 @@ export const platformService = (log: FastifyBaseLogger) => ({
             ...spreadIfDefined('allowedEmbedOrigins', params.allowedEmbedOrigins),
             ...spreadIfDefined('ssoDomain', params.ssoDomain),
             ...spreadIfDefined('ssoDomainVerification', params.ssoDomainVerification),
-            ...spreadIfDefined('pinnedPieces', params.pinnedBlocks),
+            ...spreadIfDefined('pinnedBlocks', params.pinnedBlocks),
         }
         if (!isNil(params.plan)) {
             await platformPlanService(log).update({

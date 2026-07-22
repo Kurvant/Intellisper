@@ -2,7 +2,7 @@
 // (packages/shared/.../ee/otp/otp-model.ts) — NOT from any licensed source.
 import { OtpModel, OtpState, OtpType, UserIdentity } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../../database/database-common'
 
 type OtpSchema = OtpModel & {
     identity: UserIdentity

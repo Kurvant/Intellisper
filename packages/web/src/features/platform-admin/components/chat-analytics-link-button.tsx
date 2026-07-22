@@ -17,7 +17,7 @@ export function ChatAnalyticsLinkButton({
 }) {
   return (
     <Button variant={variant} size={size} asChild>
-      <Link to="/platform/observability/chat-analytics">
+      <Link to="/admin/observability/chat-analytics">
         <ChartLineIcon className="size-4 mr-2" />
         {t('Chat Analytics')}
       </Link>

@@ -1,19 +1,19 @@
 import { BlockMetadata, BlockMetadataModel, BlockMetadataModelSummary, BlockPackageInformation, blockTranslation } from '@intelblocks/blocks-framework'
 import { ibVersionUtil } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
-    ibId,
     assertNotNullOrUndefined,
-    ErrorCode,
-    EXACT_VERSION_REGEX,
-    isNil,
-    LocalesEnum,
-    PackageType,
     BlockCategory,
     BlockOrderBy,
     BlockPackage,
     BlockSortBy,
     BlockType,
+    ErrorCode,
+    EXACT_VERSION_REGEX,
+    ibId,
+    IntellisperError,
+    isNil,
+    LocalesEnum,
+    PackageType,
     PlatformId,
     PrivateBlockPackage,
     PublicBlockPackage,
@@ -28,7 +28,7 @@ import { enterpriseFilteringUtils } from '../../enterprise/pieces/filters/piece-
 import { blockTagService } from '../tags/pieces/piece-tag.service'
 import { blockCache, BlockRegistryEntry } from './piece-cache'
 import { BlockMetadataEntity, BlockMetadataSchema } from './piece-metadata-entity'
-import { filterBlockBasedOnType, isNewerVersion, isSupportedRelease, lastVersionOfEachBlock, loadDevBlocksIfEnabled, blockListUtils } from './utils'
+import { blockListUtils, filterBlockBasedOnType, isNewerVersion, isSupportedRelease, lastVersionOfEachBlock, loadDevBlocksIfEnabled } from './utils'
 
 export const blockRepos = repoFactory(BlockMetadataEntity)
 

@@ -8,12 +8,12 @@
 // server-side resolution accessor exposes it, so the provisioning flow can perform the token
 // exchange.
 import {
-    IntellisperError,
-    ibId,
     AppCredential,
     AppCredentialType,
     Cursor,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     OAuth2GrantType,
     SeekPage,

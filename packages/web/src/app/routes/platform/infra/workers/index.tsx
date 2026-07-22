@@ -38,7 +38,12 @@ import { cn } from '@/lib/utils';
 import { SandboxesPopover } from './sandboxes-popover';
 import { WorkerConfigsPopover } from './worker-configs-popover';
 
-export default function WorkersPage() {
+export default function WorkersPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { data: edition } = flagsHooks.useFlag<IbEdition>(IbFlagId.EDITION);
   const isCloud = edition === IbEdition.CLOUD;
   const { data: workersData, isLoading } = workersQueries.useWorkerMachines();
@@ -47,10 +52,12 @@ export default function WorkersPage() {
 
   return (
     <div className="flex flex-col w-full gap-4 px-4">
-      <DashboardPageHeader
-        description={t('Check the health of your workers')}
-        title={t('Workers')}
-      ></DashboardPageHeader>
+      {!isOverhaul && (
+        <DashboardPageHeader
+          description={t('Check the health of your workers')}
+          title={t('Workers')}
+        ></DashboardPageHeader>
+      )}
       {isCloud && fleetType === WorkerMachineType.SHARED && (
         <Alert variant="primary">
           <Zap size={16} />

@@ -7,8 +7,8 @@
 // edition exposes). The feature-flag values themselves are produced by the
 // entitlement resolver (flags hooks); this guard only enforces them.
 import {
-    IntellisperError,
     ErrorCode,
+    IntellisperError,
     isNil,
     PlatformRole,
     PlatformWithoutSensitiveData,

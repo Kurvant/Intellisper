@@ -6,11 +6,17 @@ import { MetricCard, MetricCardSkeleton } from './metric-card';
 
 type ActiveFlowsMetricProps = {
   report?: PlatformAnalyticsReport;
+  variant?: 'default' | 'overhaul';
+  index?: number;
 };
 
-export const ActiveFlowsMetric = ({ report }: ActiveFlowsMetricProps) => {
+export const ActiveFlowsMetric = ({
+  report,
+  variant = 'default',
+  index = 0,
+}: ActiveFlowsMetricProps) => {
   if (!report) {
-    return <MetricCardSkeleton />;
+    return <MetricCardSkeleton variant={variant} />;
   }
 
   const activeFlows = report.flows.filter(
@@ -29,6 +35,8 @@ export const ActiveFlowsMetric = ({ report }: ActiveFlowsMetricProps) => {
       })}
       iconColor="text-chart-1"
       iconBgColor="bg-chart-1/10"
+      variant={variant}
+      index={index}
     />
   );
 };

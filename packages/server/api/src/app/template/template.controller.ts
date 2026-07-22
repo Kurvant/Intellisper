@@ -1,10 +1,10 @@
 import {
-    IntellisperError,
     ALL_PRINCIPAL_TYPES,
-    IbEdition,
-    IbFlagId,
     CreateTemplateRequestBody,
     ErrorCode,
+    IbEdition,
+    IbFlagId,
+    IntellisperError,
     isNil,
     ListTemplatesRequestQuery,
     Principal,
@@ -165,6 +165,7 @@ const GetCategoriesParams = {
     },
     schema: {
         tags: ['templates'],
+        summary: 'List template categories',
         description: 'Get categories of templates.',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },
@@ -176,6 +177,7 @@ const GetParams = {
     },
     schema: {
         tags: ['templates'],
+        summary: 'Get a template',
         description: 'Get a template.',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         params: GetIdParams,
@@ -188,6 +190,7 @@ const ListTemplatesParams = {
     },
     schema: {
         tags: ['templates'],
+        summary: 'List templates',
         description: 'List templates.',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         querystring: ListTemplatesRequestQuery,
@@ -199,6 +202,7 @@ const DeleteParams = {
         security: securityAccess.publicPlatform([PrincipalType.USER, PrincipalType.SERVICE]),
     },
     schema: {
+        summary: 'Delete a template',
         description: 'Delete a template.',
         tags: ['templates'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
@@ -211,6 +215,7 @@ const CreateParams = {
         security: securityAccess.publicPlatform([PrincipalType.USER, PrincipalType.SERVICE]),
     },
     schema: {
+        summary: 'Create a template',
         description: 'Create a template.',
         tags: ['templates'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
@@ -223,6 +228,7 @@ const UpdateParams = {
         security: securityAccess.publicPlatform([PrincipalType.USER, PrincipalType.SERVICE]),
     },
     schema: {
+        summary: 'Update a template',
         description: 'Update a template.',
         tags: ['templates'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],

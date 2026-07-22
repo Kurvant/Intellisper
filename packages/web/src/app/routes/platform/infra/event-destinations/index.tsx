@@ -20,7 +20,10 @@ import { eventDestinationsCollectionUtils } from './lib/event-destinations-colle
 import { parseFlowIdFromUrl } from './lib/parse-flow-id-from-url';
 import { useEventLabels } from './lib/use-event-labels';
 
-const EventDestinationsPage = () => {
+const EventDestinationsPage = ({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   const isEnabled = platform.plan.eventStreamingEnabled;
   const { data: destinations, isLoading } =
@@ -95,6 +98,7 @@ const EventDestinationsPage = () => {
             </AnimatedIconButton>
           </EventDestinationDialog>
         }
+        hideHeader={isOverhaul}
       >
         {isLoading && (
           <SkeletonList numberOfItems={3} className="w-full h-[72px]" />

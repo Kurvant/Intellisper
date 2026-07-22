@@ -1,13 +1,13 @@
 import { createHash, randomBytes } from 'crypto'
 import { PropertyType } from '@intelblocks/blocks-framework'
-import { IntellisperError,
-    AppConnection,
+import { AppConnection,
     AppConnectionType,
     assertNotNullOrUndefined,
     BaseOAuth2ConnectionValue,
     deleteProps,
     ErrorCode,
     GetOAuth2AuthorizationUrlResponse,
+    IntellisperError,
     OAuth2GrantType,
     PlatformId,
     resolveValueFromProps,

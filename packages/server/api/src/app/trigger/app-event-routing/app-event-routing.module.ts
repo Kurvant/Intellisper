@@ -4,11 +4,11 @@ import { slack } from '@intelblocks/block-slack'
 import { square } from '@intelblocks/block-square'
 import { Block, BlockAuthProperty } from '@intelblocks/blocks-framework'
 import {
-    IntellisperError,
-    ibId,
     assertNotNullOrUndefined,
     ErrorCode,
     FlowStatus,
+    ibId,
+    IntellisperError,
     isNil,
     LATEST_JOB_DATA_SCHEMA_VERSION,
     RunEnvironment,

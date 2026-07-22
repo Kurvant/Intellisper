@@ -1,5 +1,5 @@
 import { assertNotNullOrUndefined } from '../../core/common'
-import { IntellisperError, ErrorCode } from '../../core/common/intellisper-error'
+import { ErrorCode, IntellisperError } from '../../core/common/intellisper-error'
 
 /**
  * @param {string} pieceName - starts with `@intelblocks/block-`

@@ -1,0 +1,70 @@
+---
+id: upload-a-knowledge-base-file
+title: "Upload a knowledge base file"
+description: "Upload a file and create a knowledge base file record"
+sidebar_label: "Upload a knowledge base file"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVMuO2zAM/BWBpxbQxtkefWx7WRRoF/s4LXJgLCZRYz1WotMagf+9oOxkkzQtip4sSySHwxlpD4zrDPULbH340ZJZ080SM8FCg6HcJBvZBg81PMc2oFGoVrYlhd6oJhEyKVTHVCWpY0CiJiQDGhK9dpT5YzA91HtogmfyLEvXtWwjJq5WIbkbg4yynZsNubLiPhLUEJbfqWHQEFOIlNhSllOB+bcoj+40MnOyfg2Dhgly0NPRZYgG8p2T6RSwxaDBWUfXg4dhJGsTmUNKQZ5wJhApYmyOLfZfr/d1pQ6c5yyG8yBOHQ0aIiZ0xJRE0CuDfCNuRdHXjlIPGsbxyNxkgncH0U5KLzRkarpkuS+VMdovJMuFHCXKMfg8zvvDfC6fc+98phV2LauHKbJwdMSbYAQ45KIb8gZqqHa31bkXK5lArrpiQJBW0u7AsUst1LBhjrmuKox2Zj1T29ocKc2a4ODSx/cpmK6RH/VYCsEpvUeZ2cjkQPI4PkH5rdxzJtWHLimMVm2pV2vylJDJqFUKTvGGFBpnvWqCz6FIWYSRikvCJA0URVahYFkWW8PdGw31OTSdI89YMDUI+xF9PpvP5iKozNChlwqTnMf7euV2XrI4uZb/fc+nITH95Cq2aL20VeTZT9K+wO4W9OVDo4vBM2iYBF5o2Igj6hfY7yXkObXDINujYUV2YzMuW/HnCttMf6Hz7mGy8nv1pya3ovKZ/XfYdhJXrLHDZAWs2F3DhtBQKl2MiZ9GrJsnqf2We+11k3JH299/e3wCDcvpYXTBSJoET8/FcTkCYydDPLpx8o4+LKSh6Qh9f9LIfj9GPIUt+WGAA2GWfxjkLfkFwbUThQ==
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Upload a knowledge base file"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/knowledge-base/files/upload"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Upload a file and create a knowledge base file record
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"query","name":"projectId","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"multipart/form-data":{"schema":{"type":"object","properties":{"file":{"type":"object","properties":{"filename":{"type":"string"},"data":{},"type":{"type":"string","enum":["file"]},"mimetype":{"type":"string"}},"required":["filename","data","type"]},"displayName":{"type":"string"}},"required":["file","displayName"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

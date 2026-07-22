@@ -1,4 +1,4 @@
-import { CodeAction, FlowAction, FlowActionType, BlockAction } from '../actions/action'
+import { BlockAction, CodeAction, FlowAction, FlowActionType } from '../actions/action'
 import { FlowTrigger } from '../triggers/trigger'
 import { flowStructureUtil } from './flow-structure-util'
 

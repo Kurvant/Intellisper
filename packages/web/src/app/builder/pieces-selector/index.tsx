@@ -1,8 +1,4 @@
-import {
-  FlowOperationType,
-  FlowTriggerType,
-  isNil,
-} from '@intelblocks/shared';
+import { FlowOperationType, FlowTriggerType, isNil } from '@intelblocks/shared';
 import { t } from 'i18next';
 import {
   CheckCircle2Icon,

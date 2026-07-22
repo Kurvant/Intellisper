@@ -1,0 +1,99 @@
+---
+title: Automation
+description: Run a routine across many rows of input from a spreadsheet, or on a recurring cron schedule. Batches and schedules run on your live browser session.
+sidebar_label: Automation
+sidebar_position: 5
+---
+Automation scales a [Routine](/agent/routines) beyond a single run. There are two ways to do it:
+
+- **Batches** — run a routine once per row of input, from a spreadsheet or a list of values.
+- **Schedules** — run a routine automatically on a recurring cron schedule.
+
+<Info>
+**Your browser does the work**
+
+Batches and schedules **run on your live browser session** through the connected extension — they are
+not headless. If your browser isn't connected when a batch row or a scheduled run is due, the work
+**waits** until you reconnect, then continues. Keep the extension running for automation to make
+progress.
+</Info>
+
+## Batches
+
+A batch runs a routine once for each row of parameter values you provide. Give it a hundred rows, and it
+runs the routine a hundred times, filling each run's parameters from that row.
+
+### Providing input
+
+You can supply batch input three ways:
+
+- **Structured rows** — a JSON array where each row maps parameter names to values.
+- **CSV upload** — a `.csv` file.
+- **Excel upload** — an `.xlsx` file.
+
+Uploaded files are capped at **5 MB**. Uploaded content is treated as untrusted and sanitised on the way
+in: cells that could be interpreted as spreadsheet formulas are neutralised, and dangerous keys are
+dropped — so a malicious spreadsheet can't inject a formula or tamper with the run.
+
+There are also hard ceilings on any plan — a batch can have at most **10,000 rows**, 100 columns per row,
+and 2,000 characters per cell — plus stricter per-plan limits on rows and how many run at once (see
+[Plans & limits](/agent/plans-and-limits)).
+
+### How a batch runs
+
+<Steps>
+  <Step title="Expand">
+    The batch creates one run per row and queues them all.
+  </Step>
+  <Step title="Admit">
+    Each row waits its turn. A row only starts when your browser is connected and you're under your
+    concurrency limit. If your browser is offline, the row keeps waiting and retries; if you're at your
+    concurrency limit, it queues until a slot frees up.
+  </Step>
+  <Step title="Run">
+    Admitted rows replay the routine (with self-healing, exactly as a single replay does).
+  </Step>
+  <Step title="Finish">
+    As rows complete, the batch tracks how many succeeded and failed, and finalises when every row is
+    done.
+  </Step>
+</Steps>
+
+### Managing a batch
+
+- **List** your batches and open one to see per-row status.
+- **Cancel** a running batch.
+- **Retry failed** — re-run only the rows that failed.
+- **Export** the aggregated results as structured records.
+
+A batch ends in one of these states: **completed**, **completed with errors** (some rows failed),
+**canceled**, or **failed**. While your browser is offline it shows as **paused, waiting for the
+extension**.
+
+## Schedules
+
+A schedule runs a routine automatically on a recurring basis.
+
+- Schedules use **cron** timing. Both standard five-field cron and six-field cron (with a seconds field)
+  are accepted, along with named aliases.
+- Set an optional **timezone** (an IANA name like `America/New_York`); schedules default to **UTC**.
+- **Enable or disable** a schedule at any time, or delete it.
+
+When a schedule fires, it spawns a batch run of its routine — so a schedule is really "run this routine
+on a timer," and everything about batch execution (your browser must be connected, per-plan limits)
+applies to scheduled runs too.
+
+The number of schedules you can create is limited by your plan (see [Plans & limits](/agent/plans-and-limits)).
+
+## Notifications
+
+Automation can email you about a batch's outcome. In a batch's notification settings you can choose to be
+emailed:
+
+- when a batch **finishes** successfully,
+- when a batch **fails** or finishes with errors, or
+- when a run **needs your attention** — for example, it's parked waiting for you to approve a
+  consequential step.
+
+Notifications are sent by email only, to the batch owner (or an address you specify), and are
+best-effort — a notification never blocks or fails the run itself.

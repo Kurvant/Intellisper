@@ -4,14 +4,14 @@
 //
 // Path grammar (provider-defined): `<secret-name>:<json-key>` — the secret name and the field
 // to extract from that secret's JSON value.
+import { GetSecretValueCommand, ListSecretsCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager'
 import {
-    IntellisperError,
     AWSProviderConfig,
     ErrorCode,
+    IntellisperError,
     isNil,
     SecretManagerProviderId,
 } from '@intelblocks/shared'
-import { GetSecretValueCommand, ListSecretsCommand, SecretsManagerClient } from '@aws-sdk/client-secrets-manager'
 import { SecretManagerProvider } from './provider'
 
 type AwsSession = {

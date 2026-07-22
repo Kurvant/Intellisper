@@ -1,9 +1,10 @@
 import { cryptoUtils } from '@intelblocks/server-utils'
-import { IntellisperError, IbEdition, IbFlagId, assertNotNullOrUndefined, AuthenticationResponse, ErrorCode, isNil, OtpType, PlatformWithoutSensitiveData, User, UserIdentity, UserIdentityProvider } from '@intelblocks/shared'
+import { assertNotNullOrUndefined, AuthenticationResponse, ErrorCode, IbEdition, IbEnvironment, IbFlagId, IntellisperError, isNil, OtpType, PlatformWithoutSensitiveData, User, UserIdentity, UserIdentityProvider } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { otpService } from '../enterprise/authentication/otp/otp-service'
 import { flagService } from '../flags/flag.service'
 import { system } from '../helper/system/system'
+import { AppSystemProp } from '../helper/system/system-props'
 import { platformService } from '../platform/platform.service'
 import { userService } from '../user/user-service'
 import { userInvitationsService } from '../user-invitations/user-invitation.service'
@@ -201,6 +202,14 @@ async function getUserForPlatform(identityId: string, platform: PlatformWithoutS
 
 async function sendVerificationOrAutoVerify(userIdentity: UserIdentity, log: FastifyBaseLogger): Promise<void> {
     const edition = system.getEdition()
+    // A local dev instance has no SMTP transport, so an emailed OTP can never arrive and the identity
+    // would stay unverified forever. Auto-verify instead, matching the non-cloud editions below.
+    if (system.get(AppSystemProp.ENVIRONMENT) === IbEnvironment.DEVELOPMENT) {
+        if (!userIdentity.verified) {
+            await userIdentityService(log).verify(userIdentity.id)
+        }
+        return
+    }
     switch (edition) {
         case IbEdition.CLOUD:
             if (!userIdentity.verified) {

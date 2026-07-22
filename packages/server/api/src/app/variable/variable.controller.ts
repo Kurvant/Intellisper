@@ -1,7 +1,7 @@
 import {
-    IbId,
     AppConnectionOwners,
     ApplicationEventName,
+    IbId,
     ListVariablesRequestQuery,
     Permission,
     PrincipalType,

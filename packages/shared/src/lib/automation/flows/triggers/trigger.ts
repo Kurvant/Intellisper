@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { STEP_NAME_REGEX } from '../../../core/common'
 import { VersionType } from '../../pieces'
-import { CodeActionSettings, LoopOnItemsActionSettings, BlockActionSettings, RouterActionSettings } from '../actions/action'
+import { BlockActionSettings, CodeActionSettings, LoopOnItemsActionSettings, RouterActionSettings } from '../actions/action'
 import { PropertySettings } from '../properties'
 import { SampleDataSetting } from '../sample-data'
 

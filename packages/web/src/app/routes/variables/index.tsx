@@ -49,7 +49,11 @@ const copyReferenceToClipboard = async (name: string) => {
   }
 };
 
-function VariablesPage() {
+function VariablesPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
   const projectId = authenticationSession.getProjectId()!;
   const { checkAccess } = useAuthorization();
   const canWrite = checkAccess(Permission.WRITE_VARIABLE);
@@ -285,6 +289,7 @@ function VariablesPage() {
         selectColumn={true}
         onSelectedRowsChange={setSelectedRows}
         bulkActions={bulkActions}
+        variant={variant}
       />
       <VariableDialog
         open={createOpen}

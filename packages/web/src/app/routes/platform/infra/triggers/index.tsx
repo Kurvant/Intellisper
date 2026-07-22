@@ -75,7 +75,12 @@ const generateLastXDays = (days: number): string[] => {
   );
 };
 
-export default function TriggerHealthPage() {
+export default function TriggerHealthPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { data: report, isLoading } = triggerRunHooks.useStatusReport();
 
   const triggerHealthData: TriggerHealthRow[] = isLoading
@@ -249,10 +254,12 @@ export default function TriggerHealthPage() {
 
   return (
     <div className="flex flex-col w-full gap-4">
-      <DashboardPageHeader
-        title={t('Trigger Health Status')}
-        description={t('Monitor the health and performance of your triggers')}
-      />
+      {!isOverhaul && (
+        <DashboardPageHeader
+          title={t('Trigger Health Status')}
+          description={t('Monitor the health and performance of your triggers')}
+        />
+      )}
       <DataTable
         emptyStateTextTitle={t('No trigger data available')}
         emptyStateTextDescription={t(

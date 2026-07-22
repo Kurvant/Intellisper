@@ -1,0 +1,38 @@
+---
+title: Export & delete
+description: Export your memory as JSON, delete individual facts, or clear a whole scope. How deletion works and one thing to know about deleting on a lapsed plan.
+sidebar_label: Export & delete
+sidebar_position: 3
+---
+You can get your memory out and erase it. These controls support data-portability and
+right-to-erasure needs.
+
+## Export
+
+Export the facts in a scope as a JSON download. The export is complete (not paginated), so you get every
+fact in that scope in one file.
+
+## Delete
+
+There are three levels of deletion:
+
+- **Forget one fact** — remove a single fact.
+- **Clear a scope** — bulk-delete every fact in a scope at once.
+- Both are **soft deletes**: the data is marked deleted rather than immediately destroyed, which means an
+  operator can recover it if you erase something by mistake.
+
+Deleting your own facts is never blocked by a storage limit — the per-user cap only applies to saving
+*new* facts, so you can always curate and delete down.
+
+:::warning Deleting on a lapsed plan
+Erasing your own data through the **agent** is always available — deleting your data is never behind a
+paywall. However, the memory **web/API** endpoints (including export and bulk-delete) require memory to be
+on your plan. If your plan has lapsed and memory is off, use the agent to forget facts; the REST export
+and bulk-delete routes will return an upgrade prompt until memory is re-enabled.
+:::
+
+## What deletion affects
+
+Deleting a fact removes it from everywhere it was used — recall for the agent and Copilot, and any scope
+it was shared into. Because the [sharing gate](/memory/privacy-and-sharing) is evaluated live, a deleted
+fact stops appearing immediately.

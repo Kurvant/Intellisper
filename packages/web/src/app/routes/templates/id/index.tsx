@@ -32,9 +32,20 @@ import { BlockCard } from './piece-card';
 
 type TemplateDetailsPageProps = {
   template: Template;
+  /**
+   * Which templates surface this detail page belongs to. 'overhaul' sends the back button and the
+   * copied share link to /build/explore; 'default' (legacy) uses /templates. The immersive
+   * full-screen preview itself is identical in both. Defaults to legacy.
+   */
+  variant?: 'default' | 'overhaul';
 };
 
-const TemplateDetailsPage = ({ template }: TemplateDetailsPageProps) => {
+const TemplateDetailsPage = ({
+  template,
+  variant = 'default',
+}: TemplateDetailsPageProps) => {
+  const templatesListRoute =
+    variant === 'overhaul' ? '/build/explore' : '/templates';
   const token = authenticationSession.getToken();
   const location = useLocation();
   const navigate = useNavigate();
@@ -122,7 +133,7 @@ const TemplateDetailsPage = ({ template }: TemplateDetailsPageProps) => {
   };
 
   const handleShare = async () => {
-    const shareUrl = `${window.location.origin}/templates/${template.id}`;
+    const shareUrl = `${window.location.origin}${templatesListRoute}/${template.id}`;
     try {
       await navigator.clipboard.writeText(shareUrl);
       toast.success(t('Link copied to clipboard!'));
@@ -139,7 +150,7 @@ const TemplateDetailsPage = ({ template }: TemplateDetailsPageProps) => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate('/templates')}
+              onClick={() => navigate(templatesListRoute)}
               className="flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />

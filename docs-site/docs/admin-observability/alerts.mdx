@@ -1,0 +1,27 @@
+---
+title: Alerts
+description: Get notified by email when a production automation fails, so you find out about problems without watching the run history.
+sidebar_label: Alerts
+sidebar_position: 3
+---
+Alerts email you when an automation fails in production, so you learn about problems as they happen rather
+than by checking the run history.
+
+## What triggers an alert
+
+An alert is raised when a **published automation fails in production** and the failing step is identified.
+To avoid flooding your inbox when something is broadly broken, alerts are **deduplicated**: only the
+*first* failure of a given automation within a rolling 24-hour window sends a notification. Repeat
+failures in that window are counted but don't send another email.
+
+## Setting up alerts
+
+Alerts are configured per project. Add an **email receiver** to a project, and that address will be
+notified of production failures for that project's automations. A project can have more than one
+receiver — a failure notification fans out to everyone registered.
+
+## Good to know
+
+- Alerts are **best-effort**: the alerting system never interferes with your automations. If a
+  notification can't be sent, your runs are unaffected.
+- Alerts cover **production** runs — test runs you trigger while building don't generate alerts.

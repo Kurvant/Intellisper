@@ -1,5 +1,7 @@
-import { chatAiUtils, ContentPartLike } from '@intelblocks/server-utils'
+import { chatAiUtils, ContentPartLike, meterLanguageModel } from '@intelblocks/server-utils'
 import {
+    AiFeature,
+    AiKeyMode,
     AIProviderName,
     ChatAgentEvent,
     ChatAgentEventType,
@@ -17,6 +19,7 @@ import {
     WorkerJobType,
 } from '@intelblocks/shared'
 import { createUIMessageStream, generateText, isLoopFinished, LanguageModelUsage, ModelMessage, streamText } from 'ai'
+import { createAiUsageReporter } from '../../../../ai-usage-reporter'
 import { FireAndForgetJobResult, JobContext, JobHandler, JobResultKind } from '../../../types'
 import { chatMcpClient } from './chat-mcp-client'
 import { chatWorkerTools } from './chat-worker-tools'
@@ -63,9 +66,38 @@ export const executeChatAgentJob: JobHandler<ExecuteChatAgentJobData, FireAndFor
         })
 
         const provider = config.provider as AIProviderName
-        const model = chatAiUtils.createChatModel({
+        const rawModel = chatAiUtils.createChatModel({
             provider, auth: config.auth, config: config.providerConfig, modelId: config.modelId,
         })
+
+        // AI Gateway — meter this chat turn.
+        //
+        // Studio chat previously computed its token counts and threw them into a log line. Every
+        // model call it makes (the main loop, tool-call repair, and auto-title) was real money that
+        // appeared in NO cost record. Wrapping the model here captures all of them, including the
+        // continuation loop, with no added latency: usage is read off responses we already await.
+        //
+        // The idempotency prefix is keyed to the RUN, so if this job is retried (the queue is
+        // at-least-once) the same calls re-emit the same keys and the ledger's unique index collapses
+        // them — a retried chat turn cannot double-charge the customer.
+        const usageReporter = createAiUsageReporter(ctx.apiClient, log)
+        const model = meterLanguageModel({
+            model: rawModel as never,
+            modelId: config.modelId,
+            context: {
+                platformId,
+                projectId: data.projectId ?? null,
+                userId,
+                feature: AiFeature.STUDIO_CHAT,
+                featureRef: conversationId,
+                // Studio chat runs on the platform's OWN configured provider key, so the spend is
+                // already the customer's — but until now it was measured nowhere.
+                keyMode: AiKeyMode.MANAGED,
+                idempotencyPrefix: `chat:${runId}`,
+            },
+            emit: (call) => usageReporter.record(call),
+            onError: (err) => log.warn({ err }, '[chat] AI usage meter failed (isolated — the turn was unaffected)'),
+        }) as never
 
         const eventEmitter = chatWorkerTools.createEventEmitter({
             sendEvent: (input) => ctx.apiClient.sendChatEvent({ ...input, runId }),
@@ -332,6 +364,13 @@ export const executeChatAgentJob: JobHandler<ExecuteChatAgentJobData, FireAndFor
         }
         finally {
             clearInterval(cancelCheckInterval)
+            // AI Gateway: flush on EVERY exit path — success, user cancel, or error.
+            //
+            // A turn that was cancelled or that blew up still BURNED the tokens it had already spent.
+            // Flushing only on success would leave a permanent, silent hole in the cost record for
+            // exactly the runs most likely to be expensive (the ones that ran long and got killed).
+            // This is off the user's critical path: the response has already been streamed to them.
+            await usageReporter.flush()
             if (mcpClient) {
                 await mcpClient.close().catch((closeErr: unknown) => {
                     log.warn({ err: closeErr }, 'Failed to close MCP client')

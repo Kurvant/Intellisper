@@ -5,12 +5,12 @@
 // A presented key is authenticated by hashing it and matching the stored hash.
 import { cryptoUtils } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
-    ibId,
     ApiKey,
     ApiKeyResponseWithValue,
     assertNotNullOrUndefined,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     secureIbId,
     SeekPage,

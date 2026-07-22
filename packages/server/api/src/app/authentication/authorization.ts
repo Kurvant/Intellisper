@@ -1,6 +1,6 @@
 import {
-    IntellisperError,
     ErrorCode,
+    IntellisperError,
     isNil,
     isObject,
     PrincipalType,

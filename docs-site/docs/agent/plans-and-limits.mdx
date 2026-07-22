@@ -1,0 +1,62 @@
+---
+title: Plans & limits
+description: What the agent includes at each plan tier — monthly action, research, file, routine-run, and quick-tool allowances, plus batch, concurrency, and schedule limits.
+sidebar_label: Plans & limits
+sidebar_position: 10
+---
+The agent is a paid capability on **Cloud** and **Enterprise**. What's included, and how much you can do
+each month, depends on your plan.
+
+## The paid door
+
+The agent is gated by a single switch on your plan. If the agent isn't included, opening it shows an
+**upgrade prompt** rather than an error — it's an invitation to add the agent, not a failure. Once the
+agent is on your plan, your tier sets the allowances below.
+
+## Monthly allowances
+
+Several agent activities are metered per month, pooled across your workspace. When you reach an
+allowance, further actions of that kind are declined until the next month (or until you upgrade) — this
+shows up as an upgrade prompt, the same as the paid door.
+
+| Allowance | Free | Starter | Pro | Team | Enterprise |
+| --- | --- | --- | --- | --- | --- |
+| **Browser actions** | 25 | 400 | 3,000 | 3,000 | Unlimited |
+| **Research fetches** | 3 | 40 | 300 | 300 | Unlimited |
+| **File operations** | 3 | 50 | 500 | 500 | Unlimited |
+| **Routine runs** | 50 | 2,000 | 20,000 | 20,000 | Unlimited |
+| **Quick tools** (e.g. grammar) | 20 | 300 | 3,000 | 3,000 | Unlimited |
+
+## Automation limits
+
+[Batches and schedules](/agent/automation) have their own per-tier limits:
+
+| Limit | Free | Starter | Pro | Team | Enterprise |
+| --- | --- | --- | --- | --- | --- |
+| **Max rows per batch** | — | 200 | 1,000 | 1,000 | 5,000 |
+| **Concurrent rows** | — | 2 | 3 | 5 | 10 |
+| **Schedules** | — | 5 | 20 | 40 | 200 |
+
+On the Free tier, batches and schedules aren't included — a batch or schedule limit of zero means the
+feature isn't on that plan.
+
+Every plan also enforces fixed safety ceilings regardless of tier: a batch can never exceed 10,000 rows,
+100 columns, or 2,000 characters per cell.
+
+## Reasoning model
+
+The agent uses a fast model for ordinary work and escalates to a stronger model when a task stalls. The
+most powerful **reasoning** model is available only on **Pro, Team, and Enterprise** — Free and Starter
+plans use the fast and escalation models but do not reach the top reasoning tier.
+
+## How limits behave
+
+Two conventions are worth knowing:
+
+- A limit of **zero** means the feature isn't included on that plan — you'll be prompted to upgrade.
+- **Unlimited** means no cap.
+
+Intellisper is deliberately careful about how it enforces these: if the system can't confirm your
+entitlements for a moment (for example, a transient database hiccup), it **holds back privileged
+features** (like batches and the reasoning model) but **does not block your metered day-to-day actions**
+— so a blip never locks a paying customer out of ordinary work.

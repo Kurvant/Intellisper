@@ -7,9 +7,9 @@
 // variable path within the organization account.
 import { safeHttp } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
     CyberarkConjurProviderConfig,
     ErrorCode,
+    IntellisperError,
     isNil,
     SecretManagerProviderId,
 } from '@intelblocks/shared'

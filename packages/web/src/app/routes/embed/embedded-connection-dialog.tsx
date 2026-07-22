@@ -3,14 +3,6 @@ import {
   AppConnectionWithoutSensitiveData,
   isNil,
 } from '@intelblocks/shared';
-import {
-  IntellisperClientConnectionNameIsInvalid,
-  IntellisperClientConnectionPieceNotFound,
-  IntellisperClientEventName,
-  IntellisperClientShowConnectionIframe,
-  IntellisperNewConnectionDialogClosed,
-  NEW_CONNECTION_QUERY_PARAMS,
-} from 'ee-embed-sdk';
 import { useEffect, useRef, useState } from 'react';
 
 import { memoryRouter } from '@/app/guards';
@@ -20,6 +12,14 @@ import { oauthAppsQueries } from '@/features/connections';
 import { blocksHooks } from '@/features/pieces';
 import { parentWindow } from '@/lib/dom-utils';
 import { cn } from '@/lib/utils';
+import {
+  IntellisperClientConnectionNameIsInvalid,
+  IntellisperClientConnectionPieceNotFound,
+  IntellisperClientEventName,
+  IntellisperClientShowConnectionIframe,
+  IntellisperNewConnectionDialogClosed,
+  NEW_CONNECTION_QUERY_PARAMS,
+} from 'ee-embed-sdk';
 
 import { CreateOrEditConnectionDialogContent } from '../../connections/create-edit-connection-dialog';
 

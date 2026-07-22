@@ -1,4 +1,4 @@
-import { IntellisperError, ErrorCode } from '@intelblocks/shared'
+import { ErrorCode, IntellisperError } from '@intelblocks/shared'
 import { FastifyError, FastifyReply, FastifyRequest } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import { exceptionHandler } from './exception-handler'

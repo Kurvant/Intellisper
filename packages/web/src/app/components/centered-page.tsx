@@ -7,12 +7,22 @@ export const CenteredPage = ({
   description,
   actions,
   children,
+  hideHeader = false,
 }: {
   title: string;
   description: React.ReactNode;
   actions?: React.ReactNode;
   children: React.ReactNode;
+  hideHeader?: boolean;
 }) => {
+  if (hideHeader) {
+    return (
+      <div className="w-full max-w-[40rem] mx-auto py-6">
+        {actions && <div className="mb-4 flex justify-end">{actions}</div>}
+        {children}
+      </div>
+    );
+  }
   return (
     <div className="w-full max-w-[40rem] mx-auto py-6">
       <div className="flex items-start justify-between gap-4">

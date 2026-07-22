@@ -4,7 +4,7 @@
 // token which is then cryptographically verified (signature against Google's published
 // JWKS, plus issuer/audience/email-verified checks) before its claims are trusted.
 import { safeHttp } from '@intelblocks/server-utils'
-import { IntellisperError, assertNotEqual, ErrorCode, isNil } from '@intelblocks/shared'
+import { assertNotEqual, ErrorCode, IntellisperError, isNil } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import jwksClient from 'jwks-rsa'
 import { JwtSignAlgorithm, jwtUtils } from '../../../helper/jwt-utils'
@@ -59,6 +59,15 @@ export const googleAuthnProvider = (log: FastifyBaseLogger) => ({
     async authenticate({ clientId, clientSecret, authorizationCode }: AuthenticateParams): Promise<FederatedAuthnIdToken> {
         const idToken = await exchangeCodeForIdToken(log, clientId, clientSecret, authorizationCode)
         return verifyIdToken(clientId, idToken)
+    },
+
+    // Verify a CLIENT-SUPPLIED Google id_token (implicit/id-token flow — e.g. a Chrome extension
+    // using chrome.identity). No code exchange: the token was minted directly for `audience` (the
+    // extension's own OAuth client id), and we verify it against Google's JWKS exactly as the
+    // code-exchange path does — same signature/issuer/audience/email-verified checks. This is the ONLY
+    // difference from `authenticate`: the token arrives pre-minted rather than being redeemed from a code.
+    async verifyClientIdToken({ audience, idToken }: { audience: string, idToken: string }): Promise<FederatedAuthnIdToken> {
+        return verifyIdToken(audience, idToken)
     },
 })
 

@@ -1,0 +1,68 @@
+---
+id: search-the-knowledge-base
+title: "Search the knowledge base"
+description: "Search knowledge base using vector similarity"
+sidebar_label: "Search the knowledge base"
+hide_title: true
+hide_table_of_contents: true
+api: eJyVlE1v2zAMhv+KwLMauwO6DT72Y0Cxw4omPQU+KDZjq9GHK8lpA8P/faDsuE6CYthNsimS76tH7CCIykO2hp2x7wrLCq82wiPkHEr0hZNNkNZABksUrqjZFMYojLVemortsQjWMS+1VMLJcAAODt9a9OHWlgfIOiisCWgCLUXTKFkIypu8ekregS9q1IJW4dAgZGA3r1gE4NA426ALEj39ncrfCo+/pMLH0s9OCecEFZcB9fy7D06aCvqew1uL7vCgN1iW9CnrQEvzOMT/+P6TgxYf8+0/MptWb9DFzEpqGQWWuBWtCpDdTMelCVihA07VpG41ZNex1LhO057Dp3+r2qGvrSovK80ypPMM1AF5Lh2WJ/c5d+pCft6fnguuReoEizbeY7am+5K/kZZ5n1Osb6zxw3V8S9NB8JyU+0E+ex4jozkaQ21LyKCxPl6rCDVkkOyvk1Pykq1U6BMfcQNqxe3R+dhJ6xRkUIfQ+CxJRCMX5KtS0jfoFoXVcE7tk7NlW9CGLWMiIA1HeUuiblByFDnZTVUu0r14ZAfbOiYayXZ4YBUadCJgybbOahZqZKLU0rDCGm8VkoBYBDLYoHAjKoT98+cDefgQulH4NeDrI8H5JcDrNJ/Yu/kCIqJLmq2N+mSgUvD4aR27t0Wr0YT4KIEDOT4oThfpIoWex3vTIj5WI6KecSKQ5tOpcG7b7PX/9xgZbyPgR0gaJaShXiIH3cjQGvbXwM/nF4fIUQQokpRzqAm9bA1dRyEvTvX9ZCjhzWEvnBQbsmed9xxqFCW6iN6O4IC7QcfVirqicNXG4XA+0QiyifinP8sVcNiMk1Dbks448U5TUrxDBsDBRq8iivFbB0qYqhUVxQ45CRzRkuQJ0hEpflxQp8eBZQ6zDrtuiFjZHZq+J7+ioEB76GkM/AU0ERjc
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search the knowledge base"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/knowledge-base/files/search"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Search knowledge base using vector similarity
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"knowledgeBaseFileIds":{"type":"array","items":{"type":"string"}},"queryEmbedding":{"minItems":768,"maxItems":768,"type":"array","items":{"type":"number"}},"limit":{"default":5,"type":"integer","minimum":1,"maximum":100},"similarityThreshold":{"type":"number","minimum":0,"maximum":1}},"required":["knowledgeBaseFileIds","queryEmbedding"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

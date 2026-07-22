@@ -1,6 +1,5 @@
 import {
-    IntellisperError,
-    ibId,
+    BlockTrigger,
     Cursor,
     EngineResponse,
     EngineResponseStatus,
@@ -12,7 +11,8 @@ import {
     FlowTrigger,
     FlowTriggerType,
     getBlockMajorAndMinorVersion,
-    BlockTrigger,
+    ibId,
+    IntellisperError,
     PopulatedFlow,
     ProjectId,
     SeekPage,

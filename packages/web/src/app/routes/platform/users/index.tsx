@@ -33,7 +33,12 @@ export type UserRowData =
       data: UserInvitation;
     };
 
-export default function UsersPage() {
+export default function UsersPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const [inviteOpen, setInviteOpen] = useState(false);
 
   const {
@@ -111,12 +116,14 @@ export default function UsersPage() {
       lockDescription={t('Manage your users and their access to your projects')}
     >
       <div className="flex flex-col w-full">
-        <DashboardPageHeader
-          title={t('Users')}
-          description={t(
-            'Manage, delete, activate and deactivate users on platform',
-          )}
-        />
+        {!isOverhaul && (
+          <DashboardPageHeader
+            title={t('Users')}
+            description={t(
+              'Manage, delete, activate and deactivate users on platform',
+            )}
+          />
+        )}
         <DataTable
           emptyStateTextTitle={t('No users found')}
           emptyStateTextDescription={t('Start inviting users to your project')}

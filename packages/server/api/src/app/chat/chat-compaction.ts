@@ -12,7 +12,7 @@
 //                          further (oldest-first, never splitting a tool-call/tool-result pair)
 //                          if the result still overflows — throwing if even a minimal payload
 //                          cannot fit.
-import { IntellisperError, AIProviderName, aiProviderUtils, ErrorCode } from '@intelblocks/shared'
+import { AIProviderName, aiProviderUtils, ErrorCode, IntellisperError } from '@intelblocks/shared'
 import { ModelMessage } from 'ai'
 
 // Rough token estimate: ~4 characters per token (matches common BPE tokenizers closely enough

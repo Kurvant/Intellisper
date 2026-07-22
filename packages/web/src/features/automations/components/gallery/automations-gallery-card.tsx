@@ -1,4 +1,9 @@
-import { FolderDto, PopulatedFlow, Table } from '@intelblocks/shared';
+import {
+  FlowStatus,
+  FolderDto,
+  PopulatedFlow,
+  Table,
+} from '@intelblocks/shared';
 import { t } from 'i18next';
 import {
   Copy,
@@ -102,12 +107,13 @@ export function AutomationsGalleryCard({
             : 'border-border/70',
         )}
       >
-        {/* Top row: 3D icon + select checkbox + pin + menu */}
+        {/* Top row: 3D icon + status badge + select checkbox + pin + menu */}
         <div className="flex items-start gap-3">
           <Icon3d
             name={item.type === 'table' ? 'table' : 'automation'}
             size={38}
           />
+          {flow && <FlowStatusBadge status={flow.status} />}
           <div className="ml-auto flex items-center gap-0.5">
             <span
               className="opacity-0 transition-opacity group-hover:opacity-100 data-[on=true]:opacity-100"
@@ -296,6 +302,33 @@ export function AutomationsGalleryCard({
         }}
       />
     </>
+  );
+}
+
+/**
+ * Small status pill on the automation card (design mockup): Active (enabled) / Disabled, with a
+ * Failed variant reserved for when per-flow run-failure state is available. Driven only by the
+ * flow's real `status` — no fabricated data.
+ */
+function FlowStatusBadge({ status }: { status: FlowStatus }) {
+  const active = status === FlowStatus.ENABLED;
+  return (
+    <span
+      className={cn(
+        'flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide',
+        active
+          ? 'border-emerald-600/20 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400'
+          : 'border-border bg-muted text-muted-foreground',
+      )}
+    >
+      <span
+        className={cn(
+          'size-1.5 rounded-full',
+          active ? 'bg-emerald-600' : 'bg-muted-foreground/60',
+        )}
+      />
+      {active ? t('Active') : t('Disabled')}
+    </span>
   );
 }
 

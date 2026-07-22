@@ -1,11 +1,11 @@
 import {
+    BlockTrigger,
     FlowOperationRequest,
     FlowOperationType,
     FlowTriggerType,
     isNil,
     McpToolDefinition,
     Permission,
-    BlockTrigger,
     ProjectScopedMcpServer,
 } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'

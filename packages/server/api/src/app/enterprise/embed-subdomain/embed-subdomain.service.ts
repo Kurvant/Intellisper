@@ -10,11 +10,11 @@
 // no provider id / records — the embed-security layer then falls back to the env-configured
 // origins (the documented fallback).
 import {
-    IntellisperError,
-    ibId,
     EmbedSubdomain,
     EmbedSubdomainStatus,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     PlatformId,
 } from '@intelblocks/shared'

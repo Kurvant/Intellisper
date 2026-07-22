@@ -1,10 +1,10 @@
 import {
-    IntellisperError,
     AppConnection,
     assertNotNullOrUndefined,
     EnginePrincipal,
     ErrorCode,
     GetAppConnectionForWorkerRequestQuery,
+    IntellisperError,
     isNil,
 } from '@intelblocks/shared'
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'

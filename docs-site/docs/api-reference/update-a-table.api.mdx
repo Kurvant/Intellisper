@@ -1,0 +1,70 @@
+---
+id: update-a-table
+title: "Update a table"
+description: "Update a table"
+sidebar_label: "Update a table"
+hide_title: true
+hide_table_of_contents: true
+api: eJx9VEtv2zAM/isGTxugNemOvrVNDsWGpsgDOwRBwVhMotaWVD3SBob/+0DZec1YfTEl8fnxI2sIuPWQLyHguiQPKwGSfOGUDcpoyGFhJQbKMEsKIMDReyQf7o08QF5DYXQgHVhEa0tVIBsOXj1b1+CLHVXIUjhYghzM+pWKAAKsM5ZcUOT5VWNFF1o+OKW30AgITm235PpvAkjHilOfPL08jf+8TMcPk+kIBJ8Xz6O7+fh4tWoE+IAh+q/cjJ/u7n+P2cHocdaKbLgxpST3KFOF+jDZQL7s53m60bEsoVk16RNg0WFFgZxPZj04zoUqRtti2IHo0AAlO7yVIwl5cJGalQBPRXQqHJJHtOoXsbjiJ0feGu1bTH8Oh/y77ueINhjLkE07TeAsKwo7Izm+8ak3nEYOg/3toOXFoFayAQ7t9sdaoishh10I1ueDAVp1o3SgslTekrspTAX/cunZGRkLPmSz5Aguy5kxNm3mx6JOMHGUnruFp+xgosvQquyNDtmWNDkMJLONM1UWdpShrJTOCqO9SexNDWCPa0LHCTQCmKvTM6vHn1jZks6sPFPlRMYe5470umDRmThXXd6YVJcKHAIez5BlI1PEinRIEwQCGOm20uHN8GbI5tyfCvVFbr35vMLoYj77mh22gT7DwJaoNEdIXa07Bixhf8uK7W4QkCvJG2LHLMmXUNdr9LRwZdPw9Xskl5goYI9OpShMFKk8yxLyDZaevkjx27Qj+/fsf/l1l6gPjBCWkU8g4I35whPT8NDuCCX3aVl3Dw9tjB9zNj8b9lYWE/I0Dc+T2RwErLtVVxnJNg4/eCzxow1sUh2JtumuhhL1NuKWdVufTDKMDOiJ0B39xFG42CnXpdV1qzE3b6Sb5lRp4HO7aP4CVKrxsA==
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a table"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/tables/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update a table
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"name":{"type":"string"},"trigger":{"type":"string","enum":["ON_NEW_RECORD","ON_UPDATE_RECORD"]},"status":{"type":"string","enum":["ENABLED","DISABLED"]},"folderId":{"anyOf":[{"type":"string"},{"type":"null"}]}}}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

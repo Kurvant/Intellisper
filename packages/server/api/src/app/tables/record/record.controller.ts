@@ -139,6 +139,7 @@ const UpdateRequest = {
     schema: {
         tags: ['records'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Update a record',
         description: 'Update a record',
         params: z.object({
             id: z.string(),
@@ -166,6 +167,7 @@ const DeleteRecordRequest = {
     schema: {
         tags: ['records'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Delete records',
         description: 'Delete records',
         body: DeleteRecordsRequest,
         response: {
@@ -190,6 +192,7 @@ const ListRequest = {
         querystring: ListRecordsRequest,
         tags: ['records'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'List records',
         description: 'List records',
         response: {
             [StatusCodes.OK]: SeekPage(PopulatedRecord),

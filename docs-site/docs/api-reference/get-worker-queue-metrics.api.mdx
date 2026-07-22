@@ -1,0 +1,59 @@
+---
+id: get-worker-queue-metrics
+title: "Get worker queue metrics"
+description: "Get worker queue metrics"
+sidebar_label: "Get worker queue metrics"
+hide_title: true
+hide_table_of_contents: true
+api: eJyFU8lu20AM/ZUBz4rl9KhbgRRB0UvQNCfDB3pEWxNrFnMopYKgfy8oG95aNCeNRPJRb5kRBHcZqhV8RN4TP3i0jQuUYV0AU04xZMpQjfBludRHTdmyS+JigAqeaItdK+bnqRMKsDEIBdFeTKl1FrW3fM86MEK2DXnUkwyJoIK4eScrUEDimIjFHdcdOuqOp1MfMuMABTghnz+fD+jpqisLu7CDqYAPdKLHSy10fkOsNbTievpHaVIxDp1jqlWrGfwCdR5cF4B17ZQwti9X/7PFNtN0D3Pi+OmUzt3q/kxijoaZGcR4EnY2QwGepIk1VLCjWRWUBioo+8fyzuFynny4TGbinljDMELHLVTQiKRclSUmt3BBqG1dTsQLGz3c/9ILx7qz+mJeZyCY1oppO3YyvKrtR2cwuR80XImsW/6Ce8tkhtixweTMngazo0CMQrXZcvRGGjJYexeMjSHHVv2Ys6WIG0I+2ebCNs67nLRa+n6hYZ6i7TwFmRMKBSj74/blYrlYaiJSzOIxXBL1P+lvGJzpCf2WMrXoggLOwo4nW1bQP2qO7q5eAbfWrAtoYhbtH8cNZnrjdpr086EjHqBarQvokR1ulONqPRXQENbEs5d7VRu+WktJE9Fj280X6v52ql/n9Dx/+wXT9AeLinBf
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get worker queue metrics"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/worker-machines/queue-metrics"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get worker queue metrics
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"queues":{"type":"array","items":{"type":"object","properties":{"name":{"type":"string"},"waiting":{"type":"number"},"active":{"type":"number"}},"required":["name","waiting","active"],"additionalProperties":false}}},"required":["queues"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

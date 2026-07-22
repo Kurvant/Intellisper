@@ -1,0 +1,69 @@
+---
+id: delete-a-user
+title: "Delete a user"
+description: "Delete user"
+sidebar_label: "Delete a user"
+hide_title: true
+hide_table_of_contents: true
+api: eJx9Ustu2zAQ/BVi0UMLMJYT9FLdAsSHoj0UeVxquMBGXFtsJJIhV0Zdgf9eLC07jtNWF5Hc18zsjMC4SVAvYUgUE6w0GEpNtIGtd1DDDXXEpCQKGgJG7Ikls16OkJqWeoR6BN4FghoSR+s2JZGZojT4sZxffMKL39cX31fj1WV+B1mDlUhAbkGDw15KrQENkZ4HG8lAzXGgvNKQqBmi5V2Zh8F+ITmuJBQpBe8SJQFwNf8ov3Pwaxw6VrdTJmhovGNyLLkYQmcblNzqZ5KCU0bOS1Iun4aeuPUGajBFjz3DFmqotpdVka4arckggOP2oM8QO6ihZQ6prioMdmYdU9fZFCjOGt/DudzfojdDIxd1VxrBqQh3gm7P9yDFUXqZ8qbdQyK180NUGKx6op3akKOITEato+8Vt6TQ9NapxrvkOyFWJJCOj4RRAJR9rX2ZZbmT0OcXGurGN0NPjouQoEHY76fPZ/PZXNYdfOIei8DTtidb4cFYr2CPL1s689/ElekXV6FD66R7UXmcFrKE7SXoyc0aamvE061PLLFxfMRED7HLWZ6fB4rFThq2GC0+CrnlCMYmORuo19gl+g+897eTYz+of8GbHtHtRBzsBrmBhidZn9g+r7KGltBQLNP3geumocAnJW/sKs44+vJm8XVxvwANOIgMR1tMS9SHgwz4K6Jx3Gfc+ydyOR8BstwFY85/APsxauA=
+sidebar_class_name: "delete api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a user"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/users/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete user
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"204":{"description":"Default Response","content":{"application/json":{"schema":{"not":{}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

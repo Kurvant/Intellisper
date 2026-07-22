@@ -15,7 +15,10 @@ import { platformHooks } from '@/hooks/platform-hooks';
 import { ProjectRoleDialog } from './project-role-dialog';
 import { ProjectRolesTable } from './project-roles-table';
 
-const ProjectRolePage = () => {
+const ProjectRolePage = ({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
 
   const { data, isLoading, refetch } = projectRoleQueries.useProjectRoles(
@@ -61,6 +64,7 @@ const ProjectRolePage = () => {
           'Define custom roles and permissions that can be assigned to your team members',
         )}
         actions={newRoleButton}
+        hideHeader={isOverhaul}
       >
         <ProjectRolesTable
           projectRoles={data}

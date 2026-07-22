@@ -45,16 +45,24 @@ const getReleaseSummaryType = (type: ProjectReleaseType) => {
   }
 };
 
-const ViewRelease = () => {
+const ViewRelease = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
   const { releaseId } = useParams();
   const navigate = useNavigate();
+  const releasesListRoute =
+    variant === 'overhaul'
+      ? authenticationSession.appendProjectRoutePrefix('/operate/releases')
+      : '/releases';
   const { data: release, isLoading } = projectReleaseQueries.useProjectRelease(
     releaseId || '',
     !!releaseId,
   );
 
   if (!releaseId) {
-    return <Navigate to="/releases" replace />;
+    return <Navigate to={releasesListRoute} replace />;
   }
 
   if (!isLoading && isNil(release)) {
@@ -71,7 +79,7 @@ const ViewRelease = () => {
           <Button
             variant="link"
             className="p-0 h-auto text-sm text-muted-foreground hover:text-primary"
-            onClick={() => navigate('/releases')}
+            onClick={() => navigate(releasesListRoute)}
           >
             {t('Releases')}
           </Button>
@@ -86,7 +94,7 @@ const ViewRelease = () => {
                 <TooltipTrigger asChild>
                   <ApplyButton
                     onSuccess={() => {
-                      navigate('/releases');
+                      navigate(releasesListRoute);
                     }}
                     variant="ghost"
                     className=" p-0"

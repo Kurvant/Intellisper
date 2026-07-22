@@ -48,6 +48,12 @@ type ImportTableDialogProps = {
   folderId?: string;
   onImportSuccess?: () => void;
   allowedFileTypes?: SupportedFileType[];
+  /**
+   * Which shell a newly-imported table opens in. 'overhaul' → the /data/tables editor;
+   * 'default' (legacy) → /projects/:id/tables/:id. Defaults to legacy. Only applies when creating a
+   * NEW table (no `tableId`); importing INTO an existing table never navigates.
+   */
+  variant?: 'default' | 'overhaul';
 };
 
 const ImportTableDialog = ({
@@ -58,6 +64,7 @@ const ImportTableDialog = ({
   folderId,
   onImportSuccess,
   allowedFileTypes = ['json'],
+  variant = 'default',
 }: ImportTableDialogProps) => {
   const navigate = useNavigate();
   const projectId = authenticationSession.getProjectId() ?? '';
@@ -210,7 +217,13 @@ const ImportTableDialog = ({
       setIsOpen?.(false);
       onImportSuccess?.();
       if (!tableId && table) {
-        navigate(`/projects/${projectId}/tables/${table.id}`);
+        navigate(
+          variant === 'overhaul'
+            ? authenticationSession.appendProjectRoutePrefix(
+                `/data/tables/${table.id}`,
+              )
+            : `/projects/${projectId}/tables/${table.id}`,
+        );
       }
     },
     onError: (error) => {

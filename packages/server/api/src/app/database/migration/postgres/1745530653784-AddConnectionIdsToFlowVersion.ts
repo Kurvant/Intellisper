@@ -1,4 +1,4 @@
-import { IbEdition, flowStructureUtil } from '@intelblocks/shared'
+import { flowStructureUtil, IbEdition } from '@intelblocks/shared'
 import { MigrationInterface, QueryRunner } from 'typeorm'
 import { system } from '../../../helper/system/system'
 

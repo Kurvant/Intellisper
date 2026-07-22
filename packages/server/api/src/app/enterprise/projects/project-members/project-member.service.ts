@@ -9,10 +9,10 @@
 // This holds in all editions: community seeds only owners (so members get Admin), while
 // enterprise/cloud add real memberships with granular roles.
 import {
-    IntellisperError,
-    ibId,
     DefaultProjectRole,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     Permission,
     ProjectMember,

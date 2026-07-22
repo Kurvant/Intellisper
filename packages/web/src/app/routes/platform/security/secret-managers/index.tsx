@@ -36,7 +36,12 @@ import { platformHooks } from '@/hooks/platform-hooks';
 
 import AddEditSecretManagerConnectionDialog from './connect-secret-manager-dialog';
 
-const SecretManagersPage = () => {
+const SecretManagersPage = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   const { data: connections, isLoading: isLoadingConnections } =
     secretManagersHooks.useListSecretManagerConnections({
@@ -195,16 +200,26 @@ const SecretManagersPage = () => {
       lockDescription={t('Manage your secrets from a single and secure place')}
     >
       <div className="flex-col w-full">
-        <DashboardPageHeader
-          title={t('Secret Managers')}
-          description={t('Manage Secret Manager connections')}
-        >
-          <AddEditSecretManagerConnectionDialog>
-            <AnimatedIconButton icon={PlusIcon} iconSize={16} size="sm">
-              {t('New Connection')}
-            </AnimatedIconButton>
-          </AddEditSecretManagerConnectionDialog>
-        </DashboardPageHeader>
+        {isOverhaul ? (
+          <div className="flex justify-end px-4 pt-4">
+            <AddEditSecretManagerConnectionDialog>
+              <AnimatedIconButton icon={PlusIcon} iconSize={16} size="sm">
+                {t('New Connection')}
+              </AnimatedIconButton>
+            </AddEditSecretManagerConnectionDialog>
+          </div>
+        ) : (
+          <DashboardPageHeader
+            title={t('Secret Managers')}
+            description={t('Manage Secret Manager connections')}
+          >
+            <AddEditSecretManagerConnectionDialog>
+              <AnimatedIconButton icon={PlusIcon} iconSize={16} size="sm">
+                {t('New Connection')}
+              </AnimatedIconButton>
+            </AddEditSecretManagerConnectionDialog>
+          </DashboardPageHeader>
+        )}
         <DataTable
           emptyStateTextTitle={t('No connections found')}
           emptyStateTextDescription={t(

@@ -1,4 +1,4 @@
-import { IntellisperError, ErrorCode } from '@intelblocks/shared'
+import { ErrorCode, IntellisperError } from '@intelblocks/shared'
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { knowledgeBaseSchema } from './knowledge-base-schema'
 import { knowledgeBaseController } from './knowledge-base.controller'

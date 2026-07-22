@@ -4,9 +4,9 @@
 // Lookup resolvers (user email, platform name, provider name) live in the module itself because they
 // hit services; these helpers are the pure core the tests pin.
 import {
-    INTELLISPER_CHAT_TIERS,
     AIProviderName,
     ChatConversation,
+    INTELLISPER_CHAT_TIERS,
     isNil,
     PersistedChatMessage,
     PersistedChatPartType,

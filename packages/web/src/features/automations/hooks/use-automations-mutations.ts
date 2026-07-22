@@ -32,6 +32,13 @@ type MutationDeps = {
   clearSelection: () => void;
   treeItems: TreeItem[];
   unpinItem?: (itemId: string) => void;
+  /**
+   * Which shell a freshly-created table should open in. 'overhaul' routes to the new
+   * `/data/tables/:id` editor (inside NewAppShell); 'default' (legacy) keeps the old
+   * `/projects/:id/tables/:id` editor. Flows always open the shell-agnostic builder, so only the
+   * table target varies. Defaults to legacy so existing callers are unaffected.
+   */
+  variant?: 'default' | 'overhaul';
 };
 
 export function useAutomationsMutations(deps: MutationDeps) {
@@ -39,6 +46,12 @@ export function useAutomationsMutations(deps: MutationDeps) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const projectId = authenticationSession.getProjectId() ?? '';
+  const newTableRoute = (tableId: string) =>
+    deps.variant === 'overhaul'
+      ? authenticationSession.appendProjectRoutePrefix(
+          `/data/tables/${tableId}`,
+        ) + `?${NEW_TABLE_QUERY_PARAM}=true`
+      : `/projects/${projectId}/tables/${tableId}?${NEW_TABLE_QUERY_PARAM}=true`;
 
   const { mutate: startFromScratch, isPending: isCreateFlowPending } =
     useMutation<PopulatedFlow, Error, string | undefined>({
@@ -68,9 +81,7 @@ export function useAutomationsMutations(deps: MutationDeps) {
       },
       onSuccess: (table) => {
         queryClient.invalidateQueries({ queryKey: ['tables'] });
-        navigate(
-          `/projects/${projectId}/tables/${table.id}?${NEW_TABLE_QUERY_PARAM}=true`,
-        );
+        navigate(newTableRoute(table.id));
       },
     });
 

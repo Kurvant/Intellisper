@@ -9,10 +9,10 @@
 // The entitlement document field set (LicenseKeyEntity) is the contract the apply step depends on.
 import { safeHttp } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
-    IbEdition,
     CreateTrialLicenseKeyRequestBody,
     ErrorCode,
+    IbEdition,
+    IntellisperError,
     isNil,
     LicenseKeyEntity,
     PlanName,
@@ -27,10 +27,15 @@ import { telemetry } from '../../helper/telemetry.utils'
 import { platformService } from '../../platform/platform.service'
 import { platformPlanService } from '../platform/platform-plan/platform-plan.service'
 
-const DEFAULT_LICENSE_KEY_URL = 'https://secrets.activepieces.com'
-
 function licenseKeyBaseUrl(): string {
-    return system.get(AppSystemProp.LICENSE_KEY_URL) ?? DEFAULT_LICENSE_KEY_URL
+    const url = system.get(AppSystemProp.LICENSE_KEY_URL)
+    if (isNil(url) || url.trim() === '') {
+        throw new IntellisperError({
+            code: ErrorCode.SYSTEM_PROP_NOT_DEFINED,
+            params: { prop: AppSystemProp.LICENSE_KEY_URL },
+        })
+    }
+    return url
 }
 
 // The complete "turned off" entitlement set — every capability boolean false. Written on downgrade

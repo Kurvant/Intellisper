@@ -22,7 +22,10 @@ import { platformHooks } from '@/hooks/platform-hooks';
 
 import GoogleIcon from '../../../../../assets/img/custom/auth/google-icon.svg';
 
-const SSOPage = () => {
+const SSOPage = ({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform, refetch } = platformHooks.useCurrentPlatform();
 
   const samlConnected = !!platform.federatedAuthProviders?.saml;
@@ -61,6 +64,7 @@ const SSOPage = () => {
       <CenteredPage
         title={t('Single Sign On')}
         description={t('Manage single sign on providers')}
+        hideHeader={isOverhaul}
       >
         <div className="flex flex-col gap-4">
           <Item variant="outline">

@@ -1,0 +1,61 @@
+---
+title: Agent API
+description: How the agent's HTTP API is organised — the chat and run-lifecycle endpoints, conversations, routines, automation, files, and usage — and who calls them.
+sidebar_label: Agent API
+sidebar_position: 11
+---
+The agent is driven over an HTTP API under the `/v1/browser-agent` path. In normal use you don't call
+these endpoints directly — the **browser extension** and the Intellisper web app are the clients. This
+page describes how the API is organised so you understand what's happening behind the interface.
+
+<Note>
+**Not in the public API Reference**
+
+The agent endpoints are an internal control surface between the extension and the server, so they are
+**not** part of the published [API Reference](/api-reference/intellisper-documentation). This page
+documents them conceptually rather than as a callable public API.
+</Note>
+
+## Chat and run lifecycle
+
+The core of the agent is a set of streaming endpoints. Starting a turn opens a live
+[server-sent-events](/agent/chat-and-runs#watching-a-run-streaming) stream, and the run's lifecycle is
+driven by follow-up calls as the extension executes actions and you make approval decisions.
+
+| Endpoint | Purpose |
+| --- | --- |
+| `POST /v1/browser-agent/chat` | Start a new turn; streams the run's events. |
+| `POST /v1/browser-agent/runs/:id/observation` | The extension reports the result of an on-page action; the run resumes. |
+| `POST /v1/browser-agent/runs/:id/approve` | Approve a consequential action so it can be dispatched. |
+| `POST /v1/browser-agent/runs/:id/reject` | Reject a consequential action; the agent continues without it. |
+| `POST /v1/browser-agent/runs/:id/expand` | Grant a research task a larger source budget. |
+| `POST /v1/browser-agent/runs/:id/decline-expand` | Tell a research task to compile from what it has. |
+
+## Conversations and runs
+
+| Endpoint | Purpose |
+| --- | --- |
+| `GET /v1/browser-agent/conversations` | List your conversations. |
+| `GET /v1/browser-agent/conversations/:id/messages` | List one conversation's messages. |
+| `DELETE /v1/browser-agent/conversations/:id` | Delete a conversation. |
+| `GET /v1/browser-agent/runs` | List your runs ([My Agent](/agent/monitoring#my-agent)). |
+
+## Feature areas
+
+The remaining endpoints are grouped by feature, each under its own path:
+
+| Area | Path | Covered in |
+| --- | --- | --- |
+| **Routines** | `/v1/browser-agent/routines` | [Routines](/agent/routines) |
+| **Automation** (batches, schedules) | `/v1/browser-agent/automation` | [Automation](/agent/automation) |
+| **Files** | `/v1/browser-agent/files` | [Files](/agent/files) |
+| **Grammar / quick tools** | `/v1/browser-agent/grammar` | [Grammar & quick tools](/agent/grammar-and-quick-tools) |
+| **Usage** | `/v1/browser-agent/usage` | [Plans & limits](/agent/plans-and-limits) |
+| **Oversight** (admin) | `/v1/browser-agent/admin/oversight` | [Agent Activity](/agent/monitoring#agent-activity) |
+
+## Access and gating
+
+- Every agent endpoint except health and workspace onboarding sits behind the **agent entitlement** on
+  your plan. Calls without it return a payment-required response — an upgrade prompt, not an error.
+- The admin oversight endpoint additionally requires **workspace-admin** rights.
+- All of these are available on **Cloud** and **Enterprise** editions only.

@@ -8,9 +8,9 @@
 // sendWorkerEvent is persisted. Persistence is best-effort and MUST NOT throw back into the
 // triggering operation (a logging failure never breaks the action it records).
 import {
-    ibId,
     ApplicationEvent,
     ApplicationEventName,
+    ibId,
     isNil,
     ListAuditEventsRequest,
     SeekPage,

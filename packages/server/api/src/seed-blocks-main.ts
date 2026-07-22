@@ -1,5 +1,5 @@
 import { BlockMetadata } from '@intelblocks/blocks-framework'
-import { ibId, isNil, PackageType, BlockType } from '@intelblocks/shared'
+import { BlockType, ibId, isNil, PackageType } from '@intelblocks/shared'
 import { databaseConnection } from './app/database/database-connection'
 import { system } from './app/helper/system/system'
 import { BlockMetadataEntity, BlockMetadataSchema } from './app/pieces/metadata/piece-metadata-entity'

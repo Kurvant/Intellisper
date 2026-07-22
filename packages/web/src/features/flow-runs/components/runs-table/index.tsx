@@ -68,7 +68,11 @@ type SelectedRow = {
   id: string;
   status: FlowRunStatus;
 };
-export const RunsTable = () => {
+export const RunsTable = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedRows, setSelectedRows] = useState<Array<SelectedRow>>([]);
   const [selectedAll, setSelectedAll] = useState(false);
@@ -597,6 +601,7 @@ export const RunsTable = () => {
         customFilters={customFilters}
         toolbarButtons={[<RunsStatusChart key="status-chart" />]}
         hidePagination={retriedRunsInQueryParams.length > 0}
+        variant={variant}
       />
       <RetriedRunsSnackbar
         retriedRunsIds={retriedRunsIds}

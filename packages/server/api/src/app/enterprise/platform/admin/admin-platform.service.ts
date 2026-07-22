@@ -2,12 +2,12 @@
 // (capability spec C.5). These are operator-only actions, not tenant-facing: they act
 // across organizations and are guarded by the operator API key at the module boundary.
 import {
-    IntellisperError,
     AdminRetryRunsRequestBody,
     ApplyLicenseKeyByEmailRequestBody,
     ErrorCode,
     FlowRetryStrategy,
     IncreaseAICreditsForPlatformRequestBody,
+    IntellisperError,
     isNil,
     PlatformRole,
 } from '@intelblocks/shared'

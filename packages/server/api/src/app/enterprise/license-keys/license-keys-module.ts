@@ -10,8 +10,8 @@
 // schedule) so licensed organizations are re-verified and expired keys are downgraded. Registered
 // unconditionally for every edition (the frontend calls verify in all editions).
 import {
-    IntellisperError,
     ErrorCode,
+    IntellisperError,
     LicenseKeyEntity,
     VerifyLicenseKeyRequestBody,
 } from '@intelblocks/shared'

@@ -23,6 +23,7 @@ const ValidateMcpToolRequest = {
     },
     schema: {
         tags: ['agent'],
+        summary: 'Probe an agent MCP tool server',
         description: 'Probe an external MCP server configured as an agent tool and return its tool names. The outbound call is routed through the SSRF-filtered safeHttp axios; all failure modes collapse to a single generic error so the response cannot be used for port or network reconnaissance.',
         params: z.object({
             projectId: IbId,

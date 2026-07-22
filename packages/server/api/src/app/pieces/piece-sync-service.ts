@@ -1,6 +1,6 @@
 import { BlockMetadata } from '@intelblocks/blocks-framework'
 import { ibVersionUtil } from '@intelblocks/server-utils'
-import { groupBy, isNil, PackageType, BlockSyncMode, BlockType, tryCatch } from '@intelblocks/shared'
+import { BlockSyncMode, BlockType, groupBy, isNil, PackageType, tryCatch } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import semver from 'semver'
 import { rejectedPromiseHandler } from '../helper/promise-handler'

@@ -1,5 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { ExecutionMode } from '@intelblocks/shared'
+import { FastifyBaseLogger } from 'fastify'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 vi.mock('../../../../../src/app/workers/machine/machine-cache', () => ({
     workerMachineCache: vi.fn(() => ({
@@ -9,9 +10,17 @@ vi.mock('../../../../../src/app/workers/machine/machine-cache', () => ({
 }))
 
 vi.mock('../../../../../src/app/helper/system/system', () => ({
+    // Mocked wholesale, so every accessor the import graph reaches must exist — a missing one is a
+    // TypeError at module load. `getNumber` is read transitively (database/redis reads REDIS_DB at
+    // module scope).
     system: {
         getOrThrow: vi.fn().mockReturnValue('test-value'),
         getNumberOrThrow: vi.fn().mockReturnValue(60),
+        getNumber: vi.fn().mockReturnValue(undefined),
+        getBoolean: vi.fn().mockReturnValue(false),
+        // Literal, not the IbEdition enum: vi.mock's factory is hoisted above the imports, so an
+        // enum reference here would not be initialized yet.
+        getEdition: vi.fn().mockReturnValue('ce'),
         get: vi.fn().mockReturnValue(undefined),
     },
 }))
@@ -34,7 +43,7 @@ const mockLog = {
     trace: vi.fn(),
     silent: vi.fn(),
     level: 'info',
-} as any
+} as unknown as FastifyBaseLogger
 
 const mockHealthcheck = {
     workerId: 'test-worker-1',
@@ -56,7 +65,7 @@ describe('machineService — execution mode', () => {
     })
 
     it('should return system default execution mode for shared workers', async () => {
-        vi.mocked(system.getOrThrow).mockReturnValue(ExecutionMode.SANDBOX_PROCESS as any)
+        vi.mocked(system.getOrThrow).mockReturnValue(ExecutionMode.SANDBOX_PROCESS)
 
         const { machineService: freshMachineService } = await import('../../../../../src/app/workers/machine/machine-service')
         const result = await freshMachineService(mockLog).onConnection(mockHealthcheck)
@@ -65,7 +74,7 @@ describe('machineService — execution mode', () => {
     })
 
     it('should return system default execution mode for dedicated workers', async () => {
-        vi.mocked(system.getOrThrow).mockReturnValue(ExecutionMode.SANDBOX_CODE_AND_PROCESS as any)
+        vi.mocked(system.getOrThrow).mockReturnValue(ExecutionMode.SANDBOX_CODE_AND_PROCESS)
 
         const { machineService: freshMachineService } = await import('../../../../../src/app/workers/machine/machine-service')
         const result = await freshMachineService(mockLog).onConnection(mockHealthcheck, 'my-worker-group')

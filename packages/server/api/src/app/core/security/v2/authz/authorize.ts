@@ -1,4 +1,4 @@
-import { IntellisperError, ErrorCode, isNil, Permission, PlatformRole, Principal, PrincipalType, UserIdentityProvider } from '@intelblocks/shared'
+import { ErrorCode, IntellisperError, isNil, Permission, PlatformRole, Principal, PrincipalType, UserIdentityProvider } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { userIdentityService } from '../../../../authentication/user-identity/user-identity-service'
 import { rbacService } from '../../../../enterprise/authentication/project-role/rbac-service'

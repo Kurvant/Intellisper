@@ -121,9 +121,9 @@ export const AutomationsTable = ({
   const groups = groupTreeItemsByFolder(items);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto rounded-xl border border-[#3B6EF5]/50 dark:border-[#3B6EF5]/45 shadow-sm">
       <div className="min-w-[1000px]">
-        <div className="flex items-center h-8 text-xs border-b font-medium text-foreground bg-muted/50">
+        <div className="flex items-center h-9 text-xs border-b border-[#3B6EF5]/40 dark:border-[#3B6EF5]/35 font-semibold text-[#1E4FD1] dark:text-[#8FB0FF] bg-[#3B6EF5]/12 dark:bg-[#3B6EF5]/18">
           <div className="w-10 shrink-0 pl-4 pr-1">
             <Checkbox
               checked={

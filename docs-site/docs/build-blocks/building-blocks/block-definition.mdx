@@ -1,0 +1,50 @@
+---
+title: 'Create Block Definition'
+description: ''
+---
+
+
+This tutorial will guide you through the process of creating a Gelato block with an action that fetches random icecream flavor and trigger that fetches new icecream flavor created. It assumes that you are familiar with the following:
+
+- [Intellisper Local development](./development-setup) Or [GitHub Codespaces](../misc/codespaces).
+- TypeScript syntax.
+
+## Block Definition
+
+To get started, let's generate a new block for Gelato
+
+```bash
+npm run cli blocks create
+```
+
+You will be asked three questions to define your new block:
+
+1. `Block Name`: Specify a name for your block. This name uniquely identifies your block within the Intellisper ecosystem.
+2. `Package Name`: Optionally, you can enter a name for the npm package associated with your block. If left blank, the default name will be used.
+3. `Block Type`: Choose the block type based on your intention. It can be either "custom" if it's a tailored solution for your needs, or "community" if it's designed to be shared and used by the broader community.
+
+**Example:**
+
+```bash
+npm run cli blocks create
+
+? Enter the block name: gelato
+? Enter the package name: @intelblocks/block-gelato
+? Select the block type: community
+```
+
+The block will be generated at `packages/blocks/community/gelato/`,
+the `src/index.ts` file should contain the following code
+
+```ts
+import { BlockAuth, createBlock } from '@intelblocks/blocks-framework';
+
+export const gelato = createBlock({
+  displayName: 'Gelato',
+  logoUrl: 'https://cdn.intellisper.com/blocks/gelato.png',
+  auth: BlockAuth.None(),
+  authors: [],
+  actions: [],
+  triggers: [],
+});
+```

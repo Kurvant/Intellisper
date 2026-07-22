@@ -9,11 +9,15 @@ import { MetricCard, MetricCardSkeleton } from './metric-card';
 type TimeSavedMetricProps = {
   report?: PlatformAnalyticsReport;
   isLoading: boolean;
+  variant?: 'default' | 'overhaul';
+  index?: number;
 };
 
 export const TimeSavedMetric = ({
   report,
   isLoading,
+  variant = 'default',
+  index = 0,
 }: TimeSavedMetricProps) => {
   const flows = report?.flows ?? [];
 
@@ -38,7 +42,7 @@ export const TimeSavedMetric = ({
   const equivalentWorkdays = Math.round(totalSeconds / 3600 / 8);
 
   if (isLoading) {
-    return <MetricCardSkeleton />;
+    return <MetricCardSkeleton variant={variant} />;
   }
 
   if (!atLeastOneTimeSavedSet) {
@@ -55,6 +59,8 @@ export const TimeSavedMetric = ({
         })}
         iconColor="text-chart-5"
         iconBgColor="bg-chart-5/10"
+        variant={variant}
+        index={index}
       />
     );
   }
@@ -70,6 +76,8 @@ export const TimeSavedMetric = ({
       })}
       iconColor="text-success"
       iconBgColor="bg-success/10"
+      variant={variant}
+      index={index}
     />
   );
 };

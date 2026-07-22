@@ -1,13 +1,13 @@
 import { BlockMetadataModel } from '@intelblocks/blocks-framework'
 import {
-    IbId,
     BaseModel,
+    IbId,
 } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
 import {
-    IbIdSchema,
     BaseColumnSchemaPart,
     COLLATION,
+    IbIdSchema,
 } from '../../database/database-common'
 
 export type BlockMetadataSchema = BaseModel<IbId> & BlockMetadataModel

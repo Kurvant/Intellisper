@@ -1,0 +1,42 @@
+---
+title: Research
+description: The agent can fetch public web pages, extract the readable content, and compile a cited answer — with a per-run source budget you control.
+sidebar_label: Research
+sidebar_position: 7
+---
+The agent can research the web to answer a question: it fetches public pages, pulls out the readable
+content, and compiles an answer that cites its sources.
+
+## How research works
+
+<Steps>
+  <Step title="Fetch">
+    The agent fetches a public web page server-side. It extracts the readable text (stripping navigation,
+    scripts, and boilerplate) and condenses it to the parts relevant to your question. Page content is
+    always treated as untrusted data — the agent reads it, it doesn't obey it.
+  </Step>
+  <Step title="Compile">
+    Once it has gathered enough sources, the agent synthesises a single answer that cites the pages it
+    drew from.
+  </Step>
+</Steps>
+
+As sources come in, you'll see **research source** and **citation** events in the run, so you can see
+exactly where the answer is coming from.
+
+## Staying in control of depth
+
+Each research task has a **source budget** — a cap on how many pages the agent will pull for one run.
+When the agent wants to go beyond that budget, it pauses and asks:
+
+- **Expand** — raise the budget and keep gathering.
+- **Compile now** — stop gathering and answer from what it has.
+
+This keeps a research task from ranging further than you intend, and keeps its cost predictable. Research
+usage counts against your plan's research allowance (see [Plans & limits](/agent/plans-and-limits)).
+
+## Safety
+
+Research fetches are protected against server-side request forgery: the agent will only fetch
+public `http`/`https` URLs, and requests to private, internal, or cloud-metadata addresses are rejected.
+Fetches are bounded in time and size, and only HTML or plain-text responses are read.

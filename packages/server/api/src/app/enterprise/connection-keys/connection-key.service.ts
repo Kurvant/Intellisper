@@ -13,10 +13,10 @@
 // access. Despite the historical name `upsert`, each call MINTS A NEW key row (insert-per-call).
 import { generateKeyPairSync } from 'node:crypto'
 import {
-    ibId,
     ConnectionKey,
     ConnectionKeyType,
     Cursor,
+    ibId,
     SeekPage,
     UpsertSigningKeyConnection,
 } from '@intelblocks/shared'

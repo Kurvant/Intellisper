@@ -56,6 +56,7 @@ const QueueMetricsParams = {
     },
     schema: {
         tags: ['worker-machines'],
+        summary: 'Get worker queue metrics',
         response: {
             200: z.object({
                 queues: z.array(z.object({

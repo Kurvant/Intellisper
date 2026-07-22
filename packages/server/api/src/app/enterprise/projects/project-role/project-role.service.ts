@@ -7,11 +7,11 @@
 // edition (they carry a null platform id). Custom roles are created per organization,
 // available subject to entitlement.
 import {
-    IntellisperError,
-    ibId,
     CreateProjectRoleRequestBody,
     DefaultProjectRole,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     PlatformId,
     ProjectRole,

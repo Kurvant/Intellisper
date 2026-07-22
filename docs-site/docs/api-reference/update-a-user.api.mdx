@@ -1,0 +1,70 @@
+---
+id: update-a-user
+title: "Update a user"
+description: "Update user"
+sidebar_label: "Update a user"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVktv4zYQ/ivCNIcWoB/xrbplNz4YRR5wkh5quMBYGtvcSCSXHHnjCvrvxVCyrSTeoNvNJRTnQc433zd0DYybAOkCqkA+wFJBTiHz2rG2BlJ4cjkyJWIFBZ6+VhT4k833kNaQWcNkWJboXKEzlKjRlyChNYRsSyXKiveOIAW7+kIZgwLnrSPPmkL0Y+Qq9PwCe202oIBMVcrlrj4/zv6cgoLZbbdcNgpcgby2vpzbgj6Mvr6Z3YKCm+nNp+kcFNzdT+dXj3fzmIVemLzBYpa/z9HEPwUOPZbEglC6OFPY8UiHLNkghb8X48HvOPjnavDXsp5cNhfQKNBicchbUGCwlFCdd7hqTzmk7CtqlgoCZZXXvI/nodN/kCyXYvIUnDWhxW4yHsu/1027pjVWBSfzzhPUf2/VxWEJW2YX0lH0GbS7Q+s3o9zjmkeT8WQ8uJyMOncFFzqHFH4ZZbZ01pDh0NnCqGPPxyzQ5/BXQCXq4qxlrX3g24jiGev/JdVrOqDZ361jD94ecNwxVVFA0+fjT4T+HJUL/ACQzBMynQe5iio/b5OkVxnrHV0j0w9Xpkvc0JMvfjCw6Yti0aqkpUK/8cc2v0GwB8Wp8FOZSwWY51oUgMV9j4VrLAIpYM3ShjgToRsBJfHWCsOdDdwqfQspjHaXkd5hVOu8kQuR3x3mRCVlH3WETg+1YSoKHRz5YWZLeDtu773Nq0w+koeYCPrD4EH01KrlMBKOwMkp79I9BUr2tvIJOp080z7ZkCEvGCRrb8uEt5RgXmqTZNaEFrkoWsm4IvSxfgUyAuan2T99wdK1RD3I7KSm11Q+Mravqx67tFnbWEUH+ewEUHJts6okw3FUgQLBta1rPBwPxxIuzSgxjrBunnYPFh6erFeA9J6sNy9bhyLTC49cgdpEWbS0bVu9gN2lcCi+kwpSHXm0FTakC6jrFQbhedPI9teKfBzYCnboNa6kuEUNuQ6yzo9U++71fp139P8t+d71uk00ewEHi0q+QMGzEEMkEwW4JczJx9Nbw+f2jMGjhJ8C3z0Loso24irLyPGHvsueQu7vHh5Bwar7lVDaXGI8fpOXDr+1l7Sx5sjluFdDgWZT4UZ825zCPKwE+yPLO06qw6I3S17DUNetx6N9JtM0R1RYvuOAaf4FJBAIxw==
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a user"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/users/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update user
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"status":{"type":"string","enum":["ACTIVE","INACTIVE"]},"platformRole":{"type":"string","enum":["ADMIN","MEMBER","OPERATOR"]},"externalId":{"type":"string"}}}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"#/components/schemas/user","type":"object","properties":{"id":{"type":"string"},"email":{"type":"string"},"firstName":{"type":"string"},"status":{"type":"string","enum":["ACTIVE","INACTIVE"]},"externalId":{"anyOf":[{"type":"string"},{"type":"null"}]},"platformId":{"anyOf":[{"type":"string"},{"type":"null"}]},"platformRole":{"type":"string","enum":["ADMIN","MEMBER","OPERATOR"]},"lastName":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"lastActiveDate":{"anyOf":[{"type":"string"},{"type":"null"}]},"imageUrl":{"anyOf":[{"type":"string"},{"type":"null"}]}},"required":["id","email","firstName","status","platformRole","lastName","created","updated"],"additionalProperties":false,"title":"user"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

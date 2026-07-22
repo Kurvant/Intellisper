@@ -8,7 +8,8 @@ import { createOpenRouter } from '@openrouter/ai-sdk-provider'
 import { EmbeddingModel, ImageModel, LanguageModel } from 'ai'
 import { ProviderOptions } from '@ai-sdk/provider-utils'
 import { httpClient, HttpMethod } from '@intelblocks/blocks-common'
-import { AIProviderName, AzureProviderConfig, BaseAIProviderAuthConfig, BedrockProviderAuthConfig, BedrockProviderConfig, CloudflareGatewayProviderConfig, GetProviderConfigResponse, OpenAICompatibleProviderConfig, splitCloudflareGatewayModelId } from '@intelblocks/shared'
+import { AiKeyMode, AIProviderName, AzureProviderConfig, BaseAIProviderAuthConfig, BedrockProviderAuthConfig, BedrockProviderConfig, CloudflareGatewayProviderConfig, GetProviderConfigResponse, OpenAICompatibleProviderConfig, splitCloudflareGatewayModelId } from '@intelblocks/shared'
+import { type BlockUsageEmitter, meterBlockEmbeddingModel, meterBlockModel } from './ai-usage-meter'
 import { createAiGateway } from 'ai-gateway-provider';
 import { createAnthropic as createAnthropicGateway } from 'ai-gateway-provider/providers/anthropic';
 import { createGoogleGenerativeAI as createGoogleGateway } from 'ai-gateway-provider/providers/google';
@@ -33,22 +34,76 @@ type CreateAIModelParams<IsImage extends boolean = false> = {
     apiUrl: string;
     openaiResponsesModel?: boolean;
     isImage?: IsImage;
+    /**
+     * AI Gateway. When supplied, every model call made through the returned model is metered into the
+     * platform's AI-cost ledger. Optional so a caller that has no run context still works unchanged —
+     * but every real action passes it, because an unmetered AI call is money we cannot see.
+     */
+    usageMeter?: {
+        /** Distinguishes steps within one run so their ledger idempotency keys cannot collide. */
+        stepName: string;
+        emit: BlockUsageEmitter;
+    };
 }
 
 export function createAIModel(params: CreateAIModelParams<false>): Promise<LanguageModel>;
 export function createAIModel(params: CreateAIModelParams<true>): Promise<ImageModel>;
-export async function createAIModel({
-    provider,
-    modelId,
-    engineToken,
-    projectId,
-    flowId,
-    runId,
-    apiUrl,
-    openaiResponsesModel = false,
-    isImage,
-}: CreateAIModelParams<boolean>): Promise<ImageModel | LanguageModel> {
-    const { config, auth, platformId } = await fetchProviderConfig({ provider, engineToken, apiUrl });
+export async function createAIModel(params: CreateAIModelParams<boolean>): Promise<ImageModel | LanguageModel> {
+    // Fetch the provider config exactly ONCE and thread it through. Metering must add no work — a
+    // second config fetch just to learn the platformId would be a real extra HTTP round-trip on the
+    // flow's critical path, which is precisely what this design refuses to do.
+    const providerConfig = await fetchProviderConfig({
+        provider: params.provider,
+        engineToken: params.engineToken,
+        apiUrl: params.apiUrl,
+    });
+
+    const model = await buildAIModel(params, providerConfig);
+
+    // AI Gateway — meter this block's AI call.
+    //
+    // Flow blocks are the largest previously-unmeasured plane: they call vendors DIRECTLY with a
+    // decrypted key, so every token a customer's flow burned was real money that appeared in no cost
+    // record at all.
+    //
+    // Image models are deliberately NOT metered here: they are priced per-image, not per-token, so
+    // recording them in a token ledger would misstate them. That is a separate line item, and inventing
+    // a fake token cost for it would be worse than the honest gap.
+    if (params.isImage === true || params.usageMeter === undefined) {
+        return model;
+    }
+    return meterBlockModel({
+        model: model as LanguageModel,
+        provider: params.provider,
+        modelId: params.modelId,
+        // The flow runs on the PLATFORM's configured provider key (fetched from the API), so this is
+        // our cost against the customer's credits — not the customer's own vendor account.
+        keyMode: AiKeyMode.MANAGED,
+        context: {
+            platformId: providerConfig.platformId,
+            projectId: params.projectId,
+            runId: params.runId,
+            stepName: params.usageMeter.stepName,
+        },
+        emit: params.usageMeter.emit,
+    });
+}
+
+async function buildAIModel(
+    {
+        provider,
+        modelId,
+        engineToken,
+        projectId,
+        flowId,
+        runId,
+        apiUrl,
+        openaiResponsesModel = false,
+        isImage,
+    }: CreateAIModelParams<boolean>,
+    providerConfig: Awaited<ReturnType<typeof fetchProviderConfig>>,
+): Promise<ImageModel | LanguageModel> {
+    const { config, auth, platformId } = providerConfig;
 
     switch (provider) {
         case AIProviderName.OPENAI: {
@@ -237,14 +292,54 @@ type CreateEmbeddingModelParams = {
     provider: AIProviderName
     engineToken: string
     apiUrl: string
+    /**
+     * AI Gateway. When supplied, embeddings are metered into the cost ledger. The RAG tool embeds in
+     * BULK (every document chunk, every query), so this is a real line item that was invisible before.
+     */
+    usageMeter?: {
+        stepName: string
+        projectId: string
+        runId: string
+        emit: BlockUsageEmitter
+    }
 }
 
-export async function createEmbeddingModel({
-    provider,
-    engineToken,
-    apiUrl,
-}: CreateEmbeddingModelParams): Promise<CreateEmbeddingModelResult> {
-    const { config, auth } = await fetchProviderConfig({ provider, engineToken, apiUrl })
+export async function createEmbeddingModel(params: CreateEmbeddingModelParams): Promise<CreateEmbeddingModelResult> {
+    // Fetch the config ONCE — a second round-trip just to learn the platformId would add real latency
+    // to the flow's critical path.
+    const providerConfig = await fetchProviderConfig({
+        provider: params.provider,
+        engineToken: params.engineToken,
+        apiUrl: params.apiUrl,
+    })
+    const result = await buildEmbeddingModel(params, providerConfig)
+
+    if (params.usageMeter === undefined) {
+        return result
+    }
+    return {
+        ...result,
+        model: meterBlockEmbeddingModel({
+            model: result.model,
+            provider: params.provider,
+            modelId: result.embeddingModelId,
+            keyMode: AiKeyMode.MANAGED,
+            context: {
+                platformId: providerConfig.platformId,
+                projectId: params.usageMeter.projectId,
+                runId: params.usageMeter.runId,
+                stepName: params.usageMeter.stepName,
+            },
+            emit: params.usageMeter.emit,
+        }),
+    }
+}
+
+async function buildEmbeddingModel(
+    { provider }: CreateEmbeddingModelParams,
+    providerConfig: Awaited<ReturnType<typeof fetchProviderConfig>>,
+): Promise<CreateEmbeddingModelResult> {
+    const { config, auth } = providerConfig
 
     const embeddingModelId = DEFAULT_EMBEDDING_MODELS[provider]
     if (!embeddingModelId) {

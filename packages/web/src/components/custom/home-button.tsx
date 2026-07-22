@@ -1,4 +1,3 @@
-import { IntellisperClientEventName } from 'ee-embed-sdk';
 import { t } from 'i18next';
 import { ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -12,6 +11,7 @@ import {
 } from '@/components/ui/tooltip';
 import { flagsHooks } from '@/hooks/flags-hooks';
 import { authenticationSession } from '@/lib/authentication-session';
+import { IntellisperClientEventName } from 'ee-embed-sdk';
 
 const HomeButtonWrapper = ({ children }: { children: React.ReactNode }) => {
   const { embedState } = useEmbedding();

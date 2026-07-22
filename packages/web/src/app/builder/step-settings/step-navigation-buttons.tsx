@@ -1,8 +1,4 @@
-import {
-  FlowTriggerType,
-  flowStructureUtil,
-  isNil,
-} from '@intelblocks/shared';
+import { FlowTriggerType, flowStructureUtil, isNil } from '@intelblocks/shared';
 import { t } from 'i18next';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useMemo } from 'react';

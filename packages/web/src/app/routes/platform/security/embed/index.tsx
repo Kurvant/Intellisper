@@ -31,7 +31,10 @@ import { DnsStep } from './steps/dns-step';
 import { HostnameStep } from './steps/hostname-step';
 import { SigningKeysStep } from './steps/signing-keys-step';
 
-const EmbedPage = () => {
+const EmbedPage = ({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   const { data: edition } = flagsHooks.useFlag<IbEdition>(IbFlagId.EDITION);
   const isCloud = edition === IbEdition.CLOUD;
@@ -127,28 +130,32 @@ const EmbedPage = () => {
       )}
     >
       <div className="w-full max-w-4/5 2xl:max-w-6xl mx-auto py-6">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-xl font-medium">{t('Embed Onboarding')}</h1>
-          <div className="text-sm text-muted-foreground">
-            {description}
-            <Button
-              variant="link"
-              size="sm"
-              className="h-auto p-0 mt-0.5 ml-1"
-              asChild
-            >
-              <a
-                href="https://www.activepieces.com/docs/embedding/overview"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t('Read more')}
-                <ExternalLink className="size-3" />
-              </a>
-            </Button>
-          </div>
-        </div>
-        <Separator className="mt-4 mb-12" />
+        {!isOverhaul && (
+          <>
+            <div className="flex flex-col gap-1">
+              <h1 className="text-xl font-medium">{t('Embed Onboarding')}</h1>
+              <div className="text-sm text-muted-foreground">
+                {description}
+                <Button
+                  variant="link"
+                  size="sm"
+                  className="h-auto p-0 mt-0.5 ml-1"
+                  asChild
+                >
+                  <a
+                    href="https://www.activepieces.com/docs/embedding/overview"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t('Read more')}
+                    <ExternalLink className="size-3" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+            <Separator className="mt-4 mb-12" />
+          </>
+        )}
 
         <div className="grid grid-cols-[16rem_1fr] gap-16">
           <Stepper

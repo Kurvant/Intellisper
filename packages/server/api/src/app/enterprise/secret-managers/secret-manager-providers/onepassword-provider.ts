@@ -5,8 +5,8 @@
 // Path grammar (provider-defined): a 1Password secret reference `op://<vault>/<item>/<field>`.
 import { safeHttp } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
     ErrorCode,
+    IntellisperError,
     isNil,
     OnePasswordProviderConfig,
     SecretManagerProviderId,

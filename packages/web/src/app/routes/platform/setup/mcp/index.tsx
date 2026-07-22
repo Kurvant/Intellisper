@@ -11,7 +11,10 @@ import { flagsHooks } from '@/hooks/flags-hooks';
 
 import { platformMcpHooks } from './platform-mcp-hooks';
 
-export default function PlatformMcpPage() {
+export default function PlatformMcpPage({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { data: mcpServer, isLoading } =
     platformMcpHooks.usePlatformMcpServer();
   const { mutate: updateTools, isPending: isToolsUpdating } =
@@ -25,6 +28,7 @@ export default function PlatformMcpPage() {
         description={t(
           'Configure the platform-wide MCP server used by the AI Chat assistant and external MCP clients.',
         )}
+        hideHeader={isOverhaul}
       >
         <div className="flex items-center justify-center py-20">
           <LoadingSpinner />
@@ -49,6 +53,7 @@ export default function PlatformMcpPage() {
       description={t(
         'Configure the platform-wide MCP server used by the AI Chat assistant and external MCP clients.',
       )}
+      hideHeader={isOverhaul}
     >
       <div className="space-y-6">
         {mcpServer && (

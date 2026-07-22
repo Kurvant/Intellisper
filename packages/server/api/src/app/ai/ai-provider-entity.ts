@@ -1,7 +1,7 @@
 import { AIProviderConfig, AIProviderName, BaseModelSchema, Platform } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
 import { z } from 'zod'
-import { IbIdSchema, BaseColumnSchemaPart } from '../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../database/database-common'
 import { EncryptedObject } from '../helper/encryption'
 
 const AIProviderEncrypted = z.object({

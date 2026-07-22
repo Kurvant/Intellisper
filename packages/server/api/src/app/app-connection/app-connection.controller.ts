@@ -1,5 +1,4 @@
-import { IbId,
-    AppConnectionOwners,
+import { AppConnectionOwners,
     AppConnectionScope,
     AppConnectionStatus,
     AppConnectionType,
@@ -7,6 +6,7 @@ import { IbId,
     ApplicationEventName,
     GetOAuth2AuthorizationUrlRequestBody,
     GetOAuth2AuthorizationUrlResponse,
+    IbId,
     ListAppConnectionOwnersRequestQuery,
     ListAppConnectionsRequestQuery,
     Permission,
@@ -179,6 +179,7 @@ const UpsertAppConnectionRequest = {
     schema: {
         tags: ['app-connections'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Upsert an app connection',
         description: 'Upsert an app connection based on the app name',
         body: UpsertAppConnectionRequestBody,
         Response: {
@@ -201,6 +202,7 @@ const UpdateConnectionValueRequest = {
     schema: {
         tags: ['app-connections'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Update an app connection',
         description: 'Update an app connection value',
         body: UpdateConnectionValueRequestBody,
         params: z.object({
@@ -222,6 +224,7 @@ const ReplaceAppConnectionsRequest = {
     schema: {
         tags: ['app-connections'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Replace app connections',
         description: 'Replace app connections',
         body: ReplaceAppConnectionsRequestBody,
         response: {
@@ -244,6 +247,7 @@ const ListAppConnectionsRequest = {
         tags: ['app-connections'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         querystring: ListAppConnectionsRequestQuery,
+        summary: 'List app connections',
         description: 'List app connections',
         response: {
             [StatusCodes.OK]: SeekPage(AppConnectionWithoutSensitiveData),
@@ -264,6 +268,7 @@ const ListAppConnectionOwnersRequest = {
         querystring: ListAppConnectionOwnersRequestQuery,
         tags: ['app-connections'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'List app connection owners',
         description: 'List app connection owners',
         response: {
             [StatusCodes.OK]: SeekPage(AppConnectionOwners),
@@ -285,6 +290,7 @@ const DeleteAppConnectionRequest = {
     schema: {
         tags: ['app-connections'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Delete an app connection',
         description: 'Delete an app connection',
         params: z.object({
             id: IbId,
@@ -304,6 +310,7 @@ const GetOAuth2AuthorizationUrlRequest = {
     schema: {
         tags: ['app-connections'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Get an OAuth2 authorization URL',
         description: 'Get OAuth2 authorization URL',
         body: GetOAuth2AuthorizationUrlRequestBody,
         response: {

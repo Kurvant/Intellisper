@@ -14,6 +14,8 @@ export enum WebsocketClientEvent {
     RESOURCE_UNLOCKED = 'RESOURCE_UNLOCKED',
     PRESENCE_UPDATED = 'PRESENCE_UPDATED',
     CHAT_MESSAGE_CHUNK = 'CHAT_MESSAGE_CHUNK',
+    /** Browser-agent automation: nudge a connected extension that unattended work is ready to claim. */
+    BROWSER_AGENT_WORK_AVAILABLE = 'BROWSER_AGENT_WORK_AVAILABLE',
 }
 
 export enum WebsocketServerEvent {

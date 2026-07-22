@@ -60,7 +60,10 @@ export const tableHooks = {
     });
     return table;
   },
-  useCreateTable: (folderId: string) => {
+  useCreateTable: (
+    folderId: string,
+    variant: 'default' | 'overhaul' = 'default',
+  ) => {
     const projectId = authenticationSession.getProjectId() ?? '';
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -77,9 +80,14 @@ export const tableHooks = {
         queryClient.invalidateQueries({
           queryKey: queryKeys(searchParams, projectId),
         });
-        navigate(
-          `/projects/${projectId}/tables/${table.id}?${NEW_TABLE_QUERY_PARAM}=true`,
-        );
+        // 'overhaul' opens the new /data/tables editor; 'default' (legacy) keeps the old editor.
+        const target =
+          variant === 'overhaul'
+            ? authenticationSession.appendProjectRoutePrefix(
+                `/data/tables/${table.id}`,
+              ) + `?${NEW_TABLE_QUERY_PARAM}=true`
+            : `/projects/${projectId}/tables/${table.id}?${NEW_TABLE_QUERY_PARAM}=true`;
+        navigate(target);
       },
     });
   },

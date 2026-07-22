@@ -8,6 +8,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
 
 export type MetricCardProps = {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -17,6 +18,13 @@ export type MetricCardProps = {
   subtitle?: React.ReactNode;
   iconColor: string;
   iconBgColor: string;
+  /**
+   * 'default' keeps the original solid Card. 'overhaul' renders the same content on a
+   * glassmorphism surface with a soft slide-in — presentation only, every field preserved.
+   */
+  variant?: 'default' | 'overhaul';
+  /** Stagger index for the overhaul slide-in animation. */
+  index?: number;
 };
 
 export const MetricCard = ({
@@ -27,7 +35,50 @@ export const MetricCard = ({
   subtitle,
   iconColor,
   iconBgColor,
+  variant = 'default',
+  index = 0,
 }: MetricCardProps) => {
+  if (variant === 'overhaul') {
+    return (
+      <div
+        className="ov-glass ov-slide-in-up rounded-2xl p-5"
+        style={{ animationDelay: `${Math.min(index, 12) * 40}ms` }}
+      >
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-muted-foreground">
+              {title}
+            </span>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Info className="h-3.5 w-3.5 text-muted-foreground/70 cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                {description}
+              </TooltipContent>
+            </Tooltip>
+            <div
+              className={cn(
+                'size-8 rounded-full flex items-center justify-center shrink-0 ml-auto',
+                iconBgColor,
+              )}
+            >
+              <Icon className={cn('size-4', iconColor)} />
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="text-2xl font-semibold text-foreground">
+              {value}
+            </div>
+            {subtitle && (
+              <div className="text-sm text-muted-foreground">{subtitle}</div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Card className="p-5">
       <div className="flex flex-col gap-3">
@@ -58,7 +109,30 @@ export const MetricCard = ({
   );
 };
 
-export const MetricCardSkeleton = () => {
+export const MetricCardSkeleton = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
+  if (variant === 'overhaul') {
+    return (
+      <div className="ov-glass rounded-2xl p-5">
+        <div className="flex items-start justify-between">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-1.5">
+              <Skeleton className="h-4 w-24" />
+              <Skeleton className="h-3.5 w-3.5 rounded-full" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <Skeleton className="h-8 w-28" />
+              <Skeleton className="h-4 w-36" />
+            </div>
+          </div>
+          <Skeleton className="size-9 rounded-full shrink-0" />
+        </div>
+      </div>
+    );
+  }
   return (
     <Card className="p-5">
       <div className="flex items-start justify-between">

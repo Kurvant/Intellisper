@@ -1,0 +1,68 @@
+---
+id: register-a-knowledge-base-file
+title: "Register a knowledge base file"
+description: "Register a file for knowledge base ingestion"
+sidebar_label: "Register a knowledge base file"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVE1v2zAM/SsCz2qS7ujbtu5QDNiCfpyCHBiLcdTIkirJaQND/32g7LROWgwYsJNl6ZF6fHxUDwmbCNUK9ta9GFINXW0wEqwlKIp10D5pZ6GCO2p0TBQEiq02JLYuiLcYwTFC24ZigUsI9NxRTN+cOkLVQ+1sIpt4id4bXSPj5k+Rc/cQ6x21yKt09AQVuM0T1Qkk+OA8haQp8inffKsmuJiCtg1kCUpHb/D4C1v65DwPjHQgxcWOec6j1vkclkJHWUKkugs6HaFaMXn9k3i5zmvGRu9sHLh9WVzz51y1G9piZ5K4G5Eg/5cU+jMZLsrUivuISmm+As1ykmGLJlLOpeaW0s4pqMC7WG7CtIMK5ofr+bkt5ixcBBYlHCjEokkXDFSwS8nHaj5Hr2faJjJGR09hVrsWLr20DE51Nf+I+5IIWM2T0PeswFDkSe63QvmWD+keI4mj64JAr8WejqIhSwETKbENrhVpRwJVq62onY3OcBeKzJxxQxiYQJbALbh79+2PV2y9oanvTkJf2G1iQ223rvDViUPh9l0KcePqriWbcJwRVnCoYDFbzBYczg1osRjBDqknc3cxbkzqUovJpP3rxI4KJ3pNc29QW+ZTetuPhljB4Rrk5UshYTDFWsKO7VOtoO/55DGYnHn7uaNQZkbCAYPGDSuzWmcJO0JFobhoz32G7wP7qwcmw3DTMakPg5LlKeJrXZNPf8WuJw5f/r5/AAmb8V1qneKYgC/8ZuELVAASXFGzOLDs9WDQNh02jB1ysl+wY1XevDk6SZ4WXNV4hPY4Ydj3A+LB7cnmzJKWUhL/Q+Z36A/09vG7
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Register a knowledge base file"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/knowledge-base/files"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Register a file for knowledge base ingestion
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"fileId":{"type":"string"},"displayName":{"type":"string"}},"required":["fileId","displayName"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"201":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string"}},"required":["id"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

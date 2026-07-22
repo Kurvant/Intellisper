@@ -7,9 +7,9 @@
 // reach it. No secret material is ever returned (provider/model are names only; no connection
 // values, provider keys, or raw auth). Conversation detail access is logged.
 import {
-    IntellisperError,
-    IbId,
     ErrorCode,
+    IbId,
+    IntellisperError,
     isNil,
     PlatformRole,
     Principal,

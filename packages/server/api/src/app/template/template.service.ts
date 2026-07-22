@@ -1,4 +1,4 @@
-import { IntellisperError, ibId, CreateTemplateRequestBody, ErrorCode, FlowVersionTemplate, isNil, ListTemplatesRequestQuery, SeekPage, spreadIfDefined, Template, TemplateStatus, TemplateType, UpdateTemplateRequestBody } from '@intelblocks/shared'
+import { CreateTemplateRequestBody, ErrorCode, FlowVersionTemplate, ibId, IntellisperError, isNil, ListTemplatesRequestQuery, SeekPage, spreadIfDefined, Template, TemplateStatus, TemplateType, UpdateTemplateRequestBody } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { ArrayContains, ArrayOverlap, Equal, IsNull } from 'typeorm'
 import { repoFactory } from '../core/db/repo-factory'
@@ -61,7 +61,7 @@ export const templateService = (log: FastifyBaseLogger) => ({
                 return templateRepo().save(newTemplate)
             }
             case TemplateType.CUSTOM: {
-                return platformTemplateService(log).create({ platformId, name, summary, description, blocks, tags: newTags, blogUrl, metadata, author, categories, flows })
+                return platformTemplateService(log).create({ platformId, name, summary, description, blocks, tags: newTags, blogUrl, metadata: metadata ?? null, author, categories, flows })
             }
         }
     },

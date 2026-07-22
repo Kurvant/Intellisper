@@ -60,9 +60,8 @@ const ApprovalsTabContent = ({
   // The config above lists *preferred* approval blocks; it is not a guarantee that a
   // deployment's catalog contains them. Intersect with the catalog before fetching
   // details, otherwise every absent block issues a request that (correctly) 404s.
-  const { blocks: catalog, isLoading: isLoadingCatalog } = blocksHooks.useBlocks(
-    {},
-  );
+  const { blocks: catalog, isLoading: isLoadingCatalog } =
+    blocksHooks.useBlocks({});
   const availableBlockNames = useMemo(() => {
     if (isNil(catalog)) {
       return [];

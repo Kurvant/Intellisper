@@ -1,4 +1,4 @@
-import { IntellisperError, AnalyticsReportRequest, ErrorCode, LeaderboardRequest, PrincipalType } from '@intelblocks/shared'
+import { AnalyticsReportRequest, ErrorCode, IntellisperError, LeaderboardRequest, PrincipalType } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { securityAccess } from '../core/security/authorization/fastify-security'

@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   IbFlagId,
   ApplicationEventName,
@@ -5,7 +6,6 @@ import {
   CreatePlatformEventDestinationRequestBody,
   isNil,
 } from '@intelblocks/shared';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { t } from 'i18next';
 import { ChevronDown, Sparkles } from 'lucide-react';
 import { useId, useState } from 'react';

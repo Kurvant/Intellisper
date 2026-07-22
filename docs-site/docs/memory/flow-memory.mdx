@@ -1,0 +1,33 @@
+---
+title: Flow memory
+description: Memory scoped to a single flow — shared across the workspace within that one flow, so an automation can remember context between runs.
+sidebar_label: Flow memory
+sidebar_position: 3
+---
+**Flow memory** is knowledge scoped to a single [flow](/flows/building-flows). It's shared across the
+workspace — but only *within that one flow*. It gives an automation a place to remember context between
+runs without mixing that context into your personal or general org memory.
+
+## When to use it
+
+Flow memory is for facts that only make sense in the context of one automation: a running tally, a
+last-seen marker, notes an automation accumulates as it processes work. Keeping this in flow scope means
+it doesn't clutter org memory and isn't confused with team-wide knowledge.
+
+## How it works
+
+Flow steps reach memory through a dedicated **engine memory surface**. From inside a flow, a step can:
+
+- **recall** facts in the flow's scope (or org scope), and
+- **remember** new facts into the flow's scope.
+
+Because a flow runs without a specific user, flow steps can only reach **flow** and **org** memory —
+never any individual's personal memory. And the engine surface is designed to **never break your
+automation**: if memory isn't on your plan, or a lookup fails, the step simply gets an empty result and
+carries on, rather than erroring.
+
+:::note Scope is fixed by who's asking
+The three scopes aren't interchangeable at will — the caller determines what's reachable. An interactive
+surface (the agent, the Copilot) acts as *you* and can use personal + org memory; a flow step acts as the
+*flow* and can use flow + org memory. This is what keeps personal facts out of automations.
+:::

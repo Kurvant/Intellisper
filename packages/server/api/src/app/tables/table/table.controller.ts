@@ -1,4 +1,4 @@
-import { IbId, CountTablesRequest, CreateTableRequest, CreateTableWebhookRequest, ExportTableResponse, GitPushOperationType, ListTablesRequest, Permission, PrincipalType, SeekPage, SERVICE_KEY_SECURITY_OPENAPI, SharedTemplate, Table, UpdateTableRequest } from '@intelblocks/shared'
+import { CountTablesRequest, CreateTableRequest, CreateTableWebhookRequest, ExportTableResponse, GitPushOperationType, IbId, ListTablesRequest, Permission, PrincipalType, SeekPage, SERVICE_KEY_SECURITY_OPENAPI, SharedTemplate, Table, UpdateTableRequest } from '@intelblocks/shared'
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { StatusCodes } from 'http-status-codes'
 import { z } from 'zod'
@@ -149,6 +149,7 @@ const GetTablesRequest = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'List tables',
         description: 'List tables',
         querystring: ListTablesRequest,
         response: {
@@ -166,6 +167,7 @@ const CountTablesRequestOptions = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Count tables',
         description: 'Count tables',
         querystring: CountTablesRequest,
         response: {
@@ -185,6 +187,7 @@ const DeleteRequest = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Delete a table',
         description: 'Delete a table',
         params: z.object({
             id: IbId,
@@ -205,6 +208,7 @@ const GetTableByIdRequest = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Get a table',
         description: 'Get a table by id',
         params: z.object({
             id: IbId,
@@ -225,6 +229,7 @@ const ExportTableRequest = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Export a table',
         description: 'Export a table',
         params: z.object({
             id: z.string(),
@@ -245,6 +250,7 @@ const CreateTableWebhook = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Create a table webhook',
         description: 'Create a table webhook',
         params: z.object({
             id: z.string(),
@@ -263,6 +269,7 @@ const DeleteTableWebhook = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Delete a table webhook',
         description: 'Delete a table webhook',
         params: z.object({
             id: z.string(),
@@ -281,6 +288,7 @@ const UpdateRequest = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Update a table',
         description: 'Update a table',
         params: z.object({
             id: z.string(),
@@ -299,6 +307,7 @@ const ClearTableRequest = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Clear a table',
         description: 'Clear all records from a table',
         params: z.object({
             id: IbId,
@@ -321,6 +330,7 @@ const GetTableTemplateRequestOptions = {
     schema: {
         tags: ['tables'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Export a table as a template',
         description: 'Export table as template',
         params: z.object({
             id: IbId,

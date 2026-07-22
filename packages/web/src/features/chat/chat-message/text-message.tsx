@@ -1,5 +1,5 @@
-import { FileResponseInterface } from '@intelblocks/shared';
 import { javascript } from '@codemirror/lang-javascript';
+import { FileResponseInterface } from '@intelblocks/shared';
 import { githubDark, githubLight } from '@uiw/codemirror-theme-github';
 import ReactCodeMirror, {
   EditorState,

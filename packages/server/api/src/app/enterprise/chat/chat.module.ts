@@ -12,9 +12,9 @@
 // execution plane and its RPC contract (chat-rpc-handlers); this module owns the durable
 // conversation record the client reads and manages.
 import {
-    ibId,
     ChatConversation,
     CreateChatConversationRequest,
+    ibId,
     LATEST_JOB_DATA_SCHEMA_VERSION,
     PersistedChatMessage,
     PrincipalType,
@@ -164,11 +164,12 @@ const chatConversationController: FastifyPluginAsyncZod = async (app) => {
                 jobType: WorkerJobType.EXECUTE_CHAT_AGENT,
                 conversationId: conversation.id,
                 runId,
-                projectId: conversation.projectId,
+                // `Nullable()` reads as `T | null | undefined`; the job contract is `T | null`.
+                projectId: conversation.projectId ?? null,
                 platformId,
                 userId,
                 userMessage: request.body.content,
-                modelName: conversation.modelName,
+                modelName: conversation.modelName ?? null,
                 files: request.body.files,
             },
         }))

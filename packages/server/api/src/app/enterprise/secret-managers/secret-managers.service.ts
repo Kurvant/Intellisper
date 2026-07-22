@@ -20,12 +20,12 @@
 // encrypted at rest, and health/value caches are invalidated on every change. Cached secret
 // values are encrypted in the cache; a successful health check is cached asymmetrically.
 import {
-    IntellisperError,
-    ibId,
     applyFunctionToValues,
     applyFunctionToValuesSync,
     ConnectSecretManagerRequest,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     SecretManagerConnection,
     SecretManagerConnectionScope,

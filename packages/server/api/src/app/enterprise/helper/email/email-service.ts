@@ -26,7 +26,7 @@ import { system } from '../../../helper/system/system'
 import { AppSystemProp } from '../../../helper/system/system-props'
 import { platformService } from '../../../platform/platform.service'
 import { userService } from '../../../user/user-service'
-import { getEmailSender } from './email-sender'
+import { DEFAULT_SENDER_EMAIL, getEmailSender } from './email-sender'
 import {
     EmailBranding,
     EmailTemplateName,
@@ -87,7 +87,7 @@ export const emailService = (log: FastifyBaseLogger) => {
     // to the branding platform name and a system sender address.
     function resolveSender(branding: EmailBranding): { senderName: string, senderEmail: string } {
         const senderName = system.get(AppSystemProp.SMTP_SENDER_NAME) ?? branding.platformName
-        const senderEmail = system.get(AppSystemProp.SMTP_SENDER_EMAIL) ?? 'noreply@activepieces.com'
+        const senderEmail = system.get(AppSystemProp.SMTP_SENDER_EMAIL) ?? DEFAULT_SENDER_EMAIL
         return { senderName, senderEmail }
     }
 

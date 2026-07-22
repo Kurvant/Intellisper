@@ -1,4 +1,4 @@
-import { ibId, ApplicationEvent, isNil, PrincipalType } from '@intelblocks/shared'
+import { ApplicationEvent, ibId, isNil, PrincipalType } from '@intelblocks/shared'
 import { FastifyBaseLogger, FastifyRequest } from 'fastify'
 import { authenticationUtils } from '../authentication/authentication-utils'
 import { userIdentityService } from '../authentication/user-identity/user-identity-service'

@@ -1,0 +1,69 @@
+---
+id: list-projects
+title: "List projects"
+description: "List the workspaces the caller can access within their organization."
+sidebar_label: "List projects"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVE1v2zAM/SsCTxtgJOmOvhVoMRTruqIfpyIHRWZirbKkknTazPB/H+ikabIiWzD0ZMiU3qP43lMHYhcM5QNkSj/RCcO0gArZkc/iU4QSLj2LkRrNc6JHztYhD0tnQ0AyzkZjnUNm8+yl9lGLnkyihY3+l1WUERSQLdkGBUnpOmBXY2Oh7EBWGaEEFvJxAX0BXlmfWqQVFBBto1V8EaRow0UFBRA+tZ6wgnJuA2Nf/DfcPSMdDRnbZoZ0CDL4xsuHNOda4kQfAlV5zsGurnR1HJ4lsgrgBRt+z1MAxrZRw9ydn36HAq7Pb25/XJ1ewrQ/0IMC8B67UIv9VP9wTpFx4Pkymehn33tnOLdtEHOz2QlK0qDUqYISFiiDsaSGEsbLk/HWxAUw0vLVay0FKKEWyVyOxzb7kY+CIXjOSCOXGvjT89eUqtbpwtwOQKD9MrqWvKxudWjrrm3233C1MydleQd3z2hWqSVjszePuDILjEhWsDJzSs0QJ1s1PhqXIqegYg3KKOIMLWkDw3jnaeDyErR08XYNc5Zc22CUIXBQgN5+zT4ZTUYTdUhOLI2NirDRZsj2ztT22u7ApSgY5eMegc2QBF9knIP1Udsa5Ok2Oj7A8kRF3XmO6sSiha6bWcZ7Cn2vv9c2U30rz3YWtr4u4FEl2X8zlja0Sg3q+n8c2L4Kxxx6zf0xe7fJPmbzfnb/fuKgbp9uNqn7bA6Nf832mtI3nqkuyCsRlA/T3eB9Pb+Dvv8Nh88g/w==
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List projects"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/projects"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List the workspaces the caller can access within their organization.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"query","name":"externalId","required":false},{"schema":{"type":"string"},"in":"query","name":"externalUserId","required":false},{"schema":{"type":"number"},"in":"query","name":"limit","required":false},{"schema":{"type":"string"},"in":"query","name":"cursor","required":false},{"schema":{"type":"string"},"in":"query","name":"displayName","required":false},{"schema":{"type":"array","items":{"type":"string","enum":["TEAM","PERSONAL"]}},"in":"query","name":"types","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

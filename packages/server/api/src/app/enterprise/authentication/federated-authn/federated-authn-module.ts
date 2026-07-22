@@ -2,7 +2,7 @@
 // B.4). Public endpoints: start a provider login (returns the consent URL), and claim a
 // session from the returned authorization code. A successful claim that lands on a real
 // platform is recorded as a sign-in for audit.
-import { ApplicationEventName, ClaimTokenRequest, isNil, ThirdPartyAuthnProviderEnum } from '@intelblocks/shared'
+import { ApplicationEventName, ClaimTokenRequest, GoogleIdTokenRequest, isNil, ThirdPartyAuthnProviderEnum } from '@intelblocks/shared'
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { securityAccess } from '../../../core/security/authorization/fastify-security'
@@ -43,6 +43,31 @@ const federatedAuthnController: FastifyPluginAsyncZod = async (app) => {
         }
         return response
     })
+
+    // Extension Google sign-in (implicit / id-token flow via chrome.identity). Accepts a Google
+    // id_token minted for the extension's OWN OAuth client, verifies it against Google's JWKS
+    // (audience = GOOGLE_CLIENT_ID_INTELLISPER), and mints a session. A brand-new cloud user gets an
+    // onboarding token; the extension then creates its browser-agent platform (productScope) exactly
+    // as the email sign-up flow does.
+    app.post('/google-id-token', GoogleIdTokenRouteOptions, async (request) => {
+        const platformId = await platformUtils.getPlatformIdForRequest(request)
+        const response = await federatedAuthnService(request.log).claimExtensionIdToken({
+            idToken: request.body.idToken,
+            platformId: platformId ?? undefined,
+        })
+        if (!isNil(response.platformId)) {
+            applicationEvents(request.log).sendUserEvent({
+                platformId: response.platformId,
+                userId: response.id,
+                projectId: response.projectId ?? undefined,
+                ip: networkUtils.extractClientRealIp(request, system.get(AppSystemProp.CLIENT_REAL_IP_HEADER)),
+            }, {
+                action: ApplicationEventName.USER_SIGNED_UP,
+                data: { source: 'sso' },
+            })
+        }
+        return response
+    })
 }
 
 const LoginRequest = {
@@ -62,5 +87,20 @@ const ClaimRequest = {
     },
     schema: {
         body: ClaimTokenRequest,
+    },
+}
+
+// Rate-limited like the other authn entrypoints — this is a public, unauthenticated login route and
+// must not be a brute-force / abuse surface.
+const GoogleIdTokenRouteOptions = {
+    config: {
+        security: securityAccess.public(),
+        rateLimit: {
+            max: Number.parseInt(system.getOrThrow(AppSystemProp.API_RATE_LIMIT_AUTHN_MAX), 10),
+            timeWindow: system.getOrThrow(AppSystemProp.API_RATE_LIMIT_AUTHN_WINDOW),
+        },
+    },
+    schema: {
+        body: GoogleIdTokenRequest,
     },
 }

@@ -1,6 +1,6 @@
 import { McpOAuthAuthorizationCode } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../../database/database-common'
 
 export const McpOAuthAuthorizationCodeEntity = new EntitySchema<McpOAuthAuthorizationCode>({
     name: 'mcp_oauth_authorization_code',

@@ -14,14 +14,14 @@
 //       (the caller already gates on that) and never throws back into the run.
 import { ibDayjsDuration } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
     Alert,
     AlertChannel,
-    ibId,
     Cursor,
     ErrorCode,
     FailedStep,
     flowStructureUtil,
+    ibId,
+    IntellisperError,
     isNil,
     ProjectType,
     SeekPage,
@@ -168,7 +168,7 @@ export const alertsService = (log: FastifyBaseLogger) => ({
             if (normalizedReceiver !== ownerEmail) {
                 throw new IntellisperError({
                     code: ErrorCode.EXISTING_ALERT_CHANNEL,
-                    params: { message: 'A personal project alert receiver must be the project owner.' },
+                    params: { email: normalizedReceiver },
                 })
             }
         }
@@ -177,7 +177,7 @@ export const alertsService = (log: FastifyBaseLogger) => ({
         if (existing) {
             throw new IntellisperError({
                 code: ErrorCode.EXISTING_ALERT_CHANNEL,
-                params: { message: 'An alert with this receiver already exists for this project.' },
+                params: { email: normalizedReceiver },
             })
         }
 

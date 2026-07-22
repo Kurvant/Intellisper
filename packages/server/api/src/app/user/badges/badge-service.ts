@@ -1,4 +1,4 @@
-import { ibId, ApplicationEvent, BADGES, isNil, WebsocketClientEvent } from '@intelblocks/shared'
+import { ApplicationEvent, BADGES, ibId, isNil, WebsocketClientEvent } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { In } from 'typeorm'
 import { repoFactory } from '../../core/db/repo-factory'

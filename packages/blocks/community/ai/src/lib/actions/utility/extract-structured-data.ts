@@ -5,6 +5,7 @@ import mime from 'mime-types';
 import Ajv from 'ajv';
 import { aiProps } from '../../common/props';
 import { AIProviderName } from '@intelblocks/shared';
+import { withAiUsageMeter } from '../../common/with-usage-meter';
 
 export const extractStructuredData = createAction({
   audience: 'human',
@@ -126,163 +127,166 @@ export const extractStructuredData = createAction({
 		}),
 	},
 	async run(context) {
-		const provider = context.propsValue.provider;
-		const modelId = context.propsValue.model;
-		const text = context.propsValue.text;
-		const files = (context.propsValue.files as Array<{ file: IbFile }>) ?? [];
-		const prompt = context.propsValue.prompt;
-		const schema = context.propsValue.schema;
-		const maxOutputTokens = context.propsValue.maxOutputTokens;
+		return withAiUsageMeter(context, 'extract-structured-data', async ({ usageMeter }) => {
+			const provider = context.propsValue.provider;
+			const modelId = context.propsValue.model;
+			const text = context.propsValue.text;
+			const files = (context.propsValue.files as Array<{ file: IbFile }>) ?? [];
+			const prompt = context.propsValue.prompt;
+			const schema = context.propsValue.schema;
+			const maxOutputTokens = context.propsValue.maxOutputTokens;
 
-		if (!text && !files.length) {
-			throw new Error('Please provide text or image/PDF to extract data from.');
-		}
-
-		const model = await createAIModel({
-			provider: provider as AIProviderName,
-			modelId,
-			engineToken: context.server.token,
-			apiUrl: context.server.apiUrl,
-			projectId: context.project.id,
-			flowId: context.flows.current.id,
-			runId: context.run.id,
-		});
-
-		let schemaDefinition: any;
-		// Track sanitized-to-original name mapping to restore output keys.
-		const sanitizedNameMap: Record<string, string> = {};
-
-		if (context.propsValue.mode === 'advanced') {
-			const ajv = new Ajv();
-			const isValidSchema = ajv.validateSchema(schema['fields']);
-
-			if (!isValidSchema) {
-				throw new Error(
-					JSON.stringify({
-						message: 'Invalid JSON schema',
-						errors: ajv.errors,
-					}),
-				);
+			if (!text && !files.length) {
+				throw new Error('Please provide text or image/PDF to extract data from.');
 			}
 
-			schemaDefinition = jsonSchema(schema['fields'] as any);
-		} else {
-			const fields = schema['fields'] as Array<{
-				name: string;
-				description?: string;
-				type: string;
-				isRequired: boolean;
-			}>;
+			const model = await createAIModel({
+				provider: provider as AIProviderName,
+				modelId,
+				engineToken: context.server.token,
+				apiUrl: context.server.apiUrl,
+				projectId: context.project.id,
+				flowId: context.flows.current.id,
+				runId: context.run.id,
+				usageMeter,
+			});
 
-			const properties: Record<string, any> = {};
-			const required: string[] = [];
+			let schemaDefinition: any;
+			// Track sanitized-to-original name mapping to restore output keys.
+			const sanitizedNameMap: Record<string, string> = {};
 
-			fields.forEach((field) => {
-				const sanitizedFieldName = field.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
-				sanitizedNameMap[sanitizedFieldName] = field.name;
+			if (context.propsValue.mode === 'advanced') {
+				const ajv = new Ajv();
+				const isValidSchema = ajv.validateSchema(schema['fields']);
 
-				properties[sanitizedFieldName] = {
-					type: field.type,
-					description: field.description,
+				if (!isValidSchema) {
+					throw new Error(
+						JSON.stringify({
+							message: 'Invalid JSON schema',
+							errors: ajv.errors,
+						}),
+					);
+				}
+
+				schemaDefinition = jsonSchema(schema['fields'] as any);
+			} else {
+				const fields = schema['fields'] as Array<{
+					name: string;
+					description?: string;
+					type: string;
+					isRequired: boolean;
+				}>;
+
+				const properties: Record<string, any> = {};
+				const required: string[] = [];
+
+				fields.forEach((field) => {
+					const sanitizedFieldName = field.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
+					sanitizedNameMap[sanitizedFieldName] = field.name;
+
+					properties[sanitizedFieldName] = {
+						type: field.type,
+						description: field.description,
+					};
+
+					if (field.isRequired) {
+						required.push(sanitizedFieldName);
+					}
+				});
+
+				const jsonSchemaObject = {
+					type: 'object' as const,
+					properties,
+					required,
 				};
 
-				if (field.isRequired) {
-					required.push(sanitizedFieldName);
-				}
-			});
-
-			const jsonSchemaObject = {
-				type: 'object' as const,
-				properties,
-				required,
-			};
-
-			schemaDefinition = jsonSchema(jsonSchemaObject);
-		}
-
-		const extractionTool = tool({
-			description: 'Extract structured data from the provided content',
-			inputSchema: schemaDefinition,
-			execute: async (data) => {
-				return data;
-			},
-		});
-
-		const messages: Array<ModelMessage> = [];
-
-		const contentParts: UserModelMessage['content'] = [];
-
-		let textContent = prompt || 'Extract the following data from the provided data.';
-		if (text) {
-			textContent += `\n\nText to analyze:\n${text}`;
-		}
-
-		contentParts.push({
-			type: 'text',
-			text: textContent,
-		});
-
-		if (files.length > 0) {
-			for (const fileWrapper of files) {
-				const file = fileWrapper.file;
-				if (!file) {
-					continue;
-				}
-				const fileType = file.extension ? mime.lookup(file.extension) : 'image/jpeg';
-
-				if (fileType && fileType.startsWith('image') && file.base64) {
-					contentParts.push({
-						type: 'image',
-						image: `data:${fileType};base64,${file.base64}`,
-					});
-				} else if (fileType && fileType.startsWith('application/pdf') && file.base64) {
-					contentParts.push({
-						type: 'file',
-						data: `data:${fileType};base64,${file.base64}`,
-						mediaType: fileType,
-						filename: file.filename,
-					});
-				}
+				schemaDefinition = jsonSchema(jsonSchemaObject);
 			}
-		}
 
-		messages.push({
-			role: 'user',
-			content: contentParts,
-		});
-
-		try {
-			const result = await generateText({
-				model,
-				maxOutputTokens,
-				tools: {
-					extractData: extractionTool,
+			const extractionTool = tool({
+				description: 'Extract structured data from the provided content',
+				inputSchema: schemaDefinition,
+				execute: async (data) => {
+					return data;
 				},
-				toolChoice: 'required',
-				messages,
 			});
 
-			const toolCalls = result.toolCalls;
-			if (!toolCalls || toolCalls.length === 0) {
-				throw new Error('No structured data could be extracted from the input.');
+			const messages: Array<ModelMessage> = [];
+
+			const contentParts: UserModelMessage['content'] = [];
+
+			let textContent = prompt || 'Extract the following data from the provided data.';
+			if (text) {
+				textContent += `\n\nText to analyze:\n${text}`;
 			}
 
-			const extractedData = toolCalls[0].input;
+			contentParts.push({
+				type: 'text',
+				text: textContent,
+			});
 
-			if (Object.keys(sanitizedNameMap).length > 0 && extractedData && typeof extractedData === 'object') {
-				const restoredData: Record<string, unknown> = {};
-				for (const [key, value] of Object.entries(extractedData)) {
-					const originalName = sanitizedNameMap[key] ?? key;
-					restoredData[originalName] = value;
+			if (files.length > 0) {
+				for (const fileWrapper of files) {
+					const file = fileWrapper.file;
+					if (!file) {
+						continue;
+					}
+					const fileType = file.extension ? mime.lookup(file.extension) : 'image/jpeg';
+
+					if (fileType && fileType.startsWith('image') && file.base64) {
+						contentParts.push({
+							type: 'image',
+							image: `data:${fileType};base64,${file.base64}`,
+						});
+					} else if (fileType && fileType.startsWith('application/pdf') && file.base64) {
+						contentParts.push({
+							type: 'file',
+							data: `data:${fileType};base64,${file.base64}`,
+							mediaType: fileType,
+							filename: file.filename,
+						});
+					}
 				}
-				return restoredData;
 			}
 
-			return extractedData;
+			messages.push({
+				role: 'user',
+				content: contentParts,
+			});
 
-		} catch (error) {
-			throw new Error(`Failed to extract structured data: ${error instanceof Error ? error.message : 'Unknown error'}`);
-		}
+			try {
+				const result = await generateText({
+					model,
+					maxOutputTokens,
+					tools: {
+						extractData: extractionTool,
+					},
+					toolChoice: 'required',
+					messages,
+				});
+
+				const toolCalls = result.toolCalls;
+				if (!toolCalls || toolCalls.length === 0) {
+					throw new Error('No structured data could be extracted from the input.');
+				}
+
+				const extractedData = toolCalls[0].input;
+
+				if (Object.keys(sanitizedNameMap).length > 0 && extractedData && typeof extractedData === 'object') {
+					const restoredData: Record<string, unknown> = {};
+					for (const [key, value] of Object.entries(extractedData)) {
+						const originalName = sanitizedNameMap[key] ?? key;
+						restoredData[originalName] = value;
+					}
+					return restoredData;
+				}
+
+				return extractedData;
+
+			} catch (error) {
+				throw new Error(`Failed to extract structured data: ${error instanceof Error ? error.message : 'Unknown error'}`);
+			}
+		});
 	},
 });
 

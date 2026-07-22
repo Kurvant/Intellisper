@@ -26,8 +26,12 @@ export class RemoveOpenRounterKeysFromPlatformPlan1766094015801 implements Migra
             `, [
                 ibId(),
                 plan.platformId,
-                AIProviderName.ACTIVEPIECES,
-                'Activepieces',
+                // The managed-provider row this migration CREATES must carry the name the live
+                // resolver looks rows up by (`aiProviderService` matches on INTELLISPER). Writing
+                // the pre-rebrand name here produced a row nothing could ever find, silently losing
+                // the platform's OpenRouter key.
+                AIProviderName.INTELLISPER,
+                'Intellisper',
                 encryptedConfig,
             ])
         }

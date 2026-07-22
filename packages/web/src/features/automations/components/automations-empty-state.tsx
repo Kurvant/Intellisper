@@ -196,13 +196,26 @@ const TemplateCardSkeleton = () => {
 
 type AutomationsEmptyStateProps = {
   onRefresh: () => void;
+  /**
+   * Which shell this start page lives in. 'overhaul' routes templates to the new Explore surface
+   * (/build/explore + /build/explore/:id) and opens created tables in the /data/tables editor;
+   * 'default' (legacy) keeps the old /templates + /projects/:id/tables targets. Defaults to legacy
+   * so the legacy AutomationsPage is unaffected.
+   */
+  variant?: 'default' | 'overhaul';
 };
 
 export const AutomationsEmptyState = ({
   onRefresh,
+  variant = 'default',
 }: AutomationsEmptyStateProps) => {
   const navigate = useNavigate();
   const { embedState } = useEmbedding();
+  const isOverhaul = variant === 'overhaul';
+  // Overhaul templates live under /build/explore; legacy under /templates.
+  const templatesListRoute = isOverhaul ? '/build/explore' : '/templates';
+  const templateDetailRoute = (templateId: string) =>
+    isOverhaul ? `/build/explore/${templateId}` : `/templates/${templateId}`;
   const [isImportTableDialogOpen, setIsImportTableDialogOpen] = useState(false);
   const [isTemplatesBrowseDialogOpen, setIsTemplatesBrowseDialogOpen] =
     useState(false);
@@ -227,14 +240,14 @@ export const AutomationsEmptyState = ({
     flowHooks.useStartFromScratch(UncategorizedFolderId);
 
   const { mutate: createTable, isPending: isCreateTablePending } =
-    tableHooks.useCreateTable(UncategorizedFolderId);
+    tableHooks.useCreateTable(UncategorizedFolderId, variant);
 
   const handleTemplateSelect = (template: Template) => {
     if (embedState.isEmbedded) {
       setSelectedTemplate(template);
       setUseTemplateDialogOpen(true);
     } else {
-      navigate(`/templates/${template.id}`);
+      navigate(templateDetailRoute(template.id));
     }
   };
 
@@ -242,7 +255,7 @@ export const AutomationsEmptyState = ({
     if (embedState.isEmbedded) {
       setIsTemplatesBrowseDialogOpen(true);
     } else {
-      navigate('/templates');
+      navigate(templatesListRoute);
     }
   };
 
@@ -301,7 +314,7 @@ export const AutomationsEmptyState = ({
                 if (embedState.isEmbedded) {
                   setIsTemplatesBrowseDialogOpen(true);
                 } else {
-                  navigate('/templates');
+                  navigate(templatesListRoute);
                 }
               }}
               hasPermission={userHasPermissionToWriteFlow}
@@ -373,6 +386,7 @@ export const AutomationsEmptyState = ({
           open={isImportTableDialogOpen}
           setIsOpen={setIsImportTableDialogOpen}
           showTrigger={false}
+          variant={variant}
         />
       )}
       <TemplatesBrowseDialog

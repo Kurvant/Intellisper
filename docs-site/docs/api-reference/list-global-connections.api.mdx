@@ -1,0 +1,69 @@
+---
+id: list-global-connections
+title: "List global connections"
+description: "List the organization's shared connections (administrator-only)."
+sidebar_label: "List global connections"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVE1v2zAM/SsCL2sBNUl39K1osyJbv+CkuwQ5KDYTC5UlV6KCeYb/+0AnWZOtLlqgJ9sS/fj4yMcGSK0DJHNYG7dU5ixz1mJG2tkACwk5hszrir8hgRsdSFCBwvm1svq34vMvQYRCeczFwb/iROWltjqQV+T8mbOmPh2AhEp5VSKh56QNhKzAUkHSANUVQgKBvLZraCVozvgc0dcgwaqSb7Pog/MgweNz1B5zSFbKBGxlP5QEtLHkEh/S++/jyxlIeLi5mH27T29h0ZMoZK7Cj+XpQVoalz3d8ftnoOU6VEbVH8BT3isG0IRleEudi8vZ5OcYJNxOptPJ3TVIGKfpfQqLtk8kUhTDEQ/y8XUaNpZL9H1lGV1qeqWgBR+FytmAHfevoxE/jqfyClcqGhLpLhKYb4lUuBwSWCN1Y0cFJDDcnA9fGXQJAf1mP5PRG0igIKpCMhyqSg+0JTRGhwr9IHMl/OuLB+/y2GGJaQcEzDxgFr2mespabPmrSv/A+kAWzvIf3GNAUbvohaq0eMJarNGiV4S5WHlXdg7s7MWOC87wKHSCd/OGyjOBTumV63JpMnw1eSlDXLkslmipszBI4Oq32UeD0WDEjapcoFJZRti1qfP/Vj9xrN9RAQ1kzhJa+pyVsZOK8BcNK6O0ZXJdk5pdX+ewOQfZs8IKF4hDmmapAj5607Z8vJ1A7neug1qav0Mn4Ylb9LJrNspEJgA82D3B+33xntjDjfCe+GPPv/1Hbx9O0p21TkWfpLtK9qZ+D7W9b19iF/zhNQdDMl8cOvF6PIO2/QM+sTDe
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List global connections"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/global-connections"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List the organization's shared connections (administrator-only).
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"query","name":"cursor","required":false},{"schema":{"type":"string","enum":["PROJECT","PLATFORM"]},"in":"query","name":"scope","required":false},{"schema":{"type":"string"},"in":"query","name":"blockName","required":false},{"schema":{"type":"string"},"in":"query","name":"displayName","required":false},{"schema":{"type":"array","items":{"type":"string","enum":["ACTIVE","MISSING","ERROR"]}},"in":"query","name":"status","required":true},{"schema":{"type":"number"},"in":"query","name":"limit","required":false}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

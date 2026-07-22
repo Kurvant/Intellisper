@@ -1,0 +1,45 @@
+---
+title: Settings
+description: Your three personal memory controls — auto-recall, auto-capture, and your admin-visibility opt-in — and what each one does.
+sidebar_label: Settings
+sidebar_position: 2
+---
+Memory has three per-user settings. They're **yours** — each member controls their own, and an admin
+cannot change them on your behalf.
+
+## Auto-recall
+
+**Use my memory to personalise answers.** When on, relevant facts are recalled and given to the agent and
+the Copilot at the start of a task, so they begin with your context. When off, they answer without
+drawing on your memory.
+
+Auto-recall is **on by default**.
+
+## Auto-capture
+
+**Let the agent save facts it learns.** When on, the agent can save durable facts as it works — your
+preferences, recurring details — so it doesn't have to relearn them next time. When off, the agent won't
+save facts on its own initiative (you can still add facts by hand).
+
+Auto-capture is **on by default**.
+
+:::note Auto-capture is for the agent's own saving
+This setting governs the agent saving facts *for you* as it works. Flow steps that write to org or flow
+memory aren't affected by it — they run without a specific user and follow the flow's own logic.
+:::
+
+## Admin-visibility opt-in
+
+**Opt in to admin visibility of my shared facts.** This is condition two of the
+[three-condition sharing gate](/memory/privacy-and-sharing). Turning it on means that *if* your admin has
+unlocked workspace sharing *and* you've marked specific facts as shared, those facts become visible to an
+admin. Leave it off and none of your personal facts are ever visible to anyone but you.
+
+This opt-in is **off by default**, and only you can turn it on — an admin can never opt you in.
+
+## Per-fact sharing
+
+Separately from the opt-in above, each personal fact carries its own **shared / private** mark, which you
+set per fact. This is the third condition of the gate. A fact is only ever visible to an admin when it's
+marked shared *and* you're opted in *and* workspace sharing is unlocked — see
+[Privacy & sharing](/memory/privacy-and-sharing).

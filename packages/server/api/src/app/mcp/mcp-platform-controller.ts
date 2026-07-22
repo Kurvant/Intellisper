@@ -30,6 +30,7 @@ const GetPlatformMcpRoute = {
     },
     schema: {
         tags: ['mcp'],
+        summary: 'Get the platform MCP server',
         description: 'Get the platform MCP server configuration',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },
@@ -41,6 +42,7 @@ const UpdatePlatformMcpRoute = {
     },
     schema: {
         tags: ['mcp'],
+        summary: 'Update the platform MCP server',
         description: 'Update the platform MCP server configuration',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         body: UpdateMcpServerRequest,
@@ -53,6 +55,7 @@ const RotatePlatformTokenRoute = {
     },
     schema: {
         tags: ['mcp'],
+        summary: 'Rotate the platform MCP server token',
         description: 'Rotate the platform MCP server token',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },

@@ -1,16 +1,17 @@
 import { ibVersionUtil } from '@intelblocks/server-utils'
 import {
-    IbEdition,
+    BlockPackage,
     ExecutionType,
     ExecutioOutputFile,
     FileCompression,
     FileType,
     FlowOperationType,
     FlowStatus,
+    IbEdition,
     isFlowRunStateTerminal,
     isNil,
     logSerializer,
-    BlockPackage,
+    ReportAiUsageBatchRequest,
     RunInternalError,
     RunInternalErrorSource,
     StreamStepProgress,
@@ -20,6 +21,7 @@ import {
     WorkerToApiContract,
 } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
+import { aiUsageSink } from '../../ai-gateway/ai-usage-sink'
 import { websocketService } from '../../core/websockets.service'
 import { distributedStore } from '../../database/redis-connections'
 import { chatRpcHandlers } from '../../enterprise/chat/chat-rpc-handlers'
@@ -275,6 +277,27 @@ export function createHandlers(log: FastifyBaseLogger, workerGroupId?: string): 
 
         async executeChatTool(input) {
             return chatRpcHandlers(log).executeChatTool(input)
+        },
+
+        /**
+         * AI Gateway — ingest AI spend incurred outside the API process (Studio chat in the worker;
+         * AI blocks in the engine, relayed by the worker).
+         *
+         * The payload is VALIDATED here, not trusted. The WORKER principal is unscoped — its token
+         * carries no platform or project — so every call must be self-describing, and this is the
+         * boundary where that claim gets checked. A malformed batch is dropped and logged rather than
+         * being allowed to write junk into the cost record.
+         *
+         * The rows go to the async sink and this returns IMMEDIATELY: no DB write happens on the RPC's
+         * ack path, so metering can never slow down (or fail) a flow run or a chat turn.
+         */
+        async reportAiUsage(input) {
+            const parsed = ReportAiUsageBatchRequest.safeParse(input)
+            if (!parsed.success) {
+                log.warn({ err: parsed.error.message }, '[workerRpc#reportAiUsage] rejected a malformed AI-usage batch')
+                return
+            }
+            aiUsageSink(log).recordBatch(parsed.data.calls)
         },
     }
 }

@@ -1,0 +1,68 @@
+---
+title: Get started with the agent
+description: Install the browser extension, connect it to your workspace, and run your first agent task.
+sidebar_label: Get started
+sidebar_position: 2
+---
+The agent runs through a Chrome extension connected to your Intellisper workspace. Once it's installed
+and your browser is connected, you can start giving it tasks.
+
+<Info>
+**You'll need**
+
+An Intellisper **Cloud** or **Enterprise** workspace with the agent included on your plan. If the agent
+isn't on your plan yet, you'll see an upgrade prompt when you open it — see [Plans & limits](/agent/plans-and-limits).
+</Info>
+
+<Steps>
+  <Step title="Install the browser extension">
+    Add the Intellisper Agent extension to Chrome and sign in with your workspace account. The extension
+    is what performs on-page actions — clicking, typing, navigating — in your live browser session.
+  </Step>
+  <Step title="Connect your browser">
+    When the extension is signed in and open, your browser registers as **connected**. The agent can
+    only act while your browser is connected: on-page actions happen in your live session, so if the
+    extension is closed, any pending work waits until you reconnect.
+  </Step>
+  <Step title="Describe a task">
+    Open the agent and type what you want in plain language — for example, *"Summarise this page,"* or
+    *"Find the contact email on this site and save it."* The agent starts a **run** and streams its
+    progress back to you.
+  </Step>
+  <Step title="Watch and approve">
+    Reading and simple interactions happen automatically. When the agent wants to do something
+    consequential — like submitting a form — it **pauses and asks you to approve** before proceeding.
+    Approve or reject, and the run continues.
+  </Step>
+</Steps>
+
+## Your first task
+
+A good first task is something read-only, so you can see the agent work without any approvals:
+
+> *"Summarise this page in three bullet points."*
+
+The agent reads the current page and streams back a summary. Because reading is a **safe** action,
+nothing needs your approval — you'll just see the result appear.
+
+Then try something with an action in it:
+
+> *"Find the newsletter signup on this page and fill in my email, but don't submit it."*
+
+Here the agent will **type** into the field (a reversible action, done automatically) and stop before
+**submitting** (a consequential action that needs your approval).
+
+## What happens behind the scenes
+
+Every task you give the agent becomes a **run** — a durable record of the conversation and every action
+taken. Runs are streamed live, but they're also saved, so:
+
+- You can close the tab and the run resumes where it left off.
+- You can review any past run under [My Agent](/agent/monitoring).
+- Admins can see all runs across the workspace under [Agent Activity](/agent/monitoring#agent-activity).
+
+Next, learn how a turn works and how the approval model keeps you in control.
+
+<Card title="Chat & runs" href="/agent/chat-and-runs">
+  The turn loop, streaming, and the approval model in detail.
+</Card>

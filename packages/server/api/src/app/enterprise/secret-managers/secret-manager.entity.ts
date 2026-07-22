@@ -5,7 +5,7 @@
 // workspaces that may use it.
 import { Platform, SecretManagerConnectionScope, SecretManagerProviderId } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../database/database-common'
 import { EncryptedObject } from '../../helper/encryption'
 
 export type SecretManagerSchema = {

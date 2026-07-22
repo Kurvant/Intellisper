@@ -1,7 +1,7 @@
 import {
-    IntellisperError,
     assertNotNullOrUndefined,
     ErrorCode,
+    IntellisperError,
     InvitationStatus,
     InvitationType,
     isNil,
@@ -192,6 +192,7 @@ const ListUserInvitationsRequestParams = {
     },
     schema: {
         tags: ['user-invitations'],
+        summary: 'List user invitations',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         querystring: ListUserInvitationsRequest,
         response: {
@@ -217,6 +218,7 @@ const DeleteInvitationRequestParams = {
     },
     schema: {
         tags: ['user-invitations'],
+        summary: 'Delete a user invitation',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         params: z.object({
             id: z.string(),
@@ -235,6 +237,7 @@ const UpsertUserInvitationRequestParams = {
     },
     schema: {
         body: SendUserInvitationRequest,
+        summary: 'Send a user invitation',
         description: 'Send a user invitation to a user. If the user already has an invitation, the invitation will be updated.',
         tags: ['user-invitations'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],

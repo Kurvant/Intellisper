@@ -1,5 +1,4 @@
-import { IbId, ApplicationEventName,
-    CountFlowsRequest,
+import { ApplicationEventName, CountFlowsRequest,
     CreateFlowRequest,
     FlowOperationRequest,
     FlowOperationType,
@@ -9,6 +8,7 @@ import { IbId, ApplicationEventName,
     GetFlowQueryParamsRequest,
     GetFlowTemplateRequestQuery,
     GitPushOperationType,
+    IbId,
     ListFlowsRequest,
     Permission,
     PlatformUsageMetric,
@@ -67,6 +67,7 @@ export const flowController: FastifyPluginAsyncZod = async (app) => {
         },
         schema: {
             tags: ['flows'],
+            summary: 'Update a flow',
             description: 'Apply an operation to a flow',
             security: [SERVICE_KEY_SECURITY_OPENAPI],
             body: FlowOperationRequest,
@@ -275,6 +276,7 @@ const CreateFlowRequestOptions = {
     },
     schema: {
         tags: ['flows'],
+        summary: 'Create a flow',
         description: 'Create a flow',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         body: CreateFlowRequest,
@@ -295,6 +297,7 @@ const ListFlowsRequestOptions = {
     },
     schema: {
         tags: ['flows'],
+        summary: 'List flows',
         description: 'List flows',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         querystring: ListFlowsRequest,
@@ -329,6 +332,7 @@ const GetFlowTemplateRequestOptions = {
     schema: {
         tags: ['flows'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Export a flow as a template',
         description: 'Export flow as template',
         params: z.object({
             id: IbId,
@@ -352,6 +356,7 @@ const GetFlowRequestOptions = {
     schema: {
         tags: ['flows'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Get a flow',
         description: 'Get a flow by id',
         params: z.object({
             id: IbId,
@@ -375,6 +380,7 @@ const DeleteFlowRequestOptions = {
     schema: {
         tags: ['flows'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Delete a flow',
         description: 'Delete a flow',
         params: z.object({
             id: IbId,

@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { IbMultipartFile } from '../../../core/common'
 import { OptionalArrayFromQuery, OptionalBooleanFromQuery } from '../../../core/common/base-model'
 import { IbEdition } from '../../../core/flag/flag'
-import { PackageType, BlockCategory } from '../piece'
+import { BlockCategory, PackageType } from '../piece'
 
 export const EXACT_VERSION_PATTERN = '^[0-9]+\\.[0-9]+\\.[0-9]+$'
 export const EXACT_VERSION_REGEX = new RegExp(EXACT_VERSION_PATTERN)

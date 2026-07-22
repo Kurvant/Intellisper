@@ -79,7 +79,14 @@ function createChatModel({ provider, auth, config, modelId }: {
         case AIProviderName.INTELLISPER:
         case AIProviderName.OPENROUTER: {
             const { apiKey } = auth as BaseAIProviderAuthConfig
-            return createOpenRouter({ apiKey }).chat(modelId) as LanguageModel
+            // `usage: { include: true }` is passed as a MODEL SETTING, not via providerOptions — this
+            // is load-bearing. On the STREAMING path the OpenRouter provider gates
+            // `stream_options.include_usage` on `this.settings.usage?.include`; a providerOptions value
+            // does NOT turn it on. Studio chat is entirely streaming, so without this the response
+            // carries no usage frame at all and every chat turn would be recorded at zero cost.
+            // With it, OpenRouter also returns its OWN USD `cost`, which the AI Gateway takes as the
+            // authoritative figure (no price-table estimate needed for this path).
+            return createOpenRouter({ apiKey }).chat(modelId, { usage: { include: true } }) as LanguageModel
         }
         default: {
             const exhaustiveCheck: never = provider

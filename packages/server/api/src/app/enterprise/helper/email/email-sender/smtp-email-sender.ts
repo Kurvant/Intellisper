@@ -4,10 +4,10 @@
 // counts as configured only when host, port, username, AND password are all present. A send
 // under an unconfigured transport is a safe no-op that never throws.
 import {
-    IntellisperError,
+    ErrorCode,
     IbEdition,
     IbEnvironment,
-    ErrorCode,
+    IntellisperError,
     isNil,
 } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
@@ -50,7 +50,7 @@ function createTransport(settings: SmtpSettings): Transporter {
 }
 
 export const smtpEmailSender = (log: FastifyBaseLogger): EmailSender => ({
-    isSmtpConfigured(): boolean {
+    isConfigured(): boolean {
         return !isNil(resolveSmtpSettings())
     },
 

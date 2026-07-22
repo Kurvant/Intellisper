@@ -1,0 +1,68 @@
+---
+id: create-a-project-release
+title: "Create a project release"
+description: "Create a project release (a versioned snapshot of the project's state)."
+sidebar_label: "Create a project release"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVctu2zAQ/BViL20BxXZ61K1x0sJNAAdOcjJ0WEtriwlFKiTlRBD078VSit8tgiKn+GKbHA13R8PZBjyuHMRzKK15pNSfWVKEjhwkEWTkUitLL42GGMaW0JNA0UNFDxVfUazJOmk0ZcJpLF1uvDBL4XN6A39xwnn09G0AEVh6rsj5C5PVEDeQGu1Je/6JZalkinzi8NHxsQ24NKcC+ZfRNF1CPG/A1yVBDGbB3BBx9SVZL8kxrtvdoJy3Uq8gAtJVwb3Opjc3Fz/G15C0EWgsToDbg+4bQF3vH75BblZ0pRS0TOpIUeop+6nMi5tk7iQBWos1RCA9Fe5ECSeZez0n2cma+91Z92ZOgtpOf2kpYy3Cbq/CLvsJrmSnoP9U/nY2/X01vv98wnu0K/K3/8C8W/dDqg+Q/dfk00n+TjmTNmnbDuxKo12n1/fRiL/28+2SllgpL2Y9MpxRkM9NBjGUxgXd0ecQw3B9PjxKTJbCchKGxiurIIbc+9LFwyGWciC1J6WkK8kOUlPAYcDeWpNVKf8Rd4EI2oQ508pKX99xDHblYymvqd4RhU85ontwJGpTWYGlFE9UixVpsugpE0tripDOmBVSi9RoZxQLF7KWGReElgtoI+Acnm0T++oVi1Lt2mgTp28G2xpwv6LN8rFl5m+byd5r3z5ynGw79pV6aUJB0nNlMNkqLS5NWhWkfRgqEEE/qiCG0WA0GIXUNM4XGJzfN/C3WXfY0s7w+sD52Ovq6dUPS4VSc5HBT01vwDmsz7ei7A3tnI0az6FpFujowaq25eXnimwN8TyJYI1W4oKFmvMtywkzssGzT+wqGHctnd13d2qNqgpX+HA2szs39+N2encPESz6mV6YjJ+x+MLzHl8gBojABNmCh8NaAwr1qsIVYztO/vwBOGL2qg==
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create a project release"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/project-releases"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a project release (a versioned snapshot of the project's state).
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"oneOf":[{"type":"object","properties":{"type":{"type":"string","enum":["ROLLBACK"]},"name":{"type":"string"},"description":{"anyOf":[{"type":"string"},{"type":"null"}]},"selectedFlowsIds":{"anyOf":[{"type":"array","items":{"type":"string"}},{"type":"null"}]},"projectId":{"type":"string"},"projectReleaseId":{"type":"string"}},"required":["type","name","projectId","projectReleaseId"]},{"type":"object","properties":{"type":{"type":"string","enum":["PROJECT"]},"name":{"type":"string"},"description":{"anyOf":[{"type":"string"},{"type":"null"}]},"selectedFlowsIds":{"anyOf":[{"type":"array","items":{"type":"string"}},{"type":"null"}]},"projectId":{"type":"string"},"targetProjectId":{"type":"string"}},"required":["type","name","projectId","targetProjectId"]},{"type":"object","properties":{"type":{"type":"string","enum":["GIT"]},"name":{"type":"string"},"description":{"anyOf":[{"type":"string"},{"type":"null"}]},"selectedFlowsIds":{"anyOf":[{"type":"array","items":{"type":"string"}},{"type":"null"}]},"projectId":{"type":"string"}},"required":["type","name","projectId"]}]}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,7 +1,7 @@
 // Clean-room implementation — the provider registry (capability spec E.6). Resolves a
 // provider id to its adapter so the calling code stays provider-agnostic; adding a new
 // adapter means registering it here and nowhere else.
-import { IntellisperError, ErrorCode, SecretManagerProviderId } from '@intelblocks/shared'
+import { ErrorCode, IntellisperError, SecretManagerProviderId } from '@intelblocks/shared'
 import { awsProvider } from './aws-provider'
 import { cyberarkProvider } from './cyberark-provider'
 import { hashicorpProvider } from './hashicorp-provider'

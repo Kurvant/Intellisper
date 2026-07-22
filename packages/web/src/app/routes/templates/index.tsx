@@ -15,14 +15,19 @@ import { Button } from '@/components/ui/button';
 import { flowHooks } from '@/features/flows';
 import { templatesTelemetryApi, templatesHooks } from '@/features/templates';
 import { platformHooks } from '@/hooks/platform-hooks';
-import { DASHBOARD_CONTENT_PADDING_X } from '@/lib/utils';
+import { cn, DASHBOARD_CONTENT_PADDING_X } from '@/lib/utils';
 
 import { AllCategoriesView } from './all-categories-view';
 import { CategoryFilterCarousel } from './category-filter-carousel';
 import { EmptyTemplatesView } from './empty-templates-view';
 import { SelectedCategoryView } from './selected-category-view';
 
-const TemplatesPage = () => {
+const TemplatesPage = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const navigate = useNavigate();
   const { data: templateCategories } = templatesHooks.useTemplateCategories();
   const { platform } = platformHooks.useCurrentPlatform();
@@ -43,7 +48,11 @@ const TemplatesPage = () => {
 
   const handleTemplateSelect = useCallback(
     (template: Template) => {
-      navigate(`/templates/${template.id}`);
+      navigate(
+        isOverhaul
+          ? `/build/explore/${template.id}`
+          : `/templates/${template.id}`,
+      );
       if (template.type === TemplateType.OFFICIAL) {
         templatesTelemetryApi.sendEvent({
           eventType: TemplateTelemetryEventType.VIEW,
@@ -51,7 +60,7 @@ const TemplatesPage = () => {
         });
       }
     },
-    [navigate],
+    [navigate, isOverhaul],
   );
 
   const templatesByCategory = useMemo(() => {
@@ -98,33 +107,62 @@ const TemplatesPage = () => {
   return (
     <div>
       <div>
-        <div className="sticky top-0 z-10 bg-background">
-          <PageHeader
-            showSidebarToggle={true}
-            className="static"
-            title={
-              <>
-                <div className="flex flex-row w-full justify-between gap-1">
-                  <SearchInput
-                    value={search}
-                    onChange={handleSearchChange}
-                    placeholder={t('Search templates by name or description')}
-                  ></SearchInput>
-                  <div className="flex flex-row justify-end w-[50%]">
-                    <Button
-                      variant="outline"
-                      className="gap-2 h-full"
-                      onClick={() => createFlow()}
-                      disabled={isCreateFlowPending}
-                    >
-                      <Plus className="w-4 h-4" />
-                      {t('Start from scratch')}
-                    </Button>
+        <div
+          className={cn(
+            'sticky top-0 z-10 bg-background',
+            isOverhaul && 'top-0',
+          )}
+        >
+          {isOverhaul ? (
+            <div className="flex flex-wrap items-center gap-2 pb-2">
+              <div className="w-[260px] max-w-xs">
+                <SearchInput
+                  value={search}
+                  onChange={handleSearchChange}
+                  placeholder={t('Search templates by name or description')}
+                ></SearchInput>
+              </div>
+              <div className="ml-auto">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-9 gap-1.5 rounded-lg"
+                  onClick={() => createFlow()}
+                  disabled={isCreateFlowPending}
+                >
+                  <Plus className="w-4 h-4" />
+                  {t('Start from scratch')}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <PageHeader
+              showSidebarToggle={true}
+              className="static"
+              title={
+                <>
+                  <div className="flex flex-row w-full justify-between gap-1">
+                    <SearchInput
+                      value={search}
+                      onChange={handleSearchChange}
+                      placeholder={t('Search templates by name or description')}
+                    ></SearchInput>
+                    <div className="flex flex-row justify-end w-[50%]">
+                      <Button
+                        variant="outline"
+                        className="gap-2 h-full"
+                        onClick={() => createFlow()}
+                        disabled={isCreateFlowPending}
+                      >
+                        <Plus className="w-4 h-4" />
+                        {t('Start from scratch')}
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </>
-            }
-          ></PageHeader>
+                </>
+              }
+            ></PageHeader>
+          )}
 
           {isShowingOfficialTemplates && categories && (
             <CategoryFilterCarousel
@@ -134,7 +172,7 @@ const TemplatesPage = () => {
             />
           )}
         </div>
-        <div className={DASHBOARD_CONTENT_PADDING_X}>
+        <div className={isOverhaul ? '' : DASHBOARD_CONTENT_PADDING_X}>
           {!hasTemplates && !showLoading ? (
             <EmptyTemplatesView />
           ) : showAllCategories ? (

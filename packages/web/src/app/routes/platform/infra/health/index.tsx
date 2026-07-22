@@ -34,7 +34,12 @@ function buildMonthOptions(): MonthOption[] {
   });
 }
 
-export default function SettingsHealthPage() {
+export default function SettingsHealthPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const monthOptions = React.useMemo(buildMonthOptions, []);
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = (searchParams.get('tab') as TabValue) || 'system';
@@ -71,26 +76,48 @@ export default function SettingsHealthPage() {
 
   return (
     <div className="flex flex-col w-full max-w-[40rem] mx-auto gap-4 px-4">
-      <DashboardPageHeader
-        title={t('Health')}
-        description={t('Check the status of your platform and its components')}
-      >
-        {(activeTab === 'runs' || activeTab === 'queue') && (
-          <Select value={selectedMonth} onValueChange={handleMonthChange}>
-            <SelectTrigger className="w-auto gap-2 h-8">
-              <Calendar className="h-4 w-4" />
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent side="bottom" align="end">
-              {monthOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
-      </DashboardPageHeader>
+      {isOverhaul ? (
+        <div className="flex justify-end px-4 pt-4">
+          {(activeTab === 'runs' || activeTab === 'queue') && (
+            <Select value={selectedMonth} onValueChange={handleMonthChange}>
+              <SelectTrigger className="w-auto gap-2 h-8">
+                <Calendar className="h-4 w-4" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent side="bottom" align="end">
+                {monthOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        </div>
+      ) : (
+        <DashboardPageHeader
+          title={t('Health')}
+          description={t(
+            'Check the status of your platform and its components',
+          )}
+        >
+          {(activeTab === 'runs' || activeTab === 'queue') && (
+            <Select value={selectedMonth} onValueChange={handleMonthChange}>
+              <SelectTrigger className="w-auto gap-2 h-8">
+                <Calendar className="h-4 w-4" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent side="bottom" align="end">
+                {monthOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        </DashboardPageHeader>
+      )}
 
       <Tabs
         value={activeTab}

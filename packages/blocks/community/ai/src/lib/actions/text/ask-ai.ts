@@ -7,6 +7,7 @@ import { AIProviderName, getEffectiveProviderAndModel, spreadIfDefined } from '@
 import { aiProps } from '../../common/props';
 import { createAIModel } from '../../common/ai-sdk';
 import { buildWebSearchOptionsProperty, buildWebSearchConfig, WebSearchOptions } from '../../common/web-search';
+import { withAiUsageMeter } from '../../common/with-usage-meter';
 
 export const askAI = createAction({
   audience: 'human',
@@ -52,84 +53,87 @@ export const askAI = createAction({
     ),
   },
   async run(context) {
-    const provider = context.propsValue.provider;
-    const modelId = context.propsValue.model;
-    const storage = context.store;
-    const webSearchEnabled = !!context.propsValue.webSearch;
-    const webSearchOptions = (context.propsValue.webSearchOptions ?? {}) as WebSearchOptions;
+    return withAiUsageMeter(context, 'ask-ai', async ({ usageMeter }) => {
+      const provider = context.propsValue.provider;
+      const modelId = context.propsValue.model;
+      const storage = context.store;
+      const webSearchEnabled = !!context.propsValue.webSearch;
+      const webSearchOptions = (context.propsValue.webSearchOptions ?? {}) as WebSearchOptions;
 
-    const { tools: webSearchTools, providerOptions } = buildWebSearchConfig({
-      provider,
-      model: modelId,
-      webSearchEnabled,
-      webSearchOptions,
-    });
+      const { tools: webSearchTools, providerOptions } = buildWebSearchConfig({
+        provider,
+        model: modelId,
+        webSearchEnabled,
+        webSearchOptions,
+      });
 
-    const { provider: effectiveProvider } = getEffectiveProviderAndModel({
-      provider: provider as AIProviderName,
-      model: modelId,
-    });
-    const model = await createAIModel({
-      provider: provider as AIProviderName,
-      modelId,
-      engineToken: context.server.token,
-      apiUrl: context.server.apiUrl,
-      projectId: context.project.id,
-      flowId: context.flows.current.id,
-      runId: context.run.id,
-      ...spreadIfDefined('openaiResponsesModel', webSearchEnabled && effectiveProvider === AIProviderName.OPENAI ? true : undefined),
-    });
+      const { provider: effectiveProvider } = getEffectiveProviderAndModel({
+        provider: provider as AIProviderName,
+        model: modelId,
+      });
+      const model = await createAIModel({
+        provider: provider as AIProviderName,
+        modelId,
+        engineToken: context.server.token,
+        apiUrl: context.server.apiUrl,
+        projectId: context.project.id,
+        flowId: context.flows.current.id,
+        runId: context.run.id,
+        ...spreadIfDefined('openaiResponsesModel', webSearchEnabled && effectiveProvider === AIProviderName.OPENAI ? true : undefined),
+        usageMeter,
+      });
 
-    const conversationKey = context.propsValue.conversationKey
-      ? `ask-ai-conversation:${context.propsValue.conversationKey}`
-      : null;
+      const conversationKey = context.propsValue.conversationKey
+        ? `ask-ai-conversation:${context.propsValue.conversationKey}`
+        : null;
 
-    let conversation = null;
-    if (conversationKey) {
-      conversation = (await storage.get<ModelMessage[]>(conversationKey)) ?? [];
-      if (!conversation) {
-        await storage.put(conversationKey, { messages: [] });
+      let conversation = null;
+      if (conversationKey) {
+        conversation = (await storage.get<ModelMessage[]>(conversationKey)) ?? [];
+        if (!conversation) {
+          await storage.put(conversationKey, { messages: [] });
+        }
       }
-    }
 
-    const stopWhen = webSearchTools
-      ? stepCountIs(webSearchOptions?.maxUses ?? 5)
-      : undefined;
+      const stopWhen = webSearchTools
+        ? stepCountIs(webSearchOptions?.maxUses ?? 5)
+        : undefined;
 
-    const response = await generateText({
-      model,
-      messages: [
-        ...(conversation ?? []),
-        {
-          role: 'user',
-          content: context.propsValue.prompt,
-        },
-      ],
-      maxOutputTokens: context.propsValue.maxOutputTokens,
-      temperature: (context.propsValue.creativity ?? 100) / 100,
-      tools: webSearchTools,
-      stopWhen,
-      providerOptions,
+      const response = await generateText({
+        model,
+        messages: [
+          ...(conversation ?? []),
+          {
+            role: 'user',
+            content: context.propsValue.prompt,
+          },
+        ],
+        maxOutputTokens: context.propsValue.maxOutputTokens,
+        temperature: (context.propsValue.creativity ?? 100) / 100,
+        tools: webSearchTools,
+        stopWhen,
+        providerOptions,
+      });
+
+      conversation?.push({
+        role: 'user',
+        content: context.propsValue.prompt,
+      });
+
+      conversation?.push({
+        role: 'assistant',
+        content: response.text ?? '',
+      });
+
+      if (conversationKey) {
+        await storage.put(conversationKey, conversation);
+      }
+
+      const includeSources = webSearchTools && webSearchOptions.includeSources;
+      if (includeSources) {
+        return { text: response.text, sources: response.sources };
+      }
+      return response.text;
     });
-
-    conversation?.push({
-      role: 'user',
-      content: context.propsValue.prompt,
-    });
-
-    conversation?.push({
-      role: 'assistant',
-      content: response.text ?? '',
-    });
-
-    if (conversationKey) {
-      await storage.put(conversationKey, conversation);
-    }
-
-    const includeSources = webSearchTools && webSearchOptions.includeSources;
-    if (includeSources) {
-      return { text: response.text, sources: response.sources };
-    }
-    return response.text;
   },
 });

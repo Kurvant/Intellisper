@@ -1,9 +1,9 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   IbErrorParams,
   EmbedSubdomain,
   GenerateEmbedSubdomainRequest,
 } from '@intelblocks/shared';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { t } from 'i18next';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';

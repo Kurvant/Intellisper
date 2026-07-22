@@ -1,7 +1,7 @@
 import {
+    assertNotNullOrUndefined,
     IbEdition,
     IbId,
-    assertNotNullOrUndefined,
     ListUsersRequestBody,
     PrincipalType,
     SeekPage,
@@ -72,6 +72,7 @@ const ListUsersRequest = {
             [StatusCodes.OK]: SeekPage(UserWithMetaInformation),
         },
         tags: ['users'],
+        summary: 'List users',
         description: 'List users',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },
@@ -93,6 +94,7 @@ const UpdateUserRequest = {
             [StatusCodes.OK]: UserWithMetaInformation,
         },
         tags: ['users'],
+        summary: 'Update a user',
         description: 'Update user',
         security: [SERVICE_KEY_SECURITY_OPENAPI],
     },
@@ -107,6 +109,7 @@ const DeleteUserRequest = {
             id: IbId,
         }),
         tags: ['users'],
+        summary: 'Delete a user',
         description: 'Delete user',
         response: {
             [StatusCodes.NO_CONTENT]: z.never(),

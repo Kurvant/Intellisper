@@ -1,0 +1,1082 @@
+[
+  {
+    "tab": "Overview",
+    "group": "Overview",
+    "page": "overview/welcome"
+  },
+  {
+    "tab": "Overview",
+    "group": "Flows",
+    "page": "flows/building-flows"
+  },
+  {
+    "tab": "Overview",
+    "group": "Flows",
+    "page": "flows/passing-data"
+  },
+  {
+    "tab": "Overview",
+    "group": "Flows",
+    "page": "flows/using-formulas"
+  },
+  {
+    "tab": "Overview",
+    "group": "Flows",
+    "page": "flows/formula-reference"
+  },
+  {
+    "tab": "Overview",
+    "group": "Flows",
+    "page": "flows/publishing-flows"
+  },
+  {
+    "tab": "Overview",
+    "group": "Flows",
+    "page": "flows/debugging-runs"
+  },
+  {
+    "tab": "Overview",
+    "group": "Flows",
+    "page": "flows/versioning"
+  },
+  {
+    "tab": "Overview",
+    "group": "Flows",
+    "page": "flows/known-limits"
+  },
+  {
+    "tab": "Overview",
+    "group": "MCP Server",
+    "page": "mcp/overview"
+  },
+  {
+    "tab": "Overview",
+    "group": "MCP Server",
+    "page": "mcp/tools"
+  },
+  {
+    "tab": "Overview",
+    "group": "About",
+    "page": "about/i18n"
+  },
+  {
+    "tab": "Overview",
+    "group": "About",
+    "page": "about/changelog"
+  },
+  {
+    "tab": "Overview",
+    "group": "About",
+    "page": "about/license"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/structure-projects"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/manage-blocks"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/sso"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides > SCIM",
+    "page": "admin-guide/guides/scim/overview"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides > SCIM",
+    "page": "admin-guide/guides/scim/providers/okta"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides > SCIM",
+    "page": "admin-guide/guides/scim/providers/microsoft-entra-id"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/manage-oauth2"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/setup-ai-providers"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides > Secret Managers",
+    "page": "admin-guide/guides/secret-managers/overview"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides > Secret Managers",
+    "page": "admin-guide/guides/secret-managers/aws"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides > Secret Managers",
+    "page": "admin-guide/guides/secret-managers/hashicorp"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides > Secret Managers",
+    "page": "admin-guide/guides/secret-managers/cyberark-conjur"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides > Secret Managers",
+    "page": "admin-guide/guides/secret-managers/onepassword"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/permissions"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/event-streaming"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/project-releases"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Guides",
+    "page": "admin-guide/guides/manage-concurrency"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security",
+    "page": "admin-guide/security/practices"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/overview"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/flow-created"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/flow-updated"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/flow-deleted"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/flow-published"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/flow-activated"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/flow-deactivated"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/connection-upserted"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/connection-deleted"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/flow-run-started"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/flow-run-finished"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/folder-created"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/folder-updated"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/folder-deleted"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/user-signed-in"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/user-signed-up"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/user-email-verified"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/user-password-reset"
+  },
+  {
+    "tab": "Admin Guide",
+    "group": "Security > Audit Logs",
+    "page": "admin-guide/security/audit-logs/signing-key-created"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started",
+    "page": "install/overview"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started",
+    "page": "install/options/docker"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started",
+    "page": "install/options/docker-compose"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started > Other Options",
+    "page": "install/options/helm"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started > Other Options",
+    "page": "install/options/easypanel"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started > Other Options",
+    "page": "install/options/aws"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started > Other Options",
+    "page": "install/options/gcp"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started > Other Options",
+    "page": "install/options/railway"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Get Started > Other Options",
+    "page": "install/options/elestio"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Configuration",
+    "page": "install/configuration/overview"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Configuration",
+    "page": "install/configuration/environment-variables"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Configuration",
+    "page": "install/configuration/hardware"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Configuration",
+    "page": "install/configuration/breaking-changes"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Configuration",
+    "page": "install/configuration/telemetry"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Guides",
+    "page": "install/guides/setup-ssl"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Guides",
+    "page": "install/guides/setup-opentelemetry"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Guides",
+    "page": "install/guides/setup-s3"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Guides",
+    "page": "install/guides/separate-workers"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Guides",
+    "page": "install/guides/setup-app-webhooks"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Guides",
+    "page": "install/guides/rollback"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Troubleshooting",
+    "page": "install/troubleshooting/bullboard"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Troubleshooting",
+    "page": "install/troubleshooting/reset-password"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Troubleshooting",
+    "page": "install/troubleshooting/truncated-logs"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Troubleshooting",
+    "page": "install/troubleshooting/websocket-issues"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Architecture",
+    "page": "install/architecture/overview"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Architecture",
+    "page": "install/architecture/workers"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Architecture",
+    "page": "install/architecture/sandboxing"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Architecture",
+    "page": "install/architecture/durable-execution"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Architecture",
+    "page": "install/architecture/waitpoints"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Architecture",
+    "page": "install/architecture/network-security"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Architecture",
+    "page": "install/architecture/block-syncing"
+  },
+  {
+    "tab": "Deploy",
+    "group": "Architecture",
+    "page": "install/architecture/benchmark"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Essentials",
+    "page": "embedding/overview"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Essentials",
+    "page": "embedding/configure-embedding"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Essentials",
+    "page": "embedding/provision-users"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Essentials",
+    "page": "embedding/embed-builder"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Misc",
+    "page": "embedding/customize-blocks"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Misc",
+    "page": "embedding/embed-connections"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Misc",
+    "page": "embedding/navigation"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Misc",
+    "page": "embedding/predefined-connection"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Misc",
+    "page": "embedding/sdk-changelog"
+  },
+  {
+    "tab": "Embedding",
+    "group": "Misc",
+    "page": "embedding/sdk-server-requests"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block",
+    "page": "build-blocks/building-blocks/overview"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block",
+    "page": "build-blocks/building-blocks/start-building"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block",
+    "page": "build-blocks/building-blocks/setup-fork"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block",
+    "page": "build-blocks/building-blocks/development-setup"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block",
+    "page": "build-blocks/building-blocks/block-definition"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block",
+    "page": "build-blocks/building-blocks/block-authentication"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block",
+    "page": "build-blocks/building-blocks/create-action"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block",
+    "page": "build-blocks/building-blocks/create-trigger"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block > Sharing Blocks",
+    "page": "build-blocks/sharing-blocks/overview"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block > Sharing Blocks",
+    "page": "build-blocks/sharing-blocks/contribute"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block > Sharing Blocks",
+    "page": "build-blocks/sharing-blocks/community"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Build a Block > Sharing Blocks",
+    "page": "build-blocks/sharing-blocks/private"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/authentication"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference > Triggers",
+    "page": "build-blocks/block-reference/triggers/overview"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference > Triggers",
+    "page": "build-blocks/block-reference/triggers/polling-trigger"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference > Triggers",
+    "page": "build-blocks/block-reference/triggers/webhook-trigger"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/properties"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/properties-validation"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/flow-control"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/persistent-storage"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/files"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/external-libraries"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/block-versioning"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/examples"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/custom-api-calls"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Block Reference",
+    "page": "build-blocks/block-reference/i18n"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Misc",
+    "page": "build-blocks/misc/build-block"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Misc",
+    "page": "build-blocks/misc/publish-block"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Misc",
+    "page": "build-blocks/misc/blocks-ci-cd"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Misc",
+    "page": "build-blocks/misc/migrate-nx-to-turbo"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Misc",
+    "page": "build-blocks/misc/private-fork"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Misc",
+    "page": "build-blocks/misc/testing-blocks"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Misc",
+    "page": "build-blocks/misc/dev-container"
+  },
+  {
+    "tab": "Build Blocks",
+    "group": "Misc",
+    "page": "build-blocks/misc/codespaces"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Get Started",
+    "page": "endpoints/overview"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Projects",
+    "page": "endpoints/projects/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Projects",
+    "page": "endpoints/projects/create"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Projects",
+    "page": "endpoints/projects/update"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Projects",
+    "page": "endpoints/projects/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Projects",
+    "page": "endpoints/projects/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Users",
+    "page": "endpoints/users/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Users",
+    "page": "endpoints/users/update"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Users",
+    "page": "endpoints/users/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Users",
+    "page": "endpoints/users/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > User Invitations",
+    "page": "endpoints/user-invitations/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > User Invitations",
+    "page": "endpoints/user-invitations/upsert"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > User Invitations",
+    "page": "endpoints/user-invitations/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > User Invitations",
+    "page": "endpoints/user-invitations/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Project Members",
+    "page": "endpoints/project-members/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Project Members",
+    "page": "endpoints/project-members/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Project Members",
+    "page": "endpoints/project-members/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Connections",
+    "page": "endpoints/connections/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Connections",
+    "page": "endpoints/connections/upsert"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Connections",
+    "page": "endpoints/connections/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Connections",
+    "page": "endpoints/connections/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flows",
+    "page": "endpoints/flows/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flows",
+    "page": "endpoints/flows/create"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flows",
+    "page": "endpoints/flows/update"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flows",
+    "page": "endpoints/flows/get"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flows",
+    "page": "endpoints/flows/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flows",
+    "page": "endpoints/flows/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flow Runs",
+    "page": "endpoints/flow-runs/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flow Runs",
+    "page": "endpoints/flow-runs/get"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Flow Runs",
+    "page": "endpoints/flow-runs/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Sample Data",
+    "page": "endpoints/sample-data/get"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Blocks",
+    "page": "endpoints/blocks/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Blocks",
+    "page": "endpoints/blocks/install"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Project Releases",
+    "page": "endpoints/project-releases/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Project Releases",
+    "page": "endpoints/project-releases/create"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Global Connections",
+    "page": "endpoints/global-connections/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Global Connections",
+    "page": "endpoints/global-connections/upsert"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Global Connections",
+    "page": "endpoints/global-connections/update"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Global Connections",
+    "page": "endpoints/global-connections/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Global Connections",
+    "page": "endpoints/global-connections/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Git Sync",
+    "page": "endpoints/git-repos/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Git Sync",
+    "page": "endpoints/git-repos/configure"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Folders",
+    "page": "endpoints/folders/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Folders",
+    "page": "endpoints/folders/create"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Folders",
+    "page": "endpoints/folders/update"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Folders",
+    "page": "endpoints/folders/get"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Folders",
+    "page": "endpoints/folders/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Folders",
+    "page": "endpoints/folders/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Templates",
+    "page": "endpoints/templates/schema"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Templates",
+    "page": "endpoints/templates/create"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Templates",
+    "page": "endpoints/templates/delete"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Templates",
+    "page": "endpoints/templates/get"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Templates",
+    "page": "endpoints/templates/list"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Worker Machines",
+    "page": "endpoints/worker-machines/queue-metrics"
+  },
+  {
+    "tab": "API Reference",
+    "group": "Endpoints > Embedding",
+    "page": "endpoints/embedding/add-allowed-embed-origins"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Handbook",
+    "page": "handbook/overview"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Handbook",
+    "page": "handbook/team"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Hiring",
+    "page": "handbook/hiring/hiring"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Hiring",
+    "page": "handbook/hiring/levels"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Hiring",
+    "page": "handbook/hiring/team"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Hiring",
+    "page": "handbook/hiring/compensation"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Customer Support",
+    "page": "handbook/customer-support/overview"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Customer Support",
+    "page": "handbook/customer-support/tone"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Customer Support",
+    "page": "handbook/customer-support/pylon"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Customer Support",
+    "page": "handbook/customer-support/handle-requests"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Onboarding",
+    "page": "handbook/engineering/overview"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Onboarding",
+    "page": "handbook/engineering/onboarding/onboarding-check-list"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Onboarding",
+    "page": "handbook/engineering/onboarding/how-we-work"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Onboarding",
+    "page": "handbook/engineering/onboarding/on-call"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Onboarding",
+    "page": "handbook/engineering/onboarding/downtime-incident"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Onboarding",
+    "page": "handbook/engineering/onboarding/stack"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Onboarding",
+    "page": "handbook/engineering/onboarding/release-cycle"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/run-ee"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/setup-betterstack"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/releases"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/canary-deployment"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/infrastructure"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/database-migration"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/security-advisory-response"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/product-announcement"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/frontend-best-practices"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/e2e-tests"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/testing-strategy"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/connect-claude-to-chrome"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks",
+    "page": "handbook/engineering/playbooks/ai-engineering-guide"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks > Postmortems",
+    "page": "handbook/engineering/postmortems/2026-03-19-redis-and-delay-overload"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks > Postmortems",
+    "page": "handbook/engineering/postmortems/2026-03-redis-queue-events-overload"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Engineering Playbooks > Postmortems",
+    "page": "handbook/engineering/postmortems/2026-03-16-infrastructure-upgrade"
+  },
+  {
+    "tab": "Handbook",
+    "group": "Product",
+    "page": "handbook/product/interface-design"
+  }
+]

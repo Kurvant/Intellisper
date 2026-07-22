@@ -1,0 +1,74 @@
+---
+title: Intellisper Agent
+description: An AI agent that works inside your browser — it reads pages, fills forms, runs research, and repeats tasks for you, pausing for your approval before anything consequential.
+sidebar_label: Overview
+sidebar_position: 1
+---
+The Intellisper Agent is an AI assistant that works **inside your web browser**. You describe a task in
+plain language — "find the three cheapest flights and put them in a table," "fill in this application
+with the details from my file," "summarise this page" — and the agent reads the page, clicks, types,
+navigates, and gathers information on your behalf. It pauses to ask before it does anything
+consequential, and you can watch every step.
+
+The agent is distinct from **Studio's** in-flow AI blocks: those run server-side inside an automation
+flow, while the agent acts in a live browser session that you can see and interrupt.
+
+<Info>
+**Availability**
+
+The Intellisper Agent is available on **Cloud** and **Enterprise** editions, and requires the agent to
+be included on your plan. On other editions the agent surface is not present. If the agent is not on
+your plan, agent routes return a payment-required prompt rather than an error — it's an upgrade path,
+not a failure.
+</Info>
+
+## How it works
+
+The agent has two halves that work together:
+
+- A **browser extension** (installed in Chrome) that performs the actual on-page actions — clicking,
+  typing, scrolling, taking screenshots — on your live session.
+- The **Intellisper server**, which runs the reasoning loop, decides what to do next, executes
+  server-side tools (research, file reading, memory), keeps a durable record of every run, and gates
+  anything consequential behind your approval.
+
+Because the server holds the full state of every run, you can close the tab and come back — a run
+resumes exactly where it left off.
+
+<CardGroup cols={2}>
+  <Card title="Get started" href="/agent/get-started">
+    Install the extension and run your first task.
+  </Card>
+  <Card title="Chat & runs" href="/agent/chat-and-runs">
+    How a turn works, and the approval model for consequential actions.
+  </Card>
+  <Card title="Routines" href="/agent/routines">
+    Record a task once, then replay it with new values.
+  </Card>
+  <Card title="Automation" href="/agent/automation">
+    Run a routine over many rows, or on a schedule.
+  </Card>
+</CardGroup>
+
+## What the agent can do
+
+| Capability | What it means |
+| --- | --- |
+| **Read & understand pages** | Summarise a page, answer questions grounded in it with citations, or extract structured fields. |
+| **Act on pages** | Navigate, click, type, select options, scroll, screenshot, and submit forms — always in your visible browser. |
+| **Research the web** | Fetch public pages server-side and compile a cited answer. |
+| **Work with files** | Read an attached PDF, Word, text, or Markdown document, and produce an edited version to download. |
+| **Remember** | Save durable preferences and facts so you don't repeat yourself. See [Memory](/memory/overview). |
+| **Repeat work** | Turn a finished task into a [Routine](/agent/routines), then replay it — once, in [batches](/agent/automation), or on a [schedule](/agent/automation). |
+
+## What stays under your control
+
+The agent classifies every action it wants to take:
+
+- **Safe** actions (reading, scrolling, taking a screenshot) run automatically.
+- **Reversible** actions (clicking, typing, choosing an option) run automatically but are easy to undo.
+- **Consequential** actions — submitting a form — **stop and wait for your explicit approval** before
+  they run.
+
+You approve or reject each consequential step, and you can watch the whole run unfold. See
+[Chat & runs](/agent/chat-and-runs#approvals) for the full model.

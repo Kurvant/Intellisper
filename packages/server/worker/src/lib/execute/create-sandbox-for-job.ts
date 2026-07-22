@@ -25,6 +25,11 @@ export function createSandboxForJob(params: {
         uploadRunLog: (input) => apiClient.uploadRunLog(input),
         sendFlowResponse: (input) => apiClient.sendFlowResponse(input),
         updateStepProgress: (input) => apiClient.updateStepProgress(input),
+        // AI Gateway: the engine sandbox has no write path to the API (its HTTP surface is read-only
+        // by design), so AI-block spend is relayed through the worker on the existing loopback RPC.
+        // Pure pass-through — the worker adds nothing and validates nothing; the API is the boundary
+        // where the payload is checked.
+        reportAiUsage: (input) => apiClient.reportAiUsage(input),
     }
 
     const memoryLimitMb = parseMemoryLimit(settings.SANDBOX_MEMORY_LIMIT)

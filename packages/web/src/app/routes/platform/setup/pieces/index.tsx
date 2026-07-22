@@ -23,7 +23,12 @@ import { oauthAppsQueries } from '@/features/connections';
 import { InstallBlockDialog, BlockIcon, blocksHooks } from '@/features/pieces';
 import { platformHooks } from '@/hooks/platform-hooks';
 
-const PlatformBlocksPage = () => {
+const PlatformBlocksPage = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   const isEnabled = platform.plan.manageBlocksEnabled;
   const [searchParams] = useSearchParams();
@@ -143,10 +148,12 @@ const PlatformBlocksPage = () => {
 
   return (
     <>
-      <DashboardPageHeader
-        description={t('Manage the blocks that are available to your users')}
-        title={t('Blocks')}
-      />
+      {!isOverhaul && (
+        <DashboardPageHeader
+          description={t('Manage the blocks that are available to your users')}
+          title={t('Blocks')}
+        />
+      )}
       <div className="mx-auto w-full flex flex-col flex-1 min-h-0">
         {!isEnabled && (
           <LockedAlert

@@ -1,6 +1,4 @@
 import {
-    IntellisperError,
-    ibId,
     assertNotNullOrUndefined,
     ErrorCode,
     File,
@@ -8,6 +6,8 @@ import {
     FileId,
     FileLocation,
     FileType,
+    ibId,
+    IntellisperError,
     isMultipartFile,
     isNil,
     ProjectId,

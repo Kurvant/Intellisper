@@ -1,0 +1,70 @@
+---
+id: create-a-table-webhook
+title: "Create a table webhook"
+description: "Create a table webhook"
+sidebar_label: "Create a table webhook"
+hide_title: true
+hide_table_of_contents: true
+api: eJx9VE1v2zAM/SsGTxugxemOvm1JDsUGtEiTU2EMjM3EamxJleSkgaH/PlB2vpZ0J8sUv97TIzvwuHGQvYLHVU0OcgElucJK46VWkMHEEnpKMIkOyZ5WldZbEGDpvSXnf+ryAFkHhVaelOcjGlPLAjlB+uY4SweuqKhBPvmDIchAr96o8CDAWG3IekmOb2lHyrsLP7QWDyBAemou7c5bqTYggFTbMID5bPI0n/6ZzGc/FrMpiKNh+Ty9Nkxnv2dsyEMQMOBZ2vo2dxCwrvX+sbxzFXoCpKWSiw9tX+U7Refh2t3bloIAgxYb8mSZ/zsMnbuQ/BAGfQUCFDZ8KUu4SZkLcFS0VvpDzIhG/iI+5nxlyRmtXE/z9/GYP9dPPaU1trVP5oNnRNmQr3TJ9bWLz8VtZJDuHtJeMmkny5AOuJkCR3Z3BNUyr1B5b1yWpmjkSCpPdS2dITsqdAP/6u3Z6rIt+Cd5iYngEtcLk9RDOKI78cVVbtItHSUH3doEjUy2dEg2pMiipzJZW90kvqIEy0aqpNDK6ZoYQCwCGawILTcQBLCO52fFzz6wMTVdKvZGgfm1us6KPYrq6oXXOkKRnrPC45mlZKqLtiHl40CBACa3BzcejUdjDue3aTAO2qCPT8f2ip6Lsf08YqDX04dPTY1SccW2H5heDa+we2DHfoUIyKI6T5LIBVQsnuwVum6Fjpa2DoHN7y3ZKFABO7SS46NsSun4XEK2xtrRf7r+Mh9m4GvyWavHRaJ4jeywbvkPBGxZPTxIIQ8CKsKSbKzeX0z6Gt8WHH4OvFluLM/TkDw/vSxAwGpYio0uOcbinqcV931hHXFEEUdbBzWqTYsb9u1zsuSwZW5P8h7EKI4H7vQutK7rPRZ6SyqEE1LP/ww2hL85sAZi
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create a table webhook"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/tables/{id}/webhooks"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a table webhook
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"events":{"type":"array","items":{"type":"string","enum":["RECORD_CREATED","RECORD_UPDATED","RECORD_DELETED"]}},"webhookUrl":{"type":"string"},"flowId":{"type":"string"}},"required":["events","webhookUrl","flowId"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

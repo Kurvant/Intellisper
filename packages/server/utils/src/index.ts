@@ -16,3 +16,6 @@ export type { SsrfAgents } from './safe-http'
 export { systemUsage } from './system-usage'
 export { chatAiUtils } from './chat-ai-utils'
 export type { ContentPartLike } from './chat-ai-utils'
+// AI Gateway — in-process metering middleware (no proxy hop, no added latency)
+export { aiGatewayMiddleware, meterEmbeddingModel, meterLanguageModel } from './ai-gateway-middleware'
+export type { AiUsageContext, AiUsageEmitter } from './ai-gateway-middleware'

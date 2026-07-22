@@ -1,0 +1,293 @@
+/**
+ * Intellisper docs theme — Mockups 1 & 2 (the docs shell).
+ *
+ * TOKENS RECONCILED FROM THREE SOURCES (they disagreed; the app wins):
+ *  - The app's server default is copper `#b5652f` (packages/server/api/src/app/flags/theme.ts) —
+ *    the canonical brand, so the docs match the product rather than a mockup's variant.
+ *  - Mockups 1/2 use `#973415`, Mockup 3 (dark API reference) uses `#6b0d09`. Same copper family,
+ *    different exposure. Taking the app's value keeps docs and product identical.
+ *  - Kurvant blue `#3b6ef5` / violet `#9b7fe0` / yellow `#f5b818` are the secondary ramp.
+ *
+ * ACCESSIBILITY OVERRIDES THE MOCKUPS: brand copper `#b5652f` on white is 4.31:1 — below WCAG AA
+ * (4.5:1) for body text, and docs are body text. Links/text use `#ad612d` (4.64:1, AA) — 2% darker
+ * and visually indistinguishable. Dark mode lifts copper to `#d18450` (5.80:1 on `#1b1c1c`).
+ * Measured, not eyeballed.
+ *
+ * The primary ramps are computed from the canonical hue/sat, not hand-picked, so every step stays
+ * on-brand.
+ */
+
+:root {
+  /* Copper ramp — AA-safe base (see header). */
+  --ifm-color-primary: #ad612d;
+  --ifm-color-primary-dark: #a55c2b;
+  --ifm-color-primary-darker: #9d5729;
+  --ifm-color-primary-darkest: #8d4e24;
+  --ifm-color-primary-light: #c56e33;
+  --ifm-color-primary-lighter: #cb7337;
+  --ifm-color-primary-lightest: #cf7e48;
+
+  /* Brand identity value — for surfaces/accents where contrast is not a factor. */
+  --ib-copper: #b5652f;
+  --ib-blue: #3b6ef5;
+  --ib-violet: #9b7fe0;
+  --ib-yellow: #f5b818;
+
+  /* Mockup surface language: light-gray ground, hairline borders, curvy radius. */
+  --ib-hairline: rgba(28, 27, 27, 0.1);
+  --ib-ambient-shadow: 0 1px 2px rgba(16, 22, 35, 0.04), 0 12px 28px -18px rgba(181, 101, 47, 0.28);
+
+  --ifm-background-color: #fcf9f8;
+  --ifm-background-surface-color: #ffffff;
+
+  --ifm-code-font-size: 92%;
+  --ifm-card-border-radius: 12px;
+  --ifm-global-radius: 9px;
+
+  --docusaurus-highlighted-code-line-bg: rgba(181, 101, 47, 0.12);
+}
+
+[data-theme='dark'] {
+  /* Copper lifted for legibility on a near-black ground (5.80:1). */
+  --ifm-color-primary: #d18450;
+  --ifm-color-primary-dark: #cd7940;
+  --ifm-color-primary-darker: #cb7337;
+  --ifm-color-primary-darkest: #bd6a31;
+  --ifm-color-primary-light: #d68f60;
+  --ifm-color-primary-lighter: #d89568;
+  --ifm-color-primary-lightest: #dca078;
+
+  --ib-hairline: rgba(255, 255, 255, 0.12);
+  --ib-ambient-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 28px -18px rgba(0, 0, 0, 0.6);
+
+  /* Mockup 3's ground — the dark surface the API reference is designed against. */
+  --ifm-background-color: #1b1c1c;
+  --ifm-background-surface-color: #232424;
+
+  --docusaurus-highlighted-code-line-bg: rgba(209, 132, 80, 0.18);
+}
+
+/* ---- Type: Playfair display headings + Hanken body + JetBrains code (all three mockups) ---- */
+
+:root {
+  --ifm-font-family-base: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ifm-heading-font-family: 'Playfair Display', Georgia, serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --ifm-heading-font-weight: 600;
+}
+
+/* Playfair is a display face: it earns its keep on page titles, but at small sizes in a dense
+   sidebar it hurts scanning — so it is scoped to content headings, not the whole UI. */
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  letter-spacing: -0.01em;
+}
+
+.markdown h1 {
+  font-size: 2.25rem;
+  line-height: 1.15;
+}
+
+/* ---- Chrome: hairline borders + blurred top bar (mockup language) ---- */
+
+.navbar {
+  border-bottom: 1px solid var(--ib-hairline);
+  box-shadow: none;
+  backdrop-filter: saturate(180%) blur(12px);
+  background: color-mix(in srgb, var(--ifm-background-color) 85%, transparent);
+}
+
+.menu {
+  border-right: 1px solid var(--ib-hairline);
+}
+
+/* ---- Curvy, hairline-bordered surfaces ---- */
+
+.theme-admonition {
+  border-radius: var(--ifm-card-border-radius);
+  border: 1px solid var(--ib-hairline);
+  box-shadow: var(--ib-ambient-shadow);
+}
+
+/* Code blocks: the mockups' rounded, hairline-framed treatment. */
+.theme-code-block {
+  border-radius: var(--ifm-card-border-radius);
+  border: 1px solid var(--ib-hairline);
+  box-shadow: var(--ib-ambient-shadow);
+}
+
+/* ---- Copper-tinted scrollbar (mockup 3) ---- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ib-copper) transparent;
+}
+
+/* ==========================================================================
+ * M5b — API Reference (Mockup 3): the three-column, dark-glass pattern.
+ *
+ * The docusaurus-theme-openapi-docs plugin ALREADY renders the geometry the mockup wants:
+ *   Docusaurus sidebar  |  .openapi-left-panel__container (content)  |  .openapi-right-panel__container (code rail)
+ * (verified in node_modules/.../ApiItem/index.js — the MDX content is `col--7 openapi-left-panel__container`,
+ *  the ApiExplorer — security + language-tabbed code samples + interactive request + response — is
+ *  `col--5 openapi-right-panel__container`.) So Mockup 3 is achieved by RESTYLING these real, stable
+ * selectors — no `@theme/ApiItem` swizzle, which keeps the plugin upgrade-safe (plan §3.5b preference).
+ *
+ * Tokens are the ones reconciled at M5 (dark ground #1b1c1c, copper family). §3.5b's divergent oxblood
+ * `#6b0d09` was deliberately folded into the copper family at M5 — we do NOT re-introduce it, so docs
+ * and product stay identical.
+ * ========================================================================== */
+
+:root {
+  --ib-glass-bg: rgba(255, 255, 255, 0.55);
+  --ib-glass-border: rgba(28, 27, 27, 0.1);
+  --ib-glass-blur: blur(12px);
+  --ib-copper-glow: 0 0 15px rgba(184, 115, 51, 0.15);
+  /* HTTP-method accents (semantic, brand-aligned). Used for pills in the header and sidebar. */
+  --ib-method-get: var(--ib-blue);
+  --ib-method-post: #2e9e6b;
+  --ib-method-put: #8c4f10;
+  --ib-method-patch: var(--ib-yellow);
+  --ib-method-delete: #c0392b;
+}
+
+[data-theme='dark'] {
+  /* Mockup 3's glass: dark translucent panel over the near-black ground. */
+  --ib-glass-bg: rgba(48, 48, 48, 0.4);
+  --ib-glass-border: rgba(184, 115, 51, 0.22);
+  --ib-copper-glow: 0 0 15px rgba(184, 115, 51, 0.15);
+  --ib-method-get: #6f9bff;
+  --ib-method-post: #4fd08a;
+  --ib-method-put: #d68f60;
+  --ib-method-patch: #f5c542;
+  --ib-method-delete: #ff6f61;
+}
+
+/* ---- The endpoint header: method pill + mono path (mockup 3) ---- */
+.openapi__method-endpoint {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--ib-glass-border);
+  border-radius: var(--ifm-card-border-radius);
+  background: var(--ib-glass-bg);
+  backdrop-filter: var(--ib-glass-blur);
+}
+.openapi__method-endpoint .badge {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: none;
+  color: #fff;
+}
+/* Recolor the plugin's semantic badge variants to the brand method accents. */
+.openapi__method-endpoint .badge--primary { background: var(--ib-method-get); }
+.openapi__method-endpoint .badge--success { background: var(--ib-method-post); }
+.openapi__method-endpoint .badge--info { background: var(--ib-method-put); }
+.openapi__method-endpoint .badge--warning { background: var(--ib-method-patch); color: #1b1c1c; }
+.openapi__method-endpoint .badge--danger { background: var(--ib-method-delete); }
+.openapi__method-endpoint-path,
+.openapi__method-endpoint h2 {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+  word-break: break-all;
+}
+.openapi__divider { display: none; } /* the glass header replaces the plugin's hairline rule */
+
+/* ---- Left panel: parameter grid + schema rows (mockup 3's 4-col param rows) ---- */
+.openapi-left-panel__container .openapi-params__list-item,
+.openapi-left-panel__container .openapi-schema__list-item {
+  border-bottom: 1px solid var(--ib-hairline);
+  padding: 0.7rem 0;
+}
+.openapi-schema__property {
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 600;
+}
+.openapi-schema__type {
+  font-family: var(--ifm-font-family-monospace);
+  opacity: 0.7;
+  font-size: 0.85em;
+}
+/* The "Required" marker as a chip rather than raw red text. */
+.openapi-schema__required {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: var(--ib-method-delete);
+  background: color-mix(in srgb, var(--ib-method-delete) 12%, transparent);
+  border-radius: 999px;
+  padding: 0.08rem 0.45rem;
+}
+
+/* ---- Right panel: the sticky, glass code rail (mockup 3's fixed right column) ---- */
+.openapi-right-panel__container {
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+  align-self: flex-start;
+  max-height: calc(100vh - var(--ifm-navbar-height) - 2rem);
+  overflow-y: auto;
+  border-radius: var(--ifm-card-border-radius);
+}
+.openapi-right-panel__container .theme-code-block,
+.openapi-right-panel__container .openapi-explorer__code-block-request-title {
+  box-shadow: var(--ib-copper-glow);
+}
+/* Glass treatment for the rail's blocks (security, code samples, response). */
+.openapi-right-panel__container > div {
+  border-radius: var(--ifm-card-border-radius);
+}
+
+/* ---- Response status tabs → chips (mockup 3) ---- */
+.openapi-tabs__response-code-item {
+  border-radius: 999px !important;
+  font-family: var(--ifm-font-family-monospace);
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+.openapi-tabs__response-code-item.success {
+  color: var(--ib-method-post);
+}
+.openapi-tabs__response-code-item.danger,
+.openapi-tabs__response-code-item.error {
+  color: var(--ib-method-delete);
+}
+
+/* ---- Sidebar: method-tagged links get a leading verb pill (mockup 3) ----
+   The plugin puts the method + `api-method` classes on the <li> (menu__list-item), so the pill hangs
+   off the <a> inside that tagged list-item. Verified against the built DOM. */
+.menu__list-item.api-method > .menu__link::before {
+  content: "";
+  display: inline-block;
+  width: 3.1em;
+  margin-right: 0.55em;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.02em;
+  border-radius: 5px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.menu__list-item.api-method > .menu__link { display: flex; align-items: center; }
+.menu__list-item.get > .menu__link::before { content: "GET"; background: var(--ib-method-get); }
+.menu__list-item.post > .menu__link::before { content: "POST"; background: var(--ib-method-post); }
+.menu__list-item.put > .menu__link::before { content: "PUT"; background: var(--ib-method-put); }
+.menu__list-item.patch > .menu__link::before { content: "PATCH"; background: var(--ib-method-patch); color: #1b1c1c; }
+.menu__list-item.delete > .menu__link::before { content: "DEL"; background: var(--ib-method-delete); }
+
+/* ---- Responsive: the 3-column collapses gracefully — content is NEVER hidden (req #1). ----
+   Below the desktop breakpoint Infima already stacks .col to full width; we just release the
+   sticky rail so it flows inline beneath the content instead of trapping height. */
+@media (max-width: 996px) {
+  .openapi-right-panel__container {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+}

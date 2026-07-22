@@ -8,10 +8,10 @@
 // (DELETE) DEACTIVATES rather than hard-deletes — the standard SCIM offboarding semantics — so the
 // user's history is retained and the account can be reactivated.
 import {
-    IntellisperError,
-    ibId,
     CreateScimUserRequest,
     ErrorCode,
+    ibId,
+    IntellisperError,
     isNil,
     parseScimFilter,
     PlatformRole,

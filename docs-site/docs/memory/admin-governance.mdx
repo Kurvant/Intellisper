@@ -1,0 +1,53 @@
+---
+title: Admin governance
+description: What a workspace admin controls in memory — the sharing unlock switch, the gated cross-member view, and the responsibility that comes with the switch.
+sidebar_label: Admin governance
+sidebar_position: 1
+---
+Workspace administrators have a narrow, well-defined set of memory controls. This page is for admins —
+and for anyone who wants to understand exactly what an admin can and can't see.
+
+## The sharing unlock switch
+
+The one lever an admin holds is a workspace-wide **sharing unlock** switch. It's the *first* of the three
+conditions in the [sharing gate](/memory/privacy-and-sharing):
+
+- **Locked (the default):** no member's personal facts are visible to anyone but their owner, no matter
+  what individual members have chosen.
+- **Unlocked:** members' personal facts *become eligible* to be seen by an admin — but only the specific
+  facts where the member has **also** opted in **and** marked that fact shared.
+
+Only an admin of the workspace can flip this switch, and only for their own workspace.
+
+:::warning Unlocking is consequential — understand it before you flip it
+Because the sharing conditions are evaluated live, **unlocking sharing immediately makes visible every
+personal fact that already meets the other two conditions** — every fact that an opted-in member has
+already marked shared. It does not expose anything a member left private or didn't opt in to, but it can
+surface a body of already-shared facts at once. Flip it deliberately, and communicate it to your members
+— unlocking sharing without telling the people whose facts it affects is a privacy misstep.
+:::
+
+Re-locking hides all shared facts again instantly, without destroying anyone's opt-ins or per-fact marks.
+
+:::note One switch, two surfaces
+The sharing unlock is a single workspace-level flag shared with the [Agent](/agent/overview). Flipping it
+affects sharing governance for both memory and the agent on that workspace.
+:::
+
+## The gated cross-member view
+
+When sharing is unlocked, an admin can view the facts that meet all three gate conditions, and see a
+count of how many personal facts are currently shared across the workspace. This view **only** ever shows
+facts that satisfy the full gate — it can never reveal a private fact, and it can never reveal the facts
+of a member who hasn't opted in.
+
+## What an admin cannot do
+
+To be unambiguous, an admin **cannot**:
+
+- mark any member's fact as shared,
+- opt a member in to sharing on their behalf, or
+- see any fact a member left private.
+
+Personal control always overrides admin reach. See [Privacy & sharing](/memory/privacy-and-sharing) for
+the complete model.

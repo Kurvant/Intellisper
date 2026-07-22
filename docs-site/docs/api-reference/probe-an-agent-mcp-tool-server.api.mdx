@@ -1,0 +1,70 @@
+---
+id: probe-an-agent-mcp-tool-server
+title: "Probe an agent MCP tool server"
+description: "Probe an external MCP server configured as an agent tool and return its tool names. The outbound call is routed through the SSRF-filtered safeHttp axios; all failure modes collapse to a single generic error so the response cannot be used for port or network reconnaissance."
+sidebar_label: "Probe an agent MCP tool server"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVkuP2zYQ/ivEoIcWkB+bW9VTu2mRoE2z2MelhhuMpZHFLEUq5HB3HUP/vRhSa3t3laJAcqwvlobDmW9e32gPjNsA5QpwS5ZhXUBNofK6Z+0slHDh3YYUWkUPTN6iUe/OL1Qgf0deVc42ehs91QqDKCUjip0zCm2tPHH0VmkOWWaxozBX1y0pF3njoq1VhcYoHZR3kalW3HoXt63iltTV1eVvs0YbJvEQsKE3zL3CB+3CT0ruNahN9KQ6V1NQlTMG+0CKnUIVtN0aUluy5HWlyHvnVXDJsqfQOxtIVWitY7UhFQPVqnFe9c6zcl5Z4nvnb5WnylmLOgS0Fc2hAE+fIgX+xdU7KPdQOcuSu3IP2PdGVyi5W3wMksA9hKqlDuWJdz1BCW7zkSqGAnrvevKsKRxPD1qBvbZbKIBs7KRA784vYD0UIJn8E7tJ3U7bP8huuYXybCggl+nGmyndxvkOGUqIXsOQ0LCr3KTuI4YQCAoRE3a4MTRrmXsoIP0JOIziew/O0vsGytXXBm2dJVgPQ0669lSLNGmvh+JrrWNVUQgf2N2SzfCT4Dq9v7g3ieLpnW+BqdcfbmmX4fT6d9pNIHk8ekNYk//vULO9Z7e/Aeg2WQoJ9OPzlxt+J+0bpsOqay3Tg+ZiAsAxvOn4jjCmW+ZkeE6H46T3xw5eP/PAPpKMCHrsiFN0q4nJPuSlRxa2hBL+Xi1nP+Ls88+zv9b7V2fDdxKllpMeuYUCbBplQSBJelvDC79rkWS+Srl4tVzK31Oefk0NRsPqctRMLdARt64W6y5whtVCCYu7s8XoLyz2B8/DItH3THIUFl3VL+7Q6Br5mK0cdxRCSTMfysUCez3XlskYHXry88p1MLFF6ljJi7pKhkCiClRFr3l3JXnMsb3o+JFgnpq7CaR2LnqFvVa3tMskj7I/Gu+6RPFYd9rKhgrOpACSEyhhQ+gFwFCAUPTlkcx/fcCuN6eNLpx7yrjHCp9Q60nZDxQ6MuUjHY7mEpsNqQEal+SaxR+8PeZPvXZV7Mhy2iJQgKQ9h72cL+fLRNUucIeJosb2OazpvIFlR6eNm2E+T+DJzvp/wU8s+LFcTA+86A1qK0mPeY3mGVrB3VkueJoiKKA8neCTQZKtXEkLH4ZpXUAr81iuYL/fYKAbb4ZBxJ8i+R2Uq7Voey0bNg1crYM811A2aAL9SzW/vxy54wf1pThGIdpdBhXlDQqQpXPKQ8ORzBOIfH6eXc2uM58+3n/x4SPzfaCfi/dX11DAZvxgkmJCCR7vhezwPvt3KZzEAkm2B4N2G3Erutmm/P4BixG2jg==
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Probe an agent MCP tool server"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/projects/{projectId}/agent-tools/mcp/validate"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Probe an external MCP server configured as an agent tool and return its tool names. The outbound call is routed through the SSRF-filtered safeHttp axios; all failure modes collapse to a single generic error so the response cannot be used for port or network reconnaissance.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"},"in":"path","name":"projectId","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"type":{"type":"string","enum":["MCP"]},"toolName":{"type":"string","minLength":1},"serverUrl":{"type":"string","format":"uri"},"protocol":{"type":"string","enum":["sse","streamable-http","http"]},"auth":{"oneOf":[{"type":"object","properties":{"type":{"type":"string","enum":["none"]}},"required":["type"]},{"type":"object","properties":{"type":{"type":"string","enum":["access_token"]},"accessToken":{"type":"string"}},"required":["type","accessToken"]},{"type":"object","properties":{"type":{"type":"string","enum":["api_key"]},"apiKey":{"type":"string"},"apiKeyHeader":{"type":"string"}},"required":["type","apiKey","apiKeyHeader"]},{"type":"object","properties":{"type":{"type":"string","enum":["headers"]},"headers":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{"type":"string"}}},"required":["type","headers"]}]}},"required":["type","toolName","serverUrl","protocol","auth"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,0 +1,42 @@
+---
+title: Monitoring
+description: Review your own agent runs under My Agent, and — as a workspace admin — see activity across everyone in your workspace under Agent Activity.
+sidebar_label: Monitoring
+sidebar_position: 9
+---
+Every agent run is saved, so you can review what the agent did — your own runs, and (if you're an admin)
+runs across your whole workspace. Monitoring surfaces are **read-only**: the agent acts in the browser
+extension, and the web app is where you watch and review.
+
+## My Agent
+
+**My Agent** shows **your own runs**. For each run you can see its status, how many steps it took, the
+token cost, and its timing. You can filter by status to find, say, only the runs that failed or halted.
+
+Use it to:
+
+- pick up a run that's awaiting your approval,
+- review how a task went, or
+- check what a routine did on its last replay.
+
+## Agent Activity
+
+**Agent Activity** is the workspace-admin view. Where My Agent shows one person's runs, Agent Activity
+aggregates **everyone's runs across your workspace**:
+
+- total runs and how many users are active,
+- token spend and overall success rate,
+- runs broken down by status and by day,
+- the most-used routines, and
+- a per-user breakdown.
+
+Agent Activity is restricted to **workspace administrators**, and only ever shows activity within your
+own workspace.
+
+<Note>
+**Read-only oversight**
+
+Both My Agent and Agent Activity are for viewing and reviewing. Actions themselves happen in the browser
+extension on a live session; these pages give you and your admins visibility into what happened, not a
+way to drive the agent remotely.
+</Note>

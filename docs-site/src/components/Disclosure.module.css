@@ -1,0 +1,32 @@
+.accordionGroup > * + * {
+  margin-top: 0.5rem;
+}
+
+.update {
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+}
+
+.updateHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.updateLabel {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--ifm-color-primary);
+}
+
+.updateDescription {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.9375rem;
+}
+
+.updateBody > :last-child {
+  margin-bottom: 0;
+}

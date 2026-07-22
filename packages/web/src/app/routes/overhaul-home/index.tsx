@@ -1,9 +1,20 @@
+import { AppConnectionStatus, FlowStatus } from '@intelblocks/shared';
 import { t } from 'i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Icon3d } from '@/components/icons-3d';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { appConnectionsQueries } from '@/features/connections/hooks/app-connections-hooks';
+import {
+  flowRunQueries,
+  type RunStatusCategory,
+} from '@/features/flow-runs/hooks/flow-run-hooks';
+import { flowHooks } from '@/features/flows/hooks/flow-hooks';
+import { userInvitationsHooks } from '@/features/members/hooks/user-invitations-hooks';
 import { userHooks } from '@/hooks/user-hooks';
+import { authenticationSession } from '@/lib/authentication-session';
+import { formatUtils } from '@/lib/format-utils';
 
 import { NewAppShell } from '../../components/overhaul/new-app-shell';
 
@@ -18,6 +29,35 @@ export function OverhaulHomePage() {
   const { data: user } = userHooks.useCurrentUser();
   const greeting = getGreeting();
 
+  // ── Live data for the stat tiles ────────────────────────────────────────────
+  // Enabled flows (the "Active flows" tile).
+  const { data: enabledFlows, isLoading: flowsLoading } = flowHooks.useFlows({
+    limit: 100,
+    cursor: undefined,
+    status: [FlowStatus.ENABLED],
+  });
+  // Pending project invitations (the "Active users" hint + a needs-attention alert).
+  const { invitations } = userInvitationsHooks.useInvitations();
+  // Project connections (the "Connections" tile) + how many need reconnecting.
+  const projectId = authenticationSession.getProjectId() ?? '';
+  const { data: connectionsPage, isLoading: connectionsLoading } =
+    appConnectionsQueries.useAppConnections({
+      request: { projectId, limit: 100, cursor: undefined },
+      extraKeys: [projectId],
+    });
+
+  // Run stats (shared by the run-health card AND the needs-attention "failed runs" alert).
+  const runStats = flowRunQueries.useRunStats();
+  const failed =
+    runStats.categories.find((c) => c.label === 'Failed')?.count ?? 0;
+
+  const activeFlowCount = enabledFlows?.data.length ?? 0;
+  const connections = connectionsPage?.data ?? [];
+  const needReconnect = connections.filter(
+    (c) => c.status === AppConnectionStatus.ERROR,
+  ).length;
+  const pendingInvites = invitations?.length ?? 0;
+
   return (
     <NewAppShell
       title={t('{greeting}, {name}', {
@@ -26,9 +66,11 @@ export function OverhaulHomePage() {
       })}
       subtitle={t("Here's what's happening across your workspace")}
       actions={
+        // Project settings now lives in the shared shell top-bar chrome (ProjectChrome), so the
+        // home header only carries the primary "New" action.
         <Button
           className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
-          onClick={() => navigate('/automations')}
+          onClick={() => navigate('/build/automations')}
         >
           <span className="text-base leading-none">+</span>
           {t('New')}
@@ -38,49 +80,82 @@ export function OverhaulHomePage() {
       <div className="mx-auto max-w-[1280px] px-7 py-6">
         {/* Hero + run-health */}
         <div className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
-          <HeroCard onNewFlow={() => navigate('/automations')} />
-          <RunHealthCard onClick={() => navigate('/runs')} />
+          <HeroCard
+            onNewFlow={() => navigate('/build/automations')}
+            activeFlows={activeFlowCount}
+            totalRuns={runStats.total}
+          />
+          <RunHealthCard
+            onClick={() => navigate('/operate/runs')}
+            categories={runStats.categories}
+            total={runStats.total}
+            isLoading={runStats.isLoading}
+          />
         </div>
 
         {/* Recent + needs-attention */}
         <div className="mt-5 grid gap-5 lg:grid-cols-[1.6fr_1fr]">
-          <RecentAutomationsCard onSeeAll={() => navigate('/automations')} />
-          <NeedsAttentionCard navigate={navigate} />
+          <RecentAutomationsCard
+            onSeeAll={() => navigate('/build/automations')}
+            onOpen={(flowId) => navigate(`/flows/${flowId}`)}
+          />
+          <NeedsAttentionCard
+            navigate={navigate}
+            failedRuns={failed}
+            pendingInvites={pendingInvites}
+            needReconnect={needReconnect}
+          />
         </div>
 
         {/* Stat tiles */}
         <div className="mt-5 grid gap-5 md:grid-cols-3">
           <StatTile
             label={t('Active flows')}
-            value="42"
-            hint={t('of 50 limit')}
+            value={
+              flowsLoading ? null : formatUtils.formatNumber(activeFlowCount)
+            }
+            hint={t('Enabled automations')}
             icon="flow"
           />
           <StatTile
-            label={t('Active users')}
-            value="18"
-            hint={t('across 3 projects')}
+            label={t('Pending invites')}
+            value={formatUtils.formatNumber(pendingInvites)}
+            hint={
+              pendingInvites > 0
+                ? t('Awaiting acceptance')
+                : t('All invitations accepted')
+            }
             icon="team"
           />
           <StatTile
             label={t('Connections')}
-            value="27"
-            hint={t('6 need reconnect')}
+            value={
+              connectionsLoading
+                ? null
+                : formatUtils.formatNumber(connections.length)
+            }
+            hint={
+              needReconnect > 0
+                ? t('{n} need reconnect', { n: needReconnect })
+                : t('All healthy')
+            }
             icon="connection"
           />
         </div>
-
-        <p className="mt-6 rounded-xl border border-dashed border-border bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
-          {t(
-            'Home aggregates existing data (run health, favorites, impact, alerts) into a command center. It adds an entry point and removes nothing — the flows list still lives under Build → Automations.',
-          )}
-        </p>
       </div>
     </NewAppShell>
   );
 }
 
-function HeroCard({ onNewFlow }: { onNewFlow: () => void }) {
+function HeroCard({
+  onNewFlow,
+  activeFlows,
+  totalRuns,
+}: {
+  onNewFlow: () => void;
+  activeFlows: number;
+  totalRuns: number;
+}) {
   return (
     <div className="relative overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#C4703A_0%,#B5652F_42%,#9A5220_100%)] p-6 text-white shadow-[0_1px_2px_rgba(16,22,35,.06),0_18px_40px_-20px_rgba(154,82,32,.55)]">
       {/* radial sheen + amber glow above the base gradient, below the content */}
@@ -91,19 +166,25 @@ function HeroCard({ onNewFlow }: { onNewFlow: () => void }) {
           {t('Command center')}
         </div>
         <h2 className="mt-1.5 text-[23px] font-bold leading-[1.15] tracking-tight text-white [text-wrap:balance]">
-          {t('Your automations saved 214 hours this month')}
+          {activeFlows > 0
+            ? t('{n} automations running', { n: activeFlows })
+            : t('Build your first automation')}
         </h2>
         <p className="mt-2 max-w-[46ch] text-[13.5px] leading-relaxed text-white/85">
-          {t(
-            "42 automations running across 3 projects. Everything's healthy except a few runs that need a retry.",
-          )}
+          {totalRuns > 0
+            ? t('{n} runs in the last 7 days across your workspace.', {
+                n: formatUtils.formatNumber(totalRuns),
+              })
+            : t(
+                'Automate your work on the web — start with a template or a blank flow.',
+              )}
         </p>
         <div className="mt-5 flex flex-wrap gap-2.5">
-        <HeroChip
-          icon="automation"
-          label={t('New automation')}
-          onClick={onNewFlow}
-        />
+          <HeroChip
+            icon="automation"
+            label={t('New automation')}
+            onClick={onNewFlow}
+          />
           <HeroChip icon="table" label={t('New table')} onClick={onNewFlow} />
           <HeroChip
             icon="chat"
@@ -166,27 +247,65 @@ function Card({
   );
 }
 
-function RunHealthCard({ onClick }: { onClick: () => void }) {
+function RunHealthCard({
+  onClick,
+  categories,
+  total,
+  isLoading,
+}: {
+  onClick: () => void;
+  categories: RunStatusCategory[];
+  total: number;
+  isLoading: boolean;
+}) {
+  const succeeded = categories.find((c) => c.label === 'Succeeded')?.count ?? 0;
+  const failed = categories.find((c) => c.label === 'Failed')?.count ?? 0;
+  const successRate = total > 0 ? (succeeded / total) * 100 : 0;
+
   return (
     <Card cap={t('Run health · last 7 days')}>
-      <div className="flex justify-between gap-3">
-        <Metric n="8,412" l={t('Runs')} d={t('+12%')} up />
-        <Metric n="98.6%" l={t('Success')} d={t('+0.4%')} up />
-        <Metric n="3" l={t('Failed')} d={t('needs retry')} />
-      </div>
-      <div className="mt-3 flex h-12 items-end gap-1.5 border-b border-border/60 pb-px">
-        {[40, 55, 48, 70, 62, 88, 75].map((h, i) => (
-          <span
-            key={i}
-            className={
-              'flex-1 rounded-md bg-gradient-to-t ' +
-              (i === 5
-                ? 'from-primary/70 to-primary'
-                : 'from-primary/15 to-primary/45')
-            }
-            style={{ height: `${h}%` }}
+      {isLoading ? (
+        <div className="flex justify-between gap-3">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="flex flex-col gap-1.5">
+              <Skeleton className="h-7 w-16" />
+              <Skeleton className="h-3 w-12" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex justify-between gap-3">
+          <Metric n={formatUtils.formatNumber(total)} l={t('Runs')} d="" />
+          <Metric
+            n={`${successRate.toFixed(1)}%`}
+            l={t('Success')}
+            d=""
+            up={successRate >= 95}
           />
-        ))}
+          <Metric
+            n={formatUtils.formatNumber(failed)}
+            l={t('Failed')}
+            d={failed > 0 ? t('needs retry') : ''}
+          />
+        </div>
+      )}
+      {/* Distribution bar across the run categories (real proportions, not a fake sparkline). */}
+      <div className="mt-3 flex h-2.5 overflow-hidden rounded-full bg-muted">
+        {total > 0 &&
+          categories.map((c) => (
+            <span
+              key={c.label}
+              className={
+                c.label === 'Succeeded'
+                  ? 'bg-success'
+                  : c.label === 'Failed'
+                  ? 'bg-destructive'
+                  : 'bg-primary/60'
+              }
+              style={{ width: `${(c.count / total) * 100}%` }}
+              title={`${c.label}: ${c.count}`}
+            />
+          ))}
       </div>
       <button
         type="button"
@@ -207,7 +326,7 @@ function Metric({
 }: {
   n: string;
   l: string;
-  d: string;
+  d?: string;
   up?: boolean;
 }) {
   return (
@@ -216,48 +335,37 @@ function Metric({
         {n}
       </span>
       <span className="text-xs text-muted-foreground">{l}</span>
-      <span
-        className={
-          'text-[11.5px] font-semibold ' +
-          (up ? 'text-success' : 'text-destructive')
-        }
-      >
-        {d}
-      </span>
+      {d ? (
+        <span
+          className={
+            'text-[11.5px] font-semibold ' +
+            (up ? 'text-success' : 'text-destructive')
+          }
+        >
+          {d}
+        </span>
+      ) : null}
     </div>
   );
 }
 
-function RecentAutomationsCard({ onSeeAll }: { onSeeAll: () => void }) {
-  const rows = [
-    {
-      icon: 'automation',
-      name: 'Daily sync → Slack',
-      meta: t('Ran 2m ago · Acme Ops'),
-      status: 'on',
-    },
-    {
-      icon: 'automation',
-      name: 'Invoice → QuickBooks',
-      meta: t('Ran 1h ago · Finance'),
-      status: 'off',
-    },
-    {
-      icon: 'automation',
-      name: 'Lead → CRM enrich',
-      meta: t('Ran 3h ago · Growth'),
-      status: 'err',
-    },
-    {
-      icon: 'table',
-      name: 'Customers table',
-      meta: t('Edited yesterday · 1,204 rows'),
-      status: 'on',
-    },
-  ] as const;
+function RecentAutomationsCard({
+  onSeeAll,
+  onOpen,
+}: {
+  onSeeAll: () => void;
+  onOpen: (flowId: string) => void;
+}) {
+  // Most-recently-touched flows for this project (server returns them updated-desc).
+  const { data: flowsPage, isLoading } = flowHooks.useFlows({
+    limit: 5,
+    cursor: undefined,
+  });
+  const flows = flowsPage?.data ?? [];
+
   return (
     <Card
-      cap={t('Recent & favorite automations')}
+      cap={t('Recent automations')}
       action={
         <button
           type="button"
@@ -268,23 +376,58 @@ function RecentAutomationsCard({ onSeeAll }: { onSeeAll: () => void }) {
         </button>
       }
     >
-      <div className="-mx-1 flex flex-col">
-        {rows.map((r) => (
-          <div
-            key={r.name}
-            className="flex items-center gap-3 rounded-lg px-1 py-2.5 transition-colors hover:bg-muted/50 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-border/60"
-          >
-            <Icon3d name={r.icon} size={32} />
-            <div className="min-w-0">
-              <div className="truncate text-sm font-semibold">{r.name}</div>
-              <div className="text-[11.5px] text-muted-foreground">
-                {r.meta}
+      {isLoading ? (
+        <div className="-mx-1 flex flex-col">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="flex items-center gap-3 px-1 py-2.5">
+              <Skeleton className="size-8 rounded-lg" />
+              <div className="flex flex-1 flex-col gap-1.5">
+                <Skeleton className="h-3.5 w-40" />
+                <Skeleton className="h-3 w-24" />
               </div>
+              <Skeleton className="h-5 w-16 rounded-full" />
             </div>
-            <StatusPill status={r.status} className="ml-auto" />
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : flows.length === 0 ? (
+        <div className="flex flex-col items-center gap-2 py-8 text-center">
+          <Icon3d name="automation" size={40} />
+          <p className="text-sm font-semibold">{t('No automations yet')}</p>
+          <button
+            type="button"
+            onClick={onSeeAll}
+            className="text-xs font-semibold text-primary hover:underline"
+          >
+            {t('Create your first automation →')}
+          </button>
+        </div>
+      ) : (
+        <div className="-mx-1 flex flex-col">
+          {flows.map((flow) => (
+            <button
+              type="button"
+              key={flow.id}
+              onClick={() => onOpen(flow.id)}
+              className="flex items-center gap-3 rounded-lg px-1 py-2.5 text-left transition-colors hover:bg-muted/50 [&:not(:last-child)]:border-b [&:not(:last-child)]:border-border/60"
+            >
+              <Icon3d name="automation" size={32} />
+              <div className="min-w-0 flex-1">
+                <div className="truncate text-sm font-semibold">
+                  {flow.version.displayName}
+                </div>
+                <div className="text-[11.5px] text-muted-foreground">
+                  {t('Updated')}{' '}
+                  {formatUtils.formatDateToAgo(new Date(flow.updated))}
+                </div>
+              </div>
+              <StatusPill
+                status={flow.status === FlowStatus.ENABLED ? 'on' : 'off'}
+                className="ml-auto"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </Card>
   );
 }
@@ -315,26 +458,56 @@ function StatusPill({
   );
 }
 
-function NeedsAttentionCard({ navigate }: { navigate: (to: string) => void }) {
+function NeedsAttentionCard({
+  navigate,
+  failedRuns,
+  pendingInvites,
+  needReconnect,
+}: {
+  navigate: (to: string) => void;
+  failedRuns: number;
+  pendingInvites: number;
+  needReconnect: number;
+}) {
+  const hasAny = failedRuns > 0 || pendingInvites > 0 || needReconnect > 0;
   return (
     <Card cap={t('Needs attention')}>
-      <Alert
-        tone="danger"
-        onClick={() => navigate('/runs')}
-        text={t(
-          '3 runs failed in "Lead → CRM enrich". Retry from failed step or open the run.',
-        )}
-      />
-      <Alert
-        tone="warn"
-        onClick={() => navigate('/platform/setup/billing')}
-        text={t('AI credits at 72%. Auto top-up is off.')}
-      />
-      <Alert
-        tone="info"
-        onClick={() => navigate('/platform/users')}
-        text={t('2 pending invitations awaiting acceptance.')}
-      />
+      {failedRuns > 0 && (
+        <Alert
+          tone="danger"
+          onClick={() => navigate('/operate/runs')}
+          text={t('{n} runs failed in the last 7 days. Review and retry.', {
+            n: failedRuns,
+          })}
+        />
+      )}
+      {needReconnect > 0 && (
+        <Alert
+          tone="warn"
+          onClick={() => navigate('/connect/connections')}
+          text={t('{n} connections need re-authentication.', {
+            n: needReconnect,
+          })}
+        />
+      )}
+      {pendingInvites > 0 && (
+        <Alert
+          tone="info"
+          onClick={() => navigate('/admin/users')}
+          text={t('{n} pending invitations awaiting acceptance.', {
+            n: pendingInvites,
+          })}
+        />
+      )}
+      {!hasAny && (
+        <div className="flex flex-col items-center gap-2 py-8 text-center">
+          <Icon3d name="impact" size={40} />
+          <p className="text-sm font-semibold">{t("You're all caught up")}</p>
+          <p className="text-[12.5px] text-muted-foreground">
+            {t('No failed runs, broken connections or pending invites.')}
+          </p>
+        </div>
+      )}
     </Card>
   );
 }
@@ -391,7 +564,7 @@ function StatTile({
   icon,
 }: {
   label: string;
-  value: string;
+  value: string | null;
   hint: string;
   icon: string;
 }) {
@@ -399,10 +572,14 @@ function StatTile({
     <Card cap={label}>
       <div className="flex items-center gap-3">
         <Icon3d name={icon} size={34} />
-        <div className="flex flex-col">
-          <span className="text-[26px] font-bold leading-none tracking-tight tabular-nums">
-            {value}
-          </span>
+        <div className="flex flex-col gap-1">
+          {value === null ? (
+            <Skeleton className="h-6 w-14" />
+          ) : (
+            <span className="text-[26px] font-bold leading-none tracking-tight tabular-nums">
+              {value}
+            </span>
+          )}
           <span className="text-xs text-muted-foreground">{hint}</span>
         </div>
       </div>

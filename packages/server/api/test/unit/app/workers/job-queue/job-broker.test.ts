@@ -1,5 +1,5 @@
-import { InterceptorVerdict } from '../../../../../src/app/workers/job-queue/job-interceptor'
-import { Job, Worker as BullMQWorker } from 'bullmq'
+import { WorkerJobType } from '@intelblocks/shared'
+import { Worker as BullMQWorker, Job } from 'bullmq'
 import { FastifyBaseLogger } from 'fastify'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -27,7 +27,22 @@ vi.mock('../../../../../src/app/workers/job-queue/interceptors/rate-limiter-inte
     },
 }))
 
+// The broker runs a CHAIN of interceptors — [rateLimiter, zombiePolling] — so mocking only the first
+// let the real zombie-polling interceptor run, which reaches TypeORM for `trigger_source` and blew up
+// in a unit test with no database. Every case that got as far as the interceptor chain therefore
+// failed; the ones that returned early (empty queue, deferred failure) passed, which is exactly the
+// split we were seeing. This test is about tryDequeue's dispatch logic, so the chain is stubbed out
+// and it defaults to ALLOW — the zombie interceptor has its own suite.
+vi.mock('../../../../../src/app/workers/job-queue/interceptors/zombie-polling-interceptor', () => ({
+    zombiePollingInterceptor: {
+        preDispatch: vi.fn().mockResolvedValue({ verdict: 'ALLOW' }),
+        onJobFinished: vi.fn().mockResolvedValue(undefined),
+    },
+}))
+
+// Imported AFTER the vi.mock calls above, so the module graph is built against the mocks.
 import { tryDequeue } from '../../../../../src/app/workers/job-queue/job-broker'
+import { InterceptorVerdict } from '../../../../../src/app/workers/job-queue/job-interceptor'
 
 const mockLog: FastifyBaseLogger = {
     debug: vi.fn(),
@@ -45,7 +60,19 @@ function createMockJob(id: string, data?: Record<string, unknown>, deferredFailu
     return {
         id,
         name: `job-name-${id}`,
-        data: { projectId: 'proj-1', platformId: 'plat-1', ...data },
+        // tryDequeue validates the job payload against the JobData schema and FAILS anything that does
+        // not parse (an unrecoverable, un-runnable job must not be handed to a worker). So the fixture
+        // has to be a genuinely valid job — `{projectId, platformId}` alone is not one, and a job built
+        // from it is dropped, which is why these cases were seeing `null` instead of a dequeued job.
+        data: {
+            schemaVersion: 1,
+            jobType: WorkerJobType.RENEW_WEBHOOK,
+            projectId: 'proj-1',
+            platformId: 'plat-1',
+            flowVersionId: 'fv-1',
+            flowId: 'flow-1',
+            ...data,
+        },
         attemptsMade: 0,
         deferredFailure,
         moveToDelayed: vi.fn().mockResolvedValue(undefined),
@@ -75,9 +102,11 @@ describe('tryDequeue', () => {
         expect(result).not.toBeNull()
         expect(result!.jobId).toBe('job-1')
         expect(result!.engineToken).toBe('engine-token')
-        expect(result!.timeoutInSeconds).toBe(600)
+        // `timeoutInSeconds` is no longer part of the ConsumeJobRequest contract (the worker derives
+        // the timeout itself), so asserting it here was asserting a field the broker never sets.
         expect(result!.token).toMatch(/^token-/)
         expect(result!.queueName).toBe('test-queue')
+        expect(result!.attempsStarted).toBe(0)
         expect(job.updateData).not.toHaveBeenCalled()
         expect(mockWorker.getNextJob).toHaveBeenCalledTimes(1)
     })

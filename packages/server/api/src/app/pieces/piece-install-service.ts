@@ -1,7 +1,8 @@
 import { BlockMetadata, BlockMetadataModel } from '@intelblocks/blocks-framework'
 import {
-    IntellisperError,
     AddBlockRequestBody,
+    BlockPackage,
+    BlockType,
     EngineResponse,
     EngineResponseStatus,
     ErrorCode,
@@ -9,10 +10,9 @@ import {
     FileCompression,
     FileId,
     FileType,
+    IntellisperError,
     isNil,
     PackageType,
-    BlockPackage,
-    BlockType,
     PlatformId,
     ProjectId,
     WorkerJobType,

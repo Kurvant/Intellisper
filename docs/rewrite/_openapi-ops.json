@@ -1,0 +1,653 @@
+[
+ {
+  "m": "POST",
+  "p": "/v1/folders",
+  "tag": "folders",
+  "desc": "Create a new folder",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/folders",
+  "tag": "folders",
+  "desc": "List folders",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/folders/{id}",
+  "tag": "folders",
+  "desc": "Update an existing folder",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/folders/{id}",
+  "tag": "folders",
+  "desc": "Get a folder by id",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/folders/{id}",
+  "tag": "folders",
+  "desc": "Delete a folder",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/flows",
+  "tag": "flows",
+  "desc": "Create a flow",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/flows",
+  "tag": "flows",
+  "desc": "List flows",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/flows/{id}",
+  "tag": "flows",
+  "desc": "Apply an operation to a flow",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/flows/{id}",
+  "tag": "flows",
+  "desc": "Get a flow by id",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/flows/{id}",
+  "tag": "flows",
+  "desc": "Delete a flow",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/flows/{id}/template",
+  "tag": "flows",
+  "desc": "Export flow as template",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/sample-data/test-step",
+  "tag": "sample-data",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/sample-data",
+  "tag": "sample-data",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/flow-runs",
+  "tag": "flow-runs",
+  "desc": "List Flow Runs",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/flow-runs/count-by-status",
+  "tag": "flow-runs",
+  "desc": "Count Flow Runs by Status",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/flow-runs/{id}",
+  "tag": "flow-runs",
+  "desc": "Get Flow Run",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/flow-runs/cancel",
+  "tag": "flow-runs",
+  "desc": "Cancel multiple paused/queued flow runs",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/app-connections",
+  "tag": "app-connections",
+  "desc": "Upsert an app connection based on the app name",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/app-connections",
+  "tag": "app-connections",
+  "desc": "List app connections",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/app-connections/{id}",
+  "tag": "app-connections",
+  "desc": "Update an app connection value",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/app-connections/{id}",
+  "tag": "app-connections",
+  "desc": "Delete an app connection",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/app-connections/owners",
+  "tag": "app-connections",
+  "desc": "List app connection owners",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/app-connections/replace",
+  "tag": "app-connections",
+  "desc": "Replace app connections",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/app-connections/oauth2/authorization-url",
+  "tag": "app-connections",
+  "desc": "Get OAuth2 authorization URL",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/platforms/{id}",
+  "tag": "platforms",
+  "desc": "Get a platform by id",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/projects/{projectId}/mcp-server",
+  "tag": "mcp",
+  "desc": "Get an MCP server by ID",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/projects/{projectId}/mcp-server",
+  "tag": "mcp",
+  "desc": "Update the project MCP server configuration",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/projects/{projectId}/mcp-server/rotate",
+  "tag": "mcp",
+  "desc": "Rotate the MCP server token",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/mcp-server",
+  "tag": "mcp",
+  "desc": "Get the platform MCP server configuration",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/mcp-server",
+  "tag": "mcp",
+  "desc": "Update the platform MCP server configuration",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/mcp-server/rotate",
+  "tag": "mcp",
+  "desc": "Rotate the platform MCP server token",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/mcp-oauth/approve",
+  "tag": "mcp-oauth",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/projects/{projectId}/agent-tools/mcp/validate",
+  "tag": "agent",
+  "desc": "Probe an external MCP server configured as an agent tool and return its tool names. The outbound call is routed through the SSRF-filtered safeHttp axios; all failure modes collapse to a single generic error so the response cannot be used for port or network reconnaissance.",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/users",
+  "tag": "users",
+  "desc": "List users",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/users/{id}",
+  "tag": "users",
+  "desc": "Update user",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/users/{id}",
+  "tag": "users",
+  "desc": "Delete user",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/users/{id}",
+  "tag": "users",
+  "desc": "Get a user by id",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/user-invitations",
+  "tag": "user-invitations",
+  "desc": "Send a user invitation to a user. If the user already has an invitation, the invitation will be updated.",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/user-invitations",
+  "tag": "user-invitations",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/user-invitations/{id}",
+  "tag": "user-invitations",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/worker-machines/queue-metrics",
+  "tag": "worker-machines",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/tables/{id}",
+  "tag": "tables",
+  "desc": "Update a table",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/tables/{id}",
+  "tag": "tables",
+  "desc": "Delete a table",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/tables/{id}",
+  "tag": "tables",
+  "desc": "Get a table by id",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/tables",
+  "tag": "tables",
+  "desc": "List tables",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/tables/{id}/template",
+  "tag": "tables",
+  "desc": "Export table as template",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/tables/count",
+  "tag": "tables",
+  "desc": "Count tables",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/tables/{id}/export",
+  "tag": "tables",
+  "desc": "Export a table",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/tables/{id}/webhooks",
+  "tag": "tables",
+  "desc": "Create a table webhook",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/tables/{id}/webhooks/{webhookId}",
+  "tag": "tables",
+  "desc": "Delete a table webhook",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/tables/{id}/clear",
+  "tag": "tables",
+  "desc": "Clear all records from a table",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/records/{id}",
+  "tag": "records",
+  "desc": "Update a record",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/records",
+  "tag": "records",
+  "desc": "Delete records",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/records",
+  "tag": "records",
+  "desc": "List records",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/knowledge-base/files",
+  "tag": "knowledge-base",
+  "desc": "Register a file for knowledge base ingestion",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/knowledge-base/files",
+  "tag": "knowledge-base",
+  "desc": "List knowledge base files for the project",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/knowledge-base/files/upload",
+  "tag": "knowledge-base",
+  "desc": "Upload a file and create a knowledge base file record",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/knowledge-base/files/{id}",
+  "tag": "knowledge-base",
+  "desc": "Delete a knowledge base file and all its chunks",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/knowledge-base/files/{id}/chunks/count",
+  "tag": "knowledge-base",
+  "desc": "Get the number of chunks for a knowledge base file",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/knowledge-base/files/{id}/extract-chunks",
+  "tag": "knowledge-base",
+  "desc": "Extract text chunks from a knowledge base file",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/knowledge-base/files/{id}/store-chunks",
+  "tag": "knowledge-base",
+  "desc": "Store or update chunks for a knowledge base file. Provide id to update existing chunks, or content to create new ones.",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/knowledge-base/files/{id}/chunks",
+  "tag": "knowledge-base",
+  "desc": "List chunks for a knowledge base file, optionally filtered by embedding status",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/knowledge-base/files/search",
+  "tag": "knowledge-base",
+  "desc": "Search knowledge base using vector similarity",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/templates/{id}",
+  "tag": "templates",
+  "desc": "Get a template.",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/templates/{id}",
+  "tag": "templates",
+  "desc": "Update a template.",
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/templates/{id}",
+  "tag": "templates",
+  "desc": "Delete a template.",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/templates/categories",
+  "tag": "templates",
+  "desc": "Get categories of templates.",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/templates",
+  "tag": "templates",
+  "desc": "List templates.",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/templates",
+  "tag": "templates",
+  "desc": "Create a template.",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/projects",
+  "tag": "projects",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/projects",
+  "tag": "projects",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/projects/{id}",
+  "tag": "projects",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/projects/{id}",
+  "tag": "projects",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/project-members",
+  "tag": "project-members",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/project-members/{id}",
+  "tag": "project-members",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/blocks",
+  "tag": "blocks",
+  "desc": "Add a block to a platform",
+  "sum": "Add a block to a platform"
+ },
+ {
+  "m": "POST",
+  "p": "/v1/git-repos",
+  "tag": "git-repos",
+  "desc": "Upsert a git repository information for a project.",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/event-destinations",
+  "tag": "event-destinations",
+  "desc": "List event destinations",
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/project-roles/{id}/project-members",
+  "tag": "project-members",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/project-releases",
+  "tag": "project-releases",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/global-connections",
+  "tag": "global-connections",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/global-connections",
+  "tag": "global-connections",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/global-connections/{id}",
+  "tag": "global-connections",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/global-connections/{id}",
+  "tag": "global-connections",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/embed-subdomain/allowed-embed-origins",
+  "tag": "embedding",
+  "desc": "Add origins to the list allowed to embed this platform in an iframe. Existing origins are preserved; duplicates are ignored.",
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/chat/conversations",
+  "tag": "chat",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/chat/conversations",
+  "tag": "chat",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/chat/conversations/{id}",
+  "tag": "chat",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/chat/conversations/{id}",
+  "tag": "chat",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "DELETE",
+  "p": "/v1/chat/conversations/{id}",
+  "tag": "chat",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "GET",
+  "p": "/v1/chat/conversations/{id}/messages",
+  "tag": "chat",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/chat/conversations/{id}/messages",
+  "tag": "chat",
+  "desc": null,
+  "sum": null
+ },
+ {
+  "m": "POST",
+  "p": "/v1/chat/tool-approvals/{gateId}",
+  "tag": "chat",
+  "desc": null,
+  "sum": null
+ }
+]

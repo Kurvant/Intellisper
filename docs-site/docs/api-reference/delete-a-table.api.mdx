@@ -1,0 +1,69 @@
+---
+id: delete-a-table
+title: "Delete a table"
+description: "Delete a table"
+sidebar_label: "Delete a table"
+hide_title: true
+hide_table_of_contents: true
+api: eJx9Ustu2zAQ/BVi0UMLMJYT9FLdAiSHoj0UeVwauMBaXFtsJJIhV0Zdgf9eLKU4TtxWF5HcIXd2ZkZg3CaoH4Bx3VGClQZDqYk2sPUOariijpgUqgIADQEj9sQU5doIqWmpR6hH4H0gqCFxtG5bgMwU5Y0fD8uzT3j2+/Ls+2q8OM/vIGuwUgnILWhw2MtVa0BDpKfBRjJQcxworzQkaoZoeV/6YbBfSJYrKUVKwbtESQhcLD/K7y3/DQ4dq5sZCRoa75gcCxZD6GyDgq1+JrlwPJHzAsrl09ATt95ADaZIMk3YQg3V7rya5KtGazII47h7FmiIHdTQModUVxUGu7COqetsChQXje/hreTfojdDIxt1Wx6CYxVuhd408LMWB+2ly8lz94nU3g9RYbDqkfZqS44iMhm1ib5X3JJC01unGu+SLyYXDeTFNWEUAsWwjS+9LHdS+vwyhrryzdCT46IkaJDpp+7LxXKxFL+DT9xjUXi2+yRar3iPLz6dIud5mX5xFTq0TjoUpcfZlQfYnQtwirWG2hoJd+sTS3Ec15joPnY5y/HTQLGESsMOoy1dxDxjk6wN1BvsEv2H4vubObcf1L/4zYfo9qIQdoPsQMOjeCjhz6usoSU0FEv3qXDZNBT46MpJaCUeh3ReXX+9vrsGDTiIDodszE7q54U0+CujcZwQd/6RXM4Hgix74ZjzH3a6bZg=
+sidebar_class_name: "delete api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete a table"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/tables/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete a table
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"204":{"description":"Default Response","content":{"application/json":{"schema":{"not":{}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

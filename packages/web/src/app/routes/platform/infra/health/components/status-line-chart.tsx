@@ -1,7 +1,4 @@
-import {
-  FlowRunStatus,
-  PlatformMetricsStatusPoint,
-} from '@intelblocks/shared';
+import { FlowRunStatus, PlatformMetricsStatusPoint } from '@intelblocks/shared';
 import { t } from 'i18next';
 import { LineChart as LineChartIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';

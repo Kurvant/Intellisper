@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   AIProviderConfig,
   AIProviderName,
@@ -19,7 +20,6 @@ import {
   OpenAIProviderConfig,
   UpdateAIProviderRequest,
 } from '@intelblocks/shared';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { t } from 'i18next';

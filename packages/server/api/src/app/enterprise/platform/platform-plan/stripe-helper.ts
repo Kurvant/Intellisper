@@ -7,7 +7,7 @@
 // mutates subscriptions. Upgrades apply immediately (prorated); downgrades are deferred
 // to period end via a single subscription schedule.
 import { ibDayjs } from '@intelblocks/server-utils'
-import { IbEdition, assertNotNullOrUndefined, isNil, PRICE_ID_MAP, PRICE_NAMES, UserWithMetaInformation } from '@intelblocks/shared'
+import { assertNotNullOrUndefined, IbEdition, IbEnvironment, isNil, PRICE_ID_MAP, PRICE_NAMES, UserWithMetaInformation } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import Stripe from 'stripe'
 import { system } from '../../../helper/system/system'
@@ -31,13 +31,32 @@ function extraActiveFlowsPriceId(): string {
 
 export const stripeHelper = (log: FastifyBaseLogger) => ({
 
-    // The processor client, or undefined when billing is inert (non-cloud). Callers MUST
-    // treat undefined as "billing not available" and no-op rather than error.
+    // The price id of the metered extra-active-flows add-on. Exposed so the webhook reconciler can
+    // identify that line item explicitly (rather than inferring it from item order, which silently
+    // mis-attributes quantities when the item set changes).
+    extraActiveFlowsPriceId(): string {
+        return extraActiveFlowsPriceId()
+    },
+
+    // The processor client, or undefined when billing is inert (non-cloud, or cloud with no key
+    // configured). Callers MUST treat undefined as "billing not available" and no-op rather than
+    // error.
+    //
+    // An unset key is only tolerated OUTSIDE production: a local/dev cloud instance is expected to
+    // run without processor credentials, and reads such as the billing summary must still render
+    // rather than fail. In production the key is mandatory and its absence still throws, so a
+    // misconfigured deployment can never silently degrade into serving paid flows for free.
     getStripe(): Stripe | undefined {
         if (system.getEdition() !== IbEdition.CLOUD) {
             return undefined
         }
-        const secret = system.getOrThrow(AppSystemProp.STRIPE_SECRET_KEY)
+        const isProduction = system.get(AppSystemProp.ENVIRONMENT) === IbEnvironment.PRODUCTION
+        const secret = isProduction
+            ? system.getOrThrow(AppSystemProp.STRIPE_SECRET_KEY)
+            : system.get(AppSystemProp.STRIPE_SECRET_KEY)
+        if (isNil(secret)) {
+            return undefined
+        }
         return new Stripe(secret, { apiVersion: '2025-05-28.basil' })
     },
 

@@ -23,7 +23,9 @@ import { ChatAnalyticsLinkButton } from '@/features/platform-admin/components/ch
 import { flagsHooks } from '@/hooks/flags-hooks';
 import { platformHooks } from '@/hooks/platform-hooks';
 
-export default function Billing() {
+export default function Billing({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) {
   const { data: edition } = flagsHooks.useFlag<IbEdition>(IbFlagId.EDITION);
 
   return (
@@ -37,12 +39,15 @@ export default function Billing() {
       lockDocumentationUrl="https://www.activepieces.com/docs/install/configuration/overview#enterprise-edition-optional"
       showContactSales={false}
     >
-      <BillingPageDetails />
+      <BillingPageDetails variant={variant} />
     </LockedFeatureGuard>
   );
 }
 
-function BillingPageDetails() {
+function BillingPageDetails({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
 
   const {
@@ -80,6 +85,7 @@ function BillingPageDetails() {
         'For questions about billing contact us at support@activepieces.com',
       )}
       actions={<ChatAnalyticsLinkButton />}
+      hideHeader={isOverhaul}
     >
       <div className="flex flex-col gap-6">
         {isSubscriptionActive && <SubscriptionInfo info={platformPlanInfo} />}

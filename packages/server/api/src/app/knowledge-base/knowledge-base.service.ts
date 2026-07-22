@@ -1,4 +1,4 @@
-import { IntellisperError, ibId, ErrorCode, isNil, KnowledgeBaseFile, spreadIfDefined } from '@intelblocks/shared'
+import { ErrorCode, ibId, IntellisperError, isNil, KnowledgeBaseFile, spreadIfDefined } from '@intelblocks/shared'
 import { parse as parseCsv } from 'csv-parse/sync'
 import { FastifyBaseLogger } from 'fastify'
 import { IsNull, Not } from 'typeorm'

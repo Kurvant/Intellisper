@@ -95,8 +95,7 @@ export function AIModelSelector({
 
   React.useEffect(() => {
     if (!selectedProvider && !providersLoading && providers.length > 0) {
-      const preferred =
-        intellisperProvider?.provider || providers[0]?.provider;
+      const preferred = intellisperProvider?.provider || providers[0]?.provider;
       if (preferred) {
         setSelectedProvider(preferred as AIProviderName);
       }

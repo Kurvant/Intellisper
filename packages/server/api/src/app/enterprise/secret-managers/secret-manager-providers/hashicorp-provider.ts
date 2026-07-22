@@ -9,9 +9,9 @@
 // `secret/data/keys/my-key`).
 import { safeHttp } from '@intelblocks/server-utils'
 import {
-    IntellisperError,
     ErrorCode,
     HashicorpProviderConfig,
+    IntellisperError,
     isNil,
     SecretManagerProviderId,
 } from '@intelblocks/shared'

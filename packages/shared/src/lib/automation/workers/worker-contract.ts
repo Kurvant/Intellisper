@@ -1,3 +1,4 @@
+import { ReportAiUsageBatchRequest } from '../../ai-gateway/ai-usage'
 import { StreamStepProgress } from '../engine/engine-operation'
 import { GetFlowVersionForWorkerRequest, SendFlowResponseRequest, UpdateRunProgressRequest, UpdateStepProgressRequest, UploadRunLogsRequest } from '../engine/requests'
 import { FlowRun, RunEnvironment } from '../flow-run/flow-run'
@@ -52,6 +53,19 @@ export type WorkerToApiContract = {
     updateChatProgress(input: UpdateChatProgressRequest): Promise<void>
     updateProjectContext(input: UpdateProjectContextRequest): Promise<void>
     executeChatTool(input: ExecuteChatToolRequest): Promise<ExecuteChatToolResponse>
+    /**
+     * AI Gateway — report AI spend incurred OUTSIDE the API process (Studio chat in the worker, and
+     * AI blocks in the engine, relayed through the worker).
+     *
+     * Batched on purpose: the caller buffers and flushes, so metering costs one RPC per flush rather
+     * than one per model call. The API handler hands the batch straight to the async ledger sink and
+     * returns — it never writes the DB inline, so this can never slow a flow run.
+     *
+     * Every call carries its own `platformId` and `idempotencyKey`: the WORKER principal is unscoped
+     * (its token has no platform/project), and this transport is at-least-once, so the payload must be
+     * self-describing and the ledger's unique index is what makes a re-delivery a no-op.
+     */
+    reportAiUsage(input: ReportAiUsageBatchRequest): Promise<void>
 }
 
 export type SendChatEventRequest = {

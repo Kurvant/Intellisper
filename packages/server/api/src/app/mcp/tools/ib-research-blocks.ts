@@ -1,8 +1,8 @@
 import {
+    BlockCategory,
     isNil,
     LocalesEnum,
     McpToolDefinition,
-    BlockCategory,
     ProjectScopedMcpServer,
     SuggestionType,
 } from '@intelblocks/shared'

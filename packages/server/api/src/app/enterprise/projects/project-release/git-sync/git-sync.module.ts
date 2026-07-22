@@ -40,6 +40,9 @@ const gitRepoController: FastifyPluginAsyncZod = async (app) => {
             }),
         },
         schema: {
+            tags: ['git-repos'],
+            summary: 'Configure git sync',
+            description: 'Create or update the git repository configuration for a project.',
             body: ConfigureRepoRequest,
         },
     }, async (request, reply): Promise<GitRepoWithoutSensitiveData> => {

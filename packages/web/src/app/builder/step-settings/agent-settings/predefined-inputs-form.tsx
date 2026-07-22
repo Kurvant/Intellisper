@@ -1,10 +1,10 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { BlockProperty, PropertyType } from '@intelblocks/blocks-framework';
 import {
   FieldControlMode,
   isNil,
   PredefinedInputField,
 } from '@intelblocks/shared';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { t } from 'i18next';
 import { useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';

@@ -33,7 +33,12 @@ import { platformHooks } from '@/hooks/platform-hooks';
 import { CreateTemplateDialog } from './create-template-dialog';
 import { UpdateTemplateDialog } from './update-template-dialog';
 
-const PlatformTemplatesPage = () => {
+const PlatformTemplatesPage = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
 
   const [searchParams] = useSearchParams();
@@ -217,12 +222,14 @@ const PlatformTemplatesPage = () => {
       lockVideoUrl="https://cdn.activepieces.com/videos/showcase/templates.mp4"
     >
       <div className="flex flex-col w-full">
-        <DashboardPageHeader
-          description={t(
-            'Convert the most common automations into reusable templates',
-          )}
-          title={t('Templates')}
-        />
+        {!isOverhaul && (
+          <DashboardPageHeader
+            description={t(
+              'Convert the most common automations into reusable templates',
+            )}
+            title={t('Templates')}
+          />
+        )}
         <DataTable
           emptyStateTextTitle={t('No templates found')}
           emptyStateTextDescription={t(

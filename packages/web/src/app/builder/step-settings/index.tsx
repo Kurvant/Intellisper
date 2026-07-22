@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   FlowAction,
   FlowActionType,
@@ -8,7 +9,6 @@ import {
   flowStructureUtil,
   isNil,
 } from '@intelblocks/shared';
-import { zodResolver } from '@hookform/resolvers/zod';
 import deepEqual from 'deep-equal';
 import { useEffect, useRef, useState } from 'react';
 import { useForm, Resolver } from 'react-hook-form';

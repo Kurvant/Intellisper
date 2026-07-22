@@ -38,10 +38,17 @@ export enum AppSystemProp {
     FLOW_TIMEOUT_SECONDS = 'FLOW_TIMEOUT_SECONDS',
     GOOGLE_CLIENT_ID = 'GOOGLE_CLIENT_ID',
     GOOGLE_CLIENT_SECRET = 'GOOGLE_CLIENT_SECRET',
+    // Separate Google OAuth client for the Intellisper browser EXTENSION. The extension uses the
+    // implicit/id-token flow (chrome.identity), so it presents a Google id_token minted for ITS OWN
+    // client id — which must be the audience we verify against, distinct from the web GOOGLE_CLIENT_ID.
+    // Optional: when unset, the extension Google-sign-in endpoint is disabled (email/password still works).
+    GOOGLE_CLIENT_ID_INTELLISPER = 'GOOGLE_CLIENT_ID_INTELLISPER',
     HYPERDX_TOKEN = 'HYPERDX_TOKEN',
     INTERNAL_URL = 'INTERNAL_URL',
     ISSUE_ARCHIVE_DAYS = 'ISSUE_ARCHIVE_DAYS',
     JWT_SECRET = 'JWT_SECRET',
+    CLOUD_OAUTH_URL = 'CLOUD_OAUTH_URL',
+    CLOUD_OAUTH_API_KEY = 'CLOUD_OAUTH_API_KEY',
     LICENSE_KEY = 'LICENSE_KEY',
     LICENSE_KEY_URL = 'LICENSE_KEY_URL',
     LICENSE_KEY_EXTEND_TRIAL_API_KEY = 'LICENSE_KEY_EXTEND_TRIAL_API_KEY',
@@ -113,6 +120,13 @@ export enum AppSystemProp {
     SMTP_USERNAME = 'SMTP_USERNAME',
     STRIPE_SECRET_KEY = 'STRIPE_SECRET_KEY',
     STRIPE_WEBHOOK_SECRET = 'STRIPE_WEBHOOK_SECRET',
+    /**
+     * Stripe price ids for the subscription tiers, as a JSON object keyed by PlanName, e.g.
+     * {"agent_pro":"price_123","studio_pro":"price_456"}. Kept as one tunable map rather than a
+     * price-id-per-plan enum: the ids differ per Stripe account/environment, and a wrong-but-plausible
+     * hardcoded literal would silently bill the wrong amount.
+     */
+    STRIPE_PLAN_PRICE_IDS = 'STRIPE_PLAN_PRICE_IDS',
     TELEMETRY_ENABLED = 'TELEMETRY_ENABLED',
     TEMPLATES_SOURCE_URL = 'TEMPLATES_SOURCE_URL',
     TRIGGER_DEFAULT_POLL_INTERVAL = 'TRIGGER_DEFAULT_POLL_INTERVAL',
@@ -137,6 +151,28 @@ export enum AppSystemProp {
     // CHAT_METRICS_RETENTION_DAYS bounds the table via a scheduled prune (default 90).
     CHAT_METRICS_ENABLED = 'CHAT_METRICS_ENABLED',
     CHAT_METRICS_RETENTION_DAYS = 'CHAT_METRICS_RETENTION_DAYS',
+    // Browser-agent (Intellisper) model-provider keys + tier model ids. Server-side only; never
+    // shipped to the client. Distinct from blockunits' per-platform ai_provider stack.
+    BROWSER_AGENT_ANTHROPIC_API_KEY = 'BROWSER_AGENT_ANTHROPIC_API_KEY',
+    BROWSER_AGENT_OPENAI_API_KEY = 'BROWSER_AGENT_OPENAI_API_KEY',
+    BROWSER_AGENT_DEFAULT_MODEL = 'BROWSER_AGENT_DEFAULT_MODEL',
+    BROWSER_AGENT_ESCALATION_MODEL = 'BROWSER_AGENT_ESCALATION_MODEL',
+    BROWSER_AGENT_REASONING_MODEL = 'BROWSER_AGENT_REASONING_MODEL',
+    BROWSER_AGENT_FALLBACK_MODEL = 'BROWSER_AGENT_FALLBACK_MODEL',
+    BROWSER_AGENT_DISTILL_MODEL = 'BROWSER_AGENT_DISTILL_MODEL',
+    BROWSER_AGENT_EMBEDDING_MODEL = 'BROWSER_AGENT_EMBEDDING_MODEL',
+    // Deep-link base for notification emails (falls back to the frontend URL).
+    BROWSER_AGENT_SITE_URL = 'BROWSER_AGENT_SITE_URL',
+    // Platform email transport selection: 'REST' (provider-agnostic HTTP API — preferred) or
+    // 'SMTP' (nodemailer). Unset = auto: REST when configured, else SMTP. The browser-agent
+    // notifier uses the same transport (no separate mail configuration).
+    EMAIL_TRANSPORT = 'EMAIL_TRANSPORT',
+    // REST transport config: endpoint URL + one auth header. PROVIDER selects the wire body
+    // ('GENERIC' neutral JSON, or 'ZEPTOMAIL' for Zoho ZeptoMail's Send Mail API).
+    EMAIL_REST_PROVIDER = 'EMAIL_REST_PROVIDER',
+    EMAIL_REST_URL = 'EMAIL_REST_URL',
+    EMAIL_REST_AUTH_HEADER = 'EMAIL_REST_AUTH_HEADER',
+    EMAIL_REST_AUTH_VALUE = 'EMAIL_REST_AUTH_VALUE',
 }
 
 export enum ContainerType {

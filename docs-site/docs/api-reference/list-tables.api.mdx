@@ -1,0 +1,69 @@
+---
+id: list-tables
+title: "List tables"
+description: "List tables"
+sidebar_label: "List tables"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1VUtv40YM/isCTy0wiL096pbWRhF0kQR5oIfACMYSbc9mNDPLoYwYgv57QT1sOZG9Rrs96cE3P/JjBazXEdIXYL20GGGhIMeYkQlsvIMUvprISSdUEDTpAhlJbCqI2QYLDWkFvAsIKUQm49ZQKzBi/L1E2oECpwuRBvLfMOObHBQQfi8NYQ4pU4m1GnHmymKJdMqZNYXhI0crbeO4p/NpZSVFTz/FVfO4zJEm0mJpGIs4EuBEBHxnJKftTR4v6+L5hFfe5kgfEPnpSfdRRlJeKIiYlWR414yUDuYvlNeFiAhj8C5iE+u36VQex/M5w5UuLScPnSYoyLxjdCy6OgRrMi26k29RDEaK8kuZSplu8gGJTRsu13xJ6SesTT6KQUaoGcdlZchPytpGjgj2AEq1bne3arr4UW2wU9ZCvajVYBnH3B7GbFQcWXMZz8VUgK4shFnmt9e/f53PQMHs5rF9XYxmxGTWa6TLvN7dvt7O/359mP9x9yC+725fn+9n10/z/tdYjHo4fi+C0QGRQ/9Vv8ZDvho0ZKFA57mRodL2foB6uzeCFr7zvwAEt8af7+qPa2qm9kcZ1mJVIG98DimssRlfzRtIYbL9MtnTfUTa9lxfkoUUNswhppOJDubKOEZrTQxIV5kv4OPpuCefl5l8JI+NIxhu+6OsYbsr/c7va5Mon9w9R0x2vqREB5O84S5Zo0MSxJIV+SLhDSY6L4xLMu+it4Jgs+vicYmaJIGGoFa+iWXYiujmUEYy81lZoOOGMUCBVN9Gn15Nr6Yy+sFHLnTDJB27HZ/Io6SrAxl9UOsqZXznSbDauIYBpMdVB8ULbL+I4v4wb3xk+V1VSx3xmWxdy++WawWi3ERR7hn8TC6/PHQj82tyKpc3QeRoBbbalqLXTOGnWK1+f5Uv0d3f3UuUu5U8r/rf6z0+r5ckNrig/3dywzN6iLWQDzISrDmbCjaoc+HRl6ozvM4yDENYPt1F8bInhD/nT6BAlzKF+53sNkj1LwNy0m438F1VrcaTf0NX19Bnz/LdMFb9D+73i4w=
+sidebar_class_name: "get api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"List tables"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/tables"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+List tables
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"query","name":"projectId","required":true},{"schema":{"type":"number"},"in":"query","name":"limit","required":false},{"schema":{"type":"string"},"in":"query","name":"cursor","required":false},{"schema":{"type":"string"},"in":"query","name":"name","required":false},{"schema":{"type":"array","items":{"type":"string"}},"in":"query","name":"externalIds","required":true},{"schema":{"type":"string"},"in":"query","name":"folderId","required":false},{"schema":{"type":"array","items":{"type":"string"}},"in":"query","name":"folderIds","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response","content":{"application/json":{"schema":{"type":"object","properties":{"data":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"created":{"type":"string"},"updated":{"type":"string"},"name":{"type":"string"},"folderId":{"anyOf":[{"type":"string"},{"type":"null"}]},"projectId":{"type":"string"},"externalId":{"type":"string"},"status":{"anyOf":[{"type":"string","enum":["ENABLED","DISABLED"]},{"type":"null"}]},"trigger":{"anyOf":[{"type":"string","enum":["ON_NEW_RECORD","ON_UPDATE_RECORD"]},{"type":"null"}]}},"required":["id","created","updated","name","projectId","externalId"],"additionalProperties":false}},"next":{"anyOf":[{"type":"string"},{"type":"null"}]},"previous":{"anyOf":[{"type":"string"},{"type":"null"}]}},"required":["data"],"additionalProperties":false}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,5 +1,5 @@
 import { isNil } from '../../../core/common'
-import { IntellisperError, ErrorCode } from '../../../core/common/intellisper-error'
+import { ErrorCode, IntellisperError } from '../../../core/common/intellisper-error'
 import { BranchCondition, BranchExecutionType, emptyCondition, FlowAction, FlowActionType } from '../actions/action'
 import { FlowVersion } from '../flow-version'
 import { FlowTrigger, FlowTriggerType } from '../triggers/trigger'

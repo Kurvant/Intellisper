@@ -1,0 +1,70 @@
+---
+id: update-a-global-connection
+title: "Update a global connection"
+description: "Update a shared connection's display name / workspace attachments (administrator-only)."
+sidebar_label: "Update a global connection"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1VE1v2zAM/SsCL9sANUl39HHrBhQbtqJdT0EOjMXGamVJk+h0huH/PlBOF3fpeptPssSPx8dHDsC4y1CtYefCFt1ZHbynmm3wGTYaDOU62Sj/UMFtNMikUOUGExl1NH6TlbE5OuyVx5bUUj2G9JAj1qSQGeumJc9ZvUXTWm8zJ+SQzoJ3/bsFaEj0s6PMH4LpoRqgDp7JsxwxRmdrlCTL+ywwBsh1Qy3KiftIUEHY3lPNoCGmECmxpSyvB0jfsKWZceZk/Q40tNZ/Jb/jBqrzsfhKlEuTZ8aYEvagwTK1+TTIOGpoidEgv4anQHjJXQMaY6U4dFdz7GMBRDfkqObPIX2jx6sJ3zzMNgRH6AsModAmMtLMeeGb8fkrp44kOCZsiSlJ91+g9IjQSusjcgMafKESrIGTkBu5yTH4PFX6frUqPXimoAu6w86xuj5YPhHYBCNJQi6kSa4Klvvz5akql4M1I2jIlPZP4LvkoIKGOeZqucRoF9YzOWdzpLSoQwt/K/kqBdOVgOqmBALBn6nukuX+RsiYqsBov1A/40WynIS7zaT60CWF0aoH6tWOPCVkMuouhVZxQ6ooX0YmB0dSQEkiTSRMAmDUIAK/Po7Cp1/YRkcnUj5KeK7Z9dP15pkmXxPSQQvW34VSomXJBpdH9tRFqDuZ3TKBoEFIn4peLVaLlQhE2tZimcyDPv4siql/s0XxN3WzWf+P6+XQO6ZfvIwOrRfYRTXDQW1r2J+DfmkLaqisEU4bUWe1hmHYYqbb5MZRrn92lHqo1hsNe0wWt0LhunRMzgaqO3SZXqn77fVhkt6pf2F92kZedtEeXSd/oOFBtCnjOG5GDQ2hoVSyTw8fpxxnP8T96HiyU8fNbAqvvt/8AA3bwy5ugxGfhI8y8/g4JQ5xYqcaprsBHPpdhzuxnWLK9xsTATnT
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a global connection"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/global-connections/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update a shared connection's display name / workspace attachments (administrator-only).
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"displayName":{"type":"string","minLength":1},"projectIds":{"type":"array","items":{"type":"string"}},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}},"preSelectForNewProjects":{"type":"boolean"}},"required":["displayName"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,5 +1,5 @@
-import { loggerRedact } from '@intelblocks/server-utils'
 import * as HyperDX from '@hyperdx/node-opentelemetry'
+import { loggerRedact } from '@intelblocks/server-utils'
 import { Level, pino, transport, TransportTargetOptions } from 'pino'
 import { AppSystemProp, environmentVariables } from '../../system/system-props'
 import { TransportProvider } from './transport-provider'

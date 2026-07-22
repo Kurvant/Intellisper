@@ -1,6 +1,4 @@
 import {
-    IntellisperError,
-    ibId,
     Cell,
     chunk,
     CreateRecordsRequest,
@@ -9,6 +7,8 @@ import {
     Field,
     Filter,
     FilterOperator,
+    ibId,
+    IntellisperError,
     isNil,
     PopulatedRecord,
     SeekPage,

@@ -186,6 +186,19 @@ export function PlatformSidebar() {
           label: t('Chat Analytics'),
           icon: ChartLineIcon,
         },
+        {
+          // AI Gateway: our AI cost of goods, by product surface and model, against revenue.
+          to: '/platform/observability/ai-spend',
+          label: t('AI Spend'),
+          icon: ReceiptIcon,
+        },
+        {
+          // Agent Oversight: platform-wide browser-agent activity across the tenant's users.
+          to: '/platform/observability/agent-activity',
+          label: t('Agent Activity'),
+          icon: BotIcon,
+          locked: !platform.plan.browserAgentEnabled,
+        },
       ],
     },
     {

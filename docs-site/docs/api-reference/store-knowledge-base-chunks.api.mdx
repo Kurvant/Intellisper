@@ -1,0 +1,70 @@
+---
+id: store-knowledge-base-chunks
+title: "Store knowledge base chunks"
+description: "Store or update chunks for a knowledge base file. Provide id to update existing chunks, or content to create new ones."
+sidebar_label: "Store knowledge base chunks"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVclu2zAQ/RViTi3AWE4PbaFjmx6CAm2QpCfDh7E4tpmIS0jKsSHo34uhZFuO0+RYX8xltjd8b9RCwlWEcgaP1j3XpFZ0scBIMJegKFZB+6SdhRLukgskXBCNV5hIVOvGPkaxdEGgODgLdhZLXdNE3AS30YqEViK5vRttdUzargZ/yRErZxPZxFZVILay9CycpTgBCYGeGorpm1M7KFsYjHmJ3te6Qi6weIhcZQuxWpNBXqWdJyjBLR6oSiDBB+cpJE0xh8npR3YYAu5Agk5k4vv+Wo1sYgrarqCT4+rO7sgsSCnelC0Yba/7TF8+f5VgcDvevlOTbcyCAnSckHFcW0XbV+4lGEqoML3VkN0vNBRfrRiV0txdrG/G4Lv8619GB1JMn6Gf8xcXKTTUSfAY0FCiwFR75ZGOKTVzzWNagwSLhi+1grOQcwmRqibotMsR0eufxMs5XwWK3tnYo/o0nfLfKZuvaIlNncTtYJl7aSitneL8LuYGcRklFJvL4lQdBRM8Fq1WXRFZFxcDfK4qbPYwm1BDCeuUfCyLAr2eaJuornX0FCaVM/BSZDfBqabijbjLgWCM9I7b1oPa4z10kLOchfsTSexcEwR6LR5pJ1ZkKWAiJZbBGZHWJFAZbVmC0dXEAHISKGFBGAaSsbhujzL8sUXjaxrLaNYrYv+QIyEcj0b8n03np9SdnlC16+aZCkuXEerEyeD62Dxx5arGkE1Z/CCBe95jnk6mkykziR/RYB4KA5H6EfZiVh1e7qR1oznz/ybf8LSJtqnwNWrLsDKp2oGbM9hcgnw5uyVkfoKEMmvnhKJzCWumdzmDtmXzP6HuOj5+aihkCUnYYNC44K7PWlA68lpBucQ60hud+nA7qPSj+Ff5+8lmea5tsG54xxCYzcyh/PRrQkUhZ+8vvvc5Lu7Z/eh49gVguRxkfPP77h4kLIYvh3GKfQI+8zzB5z6xyziyqPJZCzXaVYMrtu1jsgSw4X4f5DaIQ+4XXOmr0Nq2t7h3j2S77oA08Z7Bdt1ftICZZg==
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Store knowledge base chunks"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/knowledge-base/files/{id}/store-chunks"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Store or update chunks for a knowledge base file. Provide id to update existing chunks, or content to create new ones.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"chunks":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"content":{"type":"string"},"embedding":{"minItems":768,"maxItems":768,"type":"array","items":{"type":"number"}},"chunkIndex":{"type":"number"},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}}}}}},"required":["chunks"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

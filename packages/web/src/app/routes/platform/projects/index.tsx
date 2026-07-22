@@ -38,7 +38,12 @@ import { validationUtils } from '@/lib/validation-utils';
 
 import { projectsTableColumns } from './columns';
 
-export default function ProjectsPage() {
+export default function ProjectsPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -355,10 +360,12 @@ export default function ProjectsPage() {
       lockVideoUrl="https://cdn.activepieces.com/videos/showcase/projects.mp4"
     >
       <div className="flex flex-col w-full">
-        <DashboardPageHeader
-          title={t('Projects')}
-          description={t('Manage your automation projects')}
-        />
+        {!isOverhaul && (
+          <DashboardPageHeader
+            title={t('Projects')}
+            description={t('Manage your automation projects')}
+          />
+        )}
         <DataTable
           emptyStateTextTitle={t('No projects found')}
           emptyStateTextDescription={t(

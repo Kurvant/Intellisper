@@ -1,0 +1,47 @@
+---
+title: Safety
+description: How memory protects you — a secret guard that refuses to store credentials, scope-local deduplication that never widens a fact's audience, and graceful behaviour when the vector store is unavailable.
+sidebar_label: Safety
+sidebar_position: 4
+---
+Memory has a few built-in protections that work quietly in the background.
+
+## Secret guard
+
+Memory **refuses to store secrets**. Before saving any fact — whether the agent captured it, a flow wrote
+it, or you typed it into the "Add memory" box — the text is checked for things that look like
+credentials:
+
+- keywords like *password*, *passcode*, *api key*, *secret*, *token*, *SSN* / *social security*,
+  *credit card* / *card number*, *CVV* / *CVC*, *PIN*, *private key*, *seed phrase*, *mnemonic*, and
+- long runs of digits (12 or more), which usually mean a card or account number.
+
+When memory detects one of these, it **declines to save** and tells you why in a friendly note — it's not
+an error, just a refusal. Your secret is never written to storage.
+
+## Deduplication stays within scope
+
+When you save a fact that's nearly identical to one you already have, memory merges them instead of
+storing a duplicate. Crucially, this **only happens within the same scope** — a personal fact is only ever
+deduplicated against your other personal facts, never folded into org or flow memory. This is a privacy
+protection, not just tidiness: deduplicating across scopes could silently widen a personal fact's
+audience, so memory never does it.
+
+## Graceful when the vector store is unavailable
+
+Memory uses a vector database to find relevant facts by meaning. If that store is temporarily
+unavailable:
+
+- **Recall** returns nothing rather than failing — the agent or Copilot simply answers without
+  personalisation.
+- **Saving** new facts pauses (they aren't lost; the operation just reports it didn't save).
+- **Listing and exporting** your facts keep working — those don't need the vector store.
+
+Nothing that depends on memory ever crashes because memory had a bad moment; it degrades quietly and
+recovers on its own.
+
+## Personal data stays out of automations
+
+By design, a flow step can never reach an individual's personal memory — flows act as the *flow*, not as
+a person, so they're limited to org and flow scope. Personal facts are only ever used by interactive
+surfaces that know who you are. See [Privacy & sharing](/memory/privacy-and-sharing).

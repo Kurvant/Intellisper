@@ -13,6 +13,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDebounce } from 'use-debounce';
 
 import { SearchInput } from '@/components/custom/search-input';
+import { BotIcon } from '@/components/icons/bot';
 import { ChartLineIcon } from '@/components/icons/chart-line';
 import { CompassIcon } from '@/components/icons/compass';
 import { SendIcon } from '@/components/icons/send';
@@ -198,6 +199,26 @@ export function ProjectDashboardSidebar({
     },
   };
 
+  const agentLink: SidebarItemType = {
+    type: 'link',
+    to: '/agent',
+    label: t('My Agent'),
+    icon: BotIcon,
+    show: platform.plan.browserAgentEnabled,
+    hasPermission: true,
+    isSubItem: false,
+    onClick: () => {
+      const page = STATIC_PAGES.find((p) => p.href === '/agent');
+      if (page)
+        recordAccess({
+          id: page.id,
+          type: 'page',
+          label: page.label,
+          href: page.href,
+        });
+    },
+  };
+
   const leaderboardLink: SidebarItemType = {
     type: 'link',
     to: '/leaderboard',
@@ -218,7 +239,7 @@ export function ProjectDashboardSidebar({
     },
   };
 
-  const items = [chatLink, exploreLink, impactLink, leaderboardLink]
+  const items = [chatLink, exploreLink, impactLink, agentLink, leaderboardLink]
     .filter((item) => item.show !== false)
     .filter(permissionFilter);
 

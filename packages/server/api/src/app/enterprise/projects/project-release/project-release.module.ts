@@ -77,6 +77,9 @@ const projectReleaseController: FastifyPluginAsyncZod = async (app) => {
             }),
         },
         schema: {
+            tags: ['project-releases'],
+            summary: 'Create a project release',
+            description: 'Create a project release (a versioned snapshot of the project\'s state).',
             body: CreateProjectReleaseRequestBody,
         },
     }, async (request): Promise<ProjectRelease> => {

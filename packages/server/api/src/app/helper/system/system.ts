@@ -1,15 +1,15 @@
 import os from 'os'
 import path from 'path'
 import {
-    IntellisperError,
-    IbEdition,
+    BlockSyncMode,
     DefaultProjectRole,
     ErrorCode,
     ExecutionMode,
     FileLocation,
+    IbEdition,
+    IntellisperError,
     isNil,
     NetworkMode,
-    BlockSyncMode,
 } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { DatabaseType } from '../../database/database-type'

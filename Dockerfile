@@ -72,7 +72,7 @@ RUN --mount=type=cache,target=/root/.bun/install/cache \
 COPY . .
 
 # Build frontend, engine, server API, and worker
-RUN npx turbo run build --filter=web --filter=@activepieces/engine --filter=api --filter=worker
+RUN npx turbo run build --filter=web --filter=@intelblocks/engine --filter=api --filter=worker
 
 # Generate migration manifest (ordered list of migration names) for image-tag-based rollback
 RUN node -e "\

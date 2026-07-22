@@ -1,17 +1,17 @@
 import { BlockMetadataModel, BlockMetadataModelSummary } from '@intelblocks/blocks-framework'
 import {
-    IntellisperError,
     ALL_PRINCIPAL_TYPES,
+    BlockCategory,
+    BlockOptionRequest,
     EngineResponse,
     ErrorCode,
     GetBlockRequestParams,
     GetBlockRequestQuery,
     GetBlockRequestWithScopeParams,
+    IntellisperError,
     isNil,
     ListBlocksRequestQuery,
     LocalesEnum,
-    BlockCategory,
-    BlockOptionRequest,
     Principal,
     PrincipalType,
     RegistryBlocksRequestQuery,
@@ -25,7 +25,7 @@ import { flowService } from '../../flows/flow/flow.service'
 import { sampleDataService } from '../../flows/step-run/sample-data.service'
 import { userInteractionWatcher } from '../../workers/user-interaction-watcher'
 import { blockSyncService } from '../piece-sync-service'
-import { getBlockPackageWithoutArchive, blockMetadataService } from './piece-metadata-service'
+import { blockMetadataService, getBlockPackageWithoutArchive } from './piece-metadata-service'
 
 export const blockModule: FastifyPluginAsyncZod = async (app) => {
     await app.register(baseBlocksController, { prefix: '/v1/blocks' })

@@ -1,0 +1,30 @@
+---
+title: Table webhooks
+description: Trigger an automation when a table changes — table webhooks fire on record created, updated, or deleted events.
+sidebar_label: Table webhooks
+sidebar_position: 3
+---
+A **table webhook** lets a change to a table trigger an automation. Instead of polling a table to see
+what's new, you register a webhook and Intellisper notifies you when a record changes.
+
+## Events
+
+A table webhook can fire on any of these record events:
+
+- **Record created** — a new row was added.
+- **Record updated** — an existing row changed.
+- **Record deleted** — a row was removed.
+
+You choose which of these events a webhook listens for when you create it.
+
+## Managing webhooks
+
+- **Create** a webhook on a table, selecting the events it should fire on.
+- **Delete** a webhook when you no longer need it.
+
+## Using webhooks with flows
+
+Table webhooks are how a table becomes a *source* of automation, not just a store. Point a webhook at a
+flow, and every time a matching record change happens — a new lead added, a status updated — your flow
+runs automatically with the details of the change. This closes the loop: your flows write to tables, and
+changes to tables can trigger more flows.

@@ -1,0 +1,103 @@
+---
+title: Routines
+description: Record a task the agent completed once, then replay it with new values. Routines self-heal when a page changes, and halt for you rather than guessing.
+sidebar_label: Routines
+sidebar_position: 4
+---
+A **Routine** turns a task the agent has already done into something you can run again. Once the agent
+completes a run, you can save its steps as a routine, give it parameters, and replay it with new values
+— once, [in a batch, or on a schedule](/agent/automation).
+
+Routines are the agent's answer to repetitive browser work: fill in the same form for fifty rows, pull
+the same report every Monday, apply the same steps across a list of URLs.
+
+## Record → replay → self-heal
+
+<Steps>
+  <Step title="Record">
+    After the agent finishes a run, save it as a routine. The routine captures the **replayable on-page
+    actions** the agent took — navigating, clicking, typing, selecting options, scrolling, submitting.
+    Server-side reasoning steps (reading the page, recalling memory, fetching a URL) are not part of the
+    replay; a routine is the repeatable *doing*, not the one-off *figuring out*. Recording is capped at
+    40 steps.
+  </Step>
+  <Step title="Replay">
+    Run the routine again with a set of parameter values. A deterministic replay walks the recorded
+    steps directly — no model reasoning on the happy path — so a clean replay is fast and cheap.
+  </Step>
+  <Step title="Self-heal">
+    If a page has changed and a step's target can't be found, the routine repairs that single step
+    rather than failing the whole run (details below).
+  </Step>
+</Steps>
+
+## Parameters
+
+A routine is only useful if it can take new inputs. Each routine declares **parameters** — named values
+that get substituted into its steps at replay time.
+
+When you save a routine, the agent can **infer parameters automatically**: the distinct values you typed
+or selected during the original run become parameters, and the recorded steps are rewritten to use
+`{{placeholders}}`. Each parameter has a name, a label, a type, and can be marked required or given a
+default.
+
+Supported parameter types: **text, email, number, date, URL, telephone, and select** (a fixed choice
+list).
+
+At replay, the routine checks that every **required** parameter has a value before it runs — if one is
+missing, the replay stops with a clear validation message rather than running half a task. Values are
+substituted throughout the steps wherever their `{{placeholder}}` appears.
+
+You can edit a routine's parameters after recording, reorder its steps, or delete a step you don't need.
+
+## Self-healing, in detail
+
+Pages change. A button moves, a field is renamed, a layout shifts. Instead of failing outright, a routine
+tries to repair the step that broke — but always within strict bounds, and never by guessing on
+something consequential.
+
+Each recorded step stores several independent signals for finding its target element (its reference, its
+field label, its visible text, its accessibility role and name, and the recorded value), plus a
+plain-language description of the step's **intent**. When a step's target can't be found on replay:
+
+1. **The step is re-planned once (bounded).** The agent looks at the fresh page and the step's intent
+   and tries to find the matching element — a small, single-step model call. It attempts this at most
+   twice.
+2. **Otherwise, a bounded plain retry.** For non-targeting failures the step is retried up to twice —
+   but **never for a consequential step** (a form submission is never silently retried).
+3. **If it still can't proceed, it halts for you.** The routine pauses and surfaces the step's intent so
+   you can decide — it never silently skips a step.
+
+Self-healing is per-run: repairs apply to that replay only and are **not** written back to the saved
+routine.
+
+## History
+
+You can see the **run history** of a routine — the recent times it ran, with their status and outcome.
+Batch and scheduled runs appear here too.
+
+<Note>
+**Definition versioning**
+
+A routine tracks a **version number** that increases when you edit its parameters, reorder steps, or
+delete a step. This is a change counter — Intellisper does not currently keep a browsable history of a
+routine's *previous* definitions, so editing a routine changes it in place.
+</Note>
+
+<Info>
+**Routines are private to you**
+
+Routines are owner-scoped: they belong to the person who created them. Sharing routines across a team is
+not currently available.
+</Info>
+
+## Where to go next
+
+<CardGroup cols={2}>
+  <Card title="Automation" href="/agent/automation">
+    Run a routine across many rows of input, or on a recurring schedule.
+  </Card>
+  <Card title="Plans & limits" href="/agent/plans-and-limits">
+    Routine-run allowances by plan.
+  </Card>
+</CardGroup>

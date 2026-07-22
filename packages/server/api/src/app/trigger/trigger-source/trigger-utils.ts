@@ -1,9 +1,9 @@
 import { TriggerBase } from '@intelblocks/blocks-framework'
 import {
-    IntellisperError,
     ErrorCode,
     FlowTriggerType,
     FlowVersion,
+    IntellisperError,
     isNil,
     ProjectId,
 } from '@intelblocks/shared'

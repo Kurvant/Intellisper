@@ -4,9 +4,9 @@
 // and confirms the required permission is granted. It is edition-independent for the
 // binding checks; per-project permission checks apply where roles exist.
 import {
-    IntellisperError,
-    IbEdition,
     ErrorCode,
+    IbEdition,
+    IntellisperError,
     isNil,
     Permission,
     Principal,

@@ -1,4 +1,4 @@
-import { IbEdition, ExecutionType, JOB_PRIORITY, PlanName, StreamStepProgress, RATE_LIMIT_PRIORITY, RunEnvironment, WorkerJobType } from '@intelblocks/shared'
+import { ExecutionType, IbEdition, JOB_PRIORITY, PlanName, RATE_LIMIT_PRIORITY, RunEnvironment, StreamStepProgress, WorkerJobType } from '@intelblocks/shared'
 import { Job } from 'bullmq'
 import { FastifyBaseLogger } from 'fastify'
 import { Redis } from 'ioredis'

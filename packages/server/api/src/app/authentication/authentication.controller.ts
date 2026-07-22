@@ -1,3 +1,4 @@
+import { RateLimitOptions } from '@fastify/rate-limit'
 import { ApplicationEventName,
     isNil,
     PrincipalType,
@@ -6,7 +7,6 @@ import { ApplicationEventName,
     SwitchPlatformRequest,
     UserIdentityProvider,
 } from '@intelblocks/shared'
-import { RateLimitOptions } from '@fastify/rate-limit'
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { securityAccess } from '../core/security/authorization/fastify-security'
 import { applicationEvents } from '../helper/application-events'

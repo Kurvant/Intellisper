@@ -3,10 +3,10 @@
 // template-category flag. Guarded by a dedicated templates operator key, separate from
 // the general operator key, so template curation can be delegated independently.
 import {
-    IntellisperError,
-    IbFlagId,
     CreateTemplateRequestBody,
     ErrorCode,
+    IbFlagId,
+    IntellisperError,
     isNil,
     TemplateType,
     UpdateTemplateRequestBody,

@@ -30,7 +30,10 @@ import { apiKeyApi, apiKeyQueries } from '@/features/platform-admin';
 import { platformHooks } from '@/hooks/platform-hooks';
 import { formatUtils } from '@/lib/format-utils';
 
-const ApiKeysPage = () => {
+const ApiKeysPage = ({
+  variant = 'default',
+}: { variant?: 'default' | 'overhaul' } = {}) => {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
 
   const { data, isLoading, refetch } = apiKeyQueries.useApiKeys();
@@ -57,6 +60,7 @@ const ApiKeysPage = () => {
             </AnimatedIconButton>
           </NewApiKeyDialog>
         }
+        hideHeader={isOverhaul}
       >
         {isLoading && (
           <SkeletonList numberOfItems={3} className="w-full h-[72px]" />

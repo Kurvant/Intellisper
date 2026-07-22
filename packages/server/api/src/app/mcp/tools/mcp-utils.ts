@@ -4,7 +4,7 @@ import type { RouterAction, Step } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { z } from 'zod'
 import { expressionRewriter } from '../../flows/flow-version/migrations/expression-rewriter'
-import { getBlockPackageWithoutArchive, blockMetadataService } from '../../pieces/metadata/piece-metadata-service'
+import { blockMetadataService, getBlockPackageWithoutArchive } from '../../pieces/metadata/piece-metadata-service'
 import { projectService } from '../../project/project-service'
 import { userInteractionWatcher } from '../../workers/user-interaction-watcher'
 

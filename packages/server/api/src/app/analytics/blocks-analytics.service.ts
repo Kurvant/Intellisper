@@ -1,4 +1,4 @@
-import { FlowActionType, FlowStatus, flowStructureUtil, FlowTriggerType, isNil, BlockAction, BlockTrigger } from '@intelblocks/shared'
+import { BlockAction, BlockTrigger, FlowActionType, FlowStatus, flowStructureUtil, FlowTriggerType, isNil } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { repoFactory } from     '../core/db/repo-factory'
 import { FlowEntity } from '../flows/flow/flow.entity'

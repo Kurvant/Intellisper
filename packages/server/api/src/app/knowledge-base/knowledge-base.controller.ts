@@ -1,4 +1,4 @@
-import { IntellisperError, IbMultipartFile, ErrorCode, FileCompression, FileType, Permission, PrincipalType, SERVICE_KEY_SECURITY_OPENAPI, tryCatch } from '@intelblocks/shared'
+import { ErrorCode, FileCompression, FileType, IbMultipartFile, IntellisperError, Permission, PrincipalType, SERVICE_KEY_SECURITY_OPENAPI, tryCatch } from '@intelblocks/shared'
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { StatusCodes } from 'http-status-codes'
 import { z } from 'zod'
@@ -136,6 +136,7 @@ const CreateKnowledgeBaseFileRequest = {
     schema: {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Register a knowledge base file',
         description: 'Register a file for knowledge base ingestion',
         body: z.object({
             fileId: z.string(),
@@ -159,6 +160,7 @@ const UploadKnowledgeBaseFileRequest = {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
         consumes: ['multipart/form-data'],
+        summary: 'Upload a knowledge base file',
         description: 'Upload a file and create a knowledge base file record',
         querystring: z.object({
             projectId: z.string(),
@@ -179,6 +181,7 @@ const ListKnowledgeBaseFilesRequest = {
     schema: {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'List knowledge base files',
         description: 'List knowledge base files for the project',
         querystring: z.object({
             projectId: z.string(),
@@ -195,6 +198,7 @@ const DeleteKnowledgeBaseFileRequest = {
     schema: {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Delete a knowledge base file',
         description: 'Delete a knowledge base file and all its chunks',
         params: z.object({
             id: z.string(),
@@ -214,6 +218,7 @@ const GetChunkCountRequest = {
     schema: {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Count knowledge base file chunks',
         description: 'Get the number of chunks for a knowledge base file',
         params: z.object({
             id: z.string(),
@@ -230,6 +235,7 @@ const ExtractChunksRequest = {
     schema: {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Extract knowledge base file chunks',
         description: 'Extract text chunks from a knowledge base file',
         params: z.object({
             id: z.string(),
@@ -246,6 +252,7 @@ const StoreChunksRequest = {
     schema: {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Store knowledge base chunks',
         description: 'Store or update chunks for a knowledge base file. Provide id to update existing chunks, or content to create new ones.',
         params: z.object({
             id: z.string(),
@@ -271,6 +278,7 @@ const ListChunksRequest = {
     schema: {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'List knowledge base file chunks',
         description: 'List chunks for a knowledge base file, optionally filtered by embedding status',
         params: z.object({
             id: z.string(),
@@ -290,6 +298,7 @@ const SearchKnowledgeBaseRequest = {
     schema: {
         tags: ['knowledge-base'],
         security: [SERVICE_KEY_SECURITY_OPENAPI],
+        summary: 'Search the knowledge base',
         description: 'Search knowledge base using vector similarity',
         body: z.object({
             knowledgeBaseFileIds: z.array(z.string()),

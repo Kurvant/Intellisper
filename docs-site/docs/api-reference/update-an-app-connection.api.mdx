@@ -1,0 +1,70 @@
+---
+id: update-an-app-connection
+title: "Update an app connection"
+description: "Update an app connection value"
+sidebar_label: "Update an app connection"
+hide_title: true
+hide_table_of_contents: true
+api: eJyFVE1v2zAM/SsGscMGKF+9zbdt3WHYsBX9uCxIAcZiYrW2pEp02szQfx9ou0mWtN1NEinyvadHtcC4jpDPAb0fFc5aKtg4G2GhQFMsgvGyhxxuvEamDG2G3mf71GyDVUOgINBDQ5E/O72FvIXCWSbLskTvK1OgZE/uolRrIRYl1Sgr3nqCHNzyjgoGBT44T4ENRYlqE32F259Y00Fy5GDsGhTUxv4gu+YS8llSUBOjRn6rblcqntZKClBrIyCxujjEkFLq2ZlAWrQ6xLQ4inJoKCnwGLAmpiDivsB2R8AjMwUR+HY+HX3E0Z9Po9+L9myW3gkkIxGPXIIC22kARsNJw4WCSEUTDG+7fujNd5LlQkKBonc29qzPptNO138e95xW2FScXQ6ZkHoxS6elv4vcQy0hh8lmNjlyy6Q1OoFgCJtnyk2oIIeS2cd8MkFvxsYyVZWJnsK4cDUcO+wiON30nrrqCsEhryuRsKfwzG6npnQ5KXcTKdu6JmToTXZP22xNlgIy6WwVXJ1xSRnq2lgxc3SVeLh7J6m4JAwCICkQx17uvf31CWtf0Yk3Dzy5N2HqnnDlOqyG5Rp828uQnbuiqclyNxugQNTr0U/H0/FUHCDi19jNzGCA1ybxWIGDGfz/9A5KMj3xxFdorPTu3rAdHn4Omxmok49CQW60fBeluCSfQ9suMdJNqFKS44eGQudEBRsMBpciwrwTT9Ya8hVWkd7A/v5yMPuH7DWgwyHarYjYUcoBFNyLTWRi0iIpKAk1ha57H/jS9xhdy/X9xZP/Sny4m4aLX1fXoGA5/HO103In4KOMJT72jZ3v1cnb/qyFCu26wbXk9jXFG9iIsjsfD65TzwtB+iK1tu0zrt092ZR2TFn2Qjalv7X8BOs=
+sidebar_class_name: "post api-method"
+info_path: api-reference/intellisper-documentation
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update an app connection"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/app-connections/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update an app connection value
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string","pattern":"^[0-9a-zA-Z]{21}$"},"in":"path","name":"id","required":true}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"content":{"application/json":{"schema":{"type":"object","properties":{"displayName":{"type":"string","minLength":1},"metadata":{"type":"object","propertyNames":{"type":"string"},"additionalProperties":{}}},"required":["displayName"]}}},"required":true}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  responses={{"200":{"description":"Default Response"}}}
+>
+  
+</StatusCodes>
+
+
+      

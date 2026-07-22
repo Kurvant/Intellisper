@@ -60,9 +60,7 @@ export const platformBlocksMutations = {
       },
       onSuccess: () => {
         toast.success(t('Blocks synced'), {
-          description: t(
-            'Blocks have been synced from the Intellisper cloud.',
-          ),
+          description: t('Blocks have been synced from the Intellisper cloud.'),
         });
       },
     });

@@ -5,11 +5,11 @@
 // domain (claim it, prove ownership via a DNS TXT record, expire unproven claims).
 import { resolveTxt } from 'node:dns/promises'
 import {
-    IntellisperError,
-    IbEdition,
-    ibId,
     AuthenticationResponse,
     ErrorCode,
+    IbEdition,
+    ibId,
+    IntellisperError,
     isNil,
     PlatformId,
     SAMLAuthnProviderConfig,
@@ -20,7 +20,6 @@ import {
     UserIdentityProvider,
 } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
-import { z } from 'zod'
 import { authenticationService } from '../../../authentication/authentication.service'
 import { domainHelper } from '../../../helper/domain-helper'
 import { system } from '../../../helper/system/system'
@@ -126,7 +125,11 @@ export const authnSsoSamlService = (log: FastifyBaseLogger) => ({
         const nextDomain = !isNil(normalized) && normalized.length > 0 ? normalized : null
 
         if (!isNil(nextDomain)) {
-            if (!z.string().hostname().safeParse(nextDomain).success || !nextDomain.includes('.')) {
+            // A DNS hostname: dot-separated labels of [a-z0-9-] (not starting/ending with a hyphen),
+            // at least two labels (must contain a dot). Zod 4 dropped the v3 `.hostname()` helper, so
+            // this is validated explicitly and identically.
+            const HOSTNAME_RE = /^(?=.{1,253}$)([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)(\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+$/
+            if (!HOSTNAME_RE.test(nextDomain)) {
                 throw validationError('SSO domain must be a valid lowercase domain (e.g. acme.com)')
             }
             const owner = await platformRepo().findOneBy({ ssoDomain: nextDomain })

@@ -1,6 +1,6 @@
 import { Cell, Field, Project, Record } from '@intelblocks/shared'
 import { EntitySchema } from 'typeorm'
-import { IbIdSchema, BaseColumnSchemaPart } from '../../database/database-common'
+import { BaseColumnSchemaPart, IbIdSchema } from '../../database/database-common'
 
 type CellSchema = Cell & {
     record: Record

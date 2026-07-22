@@ -1,4 +1,4 @@
-import { IbEnvironment, isNil, BlockType } from '@intelblocks/shared'
+import { BlockType, IbEnvironment, isNil } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { repoFactory } from '../../core/db/repo-factory'
 import { pubsub } from '../../helper/pubsub'

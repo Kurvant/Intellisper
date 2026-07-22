@@ -1,4 +1,4 @@
-import { IntellisperError, ibId, ErrorCode, isNil, spreadIfDefined, UserIdentity } from '@intelblocks/shared'
+import { ErrorCode, ibId, IntellisperError, isNil, spreadIfDefined, UserIdentity } from '@intelblocks/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { nanoid } from 'nanoid'
 import { repoFactory } from '../../core/db/repo-factory'

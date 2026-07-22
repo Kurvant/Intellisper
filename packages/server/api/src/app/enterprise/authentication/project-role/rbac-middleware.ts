@@ -3,9 +3,9 @@
 // permission on a workspace, resolve a caller's role, or gate a flow operation by the
 // permission it requires (capability spec I.3-B / I.4).
 import {
-    IntellisperError,
     ErrorCode,
     FlowOperationType,
+    IntellisperError,
     isNil,
     Permission,
     Principal,

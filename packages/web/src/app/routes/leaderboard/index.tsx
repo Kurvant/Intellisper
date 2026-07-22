@@ -98,7 +98,12 @@ function applyTimeSavedFilter<T extends { minutesSaved: number }>(
   return result;
 }
 
-export default function LeaderboardPage() {
+export default function LeaderboardPage({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'overhaul';
+} = {}) {
+  const isOverhaul = variant === 'overhaul';
   const { platform } = platformHooks.useCurrentPlatform();
   const [timePeriod, setTimePeriod] = useState<AnalyticsTimePeriod>(
     AnalyticsTimePeriod.LAST_WEEK,
@@ -350,22 +355,8 @@ export default function LeaderboardPage() {
     >
       <RefreshAnalyticsProvider>
         <div className="flex flex-col gap-2 w-full">
-          <PageHeader
-            showSidebarToggle={true}
-            title={
-              <div className="flex items-center gap-1.5">
-                <span className="text-sm font-medium">{t('Leaderboard')}</span>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {t('See top performers by flows created and time saved')}
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-            }
-            rightContent={
+          {(() => {
+            const headerControls = (
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 px-3 py-1.5 border border-dashed rounded-md text-sm text-muted-foreground">
                   <span>
@@ -428,9 +419,43 @@ export default function LeaderboardPage() {
                   </SelectContent>
                 </Select>
               </div>
-            }
-            className="min-w-full"
-          />
+            );
+            return isOverhaul ? (
+              // Overhaul: the shell renders the page title, so we surface the same
+              // freshness/refresh/time-period controls on a glass toolbar instead.
+              <div
+                className={cn(
+                  'ov-glass ov-slide-in-up flex flex-wrap items-center justify-end gap-3 rounded-2xl px-4 py-3',
+                  DASHBOARD_CONTENT_PADDING_X,
+                )}
+              >
+                {headerControls}
+              </div>
+            ) : (
+              <PageHeader
+                showSidebarToggle={true}
+                title={
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-medium">
+                      {t('Leaderboard')}
+                    </span>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="h-4 w-4 text-muted-foreground cursor-help" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        {t(
+                          'See top performers by flows created and time saved',
+                        )}
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                }
+                rightContent={headerControls}
+                className="min-w-full"
+              />
+            );
+          })()}
 
           <Tabs
             defaultValue="creators"

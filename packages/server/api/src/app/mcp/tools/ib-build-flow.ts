@@ -1,4 +1,5 @@
 import {
+    BlockTrigger,
     FlowActionType,
     FlowCreatorType,
     FlowOperationType,
@@ -7,7 +8,6 @@ import {
     McpToolContext,
     McpToolDefinition,
     Permission,
-    BlockTrigger,
     StepLocationRelativeToParent,
     UpdateActionRequest,
 } from '@intelblocks/shared'
