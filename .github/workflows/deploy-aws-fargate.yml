@@ -106,10 +106,12 @@ jobs:
             exit 0
           fi
           for i in $(seq 1 10); do
-            CODE=$(curl -s -o /dev/null -w '%{http_code}' "$URL/api/v1/health" || echo 000)
+            # -L follows redirects: once the ALB has an HTTPS listener the plain HTTP URL answers
+            # 301, which is a correctly-configured deployment, not a failure.
+            CODE=$(curl -sL -o /dev/null -w '%{http_code}' "$URL/api/v1/health" || echo 000)
             if [ "$CODE" = "200" ]; then
               echo "Health check passed: HTTP $CODE"
-              curl -s "$URL/api/v1/health"
+              curl -sL "$URL/api/v1/health"
               exit 0
             fi
             echo "attempt $i: HTTP $CODE - retrying in 15s"
