@@ -1,0 +1,117 @@
+name: Deploy to AWS Fargate
+
+# Builds the Intellisper image on GitHub's runners, pushes it to ECR, and rolls the Fargate
+# service onto it. This replaces running `pulumi up` locally for CODE changes: no 60-minute
+# local build, no Docker disk exhaustion.
+#
+# Pulumi still owns the INFRASTRUCTURE (VPC, RDS, ALB, Fargate service definition). Run it by
+# hand when infra or environment variables change. This workflow only swaps the running image.
+
+on:
+  # Deploy automatically when application code lands on main.
+  push:
+    branches: [main]
+    paths:
+      - 'packages/**'
+      - 'Dockerfile'
+      - 'docker-entrypoint.sh'
+      - 'package.json'
+      - 'bun.lock'
+      - '.github/workflows/deploy-aws-fargate.yml'
+  # ...and allow a manual run from the Actions tab at any time.
+  workflow_dispatch:
+
+concurrency:
+  # Never let two deploys race onto the same service; a newer push supersedes an in-flight one.
+  group: deploy-aws-fargate
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: intellisper-prod-repo
+  ECS_CLUSTER: intellisper-prod-cluster
+  ECS_SERVICE: intellisper-prod-fg
+
+jobs:
+  deploy:
+    name: Build image and roll out
+    runs-on: ubuntu-24.04
+    # A cold monorepo build takes ~30 min on GitHub runners; allow headroom without letting a
+    # hung build burn the whole free-tier budget.
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Log in to Amazon ECR
+        id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          # Tag with both the commit SHA (immutable, so a rollback can name an exact build) and
+          # `latest`, which is what the Pulumi task definition references.
+          tags: |
+            ${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
+            ${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
+          # Reuse layers from the previous image so subsequent builds are minutes, not half an hour.
+          cache-from: type=registry,ref=${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:buildcache
+          cache-to: type=registry,ref=${{ steps.ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:buildcache,mode=max
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+
+      - name: Roll the Fargate service onto the new image
+        run: |
+          aws ecs update-service \
+            --cluster "$ECS_CLUSTER" \
+            --service "$ECS_SERVICE" \
+            --force-new-deployment \
+            --region "$AWS_REGION" \
+            --no-cli-pager \
+            --query 'service.serviceName' --output text
+
+      - name: Wait for the rollout to become stable
+        run: |
+          echo "Waiting for ECS to reach a steady state (this includes the health-check grace period)..."
+          aws ecs wait services-stable \
+            --cluster "$ECS_CLUSTER" \
+            --services "$ECS_SERVICE" \
+            --region "$AWS_REGION"
+
+      - name: Verify the application is actually serving
+        run: |
+          # `services-stable` only means ECS is happy. Prove the app answers before calling the
+          # deploy a success, so a broken build fails the workflow instead of sitting green.
+          URL="${{ secrets.INTELLISPER_URL }}"
+          if [ -z "$URL" ]; then
+            echo "INTELLISPER_URL secret not set; skipping HTTP verification."
+            exit 0
+          fi
+          for i in $(seq 1 10); do
+            CODE=$(curl -s -o /dev/null -w '%{http_code}' "$URL/api/v1/health" || echo 000)
+            if [ "$CODE" = "200" ]; then
+              echo "Health check passed: HTTP $CODE"
+              curl -s "$URL/api/v1/health"
+              exit 0
+            fi
+            echo "attempt $i: HTTP $CODE - retrying in 15s"
+            sleep 15
+          done
+          echo "Health check never returned 200. Deployment is NOT healthy."
+          exit 1
