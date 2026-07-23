@@ -19,6 +19,9 @@ on:
       - 'package.json'
       - 'bun.lock'
       - '.github/workflows/deploy-aws-fargate.yml'
+      # The catalogue publisher runs as part of this workflow, so a change to it must be able to
+      # trigger a run on its own -- otherwise a fix to the seeding step silently never deploys.
+      - 'tools/scripts/blocks/**'
   # ...and allow a manual run from the Actions tab at any time.
   workflow_dispatch:
 
