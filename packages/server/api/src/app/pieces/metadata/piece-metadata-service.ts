@@ -162,6 +162,13 @@ export const blockMetadataService = (log: FastifyBaseLogger) => {
                 platformId,
                 created: createdDate,
                 ...blockMetadata,
+                // The maximumSupportedRelease column is NOT NULL, but blocks declare no upper engine
+                // bound so their built metadata always omits it. '999.999.999' is the codebase's
+                // canonical "no upper bound" sentinel (see piece-install-service.ts and
+                // isSupportedRelease), so persisting it is behaviourally identical to unset while
+                // satisfying the constraint. Placed after the spread so a block that DOES set an
+                // upper bound keeps its own value.
+                maximumSupportedRelease: blockMetadata.maximumSupportedRelease ?? '999.999.999',
             })
             if (publishCacheRefresh) {
                 await blockCache(log).invalidate()
