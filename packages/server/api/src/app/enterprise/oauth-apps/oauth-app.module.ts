@@ -18,6 +18,7 @@ import {
 import { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 import { securityAccess } from '../../core/security/authorization/fastify-security'
+import { cloudOAuthAppService } from './cloud-oauth-app.service'
 import { oauthAppService } from './oauth-app.service'
 
 export const oauthAppModule: FastifyPluginAsyncZod = async (app) => {
@@ -59,6 +60,17 @@ const oauthAppController: FastifyPluginAsyncZod = async (app) => {
             cursor: request.query.cursor ?? null,
             limit: request.query.limit ?? DEFAULT_PAGE_SIZE,
         })
+    })
+
+    // List the BROKER-MANAGED providers (blockName + clientId only, never a secret) so the
+    // connection dialog can offer one-click Connect for them. Available to any authenticated
+    // member — the same audience that needs the platform app list to establish connections.
+    // Best-effort: an unreachable broker yields an empty list, never an error.
+    app.get('/cloud', {
+        ...platformScoped,
+    }, async (request): Promise<{ providers: { blockName: string, clientId: string }[] }> => {
+        const providers = await cloudOAuthAppService(request.log).list()
+        return { providers }
     })
 
     // Revoke an app by id, scoped to the organization.

@@ -74,22 +74,31 @@ export const oauthAppsQueries = {
     return useQuery<BlocksOAuth2AppsMap, Error>({
       queryKey: ['oauth-apps'],
       queryFn: async () => {
-        // Predefined OAuth2 apps are the ones this platform registered itself.
-        // This edition hosts no shared OAuth2 client on the operator's behalf, so
-        // an app the platform has not configured has no predefined client and the
-        // connection dialog asks for the user's own credentials instead.
-        const apps =
+        // Two independent sources of managed OAuth, merged into one map:
+        //   - PLATFORM apps: client credentials an organisation registered itself (DB-backed).
+        //   - CLOUD apps: providers the operator's broker manages (broker holds the secret).
+        // A block in either list shows a one-click Connect instead of asking for the user's own
+        // credentials. When both exist, the organisation's own platform app takes precedence over
+        // the broker default (see getPredefinedOAuth2App). On COMMUNITY there is no platform
+        // registry; the cloud list is still consulted because a self-hosted install may point at
+        // a broker.
+        const [platformApps, cloudApps] = await Promise.all([
           edition === IbEdition.COMMUNITY
-            ? {
-                data: [],
-              }
-            : await oauthAppsApi.listPlatformOAuth2Apps({
+            ? Promise.resolve({ data: [] })
+            : oauthAppsApi.listPlatformOAuth2Apps({
                 limit: 1000000,
                 cursor: undefined,
-              });
+              }),
+          // Best-effort: the endpoint already degrades to an empty list if the broker is
+          // unreachable, so a failure here should never block the dialog.
+          oauthAppsApi
+            .listCloudOAuth2Apps()
+            .catch(() => ({ providers: [] as { blockName: string; clientId: string }[] })),
+        ]);
+
         const appsMap: BlocksOAuth2AppsMap = {};
 
-        apps.data.forEach((app) => {
+        platformApps.data.forEach((app) => {
           appsMap[app.blockName] = {
             platformOAuth2App: {
               oauth2Type: AppConnectionType.PLATFORM_OAUTH2,
@@ -98,6 +107,18 @@ export const oauthAppsQueries = {
             cloudOAuth2App: null,
           };
         });
+
+        cloudApps.providers.forEach((provider) => {
+          const existing = appsMap[provider.blockName];
+          appsMap[provider.blockName] = {
+            platformOAuth2App: existing?.platformOAuth2App ?? null,
+            cloudOAuth2App: {
+              oauth2Type: AppConnectionType.CLOUD_OAUTH2,
+              clientId: provider.clientId,
+            },
+          };
+        });
+
         return appsMap;
       },
       staleTime: 0,
