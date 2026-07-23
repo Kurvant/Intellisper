@@ -1,0 +1,67 @@
+name: Seed Block Catalogue
+
+# Publishes block metadata into the running instance's catalogue so the flow canvas shows blocks.
+#
+# This is separate from the deploy workflow ON PURPOSE. It has to build all ~715 blocks (20+ min),
+# which is wasteful to repeat on every code deploy and is only needed when the block set changes.
+# Keeping it here means:
+#   - a normal code deploy stays fast and never spends minutes on a block build;
+#   - a seeding problem can never fail a deploy that actually succeeded;
+#   - re-seeding is one manual click when needed.
+#
+# Only METADATA is sent to POST /v1/admin/blocks -- never block code. The worker resolves each
+# package from the registry at execution time. Idempotent: an already-present (name, version)
+# comes back 409 and is counted as "already present", so re-running is always safe.
+
+on:
+  # Only when the blocks themselves change on main.
+  push:
+    branches: [main]
+    paths:
+      - 'packages/blocks/**'
+      - 'tools/scripts/blocks/**'
+      - '.github/workflows/seed-block-catalogue.yml'
+  # ...and on demand from the Actions tab, for the initial seed or a manual refresh.
+  workflow_dispatch:
+
+concurrency:
+  group: seed-block-catalogue
+  cancel-in-progress: true
+
+jobs:
+  seed:
+    name: Build blocks and publish metadata
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build all blocks
+        # The publisher reads metadata from packages/blocks/**/dist, so the blocks must be built
+        # first. Note the runtime image deliberately trims all but four blocks to stay small; here
+        # the full set is built purely to extract metadata.
+        run: npx turbo run build --filter="./packages/blocks/**"
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
+
+      - name: Publish block metadata to the catalogue
+        run: npx tsx tools/scripts/blocks/publish-blocks-metadata.ts
+        env:
+          IB_INSTANCE_URL: ${{ secrets.INTELLISPER_URL }}
+          IB_API_KEY: ${{ secrets.IB_API_KEY }}
+          NODE_OPTIONS: "--max-old-space-size=8192"

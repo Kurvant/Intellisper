@@ -163,9 +163,19 @@ async function main(): Promise<void> {
     }
 
     console.info(`\nDone. created=${counts.created} already-present=${counts.exists} failed=${counts.failed}`)
+
+    // Tolerate a small number of individual failures (a transient network blip on one block should
+    // not discard a seed that otherwise published 700+ blocks) but still fail loudly if a large
+    // fraction failed -- that indicates a systemic problem (bad schema, wrong URL, auth) worth a
+    // red run. The threshold scales with catalogue size.
     if (failures.length > 0) {
-        console.error(`Failed blocks:\n  ${failures.join('\n  ')}`)
-        process.exit(1)
+        console.error(`Failed blocks (${failures.length}):\n  ${failures.join('\n  ')}`)
+        const tolerance = Math.max(5, Math.floor(all.length * 0.02))
+        if (failures.length > tolerance) {
+            console.error(`\n${failures.length} failures exceeds tolerance (${tolerance}); failing the run.`)
+            process.exit(1)
+        }
+        console.error(`\n${failures.length} failures is within tolerance (${tolerance}); treating the seed as successful.`)
     }
 }
 

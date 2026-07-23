@@ -109,8 +109,13 @@ const CreateOfficialBlockRequest = {
             auth: z.unknown().optional(),
             authors: z.array(z.string()),
             categories: z.array(z.nativeEnum(BlockCategory)).optional(),
-            minimumSupportedRelease: ExactVersionType,
-            maximumSupportedRelease: ExactVersionType,
+            // Both release bounds are OPTIONAL in the canonical BlockMetadata type
+            // (blocks/framework/src/lib/piece-metadata.ts) and in the service layer that persists
+            // them. Real block metadata omits maximumSupportedRelease entirely (all 700+ community
+            // blocks leave it unset), so requiring it here rejected every genuine block with a 400
+            // and made catalogue seeding impossible. Match the model, not a stricter invention.
+            minimumSupportedRelease: ExactVersionType.optional(),
+            maximumSupportedRelease: ExactVersionType.optional(),
             actions: z.record(z.string(), z.unknown()),
             triggers: z.record(z.string(), z.unknown()),
             i18n: z.record(z.string(), z.record(z.string(), z.string())).optional(),

@@ -19,9 +19,6 @@ on:
       - 'package.json'
       - 'bun.lock'
       - '.github/workflows/deploy-aws-fargate.yml'
-      # The catalogue publisher runs as part of this workflow, so a change to it must be able to
-      # trigger a run on its own -- otherwise a fix to the seeding step silently never deploys.
-      - 'tools/scripts/blocks/**'
   # ...and allow a manual run from the Actions tab at any time.
   workflow_dispatch:
 
@@ -122,36 +119,8 @@ jobs:
           echo "Health check never returned 200. Deployment is NOT healthy."
           exit 1
 
-      # ---------------------------------------------------------------------------------------
-      # Block catalogue. The UI's block pickers are served from the `block_metadata` table, which
-      # starts empty -- so without this the canvas shows no blocks at all. This mirrors upstream's
-      # `release-pieces.yml`, which publishes the packages and then pushes their metadata to the
-      # cloud instance in the same pipeline run.
-      #
-      # Only metadata is sent; block code is never uploaded. The worker resolves each package from
-      # the registry at execution time. Running this on the GitHub runner (rather than locally or
-      # in-cluster) is deliberate: the runner has to build the blocks anyway, so the artifacts are
-      # already on its disk.
-      # ---------------------------------------------------------------------------------------
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
-
-      - name: Build all blocks
-        # The publisher reads metadata from packages/blocks/**/dist, so the blocks must be built
-        # first. This is the same build the image does, but here the full set survives (the
-        # Dockerfile trims all but four blocks to keep the runtime image small).
-        run: npx turbo run build --filter="./packages/blocks/**"
-        env:
-          NODE_OPTIONS: "--max-old-space-size=8192"
-
-      - name: Publish block metadata to the catalogue
-        run: npx tsx tools/scripts/blocks/publish-blocks-metadata.ts
-        env:
-          IB_INSTANCE_URL: ${{ secrets.INTELLISPER_URL }}
-          IB_API_KEY: ${{ secrets.IB_API_KEY }}
-          NODE_OPTIONS: "--max-old-space-size=8192"
+      # Block catalogue seeding is intentionally NOT part of this workflow. It requires building all
+      # ~715 blocks (~20+ minutes) and is only needed when blocks change -- not on every code deploy.
+      # It lives in seed-block-catalogue.yml, which runs on packages/blocks changes or on demand, so
+      # a normal deploy stays fast and a seeding hiccup can never fail (or bill minutes against) a
+      # deploy that actually succeeded.
