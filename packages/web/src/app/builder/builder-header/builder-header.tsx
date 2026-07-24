@@ -1,14 +1,12 @@
 import {
-  IbFlagId,
   FlowOperationType,
   FlowVersionState,
   Permission,
-  supportUrl,
   UncategorizedFolderId,
 } from '@intelblocks/shared';
 import { useQueryClient } from '@tanstack/react-query';
 import { t } from 'i18next';
-import { ChevronDown, CircleHelp, HistoryIcon } from 'lucide-react';
+import { ChevronDown, HistoryIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import {
   createSearchParams,
@@ -37,9 +35,7 @@ import { FlowCreatedByBadge } from '@/features/flows/components/flow-created-by-
 import { foldersHooks } from '@/features/folders';
 import { getProjectName, projectCollectionUtils } from '@/features/projects';
 import { useAuthorization } from '@/hooks/authorization-hooks';
-import { flagsHooks } from '@/hooks/flags-hooks';
 import { authenticationSession } from '@/lib/authentication-session';
-import { useNewWindow } from '@/lib/navigation-utils';
 import { NEW_FLOW_QUERY_PARAM } from '@/lib/route-utils';
 import { cn } from '@/lib/utils';
 
@@ -52,10 +48,6 @@ export const BuilderHeader = () => {
   const [queryParams] = useSearchParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const openNewWindow = useNewWindow();
-  const { data: showSupport } = flagsHooks.useFlag<boolean>(
-    IbFlagId.SHOW_COMMUNITY,
-  );
 
   const hasPermissionToReadRuns = useAuthorization().checkAccess(
     Permission.READ_FLOW,
@@ -181,16 +173,6 @@ export const BuilderHeader = () => {
 
   const rightContent = (
     <div className="flex items-center justify-center gap-4">
-      {showSupport && (
-        <Button
-          variant="ghost"
-          className="gap-2 px-2"
-          onClick={() => openNewWindow(supportUrl)}
-        >
-          <CircleHelp className="w-4 h-4"></CircleHelp>
-          {t('Support')}
-        </Button>
-      )}
       <ActiveUsersWidget resourceId={flow.id} />
       {hasPermissionToReadRuns && (
         <Button

@@ -132,7 +132,12 @@ export function NewAppShell({
 
 const DOMAIN_STORAGE_KEY = 'ib.nav.activeDomain';
 
-function DomainNav() {
+/**
+ * The overhaul navigation (icon rail + pinned drawer). Exported so full-screen surfaces that
+ * don't use the whole NewAppShell chrome (e.g. the flow builder / run viewer via BuilderLayout)
+ * can still carry the NEW shell's nav instead of the legacy sidebar.
+ */
+export function DomainNav() {
   const isPlatformAdmin = useIsPlatformAdmin();
   const { checkAccess } = useAuthorization();
   const { embedState } = useEmbedding();

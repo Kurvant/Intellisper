@@ -1,17 +1,20 @@
 import { IbEdition, IbFlagId } from '@intelblocks/shared';
 
 import { useEmbedding } from '@/components/providers/embed-provider';
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar-shadcn';
 import { PurchaseExtraFlowsDialog } from '@/features/billing';
 import { flagsHooks } from '@/hooks/flags-hooks';
 import { cn } from '@/lib/utils';
 
-import {
-  GlobalSearchProvider,
-  useGlobalSearch,
-} from '../global-search/global-search-context';
-import { ProjectDashboardSidebar } from '../sidebar/dashboard';
+import { GlobalSearchProvider } from '../global-search/global-search-context';
+import { DomainNav } from '../overhaul/new-app-shell';
 
+/**
+ * Layout for full-screen work surfaces (flow builder / run viewer / legacy table editor).
+ * Carries the NEW shell's navigation (DomainNav — icon rail + drawer) so every link reachable
+ * from these surfaces stays inside the overhaul IA. The legacy ProjectDashboardSidebar
+ * (hover rail linking to old-shell pages) was deliberately removed — the builder must not
+ * offer navigation into the old shell.
+ */
 export function BuilderLayout({ children }: { children: React.ReactNode }) {
   return (
     <GlobalSearchProvider>
@@ -23,12 +26,11 @@ export function BuilderLayout({ children }: { children: React.ReactNode }) {
 function BuilderLayoutInner({ children }: { children: React.ReactNode }) {
   const { data: edition } = flagsHooks.useFlag<IbEdition>(IbFlagId.EDITION);
   const { embedState } = useEmbedding();
-  const { open: searchOpen } = useGlobalSearch();
 
   return (
-    <SidebarProvider hoverMode={!searchOpen} defaultOpen={false}>
-      {!embedState.isEmbedded && <ProjectDashboardSidebar />}
-      <SidebarInset className="flex flex-col h-full overflow-hidden bg-sidebar">
+    <div className="flex h-screen w-full overflow-hidden bg-sidebar">
+      {!embedState.isEmbedded && <DomainNav />}
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         <div
           className={cn(
             'flex-1 flex flex-col overflow-hidden',
@@ -47,7 +49,7 @@ function BuilderLayoutInner({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         {edition === IbEdition.CLOUD && <PurchaseExtraFlowsDialog />}
-      </SidebarInset>
-    </SidebarProvider>
+      </div>
+    </div>
   );
 }
