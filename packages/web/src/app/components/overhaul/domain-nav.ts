@@ -120,12 +120,11 @@ export const DOMAIN_NAV: DomainNavGroup[] = [
     icon: 'data',
     items: [
       {
-        // Tables have no standalone list in this app — they are browsed inside the (overhaul)
-        // Automations gallery alongside flows/folders — so the nav item lands there. Opening a
-        // table navigates to the project-scoped editor at /data/tables/:tableId (OverhaulTablesPage).
+        // Standalone tables list (OverhaulTablesListPage). Opening a table navigates to the
+        // project-scoped editor at /data/tables/:tableId (OverhaulTablesPage).
         icon: 'table',
         label: 'Tables',
-        to: '/build/automations',
+        to: '/data/tables',
         projectScoped: true,
         permission: Permission.READ_TABLE,
       },

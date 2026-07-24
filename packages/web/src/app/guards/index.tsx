@@ -116,6 +116,12 @@ const OverhaulTablesPage = React.lazy(() =>
   })),
 );
 
+const OverhaulTablesListPage = React.lazy(() =>
+  import('@/app/routes/overhaul-tables-list').then((m) => ({
+    default: m.OverhaulTablesListPage,
+  })),
+);
+
 function chatElement() {
   return (
     <AllowOnlyLoggedInUserOnlyGuard>
@@ -236,6 +242,18 @@ const overhaulRoutes = [
   // only the editor is mounted here. ProjectRouterWrapper mounts both the project-scoped URL and
   // the bare redirect, preserving the URL-scoped-project + access-guard capability. Old
   // /tables/:tableId stays live.
+  // Tables LIST (Data domain) — the standalone tables landing page (the nav item previously
+  // pointed at Automations because no list page existed). Project-scoped like the editor.
+  ...ProjectRouterWrapper({
+    path: '/data/tables',
+    element: (
+      <PageTitle title="Tables">
+        <Suspense fallback={<RouteLoadingBar />}>
+          <OverhaulTablesListPage />
+        </Suspense>
+      </PageTitle>
+    ),
+  }),
   ...ProjectRouterWrapper({
     path: '/data/tables/:tableId',
     element: (
