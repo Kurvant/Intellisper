@@ -242,7 +242,7 @@ async function createRootPackageJson({ path }: { path: string }): Promise<void> 
 // self-hosted install using only public/local blocks) the registry line is still written so the
 // scope resolves, and only the auth line is omitted.
 async function createInstallNpmrc({ path }: { path: string }): Promise<void> {
-    const token = process.env.GITHUB_TOKEN
+    const token = process.env['GITHUB_TOKEN']
     const lines = [
         '@intelblocks:registry=https://npm.pkg.github.com/',
     ]
