@@ -229,6 +229,28 @@ async function createRootPackageJson({ path }: { path: string }): Promise<void> 
             'pieces/**',
         ],
     }, null, 2), 'utf8')
+    await createInstallNpmrc({ path })
+}
+
+// The @intelblocks/* blocks are published to GitHub Packages, not the public npm registry. bun
+// install runs in this isolated workspace directory (cwd), which does NOT inherit the repo-root
+// .npmrc, so without a local .npmrc bun resolves against registry.npmjs.org and 404s on every
+// @intelblocks/block-* package -- which surfaces to the user as a generic "Unexpected error" the
+// moment a managed block runs. Write a scoped .npmrc here so the scope resolves to GitHub Packages
+// with the runtime token. The token is written resolved (not as ${GITHUB_TOKEN}) because bun does
+// not reliably expand env-var references inside .npmrc. If no token is configured (e.g. a
+// self-hosted install using only public/local blocks) the registry line is still written so the
+// scope resolves, and only the auth line is omitted.
+async function createInstallNpmrc({ path }: { path: string }): Promise<void> {
+    const token = process.env.GITHUB_TOKEN
+    const lines = [
+        '@intelblocks:registry=https://npm.pkg.github.com/',
+    ]
+    if (token !== undefined && token.trim() !== '') {
+        lines.push(`//npm.pkg.github.com/:_authToken=${token}`)
+    }
+    lines.push('legacy-peer-deps=true')
+    await writeFileAtomic(join(path, '.npmrc'), lines.join('\n') + '\n', 'utf8')
 }
 
 async function createBlockPackageJson({ rootWorkspace, blockPackage }: {
